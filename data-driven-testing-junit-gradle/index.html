@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/data-driven-testing-junit-gradle/"><!-- Primary Meta Tags --><title>Data driven testing with JUnit and Gradle</title><meta name="title" content="Data driven testing with JUnit and Gradle"><meta name="description" content="How to do data-driven testing with JUnit and Gradle."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/data-driven-testing-junit-gradle/"><meta property="og:title" content="Data driven testing with JUnit and Gradle"><meta property="og:description" content="How to do data-driven testing with JUnit and Gradle."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/data-driven-testing-junit-gradle/"><meta property="twitter:title" content="Data driven testing with JUnit and Gradle"><meta property="twitter:description" content="How to do data-driven testing with JUnit and Gradle."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-01-09T00:00:00.000Z"> Jan 9, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Data driven testing with JUnit and Gradle</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>In <a href="/data-driven-testing-junit-parameterized-tests/">Data driven testing with JUnit parameterized tests</a> post, I’ve shown how to create data-driven JUnit test. It should be annotated with <em><strong>@RunWith(Parameterized.class)</strong></em>.</p>
+<h2>Older Gradle and Parameterized.class</h2>
+Gradle cannot run JUnit tests annotated with <em><strong>@RunWith(Parameterized.class)</strong></em>. There is <a href="https://issues.gradle.org/browse/GRADLE-3112" target="_blank" rel="noopener noreferrer">official Gradle bug</a> which states issue is resolved in Gradle 2.12, so if you are using older Gradle then the current post is suitable for you.
+<h2>Data-Driven JUnit tests</h2>
+There is a library called <a href="https://github.com/TNG/junit-dataprovider/wiki" target="_blank" rel="noopener noreferrer">junit-dataprovider</a> which is easy to use. What you have to do to use it is:
+<ol>
+ 	<li>Annotate the test class</li>
+ 	<li>Define test data</li>
+ 	<li>Create test and use test data</li>
+</ol>
+<h2>Annotate the test class</h2>
+The class needs to be run with a specialized runner in order to be treated as data-driven one. Runner is: <em><strong>com.tngtech.java.junit.dataprovider.DataProviderRunner</strong></em>. The class looks like:
+<pre class="language-java"><code>import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+import org.junit.runner.RunWith;
+
+@RunWith(DataProviderRunner.class)
+public class LocatorDataProviderTest {
+}
+</code></pre>
+<h2>Define test data</h2>
+Test data is seeded from static method: <em><strong>public static Object[] dataProvider()</strong></em>. This method returns an array of Object arrays where each array is one row with input and expected output test data. This method is annotated with <em><strong>@DataProvider</strong></em>. Here is how test data is defined:
+<pre class="language-java"><code>@DataProvider
+public static Object[] dataProvider() {
+	return new Object[][] {
+		{-1, -1, new Point(1, 1)},
+		{-1, 0, new Point(1, 0)},
+		{-1, 1, new Point(1, 1)},
+
+		{0, -1, new Point(0, 1)},
+		{0, 0, MOCKED_POINT},
+		{0, 1, MOCKED_POINT},
+
+		{1, -1, new Point(1, 1)},
+		{1, 0, MOCKED_POINT},
+		{1, 1, MOCKED_POINT}
+	};
+}
+</code></pre>
+<h2>Create test and use test data</h2>
+In order to use the test data in some test method, it should be annotated with <em><strong>@UseDataProvider("dataProvider")</strong></em> where <em><strong>"dataProvider"</strong></em> is the name of the static method which generates the test data. Another mandatory is test method should have same number and type of arguments as each line of the test data array. Here is how test method looks like:
+<pre class="language-java"><code>@Test
+@UseDataProvider("dataProvider")
+public void testLocateResults(int x, int y, Point expected) {
+	assertTrue(PointUtils.arePointsEqual(expected, 
+				locatorUnderTest.locate(x, y)));
+}
+</code></pre>
+<h2>Putting it all together</h2>
+Combining all steps into one class leads to the code below:
+<pre class="language-java"><code>import com.automationrhapsody.junit.utils.PointUtils;
+import com.tngtech.java.junit.dataprovider.DataProvider;
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+@RunWith(DataProviderRunner.class)
+public class LocatorDataProviderTest {
+
+	private static final Point MOCKED_POINT = new Point(11, 11);
+
+	private LocatorService locatorServiceMock = mock(LocatorService.class);
+
+	private Locator locatorUnderTest;
+
+	@DataProvider
+	public static Object[] dataProvider() {
+		return new Object[][] {
+			{-1, -1, new Point(1, 1)},
+			{-1, 0, new Point(1, 0)},
+			{-1, 1, new Point(1, 1)},
+
+			{0, -1, new Point(0, 1)},
+			{0, 0, MOCKED_POINT},
+			{0, 1, MOCKED_POINT},
+
+			{1, -1, new Point(1, 1)},
+			{1, 0, MOCKED_POINT},
+			{1, 1, MOCKED_POINT}
+		};
+	}
+
+	@Before
+	public void setUp() {
+		when(locatorServiceMock.geoLocate(any(Point.class)))
+				.thenReturn(MOCKED_POINT);
+
+		locatorUnderTest = new Locator(locatorServiceMock);
+	}
+
+	@Test
+	@UseDataProvider("dataProvider")
+	public void testLocateResults(int x, int y, Point expected) {
+		assertTrue(PointUtils.arePointsEqual(expected, 
+				locatorUnderTest.locate(x, y)));
+	}
+}
+</code></pre>
+<h2>Benefits</h2>
+Using junit-dataprovider has one huge benefit over JUnit's Parameterized runner. Test data provider is used only for the method annotated with its name. JUnit's Parameterized runner runs each and every test method with given data provider. In one test class, you can define several data providers as different static methods and use them in different test methods. This is not possible with JUnit's Parameterized runner.
+<h2>Conclusion</h2>
+JUnit-dataprovider is a very nice library which makes JUnit 4 data-driven testing very nice and easy. Even if you do not have issues with Gradle I still would recommend it to use it instead of a standard Parameterized runner because it gives you the flexibility to bind data provider method with the specific unit test method.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

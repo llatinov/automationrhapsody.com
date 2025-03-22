@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/distributed-system-observability-instrument-react-application-with-opentelemetry/"><!-- Primary Meta Tags --><title>Distributed system observability: Instrument React application with OpenTelemetry</title><meta name="title" content="Distributed system observability: Instrument React application with OpenTelemetry"><meta name="description" content="Create a React web application using the Material UI design system and instrument the application with OpenTelemetry."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/distributed-system-observability-instrument-react-application-with-opentelemetry/"><meta property="og:title" content="Distributed system observability: Instrument React application with OpenTelemetry"><meta property="og:description" content="Create a React web application using the Material UI design system and instrument the application with OpenTelemetry."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/distributed-system-observability-instrument-react-application-with-opentelemetry/"><meta property="twitter:title" content="Distributed system observability: Instrument React application with OpenTelemetry"><meta property="twitter:description" content="Create a React web application using the Material UI design system and instrument the application with OpenTelemetry."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2021-10-15T00:00:00.000Z"> Oct 15, 2021 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Distributed system observability: Instrument React application with OpenTelemetry</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/distributed-system-observability-complete-end-to-end-example-with-opentracing-jaeger-prometheus-grafana-spring-boot-react-and-selenium/">Distributed system observability: complete end-to-end example</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/selenium-observability-java" target="_blank" rel="noopener noreferrer">selenium-observability-java</a> GitHub repository.</p>
+<h2>React</h2>
+<a href="https://reactjs.org/" target="_blank" rel="noopener">React</a> is a JavaScript library for building user interfaces.
+<h2>Create React App</h2>
+<a href="https://reactjs.org/docs/create-a-new-react-app.html" target="_blank" rel="noopener">Create React App</a> provides a simple way to create React applications from scratch. It also creates and abstracts the whole toolchain needed to develop JavaScript applications, such as WebPack and Babel, so the user does not need to bother with configuring those. Application is created with the following command: <em><strong>create-react-app my-app --template typescript</strong></em>.
+<h3>Project structure</h3>
+With the projects I have worked on professionally I am used to a specific folder structure of the project.
+<ul>
+ 	<li>src/components - re-usable components, building blocks, used across the application</li>
+ 	<li>src/containers - components used to build the application, e.g. pages</li>
+ 	<li>src/helpers - functionality not related to the presentation logic</li>
+ 	<li>src/stylesheets - CSS files, which hold common and re-usable functionality</li>
+ 	<li>src/types - TypeScript data models, e.g. models used with API communication</li>
+</ul>
+<h3>Material UI</h3>
+<a href="https://mui.com/" target="_blank" rel="noopener">Material UI</a> is a React design system that provides ready-to-use components. An official example is shown in <a href="https://github.com/mui-org/material-ui/tree/master/examples/create-react-app-with-typescript" target="_blank" rel="noopener">create-react-app-with-typescript</a>.
+<h3>TypeScript</h3>
+<a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a> is a programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript and adds optional static typing to the language. TypeScript is designed for the development of large applications and transcompiles to JavaScript. TypeScript brings some overhead, but for me, this is justified. Because of the static typing, errors are shown on compile-time, not in runtime. Also, IntelliSense, the intelligent code completion, kicks in and is of great help.
+<h3>Code examples</h3>
+Main file is <em><strong>src/index.tsx</strong></em>. It loads the <em><strong>App</strong></em> component, which uses React Router to define different path handling, it loads different components based on the path. In the current example, <em><strong>/about</strong></em> path is covered just by a very simple page, and all other paths are loading <em><strong>PersonsPage</strong></em>.
+<p>[tabby title=“index.tsx”]</p>
+<pre class="language-typescript"><code>import ReactDOM from 'react-dom'
+
+import App from 'containers/App'
+import reportWebVitals from './reportWebVitals'
+import './stylesheets/base.scss'
+
+ReactDOM.render(&#x3C;App />, document.querySelector('#root'))
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals()
+</code></pre>
+<p>[tabby title=“App”]</p>
+<pre class="language-typescript"><code>import { Router, Route, Switch } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
+import { ThemeProvider } from '@mui/material/styles'
+import { CssBaseline } from '@mui/material'
+
+import PersonsPage from 'containers/PersonsPage'
+
+import theme from 'stylesheets/theme'
+
+export default () => (
+  &#x3C;ThemeProvider theme={theme}>
+    &#x3C;CssBaseline />
+    &#x3C;Router history={createBrowserHistory()}>
+      &#x3C;Switch>
+        &#x3C;Route exact path={'/about'}>
+          &#x3C;div>About Page&#x3C;/div>
+        &#x3C;/Route>
+        &#x3C;Route>
+          &#x3C;PersonsPage />
+        &#x3C;/Route>
+      &#x3C;/Switch>
+    &#x3C;/Router>
+  &#x3C;/ThemeProvider>
+)
+</code></pre>
+<p>[tabby title=“PersonsPage”]</p>
+<pre class="language-typescript"><code>
+import React from 'react'
+
+import { apiFetch } from 'helpers/api'
+import { personServiceUrl } from 'helpers/config'
+import { IPerson } from 'types/types'
+
+import PersonsList from './PersonsList'
+
+import TracingButton from 'components/TracingButton'
+import CreateNewPersonModal from 'containers/CreateNewPersonModal'
+
+import styles from './styles.module.scss'
+
+export default () => {
+  const [isModalOpen, setIsModalOpen] = React.useState&#x3C;boolean>(false)
+  const [persons, setPersons] = React.useState&#x3C;IPerson[]>([])
+
+  const fetchPersons = async () => {
+    const persons = await apiFetch&#x3C;IPerson[]>(`${personServiceUrl}/persons`)
+    setPersons(persons)
+  }
+
+  return (
+    &#x3C;div className={styles.app}>
+      &#x3C;CreateNewPersonModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
+      &#x3C;header className={styles.appHeader}>
+        &#x3C;p>Sample Patient Service Frontend&#x3C;/p>
+      &#x3C;/header>
+
+      &#x3C;TracingButton id="test-create-person-button" label={'Create new person'} onClick={() => setIsModalOpen(true)} />
+
+      &#x3C;TracingButton id="test-fetch-persons-button" label={'Fetch persons'} onClick={fetchPersons} />
+      {persons.length > 0 &#x26;&#x26; (
+        &#x3C;React.Fragment>
+          &#x3C;div id="test-persons-count-text">Found {persons.length} persons&#x3C;/div>
+          &#x3C;PersonsList persons={persons} />
+        &#x3C;/React.Fragment>
+      )}
+    &#x3C;/div>
+  )
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h3>Proxy</h3>
+Cross-Origin Resource Sharing (CORS) is an HTTP-header-based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources. In order to allow the frontend to connect to the backend, CORS should be allowed. One option is to instruct the backend to produce CORS headers that allow the frontend URL. Another option is to use React Create App's mechanism to handle the CORS by defining a proxy. The file that is used is <em><strong>setupProxy.js</strong></em>. In the current examples, the proxy handles both connections to the backend and OpenTelementry connector.
+<pre class="language-typescript"><code>const { createProxyMiddleware } = require('http-proxy-middleware')
+<p>const configureProxy = (path, target) =>
+createProxyMiddleware(path, {
+target: target,
+secure: false,
+pathRewrite: { [<code>^${path}</code>]: ” }
+})</p>
+</code><p><code>module.exports = function (app) {
+app.use(configureProxy(‘/api/person-service’, ‘<a href="http://localhost:8090">http://localhost:8090</a>’))
+app.use(configureProxy(‘/api/tracing’, ‘<a href="http://localhost:4318">http://localhost:4318</a>’))
+}
+</code></p></pre><p></p>
+<h3>WebVitals</h3>
+The default application has built-in support for <a href="https://web.dev/vitals/" target="_blank" rel="noopener">WebVitals</a>. If those need to be put into operation, a reporter just needs to be registered in <em><strong>src/index.tsx</strong></em> file by passing a method reference to <em><strong>reportWebVitals()</strong></em>. Easiest is to log to console: <em><strong>reportWebVitals(console.log)</strong></em>. This can be enhanced further by creating a reporter which sends the data to Prometheus. Actually, pushing data to Prometheus is not possible. <a href="https://github.com/prometheus/pushgateway" target="_blank" rel="noopener">Prometheus Pushgateway</a> can be used as metrics cache, from which Prometheus can pull.
+<h2>Docker</h2>
+The application is Dockerized with Nginx in exactly the same way as described in <a href="/dockerize-react-application-with-a-docker-multi-staged-build/">Dockerize React application with a Docker multi-staged build</a> post.
+<h2>Instrumentation</h2>
+Instrumentation is done with OpenTracing JavaScript libraries. The API calls to the backend use the <em><strong>fetch()</strong></em> method. OpenTracing has a library that instruments all the calls going through fetch() - <em><strong>@opentelemetry/instrumentation-fetch</strong></em>. A <em><strong>WebTracerProvider</strong></em> is instantiated with a <em><strong>Resource</strong></em> that has the <em><strong>service.name</strong></em>. Several <em><strong>SimpleSpanProcessor</strong></em> are registered with <em><strong>addSpanProcessor()</strong></em> method. The important processor is the <em><strong>CollectorTraceExporter</strong></em>, which sends the traces to the OpenTelemetry collector. The actual tracer is returned by <em><strong>getTracer()</strong></em> method from the provider, it is used to do the custom tracing. <em><strong>registerInstrumentations()</strong></em> registers an instance of <em><strong>FetchInstrumentation</strong></em>, which actually traces the API calls. In case the API responds with a status code greater than <em><strong>299</strong></em>, then this is considered an error, and the span is marked as <em><strong>ERROR</strong></em>. This is done in the <em><strong>applyCustomAttributesOnSpan</strong></em> function. Another custom change for fetch tracking is that the span name is overwritten in order to have a unique name for each API. This will allow separate tracing of each individual API. Custom <em><strong>traceSpan()</strong></em> method is defined in order to manually trace individual events in the application, such as a button click for e.g. In case of an error in the wrapped function <em><strong>func</strong></em> then span is also marked as an error.
+<pre class="language-typescript"><code>import { context, trace, Span, SpanStatusCode } from '@opentelemetry/api'
+import { WebTracerProvider } from '@opentelemetry/sdk-trace-web'
+import { Resource } from '@opentelemetry/resources'
+import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
+import { CollectorTraceExporter } from '@opentelemetry/exporter-collector'
+import { ZoneContextManager } from '@opentelemetry/context-zone'
+import { FetchInstrumentation } from '@opentelemetry/instrumentation-fetch'
+import { FetchError } from '@opentelemetry/instrumentation-fetch/build/src/types'
+import { registerInstrumentations } from '@opentelemetry/instrumentation'
+<p>import { tracingUrl } from ‘helpers/config’</p>
+<p>const resource = new Resource({ ‘service.name’: ‘person-service-frontend’ })
+const provider = new WebTracerProvider({ resource })</p>
+<p>const collector = new CollectorTraceExporter({ url: tracingUrl })
+provider.addSpanProcessor(new SimpleSpanProcessor(collector))
+provider.register({ contextManager: new ZoneContextManager() })</p>
+<p>const webTracerWithZone = provider.getTracer(‘person-service-frontend’)</p>
+<p>registerInstrumentations({
+instrumentations: [
+new FetchInstrumentation({
+propagateTraceHeaderCorsUrls: [’/.*/g’],
+clearTimingResources: true,
+applyCustomAttributesOnSpan:
+(span: Span, request: Request | RequestInit, result: Response | FetchError) => {
+const attributes = (span as any).attributes
+if (attributes.component === ‘fetch’) {
+span.updateName(<code>${attributes['http.method']} ${attributes['http.url']}</code>)
+}
+if (result.status &#x26;&#x26; result.status > 299) {
+span.setStatus({ code: SpanStatusCode.ERROR })
+}
+}
+})
+]
+})</p>
+</code><p><code>export function traceSpan&#x3C;F extends (…args: any)
+=> ReturnType&#x3C;F>>(name: string, func: F): ReturnType&#x3C;F> {
+var singleSpan = webTracerWithZone.startSpan(name)
+return context.with(trace.setSpan(context.active(), singleSpan), () => {
+try {
+const result = func()
+singleSpan.end()
+return result
+} catch (error) {
+singleSpan.setStatus({ code: SpanStatusCode.ERROR })
+singleSpan.end()
+throw error
+}
+})
+}
+</code></p></pre>
+Custom instrumentation<p></p>
+<pre class="language-typescript"><code>import { Button } from '@mui/material'
+
+import { traceSpan } from 'helpers/tracing'
+
+import styles from './styles.module.scss'
+
+interface Props {
+  label: string
+  id?: string
+  secondary?: boolean
+  onClick: () => void
+}
+
+export default (props: Props) => {
+  const onClick = async () => traceSpan(`'${props.label}' button clicked`, props.onClick)
+
+  return (
+    &#x3C;div className={styles.button}>
+      &#x3C;Button id={props.id} variant={'contained'} color={props.secondary ? 'secondary' : 'primary'} onClick={onClick}>
+        {props.label}
+      &#x3C;/Button>
+    &#x3C;/div>
+  )
+}
+</code></pre>
+<h2>Traceability</h2>
+Traceability between the frontend and the backend is described in the <a href="https://www.w3.org/TR/trace-context/" target="_blank" rel="noopener">Trace Context W3C standard</a>. In a nutshell, this is done by adding a <em><strong>traceparent</strong></em> header in the HTTP request to the backend. This is done automatically by <em><strong>@opentelemetry/instrumentation-fetch</strong></em>.
+<h2>React component instrumentation</h2>
+OpenTelemetry provides a library that can instrument React components and monitor their performance, such as load time for e.g. This library is called <a href="https://www.npmjs.com/package/@opentelemetry/plugin-react-load" target="_blank" rel="noopener">@opentelemetry/plugin-react-load</a>. I tried it, it is working properly, but it is not in the current examples for two reasons. The first is that I am not really interested in React component lifecycle events. The more important reason is that this plugin works for React class components only. I started my React journey after version 16.8, which was released on 6 Feb 2019. Prior to this version functional components were stateless, they were just for data visualization purposes. In version 16.8 hooks have been introduced, which allows state management inside a functional component. I write all my components to be functional with hooks for state management. I do not have justification whether this is good or bad, I like it that way. There is a serious drawback because functions in the functional component reinitialize every time the component is re-rendered, in some cases I had to use <em><strong>useCallback()</strong></em> hook to remember some function state.
+<h2>Traces output</h2>
+In order to monitor a trace, run the examples as described in <a href="/distributed-system-observability-complete-end-to-end-example-with-opentracing-jaeger-prometheus-grafana-spring-boot-react-and-selenium/">Distributed system observability: complete end-to-end example with OpenTracing, Jaeger, Prometheus, Grafana, Spring Boot, React and Selenium</a>. Accessing <a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a> and clicking "Fetch persons" button generates a trace in Jaeger:
+<p><a href="/images/2021/10/Selenium-Observability-React-trace.png"><img src="/images/2021/10/Selenium-Observability-React-trace.png"></a></p>
+<h2>Conclusion</h2>
+OpenTelemetry provides libraries to instrument JavaScript applications and to report the traces to an OpenTelemetry collector. Creating an application with React and instrumenting it to collect OpenTelemetry traces is easy. Behind the scenes, the fetch() method is modified to pass <em><strong>traceparent</strong></em> header in the HTTP request to the backend. This is how tracing between different systems can happen.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

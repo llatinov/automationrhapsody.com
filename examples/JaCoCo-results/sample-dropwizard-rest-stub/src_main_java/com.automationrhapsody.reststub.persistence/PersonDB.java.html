@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>PersonDB.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Code coverage with JaCoCo agent</a> &gt; <a href="../../index.html" class="el_group">sample-dropwizard-rest-stub</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.automationrhapsody.reststub.persistence</a> &gt; <span class="el_source">PersonDB.java</span></div><h1>PersonDB.java</h1><pre class="source lang-java linenums">package com.automationrhapsody.reststub.persistence;
+
+import com.automationrhapsody.reststub.data.Person;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+<span class="nc" id="L10">public class PersonDB {</span>
+<span class="fc" id="L11">    private static Map&lt;Integer, Person&gt; persons = new HashMap&lt;Integer, Person&gt;();</span>
+
+    static {
+<span class="fc" id="L14">        persons.put(1, new Person(1, &quot;FN1&quot;, &quot;LN1&quot;, &quot;email1@email.na&quot;));</span>
+<span class="fc" id="L15">        persons.put(2, new Person(2, &quot;FN2&quot;, &quot;LN2&quot;, &quot;email2@email.na&quot;));</span>
+<span class="fc" id="L16">        persons.put(3, new Person(3, &quot;FN3&quot;, &quot;LN3&quot;, &quot;email3@email.na&quot;));</span>
+<span class="fc" id="L17">        persons.put(4, new Person(4, &quot;FN4&quot;, &quot;LN4&quot;, &quot;email4@email.na&quot;));</span>
+<span class="fc" id="L18">    }</span>
+
+    public static Person getById(int id) {
+<span class="fc" id="L21">        return persons.get(id);</span>
+    }
+
+    public static List&lt;Person&gt; getAll() {
+<span class="fc" id="L25">        List&lt;Person&gt; result = new ArrayList&lt;Person&gt;();</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        for (Integer key : persons.keySet()) {</span>
+<span class="fc" id="L27">            result.add(persons.get(key));</span>
+        }
+<span class="fc" id="L29">        return result;</span>
+    }
+
+    public static int getCount() {
+<span class="fc" id="L33">        return persons.size();</span>
+    }
+
+    public static void remove() {
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if (!persons.keySet().isEmpty()) {</span>
+<span class="fc" id="L38">            persons.remove(persons.keySet().toArray()[0]);</span>
+        }
+<span class="fc" id="L40">    }</span>
+
+    public static String save(Person person) {
+<span class="nc" id="L43">        String result = &quot;&quot;;</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (persons.get(person.getId()) != null) {</span>
+<span class="nc" id="L45">            result = &quot;Updated Person with id=&quot; + person.getId();</span>
+<span class="nc" id="L46">        } else {</span>
+<span class="nc" id="L47">            result = &quot;Added Person with id=&quot; + person.getId();</span>
+        }
+<span class="nc" id="L49">        persons.put(person.getId(), person);</span>
+<span class="nc" id="L50">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>Code coverage with JaCoCo agent</div></body></html>

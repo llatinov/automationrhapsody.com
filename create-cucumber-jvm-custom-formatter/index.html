@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/create-cucumber-jvm-custom-formatter/"><!-- Primary Meta Tags --><title>Create Cucumber JVM custom formatter</title><meta name="title" content="Create Cucumber JVM custom formatter"><meta name="description" content="How to implement custom formatter for Cucumber JVM."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/create-cucumber-jvm-custom-formatter/"><meta property="og:title" content="Create Cucumber JVM custom formatter"><meta property="og:description" content="How to implement custom formatter for Cucumber JVM."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/create-cucumber-jvm-custom-formatter/"><meta property="twitter:title" content="Create Cucumber JVM custom formatter"><meta property="twitter:description" content="How to implement custom formatter for Cucumber JVM."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-01-12T00:00:00.000Z"> Jan 12, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Create Cucumber JVM custom formatter</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Cucumber code examples can be found in <a href="https://github.com/llatinov/selenium-samples-java/tree/master/cucumber-parallel" target="_blank" rel="noopener">selenium-samples-java/cucumber-parallel</a> GitHub repository.</p>
+<p>Cucumber has different types of formatters available. See <a href="https://relishapp.com/cucumber/cucumber/docs/formatters" target="_blank" rel="noopener">Cucumber formatters</a> for more details. Still, those might not fulfill your needs. If this is the case Cucumber provides a way to create own custom formatter.</p>
+<h2>Why create Cucumber JVM custom formatter</h2>
+There could be different reasons for this. Standard formatters are known not to be thread safety, so one reason could be to create own thread safety formatter. Other reason could be if you want your results to be stored directly into a database or sent to a REST service. There could be many reasons, reading this post means you already have one.
+<h2>How to create Cucumber JVM custom formatter</h2>
+Custom formatter can be created by implementing two interfaces: <strong>gherkin.formatter.Reporter</strong> and <strong>gherkin.formatter.Formatter</strong>. This is it. You have to know though when each method from interfaces is called and this is pretty tricky. One simple implementation of custom formatter can be found in GitHub <a href="https://github.com/llatinov/selenium-samples-java/blob/master/cucumber-parallel/src/test/java/com/automationrhapsody/cucumber/formatter/CustomFormatter.java" target="_blank" rel="noopener">CustomFormatter.java</a> file. This is implementation from scratch. Another option is to extend some already existing formatter and modify its behavior.
+<h2>Using custom formatter in Cucumber runner</h2>
+Custom formatter is invoked by fully qualified class name in <strong>@CucumberOptions</strong> annotation. In this example it is: <strong>plugin = {"com.automationrhapsody.cucumber.formatter.CustomFormatter"}</strong>.
+<pre class="language-java"><code>import org.junit.runner.RunWith;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+		plugin = {
+				"com.automationrhapsody.cucumber.formatter.CustomFormatter:custom-formatter-output.txt"
+		}
+)
+public class RunWikipediaTestsWithCustomFormatter {
+}
+</code></pre>
+<h2>Passing an argument to custom formatter</h2>
+In the code above along with a fully qualified class name of CustomFormatter there is also file name (and location) with colon - <strong>:custom-formatter-output.txt</strong>.  This is the way to pass argument to CustomFormatter. In order to receive the argument CustomFormatter constructor should have one of the following parameters:
+<ul>
+ 	<li><strong>null</strong> - empty constructor, this is just to instantiate some variable, nothing can be received from outside.</li>
+ 	<li><strong>interface java.lang.Appendable</strong> - object to which values should be appended. It should have an implementation which can be custom or gherkin.formatter.NiceAppendable can be used. See example below.</li>
+ 	<li><strong>class java.net.URI</strong> - URI that can be used in case of database connection strings or URL. Also applicable for passing a plain String.</li>
+ 	<li><strong>class java.net.URL</strong> - only for web URL.</li>
+ 	<li><strong>class java.io.File</strong> - file path can be passed, could be absolute or relative.</li>
+</ul>
+Example:
+<pre class="language-java"><code>public CustomFormatter(Appendable appendable) {
+	output = new NiceAppendable(appendable);
+	output.println("CustomFormatter()");
+	System.out.println("CustomFormatter(): " + output.toString());
+}
+</code></pre>
+<h2>Conclusion</h2>
+Cucumber JVM gives a lot of flexibility by providing a way to implement custom formatter based on your current needs. It is pretty straightforward to do it. It is possible also to pass arguments to a parametrized constructor in custom formatter.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

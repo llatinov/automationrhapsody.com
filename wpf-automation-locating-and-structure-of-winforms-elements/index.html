@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/wpf-automation-locating-and-structure-of-winforms-elements/"><!-- Primary Meta Tags --><title>WPF automation - locating and structure of WinForms elements</title><meta name="title" content="WPF automation - locating and structure of WinForms elements"><meta name="description" content="Guide how to locate WinForms elements with TestStack White."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/wpf-automation-locating-and-structure-of-winforms-elements/"><meta property="og:title" content="WPF automation - locating and structure of WinForms elements"><meta property="og:description" content="Guide how to locate WinForms elements with TestStack White."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/wpf-automation-locating-and-structure-of-winforms-elements/"><meta property="twitter:title" content="WPF automation - locating and structure of WinForms elements"><meta property="twitter:description" content="Guide how to locate WinForms elements with TestStack White."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-02-11T00:00:00.000Z"> Feb 11, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>WPF automation - locating and structure of WinForms elements</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>References</h2>
+This post is part of <a title="Automation of WPF applications" href="/automation-of-wpf-applications/">Automation of WPF applications</a> with Telerik Testing Framework and TestStack White series. The sample application can be found in GitHub <a href="https://github.com/llatinov/SampleApp" target="_blank" rel="noopener noreferrer">SampleApp</a> repository.
+<h2>WinForms elements manipulation with TestStack White</h2>
+<em><strong>MessageBox.cs</strong></em> class is a representation of a <em><strong>MsgBox</strong></em> of our sample application which is <em><strong>WinForms</strong></em>.
+<pre class="language-csharp"><code>using System.Windows.Automation;
+using White.Core.UIItems;
+using White.Core.UIItems.Finders;
+using White.Core.UIItems.WindowItems;
+
+namespace SampleApp.Tests.Framework.Elements
+{
+	public class MessageBox
+	{
+		private Window win;
+		public MessageBox(Window window)
+		{
+			win = window;
+		}
+
+		private Button Button_OK
+		{
+			get
+			{
+				return win.Get&#x3C;Button>(
+					SearchCriteria.ByControlType(ControlType.Button).
+					AndByText("OK"));
+			}
+		}
+		private Label Label_Text
+		{
+			get
+			{
+				return win.Get&#x3C;Label>(
+					SearchCriteria.ByControlType(ControlType.Text));
+			}
+		}
+
+		public void ClickOkButton()
+		{
+			Button_OK.Click();
+		}
+
+		public string GetText()
+		{
+			return Label_Text.Text;
+		}
+	}
+}
+</code></pre>
+<p><em><strong>MessageBox</strong></em> is following <a title="Page objects pattern" href="/page-objects-design-pattern/">Page Object design pattern</a>. Elements are private properties. Actions are public methods acting on elements. Again: one element must be defined in only one place.</p>
+<p>Constructor receives an instance of the current window object. Elements are located by <em><strong>White</strong></em> framework method:</p>
+<pre class="language-csharp"><code>public virtual T Get&#x3C;T>(SearchCriteria searchCriteria) where T : UIItem;
+</code></pre>
+<h2>SearchCriteria</h2>
+SearchCriteria is used for locating elements. Search is possible with a combination of following criteria: <em><strong>Text</strong></em>, <em><strong>ControlType</strong></em>, <em><strong>AutomationId</strong></em>, <em><strong>NativeProperty</strong></em>, <em><strong>Framework</strong></em>. And here comes the hardness of working with White in complex UIs. There may be several TextBox-es (ByControlType == Edit) AND with no text inside (AndByText == ""). You can take them all and then access by index the one which is proper for your test. And what happens when you fill text in one of them. Next find has one less window. If you think it is easy then enjoy, I would rather not do it.
+<h2>UISpy</h2>
+Finding of the proper <em><strong>SearchCriteria</strong></em> is done with powerful tool <a title="UISpy" href="https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms727247(v=vs.100)" target="_blank" rel="noopener noreferrer">UISpy.exe</a>. Unfortunately, this one is deprecated from <a href="https://docs.microsoft.com/en-us/previous-versions/ms727247(v=vs.110)" target="_blank" rel="noopener noreferrer">Windows 8</a>. MS have added a replacement called <a title="Inspect" href="https://docs.microsoft.com/en-us/windows/win32/winauto/inspect-objects" target="_blank" data-blogger-escaped-target="_blank" rel="noopener noreferrer">Inspect.exe</a>. I don't find it useful this is why I have added <em><strong>UISpy.exe</strong></em> in the GitHub repository.
+<p><a href="/images/2015/02/UISpy.png"><img src="/images/2015/02/UISpy.png" alt="UISpy"></a></p>
+<p><em><strong>Dialog</strong></em> is the message box window which is a child of <em><strong>MainWindow</strong></em>. It has empty title and two elements: OK button and message text. Current example shows the location of the text element. Its MS <em><strong>ControlType == ControlType.Text</strong></em>. This is what we need to locate it since there is only one such element in the message box. Once we have it we take the text and test compares current vs. expected text. <em><strong>OK</strong></em> button is located by ControlType and text. In case of different localisations we may leave just the ControlType, but if there are more buttons text is mandatory to distinguish the correct button.</p>
+<p>Once you have defined your page objects it is time to assemble them. Next post is <a title="WPF automation - using the elements" href="/wpf-automation-locating-and-structure-of-wpf-elements/">WPF automation – locating and structure of WPF elements</a>.</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

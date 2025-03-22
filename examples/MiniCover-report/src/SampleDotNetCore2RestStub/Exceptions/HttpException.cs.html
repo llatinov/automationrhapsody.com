@@ -1,0 +1,20 @@
+<html>
+<body style="font-family: sans-serif;">
+<div style="white-space: pre;background-color: #EEF4ED;">using System;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Net;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">namespace SampleDotNetCore2RestStub.Exceptions</div>
+<div style="white-space: pre;background-color: #EEF4ED;">{</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    public class HttpException : Exception</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    {</div>
+<div style="white-space: pre;background-color: #EACECC;">        public int StatusCode { get; }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public HttpException(HttpStatusCode httpStatusCode)</div>
+<div style="white-space: pre;background-color: #EACECC;">            : base(httpStatusCode.ToString())</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            this.StatusCode = (int)httpStatusCode;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">}</div>
+</body>
+</html>

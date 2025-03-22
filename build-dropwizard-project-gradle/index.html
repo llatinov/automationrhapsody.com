@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/build-dropwizard-project-gradle/"><!-- Primary Meta Tags --><title>Build a Dropwizard project with Gradle</title><meta name="title" content="Build a Dropwizard project with Gradle"><meta name="description" content="Code examples how to create Dropwizard project with Gradle."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/build-dropwizard-project-gradle/"><meta property="og:title" content="Build a Dropwizard project with Gradle"><meta property="og:description" content="Code examples how to create Dropwizard project with Gradle."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/build-dropwizard-project-gradle/"><meta property="twitter:title" content="Build a Dropwizard project with Gradle"><meta property="twitter:description" content="Code examples how to create Dropwizard project with Gradle."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-06-05T00:00:00.000Z"> Jun 5, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Build a Dropwizard project with Gradle</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Code sample here can be found as a buildable and runnable project in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/sample-dropwizard-rest-stub/tree/gradle" target="_blank" rel="noopener noreferrer">sample-dropwizard-rest-stub</a> repository in separate git <em><strong>branch</strong></em> called <em><strong>gradle</strong></em>.</p>
+<h2>Project structure</h2>
+All classes have been thoroughly described in <a href="/build-a-rest-stub-server-with-dropwizard/">Build a RESTful stub server with Dropwizard</a> post. In this post, I will describe how to make project build-able with Gradle. In order to make it more understandable, I will compare with Maven's <em><strong>pom.xml</strong></em> file elements by XPath.
+<h2>Gradle</h2>
+<a href="https://gradle.org/" target="_blank" rel="noopener noreferrer">Gradle</a> is an open source build automation system that builds upon the concepts of Apache Ant and Apache Maven and introduces a Groovy-based domain-specific language (DSL) instead of the XML form used by Apache Maven for declaring the project configuration. Gradle is much more powerful and more complex than Maven. There is a significant tendency for Java projects moving towards Gradle so I've decided to make this post.
+<h2>Gradle artefacts</h2>
+In order to make your project work with Gradle, you need several files. The list below is how files are placed in project's root folder:
+<ul>
+ 	<li><em><strong>gradle/wrapper/gradle-wrapper.jar</strong></em> - Gradle Wrapper allows you to make builds without installing Gradle on your machine. This is very convenient and makes Gradle usage easy. This JAR is managing the Gradle Wrapper automatic download and installation on the first build.</li>
+ 	<li><em><strong>gradle\wrapper\gradle-wrapper.properties</strong></em> - a configuration which Gradle Wrapper version to be downloaded and installed on the first build.</li>
+ 	<li><em><strong>build.gradle</strong></em> - the most import file. This is where you configure your project.</li>
+ 	<li><em><strong>gradlew</strong></em> - this Gradle Wrapper executable for Linux.</li>
+ 	<li><em><strong>gradlew.bat</strong></em> - this is Gradle Wrapper executable for Windows.</li>
+ 	<li><em><strong>settings.gradle</strong></em> - Project settings. Mainly used in case of multi-module projects.</li>
+</ul>
+<h2>setting.gradle file</h2>
+This file is mainly used in case of a multi-module project. In it, we currently define project name: <em><strong>rootProject.name = 'sample-dropwizard-rest-stub'</strong></em>. This is the same value as in <em><strong>/project/name</strong></em> form <em><strong>pom.xml</strong></em> file.
+<h2>Constructing build.gradle file</h2>
+This is the main file where you configure your project. You need to define <em><strong>version</strong></em> (<em><strong>/project/version</strong></em> in pom.xml), group (<em><strong>/project/groupId </strong></em>in pom.xml) and optionally description. Since this is Java project you need to <em><strong>apply plugin: 'java'</strong></em>. Also, you need need to specify Java version, <em><strong>1.8</strong></em> in this case by <em><strong>sourceCompatibility</strong></em> and <em><strong>targetCompatibility</strong></em> values. Next is to set <em><strong>repositories</strong></em>. You can use <em><strong>mavenCentral</strong></em> or add a custom one by the following code, which is not shown in the example below: <em><strong>maven { url 'https://plugins.gradle.org/m2/' }</strong></em>. You need to define <em><strong>dependencies</strong></em> (<em><strong>/project/dependencies/dependency</strong></em> in pom.xml file) to tell Gradle what libraries this project needs. In the current example, it is a <em><strong>compile</strong></em> dependency to <em><strong>io.dropwizard:dropwizard-core:0.8.0</strong></em> and <em><strong>testCompile</strong></em> dependency to <em><strong>junit:junit:4.12</strong></em>. This is enough to have fully functional Dropwizard project with code examples given in <a href="/build-a-rest-stub-server-with-dropwizard/">Build a RESTful stub server with Dropwizard</a> post.
+<pre class="language-text"><code>version '1.0-SNAPSHOT'
+group 'com.automationrhapsody.reststub'
+description 'Sample Dropwizard REST Stub'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'io.dropwizard:dropwizard-core:0.8.0'
+
+	testCompile 'junit:junit:4.12'
+}
+</code></pre>
+<p>The beauty of Dropwizard is the ability to pack everything into a single JAR file and then run that file. In Maven this was done by <em><strong>maven-shade-plugin</strong></em> in Gradle the best way to do it is <a href="https://github.com/johnrengelman/shadow" target="_blank" rel="noopener noreferrer">Shadow JAR plugin</a>. You need to define it via <em><strong>plugins</strong></em> closure. Now lets configure <em><strong>shadowJar</strong></em>. You can specify <em><strong>archiveName</strong></em> or <em><strong>exclude</strong></em> some artefacts from packed JAR. Optionally you can enhance you <em><strong>MANIFEST.MF</strong></em> file by adding more details to <em><strong>manifest</strong></em> closure. Nice thing for Gradle is that you can use <em><strong>Groovy</strong></em> as well as pure <em><strong>Java</strong></em> code. Constructing <em><strong>Build-Time</strong></em> requires <em><strong>import</strong></em> some Java <em><strong>DateTime</strong></em> classes and using them to make human readable time. Next piece that you need to add to your <em><strong>build.gradle</strong></em> file is:</p>
+<pre class="language-text"><code>import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+
+plugins {
+	id 'com.github.johnrengelman.shadow' version '1.2.4'
+}
+
+mainClassName = 'com.automationrhapsody.reststub.RestStubApp'
+
+shadowJar {
+	mergeServiceFiles()
+	exclude 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.SF'
+	manifest {
+		attributes 'Implementation-Title': rootProject.name
+		attributes 'Implementation-Version': rootProject.version
+		attributes 'Implementation-Vendor-Id': rootProject.group
+		attributes 'Build-Time': ZonedDateTime.now(ZoneId.of("UTC"))
+				.format(DateTimeFormatter.ISO_ZONED_DATE_TIME)
+		attributes 'Built-By': InetAddress.localHost.hostName
+		attributes 'Created-By': 'Gradle ' + gradle.gradleVersion
+		attributes 'Main-Class': mainClassName
+	}
+	archiveName 'sample-dropwizard-rest-stub.jar'
+}
+</code></pre>
+<p>Once you build your JAR file with command: <em><strong>gradlew shadowJar</strong></em> you can run it with <em><strong>java -jar build/sample-dropwizard-rest-stub.jar server config.yml</strong></em> command. Gradle has another option to run your project for testing purposes. It is done by first <em><strong>apply plugin: ‘application’</strong></em>. You need to specify which is <em><strong>mainClassName</strong></em> to be run and configure <em><strong>run</strong> <strong>args</strong></em>. In order to run your project from Gradle with <em><strong>gradlew run</strong></em> command you just add:</p>
+<pre class="language-text"><code>apply plugin: 'application'
+
+mainClassName = 'com.automationrhapsody.reststub.RestStubApp'
+
+run {
+	args = ['server', 'config.yml']
+}
+</code></pre>
+<h2>build.gradle file</h2>
+Full build.gradle file content is shown below:
+<pre class="language-text"><code>import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+
+plugins {
+	id 'com.github.johnrengelman.shadow' version '1.2.4'
+}
+
+version '1.0-SNAPSHOT'
+group 'com.automationrhapsody.reststub'
+description 'Sample Dropwizard REST Stub'
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'io.dropwizard:dropwizard-core:0.8.0'
+
+	testCompile 'junit:junit:4.12'
+}
+
+mainClassName = 'com.automationrhapsody.reststub.RestStubApp'
+
+run {
+	args = ['server', 'config.yml']
+}
+
+shadowJar {
+	mergeServiceFiles()
+	exclude 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.SF'
+	manifest {
+		attributes 'Implementation-Title': rootProject.name
+		attributes 'Implementation-Version': rootProject.version
+		attributes 'Implementation-Vendor-Id': rootProject.group
+		attributes 'Build-Time': ZonedDateTime.now(ZoneId.of("UTC"))
+				.format(DateTimeFormatter.ISO_ZONED_DATE_TIME)
+		attributes 'Built-By': InetAddress.localHost.hostName
+		attributes 'Created-By': 'Gradle ' + gradle.gradleVersion
+		attributes 'Main-Class': mainClassName
+	}
+	archiveName 'sample-dropwizard-rest-stub.jar'
+}
+</code></pre>
+<h2>Conclusion</h2>
+This post is an extension to <a href="/build-a-rest-stub-server-with-dropwizard/">Build a RESTful stub server with Dropwizard</a> post, in which I have described how to build REST service with Dropwizard and Maven. In the current post, I have shown how to do the same with Gradle.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>RestStubCheck.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Code coverage with JaCoCo agent</a> &gt; <a href="../../index.html" class="el_group">sample-dropwizard-rest-stub</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.automationrhapsody.reststub</a> &gt; <span class="el_source">RestStubCheck.java</span></div><h1>RestStubCheck.java</h1><pre class="source lang-java linenums">package com.automationrhapsody.reststub;
+
+import com.automationrhapsody.reststub.persistence.PersonDB;
+import com.codahale.metrics.health.HealthCheck;
+
+public class RestStubCheck extends HealthCheck {
+    private final String version;
+
+<span class="fc" id="L9">    public RestStubCheck(String version) {</span>
+<span class="fc" id="L10">        this.version = version;</span>
+<span class="fc" id="L11">    }</span>
+
+    @Override
+    protected Result check() throws Exception {
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        if (PersonDB.getCount() == 0) {</span>
+<span class="nc" id="L16">            return Result.unhealthy(&quot;No persons in DB! Version: &quot; + this.version);</span>
+        }
+<span class="nc" id="L18">        return Result.healthy(&quot;OK with version: &quot; + this.version + &quot;. Persons count: &quot; + PersonDB.getCount());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>Code coverage with JaCoCo agent</div></body></html>

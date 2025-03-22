@@ -1,0 +1,23 @@
+<html>
+<body style="font-family: sans-serif;">
+<div style="white-space: pre;background-color: #EEF4ED;">using System;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Linq;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Net;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using Microsoft.AspNetCore.Mvc.Filters;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using SampleDotNetCore2RestStub.Exceptions;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">namespace SampleDotNetCore2RestStub.Attributes</div>
+<div style="white-space: pre;background-color: #EEF4ED;">{</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    public class AuthenticationFilterAttribute : ActionFilterAttribute</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    {</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public override void OnActionExecuting(ActionExecutingContext context)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            string authKey = context.HttpContext.Request.Headers[&quot;Authorization&quot;].SingleOrDefault();</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EACECC;">            if (string.IsNullOrWhiteSpace(authKey))</div>
+<div style="white-space: pre;background-color: #EACECC;">                throw new HttpException(HttpStatusCode.Unauthorized);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">}</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/factory-design-pattern/"><!-- Primary Meta Tags --><title>Factory design pattern</title><meta name="title" content="Factory design pattern"><meta name="description" content="Description of code samples of Factory design pattern."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/factory-design-pattern/"><meta property="og:title" content="Factory design pattern"><meta property="og:description" content="Description of code samples of Factory design pattern."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/factory-design-pattern/"><meta property="twitter:title" content="Factory design pattern"><meta property="twitter:description" content="Description of code samples of Factory design pattern."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-02-05T00:00:00.000Z"> Feb 5, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Factory design pattern</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Factory pattern is used to create objects based on specific rules.</p>
+<h2>More details</h2>
+You may have several classes implementing one and the same interface. You might not know what object is suitable to get instantiated at given point in your code. Object creation may depend on different if/else or switch statements. You definitely do not want to make those is/else check every time you need an object. This is why you handle the object creation task to the factory which knows exactly what and how to create an object. The factory always returns a newly created object or re-initialized one.
+<h2>References</h2>
+This post is part of <a title="Complete guide how to use design patterns in automation" href="/complete-guide-how-to-use-design-patterns-in-automation/">design patterns guide</a> series. Code examples are located in GitHub for <a href="https://github.com/llatinov/SeleniumSamples.NET/tree/master/DesignPatterns" target="_blank" rel="noopener">C#</a> and <a href="https://github.com/llatinov/selenium-samples-java/tree/master/design-patterns" target="_blank" rel="noopener">Java</a>.
+<h2>Example</h2>
+In the example I've given here, I've implemented a factory that creates IWebDriver object based on a specific input. Object creation logic is encapsulated from the outer world. This factory is very simple but is just fine for our purposes. More complex factories are defined by <a title="Factory method pattern" href="https://en.wikipedia.org/wiki/Factory_method_pattern" target="_blank" rel="noopener">Factory method pattern</a> and <a title="Abstract factory pattern" href="https://en.wikipedia.org/wiki/Abstract_factory_pattern" target="_blank" rel="noopener">Abstract factory pattern</a> but they are suitable for more complex applications. The factory in the example has an only CreateInstance method. In it, WebDriver is instantiated based on given from outside string with its name. It doesn't store or re-use WebDriver object but always creates a new one.
+<pre class="language-csharp"><code>public class WebDriverFactory
+{
+	public IWebDriver CreateInstance(string browser)
+	{
+		if ("Chrome".ToLower() == browser.ToLower())
+		{
+			return new ChromeDriver();
+		}
+		else if ("InternetExplorer".ToLower() == browser.ToLower())
+		{
+			return new InternetExplorerDriver();
+		}
+		else
+		{
+			return new FirefoxDriver();
+		}
+	}
+}
+</code></pre>
+<p>A factory is used to instantiate WebDriver in tests. The condition which browser to instantiate may come from external parameter.</p>
+<pre class="language-csharp"><code>WebDriverFactory factory = new WebDriverFactory();
+IWebDriver webDriver = factory.CreateInstance("Chrome");
+webDriver.Url = "";
+webDriver.Navigate();
+
+IWebElement logo = webDriver.FindElement(By.CssSelector("div#header-inner h1 a"));
+logo.Click();
+
+webDriver.Quit();
+</code></pre>
+<h2>Conclusion</h2>
+A factory is good to be used in automation testing as you have centralized control over WebDriver creation. This pattern will definitely keep you <a title="DRY" href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself" target="_blank" rel="noopener">DRY</a>. With the time being, you may add more conditions on object creation (logging, different ports, etc.).  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

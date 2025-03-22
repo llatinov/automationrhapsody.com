@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/useful-net-core-sdk-cli-commands/"><!-- Primary Meta Tags --><title>Useful .NET Core SDK CLI commands</title><meta name="title" content="Useful .NET Core SDK CLI commands"><meta name="description" content="Some useful .NET Core SDK CLI commands."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/useful-net-core-sdk-cli-commands/"><meta property="og:title" content="Useful .NET Core SDK CLI commands"><meta property="og:description" content="Some useful .NET Core SDK CLI commands."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/useful-net-core-sdk-cli-commands/"><meta property="twitter:title" content="Useful .NET Core SDK CLI commands"><meta property="twitter:description" content="Some useful .NET Core SDK CLI commands."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2018-01-09T00:00:00.000Z"> Jan 9, 2018 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Useful .NET Core SDK CLI commands</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Commands in the current post are extraction from <a href="/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/">Build a REST API with .NET Core 2 and run it on Docker Linux container</a> and <a href="/net-core-integration-testing-mock-dependencies/">.NET Core integration testing and mock dependencies</a> posts where I have used them in a real project.</p>
+<h2>All commands</h2>
+All available commands are accessed with: <em><strong>dotnet --help</strong></em>.
+<p><a href="/images/2018/01/NET-Core-CLI-all.png"><img src="/images/2018/01/NET-Core-CLI-all.png"></a></p>
+<h2>Initialise .NET projects</h2>
+Creating new projects is done with: <em><strong>dotnet new [options]</strong></em>. I have used following commands:
+<ul>
+ 	<li>Create new console application project: <em><strong>dotnet new console -o &#x3C;ProjectName></strong></em></li>
+ 	<li>Create new MS Test project: <em><strong>dotnet new mstest -o &#x3C;ProjectName></strong></em></li>
+ 	<li>Create new solution file: <em><strong>dotnet new sln –name &#x3C;SolutionName></strong></em></li>
+</ul>
+To list all available project types use: <em><strong>dotnet new --help</strong></em>.
+<p><a href="/images/2018/01/NET-Core-CLI-new.png"><img src="/images/2018/01/NET-Core-CLI-new.png"></a></p>
+<h2>Custom templates</h2>
+.NET SDK allows you to create custom project template and then install it to SDK with the command: <span><em><strong>dotnet new -i &#x3C;TEMPLATE_FOLDER></strong></em>. Once installed can create a new project out of your custom template. This is valuable in big organizations where cohesion is needed between similar project types. See more for templates in <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates" target="_blank" rel="noopener">Custom templates for dotnet new</a> article.</span>
+<h2>Manage dependencies</h2>
+Two types of dependencies are available, in a NuGet package or to another .NET project.
+<ul>
+ 	<li>Add reference to a NuGet package: <em><strong>dotnet add package &#x3C;NuGetPackageName></strong></em></li>
+ 	<li>Add reference to another .NET project: <em><strong>dotnet add reference &#x3C;PathToProjectFile></strong></em></li>
+</ul>
+Similar commands are available for removing dependencies with: <em><strong>dotnet remove</strong></em>.
+<p>Project dependencies can be shown with: <em><strong>dotnet list reference &#x3C;PathToProjectFile></strong></em>.</p>
+<h2>Actions on a project</h2>
+<ul>
+ 	<li>Build a project: <em><strong>dotnet build</strong></em></li>
+ 	<li>Run a project: <em><strong>dotnet run</strong></em></li>
+ 	<li>Run tests of a project: <em><strong>dotnet test</strong></em></li>
+ 	<li>Publish project artefacts: <em><strong>dotnet publish</strong></em></li>
+</ul>
+All commands have a bunch of configuration options to be provided. More details on each command can be obtained by adding <em><strong>--help</strong></em> at the end.
+<h2>Manage solution file</h2>
+<ul>
+ 	<li>Create new solution file: <em><strong>dotnet new sln –name &#x3C;SolutionName></strong></em></li>
+ 	<li>Add project to solution: <em><strong>dotnet sln &#x3C;SolutionFileName> add &#x3C;PathToProjectFile></strong></em></li>
+ 	<li>Remove project from solution: <em><strong>dotnet sln &#x3C;SolutionFileName> remove &#x3C;PathToProjectFile></strong></em></li>
+ 	<li>List projects in a solution: <em><strong>dotnet sln &#x3C;SolutionFileName> list</strong></em></li>
+</ul>
+<h2>Conclusion</h2>
+This post is showing some useful .NET SDK CLI commands that make management of .NET project easy without Visual Studio 2017. More practical examples can be found in post where those commands are actually used: <a href="/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/">Build a REST API with .NET Core 2 and run it on Docker Linux container</a> and <a href="/net-core-integration-testing-mock-dependencies/">.NET Core integration testing and mock</a>.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/distributed-system-observability-instrument-cypress-tests-with-opentelemetry/"><!-- Primary Meta Tags --><title>Distributed system observability: Instrument Cypress tests with OpenTelemetry</title><meta name="title" content="Distributed system observability: Instrument Cypress tests with OpenTelemetry"><meta name="description" content="Instrument Cypress tests with OpenTelemetry and be able to custom trace the tests."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/distributed-system-observability-instrument-cypress-tests-with-opentelemetry/"><meta property="og:title" content="Distributed system observability: Instrument Cypress tests with OpenTelemetry"><meta property="og:description" content="Instrument Cypress tests with OpenTelemetry and be able to custom trace the tests."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/distributed-system-observability-instrument-cypress-tests-with-opentelemetry/"><meta property="twitter:title" content="Distributed system observability: Instrument Cypress tests with OpenTelemetry"><meta property="twitter:description" content="Instrument Cypress tests with OpenTelemetry and be able to custom trace the tests."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2021-11-09T00:00:00.000Z"> Nov 9, 2021 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Distributed system observability: Instrument Cypress tests with OpenTelemetry</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/distributed-system-observability-complete-end-to-end-example-with-opentracing-jaeger-prometheus-grafana-spring-boot-react-and-selenium/">Distributed system observability: complete end-to-end example</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/selenium-observability-java" target="_blank" rel="noopener noreferrer">selenium-observability-java</a> GitHub repository.</p>
+<h2>Cypress</h2>
+<a href="https://docs.cypress.io/guides/overview/why-cypress" target="_blank" rel="noopener">Cypress</a> is a front-end testing tool built for the modern web. It is most often compared to Selenium; however, Cypress is both fundamentally and architecturally different. I have lots of experience with Cypress, I have written for it in <a href="/testing-with-cypress-lessons-learned-in-a-complete-framework/">Testing with Cypress – lessons learned in a complete framework</a> post. Although it provides some benefits over Selenium, it also comes with its problems. Writing tests in Cypress is more complex than with Selenium. Cypress is more technically complex, which gives more power but is a real struggle for making decent test automation.
+<h2>Cypress tests custom observability</h2>
+As stated before, in the case of HTTP calls, the OpenTelemetry binding between both parties is the <em><strong>traceparent</strong></em> header. I want to bind the Selenium tests with the frontend, so it comes naturally to mind - open the URL in the browser and provide this HTTP header. After research, I could not find a way to achieve this. I implemented a custom solution, which is Cypress independent and can be customized as needed. Moreover, it is a web automation framework independent, this approach can be used with any web automation tool. See examples for the same approach in Selenium in <a href="/distributed-system-observability-instrument-selenium-tests-with-opentelemetry/">Distributed system observability: Instrument Selenium tests with OpenTelemetry</a> post.
+<h3>Instrument the frontend</h3>
+In order to achieve linking, a JavaScript function is exposed in the frontend, which creates a parent Span. Then this JS function is called from the tests when needed. This function is named <em><strong>startBindingSpan()</strong></em> and is registered with the <em><strong>window</strong></em> global object. It creates a binding span with the same attributes (<em><strong>traceId, spanId, traceFlags</strong></em>) as the span used in the Selenium tests. This span never ends, so is not recorded in the traces. In order to enable this span, the <em><strong>traceSpan()</strong></em> function has to be manually used in the frontend code, because it links the current frontend context with the binding span. I have added another function, called <em><strong>flushTraces()</strong></em>. It forces the OpenTelemetry library to report the traces to Jaeger. Reporting is done with an HTTP call and the browser should not exit before all reporting requests are sent.
+<p><strong>Note:</strong> some people consider exposing such a <em><strong>window</strong></em>-bound function in the frontend to modify React state as an anti-pattern. Frontend code is in <a href="https://github.com/llatinov/selenium-observability-java/blob/main/frontend/src/helpers/tracing/index.ts" target="_blank" rel="noopener">src/helpers/tracing/index.ts</a>:</p>
+<pre class="language-javascript"><code>declare const window: any
+var bindingSpan: Span | undefined
+
+window.startBindingSpan = (traceId: string, spanId: string, traceFlags: number) => {
+  bindingSpan = webTracerWithZone.startSpan('')
+  bindingSpan.spanContext().traceId = traceId
+  bindingSpan.spanContext().spanId = spanId
+  bindingSpan.spanContext().traceFlags = traceFlags
+}
+
+window.flushTraces = () => {
+  provider.activeSpanProcessor.forceFlush().then(() => console.log('flushed'))
+}
+
+export function traceSpan&#x3C;F extends (...args: any)
+    => ReturnType&#x3C;F>>(name: string, func: F): ReturnType&#x3C;F> {
+  var singleSpan: Span
+  if (bindingSpan) {
+    const ctx = trace.setSpan(context.active(), bindingSpan)
+    singleSpan = webTracerWithZone.startSpan(name, undefined, ctx)
+    bindingSpan = undefined
+  } else {
+    singleSpan = webTracerWithZone.startSpan(name)
+  }
+  return context.with(trace.setSpan(context.active(), singleSpan), () => {
+    try {
+      const result = func()
+      singleSpan.end()
+      return result
+    } catch (error) {
+      singleSpan.setStatus({ code: SpanStatusCode.ERROR })
+      singleSpan.end()
+      throw error
+    }
+  })
+}
+</code></pre>
+<h3>Instrument Cypress tests</h3>
+In order to achieve the tracing, <a href="https://github.com/open-telemetry/opentelemetry-js" target="_blank" rel="noopener">OpenTelemetry JavaScript libraries</a> are needed. Those libraries are the same used in the frontend and described in <a href="/distributed-system-observability-instrument-react-application-with-opentelemetry/">Distributed system observability: Instrument React application with OpenTelemetry</a> post. Those libraries send the data in OpenTelemetry format, so <a href="https://github.com/open-telemetry/opentelemetry-collector" target="_blank" rel="noopener">OpenTelemetry Collector</a> is needed to convert the traces into Jaeger format. OpenTelemetry collector is already started into the Docker compose landscape, so it just needs to be used, its endpoint is <em><strong>http://localhost:4318/v1/trace</strong></em>. There is a function that creates an OpenTelemetry tracer. I have created two implementations on the tracing. One is by extending the existing Cypress commands. Another is by creating a tracing wrapper around Cypress. Both of them use the tracer creating function. Both of them coexist in the same project, but cannot run simultaneously.
+<pre class="language-javascript"><code>import { WebTracerProvider } from '@opentelemetry/sdk-trace-web'
+import { Resource } from '@opentelemetry/resources'
+import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
+import { CollectorTraceExporter } from '@opentelemetry/exporter-collector'
+import { ZoneContextManager } from '@opentelemetry/context-zone'
+<p>export function initTracer(name) {
+const resource = new Resource({ ‘service.name’: name })
+const provider = new WebTracerProvider({ resource })</p>
+<p>const collector = new CollectorTraceExporter({
+url: ‘<a href="http://localhost:4318/v1/trace">http://localhost:4318/v1/trace</a>’
+})
+provider.addSpanProcessor(new SimpleSpanProcessor(collector))
+provider.register({ contextManager: new ZoneContextManager() })</p>
+</code><p><code>return provider.getTracer(name)
+}
+</code></p></pre><p></p>
+<h2>Tracing Cypress tests - override default commands</h2>
+Cypress allows you to overwrite existing commands. This feature will be used in order to do the tracing, commands will perform their normal functions, but also will trace. This is achieved in <a href="https://github.com/llatinov/selenium-observability-java/blob/main/cypress-tests/cypress/support/commands_tracing.js" target="_blank" rel="noopener">cypress-tests/cypress/support/commands_tracing.js</a> file.
+<pre class="language-javascript"><code>import { context, trace } from '@opentelemetry/api'
+import { initTracer } from './init_tracing'
+<p>const webTracerWithZone = initTracer(‘cypress-tests-overwrite’)</p>
+<p>var mainSpan = undefined
+var currentSpan = undefined
+var mainWindow</p>
+<p>function initTracing(name) {
+mainSpan = webTracerWithZone.startSpan(name)
+currentSpan = mainSpan
+trace.setSpan(context.active(), mainSpan)
+mainSpan.end()
+}</p>
+<p>function initWindow(window) {
+mainWindow = window
+}</p>
+<p>function createChildSpan(name) {
+const ctx = trace.setSpan(context.active(), currentSpan)
+const span = webTracerWithZone.startSpan(name, undefined, ctx)
+trace.setSpan(context.active(), span)
+return span
+}</p>
+<p>Cypress.Commands.add(‘initTracing’, name => initTracing(name))</p>
+<p>Cypress.Commands.add(‘initWindow’, window => initWindow(window))</p>
+<p>Cypress.Commands.overwrite(‘visit’, (originalFn, url, options) => {
+currentSpan = mainSpan
+const span = createChildSpan(<code>visit: ${url}</code>)
+currentSpan = span
+const result = originalFn(url, options)
+span.end()
+return result
+})</p>
+<p>Cypress.Commands.overwrite(‘get’, (originalFn, selector, options) => {
+const span = createChildSpan(<code>get: ${selector}</code>)
+currentSpan = span
+const result = originalFn(selector, options)
+span.end()
+mainWindow.startBindingSpan(span.spanContext().traceId,
+span.spanContext().spanId, span.spanContext().traceFlags)
+return result
+})</p>
+<p>Cypress.Commands.overwrite(‘click’, (originalFn, subject, options) => {
+const span = createChildSpan(<code>click: ${subject.selector}</code>)
+const result = originalFn(subject, options)
+span.end()
+return result
+})</p>
+<p>Cypress.Commands.overwrite(‘type’, (originalFn, subject, text, options) => {
+const span = createChildSpan(<code>type: ${text}</code>)
+const result = originalFn(subject, text, options)
+span.end()
+return result
+})</p>
+</code><p><code></code></p></pre>
+This file with commands overwrite can be conditionally enabled and disabled with an environment variable. Variable is <em><strong>enableTracking</strong></em> and is defined in <em><strong>cypress.json</strong></em> file. This allows switching tracing on and off. In <em><strong>cypress.json</strong></em> file there is one more setting, <em><strong>chromeWebSecurity</strong></em> which overrides the <em><strong>CORS</strong></em> problem when tracing is sent to the OpenTelemetry collector. Cypress <em><strong>get</strong></em> command is the one that is used to do the linking between the tests and the frontend. It is calling the <em><strong>window.startBindingSpan</strong></em> function. In order for this to work, a <em><strong>window</strong></em> instance has to be set into the tests with the custom <em><strong>initWindow</strong></em> command.<p></p>
+<p><em><strong>Note:</strong> </em>A special set of Page Objects is used with this implementation.</p>
+<h2>Tracing Cypress tests - implement a wrapper</h2>
+Cypress allows you to overwrite existing commands. This feature will be used in order to do the tracing, commands will perform their normal functions, but also will trace. This is achieved in <a href="https://github.com/llatinov/selenium-observability-java/blob/main/cypress-tests/cypress/support/tracing_cypress.js" target="_blank" rel="noopener">cypress-tests/cypress/support/tracing_cypress.js</a> file.
+<pre class="language-javascript"><code>import { context, trace } from '@opentelemetry/api'
+import { initTracer } from './init_tracing'
+<p>export default class TracingCypress {
+constructor() {
+this.webTracerWithZone = initTracer(‘cypress-tests-wrapper’)
+this.mainSpan = undefined
+this.currentSpan = undefined
+}</p>
+<p>_createChildSpan(name) {
+const ctx = trace.setSpan(context.active(), this.currentSpan)
+const span = this.webTracerWithZone.startSpan(name, undefined, ctx)
+trace.setSpan(context.active(), span)
+return span
+}</p>
+<p>initTracing(name) {
+this.mainSpan = this.webTracerWithZone.startSpan(name)
+this.currentSpan = this.mainSpan
+trace.setSpan(context.active(), this.mainSpan)
+this.mainSpan.end()
+}</p>
+<p>visit(url, options) {
+this.currentSpan = this.mainSpan
+const span = this._createChildSpan(<code>visit: ${url}</code>)
+this.currentSpan = span
+const result = cy.visit(url, options)
+span.end()
+return result
+}</p>
+<p>get(selector, options) {
+const span = this._createChildSpan(<code>get: ${selector}</code>)
+this.currentSpan = span
+const result = cy.get(selector, options)
+span.end()
+return result
+}</p>
+<p>click(subject, options) {
+const span = this._createChildSpan(‘click’)
+subject.then(element =>
+element[0].ownerDocument.defaultView.startBindingSpan(
+span.spanContext().traceId,
+span.spanContext().spanId,
+span.spanContext().traceFlags
+)
+)
+const result = subject.click(options)
+span.end()
+return result
+}</p>
+</code><p><code>type(subject, text, options) {
+const span = this._createChildSpan(<code>type: ${text}</code>)
+const result = subject.type(text, options)
+span.end()
+return result
+}
+}
+</code></p></pre>
+In order to make this implementation work, it is mandatory to set <em><strong>enableTracking</strong></em> variable in <em><strong>cypress.json</strong></em> file to <em><strong>false</strong></em>. <em><strong>TracingCypress</strong></em> is instantiated in each and every test. An instance of it is provided as a constructor argument to the Page Object for this approach. The important part here is that the binding <em><strong>window.startBindingSpan</strong></em> is called in the <em><strong>get()</strong></em> method.<p></p>
+<p><em><strong>Note:</strong> </em>A special set of Page Objects is used with this implementation.</p>
+<h2>End-to-end traces in Jaeger</h2>
+<h2><a href="/images/2021/11/Selenium-Observability-Cypress-trace.png"><img src="/images/2021/11/Selenium-Observability-Cypress-trace.png"></a></h2>
+<h2>Conclusion</h2>
+In the given examples, I have shown how to instrument Cypress tests in order to be able to track how they perform. I have provided two approaches, with overwriting the default Cypress command and with providing a tracing wrapper for Cypress.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

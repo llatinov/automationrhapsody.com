@@ -1,0 +1,147 @@
+<?xml-stylesheet type='text/xsl' href='coverage.xsl'?>
+<coverage profilerVersion="0" driverVersion="0" startTime="9999-12-31T23:59:59.9999999" measureTime="0001-01-01T00:00:00.0000000">
+  <module moduleId="f4222f5a-8ada-4ee9-a39f-d58479f244cb" name="SampleDotNetCore2RestStub" assembly="SampleDotNetCore2RestStub" assemblyIdentity="SampleDotNetCore2RestStub">
+    <method name="get_Version" class="SampleDotNetCore2RestStub.AppConfig" excluded="false" instrumented="true" fullname="System.String SampleDotNetCore2RestStub.AppConfig::get_Version()">
+      <seqpnt visitcount="0" line="5" column="33" endline="5" endcolumn="37" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\AppConfig.cs" />
+    </method>
+    <method name="set_Version" class="SampleDotNetCore2RestStub.AppConfig" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.AppConfig::set_Version(System.String)">
+      <seqpnt visitcount="0" line="5" column="38" endline="5" endcolumn="42" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\AppConfig.cs" />
+    </method>
+    <method name="OnActionExecuting" class="SampleDotNetCore2RestStub.Attributes.AuthenticationFilterAttribute" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Attributes.AuthenticationFilterAttribute::OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+      <seqpnt visitcount="0" line="13" column="13" endline="13" endcolumn="101" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Attributes\AuthenticationFilterAttribute.cs" />
+      <seqpnt visitcount="0" line="15" column="13" endline="15" endcolumn="52" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Attributes\AuthenticationFilterAttribute.cs" />
+      <seqpnt visitcount="0" line="16" column="17" endline="16" endcolumn="70" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Attributes\AuthenticationFilterAttribute.cs" />
+    </method>
+    <method name=".ctor" class="SampleDotNetCore2RestStub.Controllers.PersonController" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Controllers.PersonController::.ctor(SampleDotNetCore2RestStub.Repositories.IPersonRepository)">
+      <seqpnt visitcount="1" line="13" column="9" endline="13" endcolumn="68" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Controllers\PersonController.cs" />
+      <seqpnt visitcount="1" line="15" column="13" endline="15" endcolumn="50" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Controllers\PersonController.cs" />
+    </method>
+    <method name="GetPerson" class="SampleDotNetCore2RestStub.Controllers.PersonController" excluded="false" instrumented="true" fullname="SampleDotNetCore2RestStub.Models.Person SampleDotNetCore2RestStub.Controllers.PersonController::GetPerson(System.Int32)">
+      <seqpnt visitcount="1" line="21" column="13" endline="21" endcolumn="50" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Controllers\PersonController.cs" />
+    </method>
+    <method name="RemovePerson" class="SampleDotNetCore2RestStub.Controllers.PersonController" excluded="false" instrumented="true" fullname="System.String SampleDotNetCore2RestStub.Controllers.PersonController::RemovePerson()">
+      <seqpnt visitcount="0" line="27" column="13" endline="27" endcolumn="40" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Controllers\PersonController.cs" />
+      <seqpnt visitcount="0" line="28" column="13" endline="28" endcolumn="87" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Controllers\PersonController.cs" />
+    </method>
+    <method name="GetPersons" class="SampleDotNetCore2RestStub.Controllers.PersonController" excluded="false" instrumented="true" fullname="System.Collections.Generic.List`1&lt;SampleDotNetCore2RestStub.Models.Person&gt; SampleDotNetCore2RestStub.Controllers.PersonController::GetPersons()">
+      <seqpnt visitcount="1" line="34" column="13" endline="34" endcolumn="47" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Controllers\PersonController.cs" />
+    </method>
+    <method name="AddPerson" class="SampleDotNetCore2RestStub.Controllers.PersonController" excluded="false" instrumented="true" fullname="System.String SampleDotNetCore2RestStub.Controllers.PersonController::AddPerson(SampleDotNetCore2RestStub.Models.Person)">
+      <seqpnt visitcount="0" line="40" column="13" endline="40" endcolumn="51" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Controllers\PersonController.cs" />
+    </method>
+    <method name=".ctor" class="SampleDotNetCore2RestStub.Controllers.SecurePersonController" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Controllers.SecurePersonController::.ctor(SampleDotNetCore2RestStub.Repositories.IPersonRepository)">
+      <seqpnt visitcount="0" line="14" column="9" endline="14" endcolumn="74" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Controllers\SecurePersonController.cs" />
+      <seqpnt visitcount="0" line="16" column="13" endline="16" endcolumn="50" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Controllers\SecurePersonController.cs" />
+    </method>
+    <method name="GetPersons" class="SampleDotNetCore2RestStub.Controllers.SecurePersonController" excluded="false" instrumented="true" fullname="System.Collections.Generic.List`1&lt;SampleDotNetCore2RestStub.Models.Person&gt; SampleDotNetCore2RestStub.Controllers.SecurePersonController::GetPersons()">
+      <seqpnt visitcount="0" line="22" column="13" endline="22" endcolumn="47" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Controllers\SecurePersonController.cs" />
+    </method>
+    <method name=".ctor" class="SampleDotNetCore2RestStub.Controllers.VersionController" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Controllers.VersionController::.ctor(Microsoft.Extensions.Options.IOptions`1&lt;SampleDotNetCore2RestStub.AppConfig&gt;)">
+      <seqpnt visitcount="0" line="11" column="9" endline="11" endcolumn="62" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Controllers\VersionController.cs" />
+      <seqpnt visitcount="0" line="13" column="13" endline="13" endcolumn="37" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Controllers\VersionController.cs" />
+    </method>
+    <method name="Version" class="SampleDotNetCore2RestStub.Controllers.VersionController" excluded="false" instrumented="true" fullname="System.String SampleDotNetCore2RestStub.Controllers.VersionController::Version()">
+      <seqpnt visitcount="0" line="19" column="13" endline="19" endcolumn="36" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Controllers\VersionController.cs" />
+    </method>
+    <method name="get_StatusCode" class="SampleDotNetCore2RestStub.Exceptions.HttpException" excluded="false" instrumented="true" fullname="System.Int32 SampleDotNetCore2RestStub.Exceptions.HttpException::get_StatusCode()">
+      <seqpnt visitcount="0" line="8" column="33" endline="8" endcolumn="37" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Exceptions\HttpException.cs" />
+    </method>
+    <method name=".ctor" class="SampleDotNetCore2RestStub.Exceptions.HttpException" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Exceptions.HttpException::.ctor(System.Net.HttpStatusCode)">
+      <seqpnt visitcount="0" line="11" column="15" endline="11" endcolumn="46" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Exceptions\HttpException.cs" />
+      <seqpnt visitcount="0" line="13" column="13" endline="13" endcolumn="51" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Exceptions\HttpException.cs" />
+    </method>
+    <method name=".ctor" class="SampleDotNetCore2RestStub.Middleware.HttpExceptionMiddleware" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Middleware.HttpExceptionMiddleware::.ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+      <seqpnt visitcount="1" line="12" column="9" endline="12" endcolumn="61" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Middleware\HttpExceptionMiddleware.cs" />
+      <seqpnt visitcount="1" line="14" column="13" endline="14" endcolumn="26" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Middleware\HttpExceptionMiddleware.cs" />
+    </method>
+    <method name="MoveNext" class="SampleDotNetCore2RestStub.Middleware.HttpExceptionMiddleware/&lt;Invoke&gt;d__2" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Middleware.HttpExceptionMiddleware/&lt;Invoke&gt;d__2::MoveNext()">
+      <seqpnt visitcount="1" line="21" column="17" endline="21" endcolumn="45" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Middleware\HttpExceptionMiddleware.cs" />
+      <seqpnt visitcount="0" line="23" column="13" endline="23" endcolumn="48" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Middleware\HttpExceptionMiddleware.cs" />
+      <seqpnt visitcount="0" line="25" column="17" endline="25" endcolumn="72" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Middleware\HttpExceptionMiddleware.cs" />
+      <seqpnt visitcount="0" line="26" column="17" endline="26" endcolumn="76" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Middleware\HttpExceptionMiddleware.cs" />
+      <seqpnt visitcount="0" line="27" column="17" endline="27" endcolumn="62" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Middleware\HttpExceptionMiddleware.cs" />
+      <seqpnt visitcount="1" line="21" column="17" endline="21" endcolumn="45" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Middleware\HttpExceptionMiddleware.cs" />
+      <seqpnt visitcount="0" line="23" column="13" endline="23" endcolumn="48" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Middleware\HttpExceptionMiddleware.cs" />
+      <seqpnt visitcount="0" line="25" column="17" endline="25" endcolumn="72" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Middleware\HttpExceptionMiddleware.cs" />
+      <seqpnt visitcount="0" line="26" column="17" endline="26" endcolumn="76" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Middleware\HttpExceptionMiddleware.cs" />
+      <seqpnt visitcount="0" line="27" column="17" endline="27" endcolumn="62" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Middleware\HttpExceptionMiddleware.cs" />
+    </method>
+    <method name="get_Id" class="SampleDotNetCore2RestStub.Models.Person" excluded="false" instrumented="true" fullname="System.Int32 SampleDotNetCore2RestStub.Models.Person::get_Id()">
+      <seqpnt visitcount="1" line="5" column="25" endline="5" endcolumn="29" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Models\Person.cs" />
+    </method>
+    <method name="set_Id" class="SampleDotNetCore2RestStub.Models.Person" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Models.Person::set_Id(System.Int32)">
+      <seqpnt visitcount="1" line="5" column="30" endline="5" endcolumn="34" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Models\Person.cs" />
+    </method>
+    <method name="get_FirstName" class="SampleDotNetCore2RestStub.Models.Person" excluded="false" instrumented="true" fullname="System.String SampleDotNetCore2RestStub.Models.Person::get_FirstName()">
+      <seqpnt visitcount="1" line="6" column="35" endline="6" endcolumn="39" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Models\Person.cs" />
+    </method>
+    <method name="set_FirstName" class="SampleDotNetCore2RestStub.Models.Person" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Models.Person::set_FirstName(System.String)">
+      <seqpnt visitcount="1" line="6" column="40" endline="6" endcolumn="44" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Models\Person.cs" />
+    </method>
+    <method name="get_LastName" class="SampleDotNetCore2RestStub.Models.Person" excluded="false" instrumented="true" fullname="System.String SampleDotNetCore2RestStub.Models.Person::get_LastName()">
+      <seqpnt visitcount="1" line="7" column="34" endline="7" endcolumn="38" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Models\Person.cs" />
+    </method>
+    <method name="set_LastName" class="SampleDotNetCore2RestStub.Models.Person" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Models.Person::set_LastName(System.String)">
+      <seqpnt visitcount="1" line="7" column="39" endline="7" endcolumn="43" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Models\Person.cs" />
+    </method>
+    <method name="get_Email" class="SampleDotNetCore2RestStub.Models.Person" excluded="false" instrumented="true" fullname="System.String SampleDotNetCore2RestStub.Models.Person::get_Email()">
+      <seqpnt visitcount="1" line="8" column="31" endline="8" endcolumn="35" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Models\Person.cs" />
+    </method>
+    <method name="set_Email" class="SampleDotNetCore2RestStub.Models.Person" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Models.Person::set_Email(System.String)">
+      <seqpnt visitcount="1" line="8" column="36" endline="8" endcolumn="40" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Models\Person.cs" />
+    </method>
+    <method name="Main" class="SampleDotNetCore2RestStub.Program" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Program::Main(System.String[])">
+      <seqpnt visitcount="0" line="10" column="13" endline="12" endcolumn="26" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Program.cs" />
+      <seqpnt visitcount="0" line="14" column="13" endline="14" endcolumn="27" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Program.cs" />
+    </method>
+    <method name=".ctor" class="SampleDotNetCore2RestStub.Repositories.PersonRepository" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Repositories.PersonRepository::.ctor()">
+      <seqpnt visitcount="0" line="9" column="9" endline="9" endcolumn="82" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+      <seqpnt visitcount="0" line="11" column="9" endline="11" endcolumn="34" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+      <seqpnt visitcount="0" line="13" column="13" endline="13" endcolumn="116" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+      <seqpnt visitcount="0" line="14" column="13" endline="14" endcolumn="116" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+      <seqpnt visitcount="0" line="15" column="13" endline="15" endcolumn="116" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+      <seqpnt visitcount="0" line="16" column="13" endline="16" endcolumn="116" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+    </method>
+    <method name="GetById" class="SampleDotNetCore2RestStub.Repositories.PersonRepository" excluded="false" instrumented="true" fullname="SampleDotNetCore2RestStub.Models.Person SampleDotNetCore2RestStub.Repositories.PersonRepository::GetById(System.Int32)">
+      <seqpnt visitcount="0" line="21" column="13" endline="21" endcolumn="33" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+    </method>
+    <method name="GetAll" class="SampleDotNetCore2RestStub.Repositories.PersonRepository" excluded="false" instrumented="true" fullname="System.Collections.Generic.List`1&lt;SampleDotNetCore2RestStub.Models.Person&gt; SampleDotNetCore2RestStub.Repositories.PersonRepository::GetAll()">
+      <seqpnt visitcount="0" line="26" column="13" endline="26" endcolumn="45" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+    </method>
+    <method name="GetCount" class="SampleDotNetCore2RestStub.Repositories.PersonRepository" excluded="false" instrumented="true" fullname="System.Int32 SampleDotNetCore2RestStub.Repositories.PersonRepository::GetCount()">
+      <seqpnt visitcount="0" line="31" column="13" endline="31" endcolumn="37" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+    </method>
+    <method name="Remove" class="SampleDotNetCore2RestStub.Repositories.PersonRepository" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Repositories.PersonRepository::Remove()">
+      <seqpnt visitcount="0" line="36" column="13" endline="36" endcolumn="37" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+      <seqpnt visitcount="0" line="38" column="17" endline="38" endcolumn="55" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+    </method>
+    <method name="Save" class="SampleDotNetCore2RestStub.Repositories.PersonRepository" excluded="false" instrumented="true" fullname="System.String SampleDotNetCore2RestStub.Repositories.PersonRepository::Save(SampleDotNetCore2RestStub.Models.Person)">
+      <seqpnt visitcount="0" line="44" column="13" endline="44" endcolumn="49" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+      <seqpnt visitcount="0" line="46" column="17" endline="46" endcolumn="46" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+      <seqpnt visitcount="0" line="47" column="17" endline="47" endcolumn="62" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+      <seqpnt visitcount="0" line="51" column="17" endline="51" endcolumn="49" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+      <seqpnt visitcount="0" line="52" column="17" endline="52" endcolumn="60" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Repositories\PersonRepository.cs" />
+    </method>
+    <method name=".ctor" class="SampleDotNetCore2RestStub.Startup" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Startup::.ctor()">
+      <seqpnt visitcount="1" line="13" column="9" endline="13" endcolumn="25" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Startup.cs" />
+      <seqpnt visitcount="1" line="15" column="13" endline="17" endcolumn="44" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Startup.cs" />
+      <seqpnt visitcount="1" line="19" column="13" endline="19" endcolumn="58" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Startup.cs" />
+    </method>
+    <method name="get_Configuration" class="SampleDotNetCore2RestStub.Startup" excluded="false" instrumented="true" fullname="Microsoft.Extensions.Configuration.IConfiguration SampleDotNetCore2RestStub.Startup::get_Configuration()">
+      <seqpnt visitcount="1" line="22" column="47" endline="22" endcolumn="51" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Startup.cs" />
+    </method>
+    <method name="ConfigureServices" class="SampleDotNetCore2RestStub.Startup" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Startup::ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+      <seqpnt visitcount="1" line="26" column="13" endline="26" endcolumn="31" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Startup.cs" />
+      <seqpnt visitcount="1" line="27" column="13" endline="27" endcolumn="58" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Startup.cs" />
+      <seqpnt visitcount="1" line="28" column="13" endline="28" endcolumn="65" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Startup.cs" />
+      <seqpnt visitcount="1" line="30" column="13" endline="30" endcolumn="45" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Startup.cs" />
+    </method>
+    <method name="ConfigureRepositories" class="SampleDotNetCore2RestStub.Startup" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Startup::ConfigureRepositories(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+      <seqpnt visitcount="0" line="35" column="13" endline="35" endcolumn="74" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Startup.cs" />
+    </method>
+    <method name="Configure" class="SampleDotNetCore2RestStub.Startup" excluded="false" instrumented="true" fullname="System.Void SampleDotNetCore2RestStub.Startup::Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+      <seqpnt visitcount="1" line="40" column="13" endline="40" endcolumn="58" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Startup.cs" />
+      <seqpnt visitcount="1" line="41" column="13" endline="41" endcolumn="26" excluded="false" document="C:\SampleDotNetCore2RestStub\src\SampleDotNetCore2RestStub\Startup.cs" />
+    </method>
+  </module>
+</coverage>

@@ -1,0 +1,351 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-basic-sqs-queue-operations/"><!-- Primary Meta Tags --><title>AWS examples in C# - basic SQS queue operations</title><meta name="title" content="AWS examples in C# - basic SQS queue operations"><meta name="description" content="Code examples of how to perform basic SQS queue operations like reading, writing, deleting, creating a queue, etc."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-basic-sqs-queue-operations/"><meta property="og:title" content="AWS examples in C# - basic SQS queue operations"><meta property="og:description" content="Code examples of how to perform basic SQS queue operations like reading, writing, deleting, creating a queue, etc."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-basic-sqs-queue-operations/"><meta property="twitter:title" content="AWS examples in C# - basic SQS queue operations"><meta property="twitter:description" content="Code examples of how to perform basic SQS queue operations like reading, writing, deleting, creating a queue, etc."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-02-19T00:00:00.000Z"> Feb 19, 2020 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - basic SQS queue operations</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository. In the current post, I will put in practice example basic SQS operations, a more detailed description of their usage is available in <em><strong>AWS examples in C# - create a service working with SQS</strong></em> post.</p>
+<h2>Instantiate Amazon SQS client</h2>
+In the current examples, I use a configuration class called <em><strong>AppConfig</strong></em>. Its values are injected from the environment variables by .NET Core framework in <em><strong>Startup</strong></em> class. In order to work with SQS, a client is needed. The SQS client interface is called <em><strong>IAmazonSQS</strong></em> and comes from <em><strong>AWS C# SDK</strong></em>. The NuGet package is called <em><strong>AWSSDK.SQS</strong></em>, which in the current example comes as a sub-reference from <em><strong>Automationrhapsody.Aws.Examples.Models</strong></em> NuGet package. The concrete AWS client implementation is <em><strong>AmazonSQSClient</strong></em> and a singleton object is instantiated in <em><strong>SqsClientFactory</strong></em> class, where <em><strong>RegionEndpoint</strong></em> is used to instantiate <em><strong>AmazonSQSConfig</strong></em>. I use the <em><strong>AwsCredentials</strong></em> class which extends the AWS' abstract <em><strong>AWSCredentials</strong></em> in order to manage the credentials.
+<p>[tabby title=“SqsClientFactory.cs”]</p>
+<pre class="language-csharp"><code>public static AmazonSQSClient CreateClient(AppConfig appConfig)
+{
+	var sqsConfig = new AmazonSQSConfig
+	{
+		RegionEndpoint = RegionEndpoint.GetBySystemName(appConfig.AwsRegion)
+	};
+	var awsCredentials = new AwsCredentials(appConfig);
+	return new AmazonSQSClient(awsCredentials, sqsConfig);
+}
+</code></pre>
+<p>[tabby title=“AwsCredentials.cs”]</p>
+<pre class="language-csharp"><code>public class AwsCredentials : AWSCredentials
+{
+	private readonly AppConfig _appConfig;
+
+	public AwsCredentials(AppConfig appConfig)
+	{
+		_appConfig = appConfig;
+	}
+
+	public override ImmutableCredentials GetCredentials()
+	{
+		return new ImmutableCredentials(_appConfig.AwsAccessKey,
+						_appConfig.AwsSecretKey, null);
+	}
+}
+</code></pre>
+<p>[tabby title=“AppConfig.cs”]</p>
+<pre class="language-csharp"><code>public class AppConfig
+{
+	private const string FifoSuffix = ".fifo";
+	private string _queueName;
+
+	public string AwsRegion { get; set; }
+	public string AwsAccessKey { get; set; }
+	public string AwsSecretKey { get; set; }
+	public string AwsQueueName
+	{
+		get => AwsQueueIsFifo ? _queueName + FifoSuffix : _queueName;
+		set => _queueName = value;
+	}
+	public string AwsDeadLetterQueueName
+	{
+		get
+		{
+			var deadLetter = _queueName + "-exceptions";
+			return AwsQueueIsFifo ? deadLetter + FifoSuffix : deadLetter;
+		}
+	}
+
+	public bool AwsQueueAutomaticallyCreate { get; set; }
+	public bool AwsQueueIsFifo { get; set; }
+	public int AwsQueueLongPollTimeSeconds { get; set; }
+}
+</code></pre>
+<p>[tabby title=“Startup.cs”]</p>
+<pre class="language-csharp"><code>public Startup()
+{
+	var configurationBuilder = new ConfigurationBuilder()
+		.AddEnvironmentVariables();
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Local SqsClient dependencies</h2>
+This sample code shows what external dependencies the <em><strong>SqsClient</strong></em> class needs. They are injected into the constructor by .NET Core dependency injection.
+<pre class="language-csharp"><code>private readonly AppConfig _appConfig;
+private readonly IAmazonSQS _sqsClient;
+private readonly ILogger&#x3C;SqsClient> _logger;
+private readonly ConcurrentDictionary&#x3C;string, string> _queueUrlCache;
+</code><p><code>public SqsClient(IOptions&#x3C;AppConfig> awsConfig,
+IAmazonSQS sqsClient, ILogger&#x3C;SqsClient> logger)
+{
+_appConfig = awsConfig.Value;
+_sqsClient = sqsClient;
+_logger = logger;
+_queueUrlCache = new ConcurrentDictionary&#x3C;string, string>();
+}
+</code></p></pre><p></p>
+<h2>Create SQS queue and dead-letter queue</h2>
+Queues can be created programmatically, something that will be described in the current post. Another option is to create them from the AWS CLI, see more information in <em><strong>AWS examples in C# - deploy with AWS CLI commands</strong></em> post.
+<p>Once the client is in place, then the queue and dead-letter queue is created with the code below. The code snippet also enables <em><strong>long polling</strong></em> for the queue, which allows reducing costs while allowing consumers to receive messages as soon as they arrive in the queue. Basically SQS waits until a message is available in a queue before sending a response.</p>
+<pre class="language-csharp"><code>public async Task CreateQueueAsync()
+{
+	const string arnAttribute = "QueueArn";
+
+	try
+	{
+		var createQueueRequest = new CreateQueueRequest();
+		if (_appConfig.AwsQueueIsFifo)
+		{
+			createQueueRequest.Attributes.Add("FifoQueue", "true");
+		}
+
+		createQueueRequest.QueueName = _appConfig.AwsQueueName;
+		var createQueueResponse = await _sqsClient.CreateQueueAsync(createQueueRequest);
+		createQueueRequest.QueueName = _appConfig.AwsDeadLetterQueueName;
+		var createDeadLetterQueueResponse = await _sqsClient.CreateQueueAsync(createQueueRequest);
+
+		// Get the the ARN of dead letter queue and configure main queue to deliver messages to it
+		var attributes = await _sqsClient.GetQueueAttributesAsync(new GetQueueAttributesRequest
+		{
+			QueueUrl = createDeadLetterQueueResponse.QueueUrl,
+			AttributeNames = new List&#x3C;string> { arnAttribute }
+		});
+		var deadLetterQueueArn = attributes.Attributes[arnAttribute];
+
+		// RedrivePolicy on main queue to deliver messages to dead letter queue if they fail processing after 3 times
+		var redrivePolicy = new
+		{
+			maxReceiveCount = "3",
+			deadLetterTargetArn = deadLetterQueueArn
+		};
+		await _sqsClient.SetQueueAttributesAsync(new SetQueueAttributesRequest
+		{
+			QueueUrl = createQueueResponse.QueueUrl,
+			Attributes = new Dictionary&#x3C;string, string>
+			{
+				{"RedrivePolicy", JsonConvert.SerializeObject(redrivePolicy)},
+				// Enable Long polling
+				{"ReceiveMessageWaitTimeSeconds", _appConfig.AwsQueueLongPollTimeSeconds.ToString()}
+			}
+		});
+	}
+	catch (Exception ex)
+	{
+		_logger.LogError(ex, $"Error when creating SQS queue {_appConfig.AwsQueueName} and {_appConfig.AwsDeadLetterQueueName}");
+	}
+}
+</code></pre>
+<h2>Read messages from the SQS queue</h2>
+Reading is done with the given code, where <em><strong>_queueUrlCache</strong></em> is <em><strong>ConcurrentDictionary&#x3C;string, string></strong></em>. Queue URL is cached for better performance in <em><strong>GetQueueUrl</strong></em> method.
+<p>[tabby title=“GetMessagesAsync”]</p>
+<pre class="language-csharp"><code>public async Task&#x3C;List&#x3C;Message>> GetMessagesAsync(string queueName, CancellationToken cancellationToken = default)
+{
+	var queueUrl = await GetQueueUrl(queueName);
+
+	try
+	{
+		var response = await _sqsClient.ReceiveMessageAsync(new ReceiveMessageRequest
+		{
+			QueueUrl = queueUrl,
+			WaitTimeSeconds = _appConfig.AwsQueueLongPollTimeSeconds,
+			AttributeNames = new List&#x3C;string> { "ApproximateReceiveCount" },
+			MessageAttributeNames = new List&#x3C;string> { "All" }
+		}, cancellationToken);
+
+		if (response.HttpStatusCode != HttpStatusCode.OK)
+		{
+			throw new AmazonSQSException($"Failed to GetMessagesAsync for queue {queueName}. Response: {response.HttpStatusCode}");
+		}
+
+		return response.Messages;
+	}
+	catch (TaskCanceledException)
+	{
+		_logger.LogWarning($"Failed to GetMessagesAsync for queue {queueName} because the task was canceled");
+		return new List&#x3C;Message>();
+	}
+	catch (Exception)
+	{
+		_logger.LogError($"Failed to GetMessagesAsync for queue {queueName}");
+		throw;
+	}
+}
+</code></pre>
+<p>[tabby title=“GetQueueUrl”]</p>
+<pre class="language-csharp"><code>private async Task&#x3C;string> GetQueueUrl(string queueName)
+{
+	if (string.IsNullOrEmpty(queueName))
+	{
+		throw new ArgumentException("Queue name should not be blank.");
+	}
+
+	if (_queueUrlCache.TryGetValue(queueName, out var result))
+	{
+		return result;
+	}
+
+	try
+	{
+		var response = await _sqsClient.GetQueueUrlAsync(queueName);
+		return _queueUrlCache.AddOrUpdate(queueName, response.QueueUrl, (q, url) => url);
+	}
+	catch (QueueDoesNotExistException ex)
+	{
+		throw new InvalidOperationException($"Could not retrieve the URL for the queue '{queueName}' as it does not exist or you do not have access to it.", ex);
+	}
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Write a message to the SQS queue</h2>
+The current example is to write a single message to the queue. AWS SDK offers a method called <em><strong>SendMessageBatchAsync</strong></em>, which can send a group of messages. Because of the nature of the example application, the use of <em><strong>SendMessageBatchAsync </strong></em>is not needed. Writing comes in two flavors. With generic method accepting object instance or with method accepting message text and message type.
+<p>In the case of a FIFO queue, there are two more values to be set. One is the <em><strong>MessageGroupId</strong></em>, so messages from the same group are always processed one by one. In the current example, messages are grouped by type. Another mandatory thing is <em><strong>MessageDeduplicationId</strong></em>, which used by SQS for deduplication of sent messages. If a message with a particular message deduplication ID is sent successfully, any messages sent with the same message deduplication ID are accepted successfully but aren’t delivered during the 5-minute deduplication interval.</p>
+<p>[tabby title=“PostMessageAsync&#x3C;T>”]</p>
+<pre class="language-csharp"><code>public async Task PostMessageAsync&#x3C;T>(string queueName, T message)
+{
+	var queueUrl = await GetQueueUrl(queueName);
+
+	try
+	{
+		var sendMessageRequest = new SendMessageRequest
+		{
+			QueueUrl = queueUrl,
+			MessageBody = JsonConvert.SerializeObject(message),
+			MessageAttributes = SqsMessageTypeAttribute.CreateAttributes&#x3C;T>()
+		};
+		if (_appConfig.AwsQueueIsFifo)
+		{
+			sendMessageRequest.MessageGroupId = typeof(T).Name;
+			sendMessageRequest.MessageDeduplicationId = Guid.NewGuid().ToString();
+		}
+
+		await _sqsClient.SendMessageAsync(sendMessageRequest);
+	}
+	catch (Exception ex)
+	{
+		_logger.LogError(ex, $"Failed to PostMessagesAsync to queue '{queueName}'. Exception: {ex.Message}");
+		throw;
+	}
+}
+</code></pre>
+<p>[tabby title=“PostMessageAsync”]</p>
+<pre class="language-csharp"><code>public async Task PostMessageAsync(string queueName, string messageBody, string messageType)
+{
+	var queueUrl = await GetQueueUrl(queueName);
+
+	try
+	{
+		var sendMessageRequest = new SendMessageRequest
+		{
+			QueueUrl = queueUrl,
+			MessageBody = messageBody,
+			MessageAttributes = SqsMessageTypeAttribute.CreateAttributes(messageType)
+		};
+		if (_appConfig.AwsQueueIsFifo)
+		{
+			sendMessageRequest.MessageGroupId = messageType;
+			sendMessageRequest.MessageDeduplicationId = Guid.NewGuid().ToString();
+		}
+
+		await _sqsClient.SendMessageAsync(sendMessageRequest);
+	}
+	catch (Exception ex)
+	{
+		_logger.LogError(ex, $"Failed to PostMessagesAsync to queue '{queueName}'. Exception: {ex.Message}");
+		throw;
+	}
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Distinguishing messages in the queue</h2>
+Since many event emitters can write messages to the queue it gets tricky to process the messages properly. One option is to have a separate queue for separate types of messages, another option is to put some metadata into the messages. I have decided to go for the solution with one queue because I have just one consumer which knows which message processor to call. In the case of many consumers, it is recommended to have several SQS queues, so the consumer does not need to read and disregard messages, this is not optimal.
+<p>Every message is added additional <em><strong>MessageAttributes</strong></em>. In the example above this is done with <em><strong>SqsMessageTypeAttribute.CreateAttributes(messageType)</strong></em> extension method, available in <em><strong>Automationrhapsody.Aws.Examples.Models</strong></em> NuGet package, which is also part of the examples code, is located in <em><strong>Models</strong></em> project. What this method does is to add <em><strong>MessageType</strong></em> string attribute, where the value is <em><strong>typeof(T).Name</strong></em>.</p>
+<pre class="language-csharp"><code>public static class SqsMessageTypeAttribute
+{
+	private const string AttributeName = "MessageType";
+
+	public static string GetMessageTypeAttributeValue(this Dictionary&#x3C;string, MessageAttributeValue> attributes)
+	{
+		return attributes.SingleOrDefault(x => x.Key == AttributeName).Value?.StringValue;
+	}
+
+	public static Dictionary&#x3C;string, MessageAttributeValue> CreateAttributes&#x3C;T>()
+	{
+		return CreateAttributes(typeof(T).Name);
+	}
+
+	public static Dictionary&#x3C;string, MessageAttributeValue> CreateAttributes(string messageType)
+	{
+		return new Dictionary&#x3C;string, MessageAttributeValue>
+		{
+			{
+				AttributeName, new MessageAttributeValue
+				{
+					DataType = nameof(String),
+					StringValue = messageType
+				}
+			}
+		};
+	}
+}
+</code></pre>
+<h2>Delete message from the queue</h2>
+Once the message is processed, it should be removed from the queue. This is done with the following method:
+<pre class="language-csharp"><code>public async Task DeleteMessageAsync(string queueName, string receiptHandle)
+{
+	var queueUrl = await GetQueueUrl(queueName);
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>try</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	var response = await _sqsClient.DeleteMessageAsync(queueUrl, receiptHandle);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>	if (response.HttpStatusCode != HttpStatusCode.OK)</span></span>
+<span class="line"><span>	{</span></span>
+<span class="line"><span>		throw new AmazonSQSException($"Failed to DeleteMessageAsync with for [{receiptHandle}] from queue '{queueName}'. Response: {response.HttpStatusCode}");</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>catch (Exception)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	_logger.LogError($"Failed to DeleteMessageAsync from queue {queueName}");</span></span>
+<span class="line"><span>	throw;</span></span>
+<span class="line"><span>}</span></span></code></pre>
+</code><p><code>}
+</code></p></pre><p></p>
+<h2>Reprocess messages from dead-letter queue</h2>
+If there is a problem with message processing, they are moved to the dead-letter queue. There might be a specific bug in the consumer application for this particular type of message. This bug might be fixed, new version deployed and now all those messages should be reprocessed. Moving from dead-letter to source queue is done with the following code:
+<pre class="language-csharp"><code>public async Task RestoreFromDeadLetterQueueAsync(CancellationToken cancellationToken = default)
+{
+	var deadLetterQueueName = _appConfig.AwsDeadLetterQueueName;
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>try</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	var token = new CancellationTokenSource();</span></span>
+<span class="line"><span>	while (!token.Token.IsCancellationRequested)</span></span>
+<span class="line"><span>	{</span></span>
+<span class="line"><span>		var messages = await GetMessagesAsync(deadLetterQueueName, cancellationToken);</span></span>
+<span class="line"><span>		if (!messages.Any())</span></span>
+<span class="line"><span>		{</span></span>
+<span class="line"><span>			token.Cancel();</span></span>
+<span class="line"><span>			continue;</span></span>
+<span class="line"><span>		}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>		messages.ForEach(async message =&#x26;gt;</span></span>
+<span class="line"><span>		{</span></span>
+<span class="line"><span>			var messageType = message.MessageAttributes.GetMessageTypeAttributeValue();</span></span>
+<span class="line"><span>			if (messageType != null)</span></span>
+<span class="line"><span>			{</span></span>
+<span class="line"><span>				await PostMessageAsync(message.Body, messageType);</span></span>
+<span class="line"><span>				await DeleteMessageAsync(deadLetterQueueName, message.ReceiptHandle);</span></span>
+<span class="line"><span>			}</span></span>
+<span class="line"><span>		});</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>catch (Exception)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	_logger.LogError($"Failed to ReprocessMessages from queue {deadLetterQueueName}");</span></span>
+<span class="line"><span>	throw;</span></span>
+<span class="line"><span>}</span></span></code></pre>
+</code><p><code>}
+</code></p></pre><p></p>
+<h2>SQS queue operations at a glance</h2>
+All operations described above can be seen in <a href="https://github.com/llatinov/aws.examples.csharp/blob/master/SqsReader/src/SqsReader/Sqs/SqsClient.cs" target="_blank" rel="noopener noreferrer">SqsReader SqsClient</a> class and <a href="https://github.com/llatinov/aws.examples.csharp/blob/master/SqsWriter/src/SqsWriter/Sqs/SqsClient.cs" target="_blank" rel="noopener noreferrer">SqsWriter SqsClient</a> class.
+<h2>Conclusion</h2>
+In the current post, I have given code examples of how to perform basic SQS queue operations.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

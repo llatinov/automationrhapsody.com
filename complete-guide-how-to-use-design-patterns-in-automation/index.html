@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/complete-guide-how-to-use-design-patterns-in-automation/"><!-- Primary Meta Tags --><title>Complete guide how to use design patterns in automation</title><meta name="title" content="Complete guide how to use design patterns in automation"><meta name="description" content="Complete code example of how design patterns can be used in real life test automation."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/complete-guide-how-to-use-design-patterns-in-automation/"><meta property="og:title" content="Complete guide how to use design patterns in automation"><meta property="og:description" content="Complete code example of how design patterns can be used in real life test automation."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/complete-guide-how-to-use-design-patterns-in-automation/"><meta property="twitter:title" content="Complete guide how to use design patterns in automation"><meta property="twitter:description" content="Complete code example of how design patterns can be used in real life test automation."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-02-07T00:00:00.000Z"> Feb 7, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Complete guide how to use design patterns in automation</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>With series of posts, I’ve described 5 design patterns that each automation test engineer should know and use. I’ve started with a brief <a title="brief description of the patterns" href="/design-patterns-every-test-automation-engineer-should-know/">description of the patterns</a>. Then I’ve explained in details with code snippets following patterns: <a title="Page objects pattern" href="/page-objects-design-pattern/">Page objects</a>, <a title="Facade pattern" href="/facade-design-pattern/">Facade</a>, <a title="Factory pattern" href="/factory-design-pattern/">Factory</a>, <a title="Singleton pattern" href="/singleton-and-null-object-patterns/">Singleton</a>, <a title="Null object pattern" href="/singleton-and-null-object-patterns/">Null object</a>. Code examples are located in GitHub for <a href="https://github.com/llatinov/SeleniumSamples.NET/tree/master/DesignPatterns" target="_blank" rel="noopener">C#</a> and <a href="https://github.com/llatinov/selenium-samples-java/tree/master/design-patterns" target="_blank" rel="noopener">Java</a>.</p>
+<h2>Overview</h2>
+This post is intended to bond all together in a complete guide how to do write better automation code. Generally, automation project consists of two parts. Automation framework project and tests project. Current guide is intended to describe how to build your automation testing framework. How to structure your tests is a different topic. Remember once having correctly designed framework then tests will be much more clean, maintainable and easy to write. <em>To keep post shorter some of the code that is not essential for representing the idea is removed. The whole code is on GitHub.</em>
+<h2>Page objects</h2>
+Everything starts by defining proper page objects. There is no fixed recipe for this. It all depends on the structure of application under test. The general rule is that repeating elements (header, footer, menu, widget, etc) are extracted as separate objects. The whole idea is to have one element defined in only one place (stay <a title="DRY" href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself" target="_blank" rel="noopener">DRY</a>)! Below is our HomePage object. What you can do generally is make search and clear search terms. Note that clearing is done with jQuery code. This is because of a bug I've described with a workaround in <a title="Selenium WebDriver cannot click UTF-8 icons" href="/selenium-webdriver-cannot-click-utf-8-icons/">Selenium WebDriver cannot click UTF-8 icons</a> post.
+<pre class="language-csharp"><code>using OpenQA.Selenium;
+
+namespace AutomationRhapsody.DesignPatterns
+{
+	class HomePageObject
+	{
+		private WebDriverFacade webDriver;
+		public HomePageObject(WebDriverFacade webDriver)
+		{
+			this.webDriver = webDriver;
+		}
+
+		private IWebElement SearchField
+		{
+			get { return webDriver.FindElement(By.Id("search")); }
+		}
+
+		public void SearchFor(string text)
+		{
+			SearchField.SendKeys(text);
+		}
+
+		public void ClearSearch()
+		{
+			webDriver.ExecuteJavaScript("$('span.cancel').click()");
+		}
+	}
+}
+</code></pre>
+<h2>WebDriver factory</h2>
+WebDriver factory will be responsible for instantiating the WebDriver based on a condition which browser we want to run our tests with.
+<pre class="language-csharp"><code>using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.IE;
+
+namespace AutomationRhapsody.DesignPatterns
+{
+	public class WebDriverFactory
+	{
+		public IWebDriver CreateInstance(Browsers browser)
+		{
+			if (Browsers.Chrome == browser)
+			{
+				return new ChromeDriver();
+			}
+			else if (Browsers.IE == browser)
+			{
+				return new InternetExplorerDriver();
+			}
+			else
+			{
+				return new FirefoxDriver();
+			}
+		}
+	}
+}
+</code></pre>
+<p>The constructor takes an argument browser type. Browser type is defined as an <a title="enums" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/enum" target="_blank" rel="noopener">enumeration</a>. <strong>This is very important. Avoid passing back and forth strings. Always stick to enums or special purpose classes.</strong> This will save you time investigating bugs in your automation.</p>
+<pre class="language-csharp"><code>public enum Browsers
+{
+	Chrome, IE, Firefox
+}
+</code></pre>
+<h2>NullWebElement</h2>
+This is null object pattern and implements IWebElement. There is a NULL property that is used to compare is given element is not found or no.
+<pre class="language-csharp"><code>using OpenQA.Selenium;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Drawing;
+
+namespace AutomationRhapsody.DesignPatterns
+{
+	public class NullWebElement : IWebElement
+	{
+		private const string nullWebElement = "NullWebElement";
+		public bool Displayed { get { return false; } }
+		public bool Enabled { get { return false; } }
+		public Point Location { get { return new Point(0, 0); } }
+		public bool Selected { get { return false; } }
+		public Size Size { get { return new Size(0, 0); } }
+		public string TagName { get { return nullWebElement; } }
+		public string Text { get { return nullWebElement; } }
+		public void Clear() { }
+		public void Click() { }
+		public string GetAttribute(string attributeName) { return nullWebElement; }
+		public string GetCssValue(string propertyName) { return nullWebElement; }
+		public void SendKeys(string text) { }
+		public void Submit() { }
+		public IWebElement FindElement(By by) { return this; }
+		public ReadOnlyCollection&#x3C;IWebElement> FindElements(By by)
+		{
+			return new ReadOnlyCollection&#x3C;IWebElement>(new List&#x3C;IWebElement>());
+		}
+
+		private NullWebElement() { }
+
+		private static NullWebElement instance;
+		public static NullWebElement NULL
+		{
+			get
+			{
+				if (instance == null)
+				{
+					instance = new NullWebElement();
+				}
+				return instance;
+			}
+		}
+	}
+}
+</code></pre>
+<h2>WebDriver facade</h2>
+WebDriver facade main responsibility is to define custom behavior on elements location. This gives you centralized control over elements location. The constructor takes browser type and uses the factory to create WebDriver instance which is used internally in the facade. FindElement method defines explicit wait. If the element is not found then NullWebElement which is actual implementation of Null object pattern. The idea is to safely locate elements with try/catch and then just use them skipping checks for null.
+<pre class="language-csharp"><code>using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.ObjectModel;
+
+namespace AutomationRhapsody.DesignPatterns
+{
+	public class WebDriverFacade
+	{
+		private IWebDriver webDriver = null;
+		private TimeSpan waitForElement = TimeSpan.FromSeconds(5);
+
+		public WebDriverFacade(Browsers browser)
+		{
+			WebDriverFactory factory = new WebDriverFactory();
+			webDriver = factory.CreateInstance(browser);
+		}
+
+		public void Start(string url)
+		{
+			webDriver.Url = url;
+			webDriver.Navigate();
+		}
+
+		public void Stop()
+		{
+			webDriver.Quit();
+		}
+
+		public object ExecuteJavaScript(string script)
+		{
+			return ((IJavaScriptExecutor)webDriver).
+				ExecuteScript("return " + script);
+		}
+
+		public IWebElement FindElement(By by)
+		{
+			try
+			{
+				WebDriverWait wait = new WebDriverWait(webDriver, waitForElement);
+				return wait.Until(ExpectedConditions.ElementIsVisible(by));
+			}
+			catch
+			{
+				return NullWebElement.NULL;
+			}
+		}
+	}
+}
+</code></pre>
+<h2>Tests</h2>
+As I mentioned initially this post is about using efficiently design patterns in your framework automation project. Tests design are not being discussed here. Once you have designed the framework one simple test (without asserts) that makes search will look like the code below.
+<pre class="language-csharp"><code>Browsers browser = Browsers.Chrome;
+WebDriverFacade webDriver = new WebDriverFacade(browser);
+webDriver.Start("/examples/utf8icons.html");
+
+HomePageObject homePage = new HomePageObject(webDriver);
+homePage.ClearSearch();
+homePage.SearchFor("automation");
+
+webDriver.Stop();
+</code></pre>
+<h2>Conclusion</h2>
+Design patterns are enabling you to write maintainable code. They increase the value of your code. As shown in this series of posts they are not so complicated and you can easily adopt them in your automation. Most important is design patterns increase your value as a professional. So make the time to learn them!  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

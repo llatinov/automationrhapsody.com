@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/code-coverage-net-core-unit-tests-opencover/"><!-- Primary Meta Tags --><title>Code coverage of .NET Core unit tests with OpenCover</title><meta name="title" content="Code coverage of .NET Core unit tests with OpenCover"><meta name="description" content="Examples how to measure code coverage of .NET Core unit tests with OpenCover."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/code-coverage-net-core-unit-tests-opencover/"><meta property="og:title" content="Code coverage of .NET Core unit tests with OpenCover"><meta property="og:description" content="Examples how to measure code coverage of .NET Core unit tests with OpenCover."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/code-coverage-net-core-unit-tests-opencover/"><meta property="twitter:title" content="Code coverage of .NET Core unit tests with OpenCover"><meta property="twitter:description" content="Examples how to measure code coverage of .NET Core unit tests with OpenCover."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2018-01-10T00:00:00.000Z"> Jan 10, 2018 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Code coverage of .NET Core unit tests with OpenCover</h1> <hr data-astro-cid-bvzihdzo> </div>  <p><span>Examples below are based on GitHub </span><a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/SampleDotNetCore2RestStub" target="_blank" rel="noopener noreferrer">SampleDotNetCore2RestStub</a><span> repository. Examples use code from <a href="/net-core-integration-testing-mock-dependencies/">.NET Core integration testing and mock dependencies</a> post. Those are integration tests because they test more than one application module at a time, but they are run with a unit testing framework, this is why current post title is such.</span></p>
+<h2>Code coverage</h2>
+<span>This topic is how to do the code coverage on .NET Core unit tests with OpenCover. Theory on what is code coverage, why it is needed can be found in </span><a href="/what-about-code-coverage/">What about code coverage</a><span> post.</span>
+<h2>OpenCover</h2>
+<a href="https://github.com/OpenCover/opencover" target="_blank" rel="noopener noreferrer">OpenCover</a> is open source tool for code coverage for .NET 2.0 and above applications for Windows only. You can read more details about OpenCover in <a href="/code-coverage-manual-automated-tests-opencover-net-applications/">Code coverage of manual or automated tests with OpenCover for .NET applications</a> post or you can visit their <a href="https://github.com/OpenCover/opencover/wiki" target="_blank" rel="noopener noreferrer">OpenCover Wiki</a> page.
+<h2>Run OpenCover</h2>
+In order to make this examples work you need to check out <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/SampleDotNetCore2RestStub" target="_blank" rel="noopener noreferrer">SampleDotNetCore2RestStub</a><span> repository to <em><strong>C:\</strong></em> and run all commands from project root folder <em><strong>C:\SampleDotNetCore2RestStub</strong></em>. OpenCover and ReportGenerator should be installed in <em><strong>C:\</strong></em> as well. If you have different paths, just adjust them in commands shown below.</span>
+<pre class="language-powershell"><code>C:\OpenCover\OpenCover.Console.exe `
+	-target:"c:\Program Files\dotnet\dotnet.exe" `
+	-targetargs:"test" `
+	-output:coverage.xml `
+	-oldStyle `
+	-filter:"+[SampleDotNetCore2RestStub*]* -[SampleDotNetCore2RestStub*Test*]*" `
+	-register:user
+</code></pre>
+<h2>Enable .NET Core to debug output</h2>
+If you run the command above you will get the following message:
+<p><strong>Committing…</strong>
+<strong> No results, this could be for a number of reasons. The most common reasons are:</strong>
+<strong> 1) missing PDBs for the assemblies that match the filter please review the</strong>
+<strong> output file and refer to the Usage guide (Usage.rtf) about filters.</strong>
+<strong> 2) the profiler may not be registered correctly, please refer to the Usage</strong>
+<strong> guide and the -register switch.</strong></p>
+<p><a href="/images/2018/01/NET-Core-OpenCover-error.png"><img src="/images/2018/01/NET-Core-OpenCover-error.png"></a></p>
+<p><strong>Note:</strong> error with red text shown on image above is because with <em><strong>-targetargs:“test”</strong> <strong>dotnet.exe</strong></em> tries to run tests inside all projects, but <em><strong>src\SampleDotNetCore2RestStub</strong></em> simply does not have tests. You can refine which test project to get run by changing to: <em><strong>-targetargs:“test test\SampleDotNetCore2RestStub.Integration.Test\SampleDotNetCore2RestStub.Integration.Test.csproj”</strong></em>.</p>
+<p>Message for no results is because debug output is not enabled on .NET Core project and OpenCover does not have needed data to work on. Change <em><strong>src\SampleDotNetCore2RestStub\SampleDotNetCore2RestStub.csproj</strong></em> file by adding <em><strong>&#x3C;DebugType>full&#x3C;/DebugType></strong></em>:</p>
+<pre class="language-xml"><code>&#x3C;PropertyGroup>
+	&#x3C;OutputType>Exe&#x3C;/OutputType>
+	&#x3C;TargetFramework>netcoreapp2.0&#x3C;/TargetFramework>
+	&#x3C;DebugType>full&#x3C;/DebugType>
+&#x3C;/PropertyGroup>
+</code></pre>
+<p>Now running the command gives proper output:</p>
+<p><strong>Committing…</strong>
+<strong>Visited Classes 5 of 12 (41.67)</strong>
+<strong>Visited Methods 17 of 36 (47.22)</strong>
+<strong>Visited Points 43 of 123 (34.96)</strong>
+<strong>Visited Branches 18 of 44 (40.91)</strong></p>
+<p><strong>==== Alternative Results (includes all methods including those without corresponding source) ====</strong>
+<strong>Alternative Visited Classes 5 of 12 (41.67)</strong>
+<strong>Alternative Visited Methods 20 of 43 (46.51)</strong></p>
+<p><a href="/images/2018/01/NET-Core-OpenCover-results.png"><img src="/images/2018/01/NET-Core-OpenCover-results.png"></a></p>
+<h2>Generate report</h2>
+<a href="https://danielpalme.github.io/ReportGenerator/" target="_blank" rel="noopener noreferrer">ReportGenerator</a><span> is used to convert </span><em><strong>XML </strong></em><span>reports generated by </span><em><strong>OpenCover</strong></em><span>, </span><em><strong>PartCover</strong></em><span>, </span><em><strong>Visual Studio</strong></em><span> or </span><em><strong>NCover</strong></em><span> into human-readable reports in various formats. To generate report use following command:</span>
+<pre class="language-powershell"><code>C:\ReportGenerator\ReportGenerator.exe `
+	-reports:coverage.xml `
+	-targetdir:coverage
+</code></pre>
+<h2>Inspect report</h2>
+The report can be found in my examples: <a href="/examples/OpenCover-report-dotnet/index.htm" target="_blank" rel="noopener noreferrer">OpenCover .Net Core report</a>. You can see what code is being covered during testing and what not.
+<p><a href="/images/2018/01/NET-Core-OpenCover-report.png"><img src="/images/2018/01/NET-Core-OpenCover-report.png"></a></p>
+<h2>Conclusion</h2>
+In this post, I have shown how to run code coverage with OpenCover on .NET Core unit tests.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/net-core-code-coverage-linux-minicover/"><!-- Primary Meta Tags --><title>.NET Core code coverage on Linux with MiniCover</title><meta name="title" content=".NET Core code coverage on Linux with MiniCover"><meta name="description" content="How to run code coverage of your unit tests as part of your build on Linux build agents."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/net-core-code-coverage-linux-minicover/"><meta property="og:title" content=".NET Core code coverage on Linux with MiniCover"><meta property="og:description" content="How to run code coverage of your unit tests as part of your build on Linux build agents."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/net-core-code-coverage-linux-minicover/"><meta property="twitter:title" content=".NET Core code coverage on Linux with MiniCover"><meta property="twitter:description" content="How to run code coverage of your unit tests as part of your build on Linux build agents."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2018-01-30T00:00:00.000Z"> Jan 30, 2018 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>.NET Core code coverage on Linux with MiniCover</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Code below can be found in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/SampleDotNetCore2RestStub" target="_blank" rel="noopener noreferrer">SampleDotNetCore2RestStub</a> repository. In <a href="/code-coverage-net-core-unit-tests-opencover/">Code coverage of .NET Core unit tests with OpenCover</a> post, I have shown how to do code coverage with OpenCover. Commands shown in that post can be made part of your CI or CD build. There is a but though, this works only for windows. If you are having build machines on Linux you need another alternative. In this post, I’m going to show this alternative.</p>
+<h2>MiniCover</h2>
+<a href="https://github.com/lucaslorentz/minicover" target="_blank" rel="noopener">MiniCover</a> is a lightweight code coverage tool for .NET Core on Linux. It is in an early stage yet and there is no big community, but I really hope this is going to change soon as it looks a very promising tool.
+<h2>Include in project</h2>
+In order to use MiniCover it has to be installed as .NET CLI Tool. This is done with following code:
+<pre class="language-xml"><code>&#x3C;ItemGroup>
+	&#x3C;DotNetCliToolReference Include="MiniCover" Version="2.0.0-ci-*" />
+&#x3C;/ItemGroup>
+</code></pre>
+<p>In order to keep your original projects intact, the best approach is to create tools project and add it to its <em><strong>tools.csproj</strong></em> file, which will look:</p>
+<pre class="language-xml"><code>&#x3C;Project Sdk="Microsoft.NET.Sdk">
+
+  &#x3C;PropertyGroup>
+    &#x3C;TargetFramework>netcoreapp2.0&#x3C;/TargetFramework>
+  &#x3C;/PropertyGroup>
+
+  &#x3C;ItemGroup>
+    &#x3C;DotNetCliToolReference Include="MiniCover" Version="2.0.0-ci-*" />
+  &#x3C;/ItemGroup>
+
+&#x3C;/Project>
+</code></pre>
+<h2>Commands</h2>
+At this stage following command line options are available:
+<ul>
+ 	<li><em><strong>instrument</strong></em> - Instrument assemblies</li>
+ 	<li><em><strong>uninstrument</strong></em> - Uninstrument assemblies</li>
+ 	<li><em><strong>reset</strong></em> - Reset hits count</li>
+ 	<li><em><strong>report</strong></em> - Outputs coverage report</li>
+ 	<li><em><strong>htmlreport</strong></em> -Write HTML report to a folder</li>
+ 	<li><em><strong>xmlreport</strong></em> - Write an NCover-formatted XML report to folder</li>
+</ul>
+<a href="/images/2018/01/NET-Core-MiniCover-commands.png"><img src="/images/2018/01/NET-Core-MiniCover-commands.png"></a>
+<h2>Run coverage</h2>
+In case of a project structure where you have your code in <em><strong>src</strong></em> folder and your tests in <em><strong>test</strong></em> folder following bash script can be used directly. It accepts as parameter threshold coverage percentage, if not provided it uses <em><strong>80%</strong></em> by default. Script restores NuGet packages and builds the projects. It navigates to <em><strong>tools</strong></em> folder and restores NuGet packages again. This is very important as it is the only way to get MiniCover NuGet package. Inside <em><strong>tools</strong></em> folder, it instruments assemblies and resets previous statistics. Script navigates to root folder and runs all tests inside every project in <em><strong>test</strong></em> folder. Afterward, script navigates again to <em><strong>tools</strong></em> folder and uninstruments all assemblies so far. No matter this operation is safe I would recommend to run one more build or publish before assemblies go into production. In the end, the script generates reports.
+<pre class="language-bash"><code>if [ ! -z $1 ]; then
+  if [ $1 -lt 0 ] || [ $1 -gt 100 ]; then
+    echo "Threshold should be between 0 and 100"
+    threshold=80
+  fi
+  threshold=$1
+else
+  threshold=80
+fi
+
+dotnet restore
+dotnet build
+
+cd tools
+dotnet restore
+
+# Instrument assemblies inside 'test' folder to detect hits for source files inside 'src' folder
+dotnet minicover instrument --workdir ../ --assemblies test/**/bin/**/*.dll --sources src/**/*.cs 
+
+# Reset hits count in case minicover was run for this project
+dotnet minicover reset
+
+cd ..
+
+for project in test/**/*.csproj; do dotnet test --no-build $project; done
+
+cd tools
+
+# Uninstrument assemblies, it's important if you're going to publish or deploy build outputs
+dotnet minicover uninstrument --workdir ../
+
+# Create HTML reports inside folder coverage-html
+# This command returns failure if the coverage is lower than the threshold
+dotnet minicover htmlreport --workdir ../ --threshold $threshold
+
+# Print console report
+# This command returns failure if the coverage is lower than the threshold
+dotnet minicover report --workdir ../ --threshold $threshold
+
+# Create NCover report
+dotnet minicover xmlreport --workdir ../ --threshold $threshold
+
+cd ..
+</code></pre>
+<h2>Reports</h2>
+There are 3 types of reports: <em><strong>Console</strong></em>, <em><strong>HTML</strong></em> and <em><strong>NCover XML</strong></em>.
+<h3>Console report</h3>
+Console report is dumping results to the console and returns <em><strong>1</strong></em> if given threshold is not met, which basically fails the CI/CD build. In the example below, <em><strong>codeCoverage.sh</strong></em> was called with argument <em><strong>40</strong></em>, which means threshold is <em><strong>40%</strong></em>.
+<p><a href="/images/2018/01/NET-Core-MiniCover-console.png"><img src="/images/2018/01/NET-Core-MiniCover-console.png"></a></p>
+<h3>HTML report</h3>
+HTML report is also failing the build and gives similar summary information as console report, but also give detailed information for each class coverage. An example report can be found in <a href="/examples/MiniCover-report/index.html" target="_blank" rel="noopener">MiniCover HTML report</a>. I have to praise myself, as the summary file that is shown below was something I contributed, because I like the project very much.
+<p><a href="/images/2018/01/NET-Core-MiniCover-html.png"><img src="/images/2018/01/NET-Core-MiniCover-html.png"></a></p>
+<p><a href="/images/2018/01/NET-Core-MiniCover-class.png"><img src="/images/2018/01/NET-Core-MiniCover-class.png"></a></p>
+<h3>NCover report</h3>
+NCover report creates XML file in its format. The beauty of it is that you can additionally use <em><strong>ReportGenerator</strong></em> on Windows machine and convert <em><strong>XML</strong></em> to nice <em><strong>HTML</strong></em> report. Assuming ReportGenerator is extracted on your <em><strong>C:\</strong></em> then the command is shown below. The report can be found in <a href="/examples/MiniCover-ReportGenerator-report/index.htm" target="_blank" rel="noopener">MiniCover ReportGenerator report</a>.
+<pre class="language-powershell"><code>C:\ReportGenerator\ReportGenerator.exe -reports:coverage.xml -targetdir:coverage
+</code></pre>
+<h2>Compare with OpenCover</h2>
+If you check both <a href="/examples/OpenCover-report-dotnet/index.htm" target="_blank" rel="noopener">OpenCover .Net Core report</a> and <a href="/examples/MiniCover-ReportGenerator-report/index.htm" target="_blank" rel="noopener">MiniCover ReportGenerator report</a> you can notice some difference in metrics. First is that MiniCover does not support branch coverage. This is not that bad after all if you have your code nicely indented, line coverage is sufficient. For e.g., if your ternary operator is not on one line, but on three and you have missed testing one of the conditions, then line coverage will state that there is a not tested line. If the ternary operator is on one line though then line coverage will miss this test problem. Another difference is <em><strong>Coverable lines</strong></em> and <span><em><strong>Covered lines</strong></em>. OpenCover counts opening and closing brackets as such, so its numbers are bigger. </span>Because of this conceptual difference <span><em><strong>Line coverage</strong></em> percentage has a small difference. MiniCover (<em><strong>35%</strong></em>) is more generous and give more percentage than OpenCover (<em><strong>33.6%</strong></em>).</span>
+<h2>Conclusion</h2>
+MiniCover is very nice and compact tool that can be put in place during your continuous integration or continuous delivery to measure code coverage on each build. The most important advantage is that it is designed and works on Linux.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

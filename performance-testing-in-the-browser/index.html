@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/performance-testing-in-the-browser/"><!-- Primary Meta Tags --><title>Performance testing in the browser</title><meta name="title" content="Performance testing in the browser"><meta name="description" content="Approaches for performance testing in the browser using Puppeteer, Lighthouse, and PerformanceTiming API."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/performance-testing-in-the-browser/"><meta property="og:title" content="Performance testing in the browser"><meta property="og:description" content="Approaches for performance testing in the browser using Puppeteer, Lighthouse, and PerformanceTiming API."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/performance-testing-in-the-browser/"><meta property="twitter:title" content="Performance testing in the browser"><meta property="twitter:description" content="Approaches for performance testing in the browser using Puppeteer, Lighthouse, and PerformanceTiming API."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2018-06-07T00:00:00.000Z"> Jun 7, 2018 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Performance testing in the browser</h1> <hr data-astro-cid-bvzihdzo> </div>  <p><span>In the current post, I will give some examples of how performance testing can be done in the browser using different metrics. <em><strong>Puppeteer</strong></em> is used as a tool for browser manipulation because it integrates easily with <em><strong>Lighthouse</strong></em> and <em><strong>DevTools Protocol</strong></em>. I have described all the tools before giving any examples. The code can be found in GitHub </span><a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/sample-performance-testing-in-browser" target="_blank" rel="noopener noreferrer">sample-performance-testing-in-browser</a><span> repository.</span></p>
+<h2>Why?</h2>
+Many things can be said on why do we do performance testing and why especially the browser. In <a href="/how-to-do-proper-performance-testing/">How to do proper performance testing</a> post I have outlined idea how to cover the backend. Assuming it is already optimized, and still, customer experience is not sufficient it is time to look at the frontend part. In general, performance testing is done to satisfy customers. I<a href="https://hostingtribunal.com/blog/how-speed-affects-website/" target="_blank" rel="noopener noreferrer"></a>t is up to the business to decide whether performance testing will have some ROI or not. In this article, I will give some ideas on how to do performance testing of the frontend part, hence in the browser.
+<h2>Puppeteer</h2>
+<a href="https://github.com/puppeteer/puppeteer" target="_blank" rel="noopener noreferrer">Puppeteer</a> is a tool by Google which allows you to control Chrome or Chromium browsers. It works over DevTools Protocol, which I will describe later. Puppeteer allows you to automate your functional tests. In this regards, it is very similar to Selenium but it offers many more features in terms of control, debugging, and information within the browser. Over the DevTools Protocol, you have programmatically access to all features available in <a href="https://developers.google.com/web/tools/chrome-devtools/" target="_blank" rel="noopener noreferrer">DevTools</a> (the tool that is shown in Chrome when you hit F12). You can check <a href="https://github.com/puppeteer/puppeteer/blob/master/docs/api.md" target="_blank" rel="noopener noreferrer">Puppeteer API documentation</a> or check <a href="https://github.com/puppeteer/examples" target="_blank" rel="noopener noreferrer">advanced Puppeteer examples</a> such as JS and CSS code coverage, site crawler, Google search features checker.
+<h2>Lighthouse</h2>
+<a href="https://github.com/GoogleChrome/lighthouse" target="_blank" rel="noopener noreferrer">Lighthouse</a> is again tool by Google which is designed to analyze web apps and pages, making a detailed report about performance, SEO, accessibility, and best practices. The tool can be used inside Chrome's DevTools, standalone from CLI (command line interface), or programmatically from Puppeteer project. Google had developed <a href="https://developers.google.com/web/fundamentals/performance/user-centric-performance-metrics" target="_blank" rel="noopener noreferrer">user-centric performance metrics</a> which Lighthouse uses. Here is a <a href="/examples/Lighthouse-report/automationrhapsody.com_2018-06-06_10-15-56.report.html" target="_blank" rel="noopener noreferrer">Lighthouse report example</a> run on my blog.
+<h2>PerformanceTimings API</h2>
+W3C have Navigation Timing recommendation which is supported by major browsers. The interesting part is <a href="https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface" target="_blank" rel="noopener noreferrer">the PerformanceTiming interface</a>, where various timings are exposed.
+<p><a href="https://www.w3.org/TR/navigation-timing/timing-overview.png"><img src="https://www.w3.org/TR/navigation-timing/timing-overview.png"></a></p>
+<h2>DevTools Protocol</h2>
+<a href="https://chromedevtools.github.io/devtools-protocol/" target="_blank" rel="noopener noreferrer">DevTools Protocol</a> comes by Google and is a way to communicate programmatically with DevTools within Chrome and Chromium, hence you can instrument, inspect, debug, and profile those browsers.
+<h2>Examples</h2>
+Now comes the fun part. I have prepared several examples. All the code is i<span>n GitHub </span><a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/sample-performance-testing-in-browser" target="_blank" rel="noopener noreferrer">sample-performance-testing-in-browser</a><span> repository.</span>
+<ul>
+ 	<li><em><strong>Puppeteer and Lighthouse</strong></em> - Puppeteer is used to login and then Lighthouse checks pages for logged in user.</li>
+ 	<li><em><strong>Puppeteer and PerformanceTiming API</strong></em> - Puppeteer navigates the site and gathers PerformanceTiming metrics from the browser.</li>
+ 	<li><em><strong>Lighthouse and PerformanceTiming API</strong></em> - comparison between both metrics in Lighthouse and NavigationTiming.</li>
+ 	<li><em><strong>Puppeteer and DevTools Protocol</strong></em> - simulate low bandwidth network conditions with DevTools Protocol.</li>
+</ul>
+Before proceeding with the examples I will outline helper functions used to gather metrics. In the examples, I use <em><strong>Node.js 8</strong></em> which supports <em><strong>async/await</strong></em> functionality. With it, you can use an <em><strong>asynchronous</strong></em> code in a <em><strong>synchronous</strong></em> manner.
+<h3>Gather single PerformanceTiming metric</h3>
+<pre class="language-javascript"><code>async function gatherPerformanceTimingMetric(page, metricName) {
+  const metric = await page.evaluate(metric => 
+     window.performance.timing[metric], metricName);
+  return metric;
+}
+</code></pre>
+<p>I will not go into details about Puppeteer API. I will describe the functions I have used. Function <em><strong>page.evaluate()</strong></em> executes JavaScript in the browser and can return a result if needed. <em><strong>window.performance.timing</strong></em> returns all metrics from the browser and only needed by <em><strong>metricName</strong></em> one is returned by the current function.</p>
+<h3>Gather all PerformaceTiming metrics</h3>
+<pre class="language-javascript"><code>async function gatherPerformanceTimingMetrics(page) {
+  // The values returned from evaluate() function should be JSON serializable.
+  const rawMetrics = await page.evaluate(() => 
+    JSON.stringify(window.performance.timing));
+  const metrics = JSON.parse(rawMetrics);
+  return metrics;
+}
+</code></pre>
+<p>This one is very similar to the previous. Instead of just one metric, all are returned. The tricky part is the call to <em><strong>JSON.stringify()</strong></em>. The values returned from <em><strong>page.evaluate()</strong></em> function should be JSON serializable. With <em><strong>JSON.parse()</strong></em> they are converted to object again.</p>
+<h3>Extract data from PerformanceTiming metrics</h3>
+<pre class="language-javascript"><code>async function processPerformanceTimingMetrics(metrics) {
+  return {
+    dnsLookup: metrics.domainLookupEnd - metrics.domainLookupStart,
+    tcpConnect: metrics.connectEnd - metrics.connectStart,
+    request: metrics.responseStart - metrics.requestStart,
+    response: metrics.responseEnd - metrics.responseStart,
+    domLoaded: metrics.domComplete - metrics.domLoading,
+    domInteractive: metrics.domInteractive - metrics.navigationStart,
+    pageLoad: metrics.loadEventEnd - metrics.loadEventStart,
+    fullTime: metrics.loadEventEnd - metrics.navigationStart
+  }
+}
+</code></pre>
+<p>Time data for certain events are compiled from raw metrics. For e.g., if <em><strong>DNS lookup</strong></em> or <em><strong>TCP connection</strong></em> times are slow, then this could be some network specific thing and may not need to be acted. If response time is very high, then this is indicator backend might not be performing well and needs to be further performance tested. See <a href="/how-to-do-proper-performance-testing/">How to do proper performance testing</a> post for more details.</p>
+<h3>Gather Lighthouse metrics</h3>
+<pre class="language-javascript"><code>const lighthouse = require('lighthouse');
+
+async function gatherLighthouseMetrics(page, config) {
+  // ws://127.0.0.1:52046/devtools/browser/675a2fad-4ccf-412b-81bb-170fdb2cc39c
+  const port = await page.browser().wsEndpoint().split(':')[2].split('/')[0];
+  return await lighthouse(page.url(), { port: port }, config).then(results => {
+    delete results.artifacts;
+    return results;
+  });
+}
+</code></pre>
+<p>The example above shows how to use Lighthouse programmatically. Lighthouse needs to connect to a browser on a specific port. This port is taken from <em><strong>page.browser().wsEndpoint()</strong></em> which is in format <em><strong>ws://127.0.0.1:52046/devtools/browser/{GUID}</strong></em>. It is good to <em><strong>delete results.artifacts;</strong></em> because they might get very big in size and are not needed. The result is one huge object. I will talk about this is more details. Before using Lighthouse is should be installed in a Node.js project with <em><strong>npm install lighthouse —save-dev</strong></em>.</p>
+<h2>Puppeteer and Lighthouse</h2>
+In this example, Puppeteer is used to navigating through the site and authenticate the user, so Lighthouse can be run for a page behind a login. Lighthouse can be run through CLI as well but in this case, you just pass and URL and Lighthouse will check it.
+<p>[tabby title=“puppeteer-lighthouse.js”]</p>
+<pre class="language-javascript"><code>const puppeteer = require('puppeteer');
+const perfConfig = require('./config.performance.js');
+const fs = require('fs');
+const resultsDir = 'results';
+const { gatherLighthouseMetrics } = require('./helpers');
+
+(async () => {
+  const browser = await puppeteer.launch({
+    headless: true,
+    // slowMo: 250
+  });
+  const page = await browser.newPage();
+
+  await page.goto('/examples/sample-login/');
+  await verify(page, 'page_home');
+
+  await page.click('a');
+  await page.waitForSelector('form');
+  await page.type('input[name="username"]', 'admin');
+  await page.type('input[name="password"]', 'admin');
+  await page.click('input[type="submit"]');
+  await page.waitForSelector('h2');
+  await verify(page, 'page_loggedin');
+
+  await browser.close();
+})();
+</code></pre>
+<p>[tabby title=“verify()”]</p>
+<pre class="language-javascript"><code>const perfConfig = require('./config.performance.js');
+const fs = require('fs');
+const resultsDir = 'results';
+const { gatherLighthouseMetrics } = require('./helpers');
+
+async function verify(page, pageName) {
+  await createDir(resultsDir);
+  await page.screenshot({
+    path: `./${resultsDir}/${pageName}.png`,
+    fullPage: true
+  });
+  const metrics = await gatherLighthouseMetrics(page, perfConfig);
+  fs.writeFileSync(`./${resultsDir}/${pageName}.json`,
+    JSON.stringify(metrics, null, 2));
+  return metrics;
+}
+</code></pre>
+<p>[tabby title=“createDir()”]</p>
+<pre class="language-javascript"><code>const fs = require('fs');
+
+async function createDir(dirName) {
+  if (!fs.existsSync(dirName)) {
+    fs.mkdirSync(dirName, '0766');
+  }
+}
+</code></pre>
+<p>[tabbyending]</p>
+<p>A new browser is launched with <em><strong>puppeteer.launch()</strong></em>, arguments <em><strong>{ headless: true, //slowMo: 250 }</strong></em> are put for debugging purposes. If you want to view what is happening then set <em><strong>headless</strong></em> to <em><strong>false</strong></em> and slow the motions with <em><strong>slowMo: 250</strong></em>, where time is in milliseconds. Start a new page with <span><em><strong>browser.newPage()</strong></em> and navigate to some URL with <em><strong>page.goto(‘URL’)</strong></em>. Then <em><strong>verify()</strong></em> function is invoked. It is shown on the second tab and will be described in a while. Next functionality is used to log in the user. With <em><strong>page.click(‘SELECTOR’)</strong></em>, where CSS selector is specified, you can click an element on the page. With </span><em><strong>page.waitForSelector(‘SELECTOR’)</strong></em> Puppeteer should wait for the element with the given CSS selector to be shown. With <em><strong>page.type(‘SELECTOR’, ‘TEXT’)</strong></em> Puppeteer types the <em><strong>TEXT</strong></em> in the element located by given CSS selector. Finally <span><em><strong>browser.close()</strong></em> closes the browser.</span></p>
+<p>So far only Puppeteer navigation is described. Lighthouse is invoked in <em><strong>verify()</strong></em> function. Results directory is created initially with <em><strong>createDir()</strong></em> function. Then a screenshot is taken on the full page with <span><em><strong>page.screenshot()</strong></em> function. Lighthouse is called with <em><strong>gatherLighthouseMetrics(page, perfConfig)</strong></em>. This function was described above. Basically, it gets the port on which DevTools Protocol is currently running and passes it to <em><strong>lighthouse()</strong></em> function. Another approach could be to start the browser with hardcoded debug port of <em><strong>9222</strong></em> with <em><strong>puppeteer.launch({ args: [ ‘—remote-debugging-port=9222’ ] })</strong></em> and pass nothing to Lighthouse, it will try to connect to this port by default. Function <em><strong>lighthouse()</strong></em> accepts also an optional config parameter. If not specified then all Lighthouse checks are done. In the current example, only performance is important, thus a specific config file is created and used. This is <em><strong>config.performance.js</strong></em> file.</span></p>
+<h2>Puppeteer and PerformanceTiming API</h2>
+In this example, Puppeteer is used to navigating the site and extract PerformanceTiming metrics from the browser.
+<pre class="language-javascript"><code>const puppeteer = require('puppeteer');
+const { gatherPerformanceTimingMetric,
+  gatherPerformanceTimingMetrics,
+  processPerformanceTimingMetrics } = require('./helpers');
+
+(async () => {
+  const browser = await puppeteer.launch({
+    headless: true
+  });
+  const page = await browser.newPage();
+  await page.goto('/');
+
+  const rawMetrics = await gatherPerformanceTimingMetrics(page);
+  const metrics = await processPerformanceTimingMetrics(rawMetrics);
+  console.log(`DNS: ${metrics.dnsLookup}`);
+  console.log(`TCP: ${metrics.tcpConnect}`);
+  console.log(`Req: ${metrics.request}`);
+  console.log(`Res: ${metrics.response}`);
+  console.log(`DOM load: ${metrics.domLoaded}`);
+  console.log(`DOM interactive: ${metrics.domInteractive}`);
+  console.log(`Document load: ${metrics.pageLoad}`);
+  console.log(`Full load time: ${metrics.fullTime}`);
+
+  const loadEventEnd = await gatherPerformanceTimingMetric(page, 'loadEventEnd');
+  const date = new Date(loadEventEnd);
+  console.log(`Page load ended on: ${date}`);
+
+  await browser.close();
+})();
+</code></pre>
+<p>Metrics are extracted with <em><strong>gatherPerformanceTimingMetrics()</strong></em> function described above and then data is collected from the metrics with <em><strong>processPerformanceTimingMetrics()</strong></em>. In the end, there is an example of how to extract one metric such as loadEventEnd and display it as a date object.</p>
+<h2>Lighthouse and PerformanceTiming API</h2>
+<pre class="language-javascript"><code>const puppeteer = require('puppeteer');
+const perfConfig = require('./config.performance.js');
+const { gatherPerformanceTimingMetrics,
+  gatherLighthouseMetrics } = require('./helpers');
+
+(async () => {
+  const browser = await puppeteer.launch({
+    headless: true
+  });
+  const page = await browser.newPage();
+  const urls = ['/',
+    '/examples/sample-login/'];
+
+  for (const url of urls) {
+    await page.goto(url);
+
+    const lighthouseMetrics = await gatherLighthouseMetrics(page, perfConfig);
+    const firstPaint = parseInt(lighthouseMetrics.audits['first-meaningful-paint']['rawValue'], 10);
+    const firstInteractive = parseInt(lighthouseMetrics.audits['first-interactive']['rawValue'], 10);
+    const navigationMetrics = await gatherPerformanceTimingMetrics(page);
+    const domInteractive = navigationMetrics.domInteractive - navigationMetrics.navigationStart;
+    const fullLoad = navigationMetrics.loadEventEnd - navigationMetrics.navigationStart;
+    console.log(`FirstPaint: ${firstPaint}, FirstInterractive: ${firstInteractive}, 
+      DOMInteractive: ${domInteractive}, FullLoad: ${fullLoad}`);
+  }
+
+  await browser.close();
+})();
+</code></pre>
+<p>This example shows a comparison between Lighthouse metrics and PerformanceTiming API metrics. If you run the example and compare all the timings you will notice how much slower the site looks according to Lighthouse. This is because it uses 3G (1.6Mbit/s download speed) settings by default.</p>
+<h2>Puppeteer and DevTools Protocol</h2>
+<pre class="language-javascript"><code>const puppeteer = require('puppeteer');
+const throughputKBs = process.env.throughput || 200;
+
+(async () => {
+  const browser = await puppeteer.launch({
+    executablePath: 
+      'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+    headless: false
+  });
+  const page = await browser.newPage();
+  const client = await page.target().createCDPSession();
+
+  await client.send('Network.emulateNetworkConditions', {
+    offline: false,
+    latency: 200,
+    downloadThroughput: throughputKBs * 1024,
+    uploadThroughput: throughputKBs * 1024
+  });
+
+  const start = (new Date()).getTime();
+  await client.send('Page.navigate', {
+    'url': ''
+  });
+  await page.waitForNavigation({
+    timeout: 240000,
+    waitUntil: 'load'
+  });
+  const end = (new Date()).getTime();
+  const totalTimeSeconds = (end - start) / 1000;
+
+  console.log(`Page loaded for ${totalTimeSeconds} seconds 
+    when connection is ${throughputKBs}kbit/s`);
+
+  await browser.close();
+})();
+</code></pre>
+<p>In the current example, <span>network conditions with restricted bandwidth are emulated in order to test page load time and perception. W</span>ith <em><strong>executablePath</strong></em> Puppeteer launches an instance of Chrome browser. The path given in the example is for Windows machine. Then a client is made to communicate with DevTools Protocol with <span><em><strong>page.target().createCDPSession()</strong></em>. Configurations are send to browser with <em><strong>client.send(‘Network.emulateNetworkConditions’, { })</strong></em>. Then URL is opened into the page with </span><em><strong>client.send(‘Page.navigate’, { URL})</strong></em>. The script can be run with different values for <em><strong>throughput</strong></em> passed as environment variable. Example waits 240 seconds for the page to fully load with <em><strong>page.waitForNavigation(</strong></em><span><em><strong>)</strong></em>.</span></p>
+<h2>Conclusion</h2>
+In the current post, I have described several ways to measure the performance of your web application. The main tool used to control the browser is Puppeteer because it integrated very easily with Lighthouse and DevTools Protocol. All examples can be executed through the CLI, so they can be easily plugged into CI/CD process. Among the various approaches, you can compile your preferred scenario which can be run on every commit to measure if the performance of your application has been affected by certain code changes.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

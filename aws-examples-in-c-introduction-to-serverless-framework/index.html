@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-introduction-to-serverless-framework/"><!-- Primary Meta Tags --><title>AWS examples in C# - introduction to Serverless framework</title><meta name="title" content="AWS examples in C# - introduction to Serverless framework"><meta name="description" content="Introduction to Serverless framework and .NET code example of a lambda function with API Gateway."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-introduction-to-serverless-framework/"><meta property="og:title" content="AWS examples in C# - introduction to Serverless framework"><meta property="og:description" content="Introduction to Serverless framework and .NET code example of a lambda function with API Gateway."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-introduction-to-serverless-framework/"><meta property="twitter:title" content="AWS examples in C# - introduction to Serverless framework"><meta property="twitter:description" content="Introduction to Serverless framework and .NET code example of a lambda function with API Gateway."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-03-16T00:00:00.000Z"> Mar 16, 2020 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - introduction to Serverless framework</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository.</p>
+<p>When speaking about Serverless there are two concepts and terms that need to be clarified.</p>
+<h2>Serverless architecture</h2>
+<a href="https://aws.amazon.com/serverless/" target="_blank" rel="noopener noreferrer">Serverless architecture</a> is an application architectural concept of the cloud, enables shifting more of your operational responsibilities to the cloud. In the current examples, AWS is used, but this is a valid concept for Azure and Google cloud. Serverless allows building and running applications and services without thinking about servers.
+<h2>Serverless framework</h2>
+<a href="https://serverless.com/" target="_blank" rel="noopener noreferrer">Serverless framework</a> is a toolset that makes deployment of serverless applications to different cloud providers extremely <em><strong>easy and streamlined</strong></em>. It supports the following cloud providers: AWS, Google Cloud, Azure, OpenWhisk, and Kubeless and following programming languages: nodeJS, Go, Python, Swift, Java, PHP, and Ruby.
+<h2>AWS Lambda</h2>
+AWS Lambda allows easy ramp-up of service without all the hassle to manage servers and environments. The ready code is uploaded to Lambda and automatically run. More detailed information and design considerations about AWS Lambda can be found in <a href="/aws-examples-in-c-working-with-lambda-functions/">AWS examples in C# – working with Lambda functions</a> post.
+<h2>CloudFormation</h2>
+AWS CloudFormation provides infrastructure as a code (IoC) capabilities. It defines a common language to model and provision AWS application resources. AWS resources and applications are described in YAML or JSON files, which are then provisioned by CloudFormation. This gives a single source of truth. The Serverless framework uses applications when creating the underlying AWS JSON CloudFormation templates. What Serverless framework is doing is to translate its custom YAML format to a JSON CloudFormation templates, which can be found in <em><strong>.serverless</strong></em> folder of <em><strong>DynamoDbServerless</strong></em> after the deployment to AWS is done.
+<h2>Create a Serverless application</h2>
+Before creating the application, Serverless needs to be installed. Installation is possible as a standalone binary or as a Node.JS package. I prefer the latter because it is much simpler.
+<pre class="language-bash"><code>npm install -g serverless</code></pre>
+Creating an empty application is done with the following command:
+<pre class="language-bash"><code>sls create --template aws-csharp --path MyService</code></pre>
+The command outputs a nice message:
+<pre class="language-bash"><code>$ sls create --template aws-csharp --path MyService
+Serverless: Generating boilerplate...
+Serverless: Generating boilerplate in "C:\MyService"
+ _______                             __
+|   _   .-----.----.--.--.-----.----|  .-----.-----.-----.
+|   |___|  -__|   _|  |  |  -__|   _|  |  -__|__ --|__ --|
+|____   |_____|__|  \___/|_____|__| |__|_____|_____|_____|
+|   |   |             The Serverless Application Framework
+|       |                           serverless.com, v1.61.3
+ -------'
+</code><p><code>Serverless: Successfully generated boilerplate for template: “aws-csharp”
+</code></p></pre>
+Apart from the default lambda project created by AWS tools, see <a href="/aws-examples-in-c-create-basic-lambda-function/">AWS examples in C# – create basic Lambda function</a> post for more details, the Serverless project is not split to <em><strong>src</strong></em> and <em><strong>test</strong></em>. It is a good idea to manually split the project in order to add tests. The configuration of Serverless projects is done in <em><strong>serverless.yml</strong></em> file. The default one is very simple, it states the provider and runtime, which is <em><strong>aws</strong></em> (Amazon) and <em><strong>dotnetcore2.1</strong></em>. The <em><strong>handler</strong></em> shows which method is being called when this lambda is invoked. In the default example, the handler is <em><strong>CsharpHandlers::AwsDotnetCsharp.Handler::Hello</strong></em>, which means <em><strong>CsharpHandlers</strong></em> is the assembly name, configured in <em><strong>aws-csharp.csproj</strong></em> file. The namespace is <em><strong>AwsDotnetCsharp</strong></em>, the class name is <em><strong>Handler</strong></em> and the method is <em><strong>Hello</strong></em>.<p></p>
+<pre class="language-bash"><code>service: myservice
+
+provider:
+  name: aws
+  runtime: dotnetcore2.1
+
+package:
+  individually: true
+
+functions:
+  hello:
+    handler: CsharpHandlers::AwsDotnetCsharp.Handler::Hello
+
+    package:
+      artifact: bin/release/netcoreapp2.1/hello.zip
+</code></pre>
+<p>After the application is created, it has to be built with <em><strong>build.cmd</strong></em> or <em><strong>build.sh</strong></em> scripts.</p>
+<p>Before deployment, AWS credential should be set:</p>
+<pre class="language-bash"><code>export AWS_ACCESS_KEY_ID=KIA57FV4.....
+export AWS_SECRET_ACCESS_KEY=mSgsxOWVh...
+export AWS_DEFAULT_REGION=us-east-1
+</code></pre>
+<p>Deployment happens with <em><strong>sls deploy —region $AWS_DEFAULT_REGION</strong></em> command, the result of deployment command is:</p>
+<img src="/images/2020/03/aws.csharp.exmaples-deploy.serverless.png">
+<p>Testing of the function can be done with <em><strong>sls invoke -f hello —region $AWS_DEFAULT_REGION</strong></em> command. Result of testing is:</p>
+<pre class="language-json"><code>{
+	"Message": "Go Serverless v1.0! Your function executed successfully!",
+	"Request": {
+		"Key1": null,
+		"Key2": null,
+		"Key3": null
+	}
+}
+</code></pre>
+<p>Finally, the stack can be deleted with <em><strong>sls remove —region $AWS_DEFAULT_REGION</strong></em> command.</p>
+<h2>Use API Gateway</h2>
+The default, Hello World example is pretty simple. In current examples, I have elaborated a bit on Lambda usage with API Gateway in order to expose it as a <em><strong>RESTful</strong></em> service. Two lambda functions are defined inside <em><strong>functions</strong></em> node, for movies and actions. Each has a <em><strong>handler</strong></em> node which defines where is the code that lambda function is executing. With <em><strong>events/http</strong></em> node and API Gateway endpoint is created. Each endpoint has a path and a method. Movies are using GET method, Actors are working via POST method. Both functions' handler methods receive <em><strong>APIGatewayProxyRequest</strong></em> object and return <em><strong>APIGatewayProxyResponse</strong></em> object. The payload is found in <em><strong>Body</strong></em> string property of <em><strong>APIGatewayProxyRequest</strong></em> object.
+<p>Actors function is querying the Actors table. Mode details on the query and how it is constructed in <em><strong>BuildQueryRequest</strong></em> method can be found in <em><strong>Querying using the low-level interface</strong></em> section in <a href="/aws-examples-in-c-basic-dynamodb-operations/">AWS examples in C# – basic DynamoDB operations</a> post.</p>
+<p>Movies lambda function is getting the JSON document from Movies table. More details on getting the data can be found in <em><strong>Get item using document interface</strong></em> section in <a href="/aws-examples-in-c-basic-dynamodb-operations/">AWS examples in C# – basic DynamoDB operations</a> post.</p>
+<p>Actors lambda function has two more security features defined. One is an API Key defined with <em><strong>private: true</strong></em> setting. The request should have <em><strong>x-api-key</strong></em> header with the value which is returned by deployment command, otherwise, an HTTP status code <em><strong>403 (Forbidden)</strong></em> is returned by API Gateway. See <em><strong>Run the project in AWS</strong></em> section in <a href="/aws-examples-in-c-run-the-solution/">AWS examples in C# – run the solution</a> post how to obtain the proper value of <em><strong>aws-examples-csharp-api-key</strong></em> API key. The example given here is not really scalable, more details on how to manage properly API keys can be found in <a href="https://serverless.com/blog/serverless-secrets-api-keys/" target="_blank" rel="noopener noreferrer">Managing secrets, API keys and more with Serverless</a> article.</p>
+<p>The other security feature is lambda authorizer configured with <em><strong>authorizer: authorizer</strong></em> setting. The <em><strong>authorizer</strong></em> lambda function is not really doing anything significant in the examples, it uses <em><strong>UserManagement</strong></em> class to check if the <em><strong>Authorization</strong></em> header has proper value.  In the real-life, this would be a database call to get the user authorizations, not like in the examples with a dummy token. The request should have Authorization header with value <em><strong>Bearer validToken</strong></em>, otherwise, an HTTP status code <em><strong>401 (Unauthorized)</strong></em> is returned by API Gateway.</p>
+<p>[tabby title=“serverless.yml”]</p>
+<pre class="language-text"><code>service: DynamoDbServerless
+
+provider:
+  name: aws
+  runtime: dotnetcore2.1
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:Query
+      Resource: ${env:actorsTableArn}
+    - Effect: "Allow"
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:GetItem
+      Resource: ${env:moviesTableArn}
+  apiKeys:
+    - aws-examples-csharp-api-key
+
+package:
+  individually: true
+  artifact: bin/release/netcoreapp2.1/DynamoDbServerless.zip
+
+functions:
+  movies:
+    handler: DynamoDbServerless::DynamoDbServerless.Handlers.MoviesHandler::GetMovie
+    events:
+      - http:
+          path: movies/title/{title}
+          method: get
+
+  actors:
+    handler: DynamoDbServerless::DynamoDbServerless.Handlers.ActorsHandler::QueryActors
+    events:
+      - http:
+          path: actors/search
+          method: post
+          private: true
+          authorizer: authorizer
+
+  authorizer:
+    handler: DynamoDbServerless::DynamoDbServerless.Handlers.AuthorizationHandler::Authorize
+</code></pre>
+<p>[tabby title=“ActorsFunction”]</p>
+<pre class="language-csharp"><code>public async Task&#x3C;APIGatewayProxyResponse> QueryActors(APIGatewayProxyRequest request, ILambdaContext context)
+{
+	context.Logger.LogLine($"Query request: {_jsonConverter.SerializeObject(request)}");
+
+	var requestBody = _jsonConverter.DeserializeObject&#x3C;ActorsSearchRequest>(request.Body);
+	if (string.IsNullOrEmpty(requestBody.FirstName))
+	{
+		return new APIGatewayProxyResponse
+		{
+			StatusCode = (int)HttpStatusCode.BadRequest,
+			Body = "FirstName is mandatory"
+		};
+	}
+	var queryRequest = BuildQueryRequest(requestBody.FirstName, requestBody.LastName);
+
+	var response = await _dynamoDbReader.QueryAsync(queryRequest);
+	context.Logger.LogLine($"Query result: {_jsonConverter.SerializeObject(response)}");
+
+	var queryResults = BuildActorsResponse(response);
+
+	return new APIGatewayProxyResponse
+	{
+		StatusCode = (int)HttpStatusCode.OK,
+		Body = _jsonConverter.SerializeObject(queryResults)
+	};
+}
+</code></pre>
+<p>[tabby title=“MoviesFunction”]</p>
+<pre class="language-csharp"><code>public async Task&#x3C;APIGatewayProxyResponse> GetMovie(APIGatewayProxyRequest request, ILambdaContext context)
+{
+	context.Logger.LogLine($"Query request: {_jsonConverter.SerializeObject(request)}");
+
+	var title = WebUtility.UrlDecode(request.PathParameters["title"]);
+	var document = await _dynamoDbReader.GetDocumentAsync(TableName, title);
+	context.Logger.LogLine($"Query response: {_jsonConverter.SerializeObject(document)}");
+
+	if (document == null)
+	{
+		return new APIGatewayProxyResponse { StatusCode = (int)HttpStatusCode.NotFound };
+	}
+
+	var movie = new Movie
+	{
+		Title = document["Title"],
+		Genre = (MovieGenre)int.Parse(document["Genre"])
+	};
+	return new APIGatewayProxyResponse
+	{
+		StatusCode = (int)HttpStatusCode.OK,
+		Body = _jsonConverter.SerializeObject(movie)
+	};
+}
+</code></pre>
+<p>[tabby title=“MoviesFunction”]</p>
+<pre class="language-csharp"><code>public async Task&#x3C;APIGatewayCustomAuthorizerResponse> Authorize(APIGatewayCustomAuthorizerRequest request, ILambdaContext context)
+{
+	context.Logger.LogLine($"Query request: {_jsonConverter.SerializeObject(request)}");
+
+	var userInfo = await _userManager.Authorize(request.AuthorizationToken?.Replace("Bearer ", string.Empty));
+
+	return new APIGatewayCustomAuthorizerResponse
+	{
+		PrincipalID = userInfo.UserId,
+		PolicyDocument = new APIGatewayCustomAuthorizerPolicy
+		{
+			Version = "2012-10-17",
+			Statement = new List&#x3C;APIGatewayCustomAuthorizerPolicy.IAMPolicyStatement>
+			{
+				new APIGatewayCustomAuthorizerPolicy.IAMPolicyStatement
+				{
+					Action = new HashSet&#x3C;string> {"execute-api:Invoke"},
+					Effect = userInfo.Effect.ToString(),
+					Resource = new HashSet&#x3C;string> { request.MethodArn }
+				}
+			}
+		}
+	};
+}
+</code></pre>
+<p>[tabby title=“UserManager”]</p>
+<pre class="language-csharp"><code>public interface IUserManager
+{
+	Task&#x3C;UserInfo> Authorize(string token);
+}
+
+public class UserManager : IUserManager
+{
+	private const string ValidToken = "validToken";
+	private const string UserId = "usedId";
+
+	public async Task&#x3C;UserInfo> Authorize(string token)
+	{
+		var userInfo = new UserInfo
+		{
+			UserId = UserId,
+			Effect = token == ValidToken ? EffectType.Allow : EffectType.Deny
+		};
+
+		return userInfo;
+	}
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Conclusion</h2>
+The Serverless framework is making deployment and maintenance of lambdas very easy. It also supports different cloud providers.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/multilingual-automation-testing-with-enumerations/"><!-- Primary Meta Tags --><title>Multilingual automation testing with enumerations</title><meta name="title" content="Multilingual automation testing with enumerations"><meta name="description" content="Solution for automated testing of multilingual sites by using string values in all supported languages for enumerations."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/multilingual-automation-testing-with-enumerations/"><meta property="og:title" content="Multilingual automation testing with enumerations"><meta property="og:description" content="Solution for automated testing of multilingual sites by using string values in all supported languages for enumerations."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/multilingual-automation-testing-with-enumerations/"><meta property="twitter:title" content="Multilingual automation testing with enumerations"><meta property="twitter:description" content="Solution for automated testing of multilingual sites by using string values in all supported languages for enumerations."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-03-05T00:00:00.000Z"> Mar 5, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Multilingual automation testing with enumerations</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>In <a title="Efficiently use of enumerations with string values in C#" href="/efficiently-use-of-enumerations-with-string-values-in-c/">efficiently use of enumerations with string values in C#</a> post I’ve described how you can add text to an enumeration element and then use it. Current post is elaboration with code samples for testing multilingual applications.</p>
+<h2>The challenge</h2>
+Multilingual automation is always a challenge. If you use text to locate elements or verify condition then trying to run a test with different language will fail. Enumerations with language dependent string values is a pretty good solution. How to do it is described below.
+<h2>Define attribute</h2>
+StringValue class is extending <em><strong>System.Attribute</strong></em>. It has two properties for text and language. It should have <em><strong>AllowMultiple = true</strong></em> in order to be applied as many times as many languages you have.
+<pre class="language-csharp"><code>namespace System
+{
+	[AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+	public class StringValue : Attribute
+	{
+		public string Value { get; private set; }
+		public string Lang { get; private set; }
+
+		public StringValue(string lang, string value)
+		{
+			Lang = lang;
+			Value = value;
+		}
+	}
+}
+</code></pre>
+<h2>Read attribute</h2>
+With reflection read all StringValue attributes. Iterate them and return the one that matches language given as parameter.
+<pre class="language-csharp"><code>using System.Reflection;
+
+namespace System
+{
+	public static class ExtensionMethods
+	{
+		public static string GetStringValue(this Enum value, string lang)
+		{
+			string stringValue = value.ToString();
+			Type type = value.GetType();
+			FieldInfo fieldInfo = type.GetField(value.ToString());
+			StringValue[] attrs = fieldInfo.
+				GetCustomAttributes(typeof(StringValue), false) as StringValue[];
+			foreach (StringValue attr in attrs)
+			{
+				if (attr.Lang == lang)
+				{
+					return attr.Value;
+				}
+			}
+			return stringValue;
+		}
+	}
+}
+
+</code></pre>
+<h2>Apply to enumerations</h2>
+All supported languages can be defined as string constants. It will be pretty cool if can define an enumeration with languages and pass it in the <em><strong>StringValue</strong></em> constructor as a language but it is not possible as it is not a compile-time constant.
+<pre class="language-csharp"><code>public class Constants
+{
+	public const string LangEn = "en";
+	public const string LangFr = "fr";
+	public const string LangDe = "de";
+}
+
+public enum Messages
+{
+	[StringValue(Constants.LangEn, "Problem occured, try again later")]
+	[StringValue(Constants.LangFr, "Problème survenu, réessayer plus tard")]
+	[StringValue(Constants.LangDe, "Problem aufgetreten, " +
+		"versuchen Sie es später erneut")]
+	ProblemOccured,
+	[StringValue(Constants.LangEn, "Successfully done")]
+	[StringValue(Constants.LangFr, "Fait avec succès")]
+	[StringValue(Constants.LangDe, "Erfolgreich durchgeführt")]
+	Success
+}
+</code></pre>
+<h2>Use in code</h2>
+Somewhere at a top level of your tests, you should have property or field which most likely will be read from conflagration and will define for which locale is the current test run.
+<pre class="language-csharp"><code>string lang = Constants.LangFr;
+</code></pre>
+<p>This is then used to read correct text value for given enumeration element.</p>
+<pre class="language-csharp"><code>Assert.AreEqual(Messages.ProblemOccured.GetStringValue(lang), 
+	App.MessageBox.GetText());
+</code></pre>
+<h2>Conclusion</h2>
+Multilingual testing is a challenge. Be smart and use all tricks you might get. In this post, I've revealed pretty good trick to do the automation. Challenge with this approach will be initially set up of enumerations with all the translations.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

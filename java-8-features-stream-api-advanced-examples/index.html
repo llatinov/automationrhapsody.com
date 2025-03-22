@@ -1,0 +1,386 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/java-8-features-stream-api-advanced-examples/"><!-- Primary Meta Tags --><title>Java 8 features - Stream API advanced examples</title><meta name="title" content="Java 8 features - Stream API advanced examples"><meta name="description" content="This post explains Java 8 Stream API with very basic code examples."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/java-8-features-stream-api-advanced-examples/"><meta property="og:title" content="Java 8 features - Stream API advanced examples"><meta property="og:description" content="This post explains Java 8 Stream API with very basic code examples."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/java-8-features-stream-api-advanced-examples/"><meta property="twitter:title" content="Java 8 features - Stream API advanced examples"><meta property="twitter:description" content="This post explains Java 8 Stream API with very basic code examples."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-06-23T00:00:00.000Z"> Jun 23, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Java 8 features - Stream API advanced examples</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>In <a href="/java-8-features-lambda-expressions-interface-changes-stream-api-datetime-api/">Java 8 features – Lambda expressions, Interface changes, Stream API, DateTime API</a> post I have briefly described most interesting Java 8 features. In the current post, I will give special attention to Stream API. This post is with more advanced code examples to elaborate on basic examples described in <a href="/java-8-features-stream-api-basic-examples/">Java 8 features – Stream API basic examples</a> post. Code examples here can be found in GitHub <a href="https://github.com/llatinov/java-samples/tree/master/java8" target="_blank" rel="noopener">java-samples/java8</a> repository.</p>
+<h2>Memory consumption and better design</h2>
+Stream API has operations that are short-circuiting, such as <em><strong>limit()</strong></em>. Once their goal is achieved they stop processing the stream. Most of the operators are not such. Here I have prepared an example for possible pitfall when using not short-circuiting operators. For testing purposes, I have created PeekObject which outputs a message to the console once its constructor is called.
+<pre class="language-java"><code>public class PeekObject {
+	private String message;
+
+	public PeekObject(String message) {
+		this.message = message;
+		System.out.println("Constructor called for: " + message);
+	}
+
+	public String getMessage() {
+		return message;
+	}
+}
+</code></pre>
+<p>Assume a situation where there is a stream of many instances of PeekObject, but only several elements of the stream are needed, thus they have to be limited. Only 2 constructors are called in this case.
+[tabby title=“limit the stream”]</p>
+<pre class="language-java"><code>public static List&#x3C;PeekObject> limit_shortCircuiting(List&#x3C;String> stringList,
+							int limit) {
+	return stringList.stream()
+		.map(PeekObject::new)
+		.limit(limit)
+		.collect(Collectors.toList());
+}
+</code></pre>
+<p>[tabby title=“unit test”]</p>
+<pre class="language-java"><code>@Test
+public void test_limit_shortCircuiting() {
+	System.out.println("limit_shortCircuiting");
+
+	List&#x3C;String> stringList = Arrays.asList("a", "b", "a", "c", "d", "a");
+
+	List&#x3C;PeekObject> result = AdvancedStreamExamples
+		.limit_shortCircuiting(stringList, 2);
+
+	assertThat(result.size(), is(2));
+}
+</code></pre>
+<p>[tabby title=“console output”]</p>
+<pre class="language-text"><code>limit_shortCircuiting
+Constructor called for: a
+Constructor called for: b
+</code></pre>
+<p>[tabbyending]</p>
+<p>Now stream has to be sorted before the limit is applied.</p>
+<p>[tabby title=“code”]</p>
+<pre class="language-java"><code>public static List&#x3C;PeekObject> sorted_notShortCircuiting(
+					List&#x3C;String> stringList, int limit) {
+	return stringList.stream()
+		.map(PeekObject::new)
+		.sorted((left, right) -> 
+			left.getMessage().compareTo(right.getMessage()))
+		.limit(limit)
+		.collect(Collectors.toList());
+}
+</code></pre>
+<p>[tabby title=“unit test”]</p>
+<pre class="language-java"><code>@Test
+public void test_sorted_notShortCircuiting() {
+	System.out.println("sorted_notShortCircuiting");
+
+	List&#x3C;String> stringList = Arrays.asList("a", "b", "a", "c", "d", "a");
+
+	List&#x3C;PeekObject> result = AdvancedStreamExamples
+		.sorted_notShortCircuiting(stringList, 2);
+
+	assertThat(result.size(), is(2));
+}
+</code></pre>
+<p>[tabby title=“console output”]</p>
+<pre class="language-text"><code>sorted_notShortCircuiting
+Constructor called for: a
+Constructor called for: b
+Constructor called for: a
+Constructor called for: c
+Constructor called for: d
+Constructor called for: a
+</code></pre>
+<p>[tabbyending]</p>
+<p>Notice that constructors for all objects in the stream are called. This will require Java to allocate enough memory for all the objects. There are 6 objects in this example, but what if there are 6 million. Also, current objects are very lightweight, but what if they are much bigger. The conclusion is that you have to know very well Stream API operations and apply them carefully when designing your stream pipeline.</p>
+<h2>Convert comma separated List to a Map with handling duplicates</h2>
+There is a <strong><em>List</em></strong> of comma separated values which need to be converted to a <em><strong>Map</strong></em>. List value <em><strong>"11,21"</strong></em> should become Map entry with key <em><strong>11</strong></em> and value <em><strong>21</strong></em>. Duplicated keys also should be considered: <em><strong>Arrays.asList("11,21", "12,21", "13,23", "13,24")</strong></em>.
+<p>[tabby title=“code”]</p>
+<pre class="language-java"><code>public static Map&#x3C;Long, Long> splitToMap(List&#x3C;String> stringsList) {
+	return stringsList.stream()
+		.filter(StringUtils::isNotEmpty)
+		.map(line -> line.split(","))
+		.filter(array -> array.length == 2 
+			&#x26;&#x26; NumberUtils.isNumber(array[0])
+			&#x26;&#x26; NumberUtils.isNumber(array[1]))
+		.collect(Collectors.toMap(array -> Long.valueOf(array[0]), 
+			array -> Long.valueOf(array[1]), (first, second) -> first)));
+}
+</code></pre>
+<p>[tabby title=“unit test”]</p>
+<pre class="language-java"><code>@Test
+public void test_splitToMap() {
+	List&#x3C;String> stringList = Arrays
+			.asList("11,21", "12,21", "13,23", "13,24");
+
+	Map&#x3C;Long, Long> result = AdvancedStreamExamples.splitToMap(stringList);
+
+	assertThat(result.size(), is(3));
+	assertThat(result.get(11L), is(21L));
+	assertThat(result.get(12L), is(21L));
+	assertThat(result.get(13L), is(23L));
+}
+</code></pre>
+<p>[tabbyending]</p>
+<p>The important bit in this conversion is <em><strong>(first, second) -> first)</strong></em>, if it is not present there will be error <em><strong>java.lang.IllegalStateException: Duplicate key 23</strong></em> (slightly misleading error, as the duplicated key is 13, the value is 23). This is a merge function which resolves collisions between values associated with the same key. It evaluates two values found for the same key - first and second where current lambda returns the first. If overwrite is needed, hence keep the last entered value then lambda would be: <em><strong>(first, second) -> second)</strong></em>.</p>
+<h2>Examples of custom object</h2>
+Examples to follow use custom object Employee, where Position is an enumeration: <em><strong>public enum Position { DEV, DEV_OPS, QA }</strong></em>.
+<pre class="language-java"><code>import java.util.List;
+
+public class Employee {
+	private String firstName;
+	private String lastName;
+	private Position position;
+	private List&#x3C;String> skills;
+	private int salary;
+
+	public Employee() {
+	}
+
+	public Employee(String firstName, String lastName,
+				Position position, int salary) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.position = position;
+		this.salary = salary;
+	}
+
+	public void setSkills(String... skills) {
+		this.skills = Arrays.stream(skills).collect(Collectors.toList());
+	}
+
+	public String getName() {
+		return this.firstName + " " + this.lastName;
+	}
+
+	... Getters and Setters
+}
+</code></pre>
+<p>A company has been created, it consists of 6 developers, 2 QAs and 2 DevOps..</p>
+<pre class="language-java"><code>private List&#x3C;Employee> createCompany() {
+	Employee dev1 = new Employee("John", "Doe", Position.DEV, 110);
+	dev1.setSkills("C#", "ASP.NET", "React", "AngularJS");
+	Employee dev2 = new Employee("Peter", "Doe", Position.DEV, 120);
+	dev2.setSkills("Java", "MongoDB", "Dropwizard", "Chef");
+	Employee dev3 = new Employee("John", "Smith", Position.DEV, 115);
+	dev3.setSkills("Java", "JSP", "GlassFish", "MySql");
+	Employee dev4 = new Employee("Brad", "Johston", Position.DEV, 100);
+	dev4.setSkills("C#", "MSSQL", "Entity Framework");
+	Employee dev5 = new Employee("Philip", "Branson", Position.DEV, 140);
+	dev5.setSkills("JavaScript", "React", "AngularJS", "NodeJS");
+	Employee dev6 = new Employee("Nathaniel", "Barth", Position.DEV, 99);
+	dev6.setSkills("Java", "Dropwizard");
+	Employee qa1 = new Employee("Ronald", "Wynn", Position.QA, 100);
+	qa1.setSkills("Selenium", "C#", "Java");
+	Employee qa2 = new Employee("Erich", "Kohn", Position.QA, 105);
+	qa2.setSkills("Selenium", "JavaScript", "Protractor");
+	Employee devOps1 = new Employee("Harold", "Jess", Position.DEV_OPS, 116);
+	devOps1.setSkills("CentOS", "bash", "c", "puppet", "chef", "Ansible");
+	Employee devOps2 = new Employee("Karl", "Madsen", Position.DEV_OPS, 123);
+	devOps2.setSkills("Ubuntu", "bash", "Python", "chef");
+
+	return Arrays.asList(dev1, dev2, dev3, dev4, dev5, dev6,
+				qa1, qa2, devOps1, devOps2);
+}
+</code></pre>
+<h3>Company skill set</h3>
+This method accepts none, one or many positions. If no positions are provided then information for all positions is printed. Positions array is transferred to <em><strong>List&#x3C;String></strong></em> because all objects used in lambda should be effectively final. Transferring array to stream is done with <em><strong>Arrays.stream()</strong></em> method. Employees are filtered based on the desired position. Each skills list is concatenated and flattened to a stream with <em><strong>flatMap()</strong></em>. After this operation, there is a stream of strings with all skills. Duplicates are removed with <em><strong>distinct()</strong></em>. Finally, stream is collected to a list.
+<p>[tabby title=“code”]</p>
+<pre class="language-java"><code>public static List&#x3C;String> gatherEmployeeSkills(
+		List&#x3C;Employee> employees, Position... positions) {
+	positions = positions == null || positions.length == 0 
+		? Position.values() : positions;
+	List&#x3C;Position> searchPositions = Arrays.stream(positions)
+			.collect(Collectors.toList());
+	return employees == null ? Collections.emptyList()
+		: employees.stream()
+			.filter(employee 
+				-> searchPositions.contains(employee.getPosition()))
+			.flatMap(employee -> employee.getSkills().stream())
+			.distinct()
+			.collect(Collectors.toList());
+}
+</code></pre>
+<p>[tabby title=“unit test”]</p>
+<pre class="language-java"><code>@Test
+public void test_gatherEmployeeSkills() {
+	List&#x3C;Employee> company = createCompany();
+
+	List&#x3C;String> skills = AdvancedStreamExamples
+			.gatherEmployeeSkills(company);
+
+	assertThat(skills.size(), is(25));
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h3>Skillset per position</h3>
+This method first received a list of all skills per position and converts it to a stream. The stream can be collected to a <em><strong>String</strong></em> with <em><strong>Collectors.joining()</strong></em> method. It accepts delimiter, prefix, and suffix.
+<p>[tabby title=“code”]</p>
+<pre class="language-java"><code>public static String printEmployeeSkills(
+		List&#x3C;Employee> employees, Position position) {
+	List&#x3C;String> skills = gatherEmployeeSkills(employees, position);
+	return skills.stream()
+		.collect(Collectors.joining("; ",
+			"Our " + position + "s have: ", " skills"));
+}
+</code></pre>
+<p>[tabby title=“unit test”]</p>
+<pre class="language-java"><code>@Test
+public void test_printEmployeeSkills() {
+	List&#x3C;Employee> company = createCompany();
+
+	String skills = AdvancedStreamExamples
+			.printEmployeeSkills(company, Position.QA);
+
+	assertThat(skills, is("Our employees have: "
+		+ "Selenium; C#; Java; JavaScript; Protractor skills"));
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h3>Salary statistics</h3>
+This method returns <em><strong>Map</strong></em> with <em><strong>Positio</strong></em>n as key and <em><strong>IntSummaryStatistics</strong></em> as value. <em><strong>Collectors.groupingBy()</strong></em> groups employees by position key and then using <em><strong>Collectors.summarizingInt()</strong></em> to get statistics of employee's salary.
+<p>[tabby title=“code”]</p>
+<pre class="language-java"><code>public static Map&#x3C;Position, IntSummaryStatistics> salaryStatistics(
+		List&#x3C;Employee> employees) {
+	return employees.stream()
+		.collect(Collectors.groupingBy(Employee::getPosition,
+			Collectors.summarizingInt(Employee::getSalary)));
+}
+</code></pre>
+<p>[tabby title=“unit test”]</p>
+<pre class="language-java"><code>@Test
+public void test_salaryStatistics() {
+	List&#x3C;Employee> company = createCompany();
+
+	Map&#x3C;Position, IntSummaryStatistics> salaries = AdvancedStreamExamples
+			.salaryStatistics(company);
+
+	assertThat(salaries.get(Position.DEV).getAverage(), is(114D));
+	assertThat(salaries.get(Position.QA).getAverage(), is(102.5D));
+	assertThat(salaries.get(Position.DEV_OPS).getAverage(), is(119.5D));
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h3>Position with the lowest average salary</h3>
+Map with position and salary summary is retrieved and then with <em><strong>entrySet().stream()</strong></em> map is converted to stream of <em><strong>Entry&#x3C;Position, IntSummaryStatistics></strong></em> objects. Entries are sorted by average value in ascending order by custom comparator <em><strong>Double.compare()</strong></em>. <em><strong>findFirst()</strong></em> returns <em><strong>Optional&#x3C;Entry></strong></em>. The entry itself is obtained with <em><strong>get()</strong></em> method. The key which is basically the position is obtained with <em><strong>getKey()</strong></em> method.
+<p>[tabby title=“code”]</p>
+<pre class="language-java"><code>public static Position positionWithLowestAverageSalary(
+		List&#x3C;Employee> employees) {
+	return salaryStatistics(employees)
+		.entrySet().stream()
+		.sorted((entry1, entry2) 
+			-> Double.compare(entry1.getValue().getAverage(),
+				entry2.getValue().getAverage()))
+		.findFirst()
+		.get()
+		.getKey();
+}
+</code></pre>
+<p>[tabby title=“unit test”]</p>
+<pre class="language-java"><code>@Test
+public void test_positionWithLowestAverageSalary() {
+	List&#x3C;Employee> company = createCompany();
+
+	Position position = AdvancedStreamExamples
+			.positionWithLowestAverageSalary(company);
+
+	assertThat(position, is(Position.QA));
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h3>Employees per each position</h3>
+Grouping is done per position and employees are aggregated to list with <em><strong>Collectors.toList()</strong></em> method.
+<p>[tabby title=“code”]</p>
+<pre class="language-java"><code>public static Map&#x3C;Position, List&#x3C;Employee>> employeesPerPosition(
+		List&#x3C;Employee> employees) {
+	return employees.stream()
+		.collect(Collectors.groupingBy(Employee::getPosition,
+				Collectors.toList()));
+}
+</code></pre>
+<p>[tabby title=“unit test”]</p>
+<pre class="language-java"><code>@Test
+public void test_employeesPerPosition() {
+	List&#x3C;Employee> company = createCompany();
+
+	Map&#x3C;Position, List&#x3C;Employee>> employees = AdvancedStreamExamples
+			.employeesPerPosition(company);
+
+	assertThat(employees.get(Position.QA).size(), is(2));
+	assertThat(employees.get(Position.QA).get(0).getName(),
+		is("Ronald Wynn"));
+	assertThat(employees.get(Position.QA).get(1).getName(),
+		is("Erich Kohn"));
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h3>Employee names per each position</h3>
+Similar to the method above, but one more mapping is needed here. Employee name should be extracted and converted to <em><strong>List&#x3C;String></strong></em>. This is done with <em><strong>Collectors.mapping(Employee::getName, Collectors.toList())</strong></em> method.
+<p>[tabby title=“code”]</p>
+<pre class="language-java"><code>public static Map&#x3C;Position, List&#x3C;String>> employeeNamesPerPosition(
+		List&#x3C;Employee> employees) {
+	return employees.stream()
+		.collect(Collectors.groupingBy(Employee::getPosition,
+			Collectors.mapping(Employee::getName,
+						Collectors.toList())));
+}
+</code></pre>
+<p>[tabby title=“unit test”]</p>
+<pre class="language-java"><code>@Test
+public void test_employeeNamesPerPosition() {
+	List&#x3C;Employee> company = createCompany();
+
+	Map&#x3C;Position, List&#x3C;String>> employees = AdvancedStreamExamples
+			.employeeNamesPerPosition(company);
+
+	assertThat(employees.get(Position.QA).size(), is(2));
+	assertThat(employees.get(Position.QA).get(0), is("Ronald Wynn"));
+	assertThat(employees.get(Position.QA).get(1), is("Erich Kohn"));
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h3>Employee count per position</h3>
+Getting the count is done by <em><strong>Collectors.counting()</strong></em> method. It returns <em><strong>Long</strong></em> by default. If <em><strong>Integer</strong></em> is needed then this can be changed to <em><strong>Collectors.reducing(0, e -> 1, Integer::sum)</strong></em>.
+<p>[tabby title=“code”]</p>
+<pre class="language-java"><code>public static Map&#x3C;Position, Long> employeesCountPerPosition(
+			List&#x3C;Employee> employees) {
+	return employees.stream()
+		.collect(Collectors.groupingBy(Employee::getPosition,
+						Collectors.counting()));
+}
+</code></pre>
+<p>[tabby title=“unit test”]</p>
+<pre class="language-java"><code>@Test
+public void test_employeesCountPerPosition() {
+	List&#x3C;Employee> company = createCompany();
+
+	Map&#x3C;Position, Long> employees = AdvancedStreamExamples
+				.employeesCountPerPosition(company);
+
+	assertThat(employees.get(Position.DEV), is(6L));
+	assertThat(employees.get(Position.QA), is(2L));
+	assertThat(employees.get(Position.DEV_OPS), is(2L));
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h3>Employees with duplicated first name</h3>
+Employees are grouped into a map with key first name and <em><strong>List&#x3C;Employee></strong></em> as value. This map is converted to stream and filtered for <em><strong>List&#x3C;Employee></strong></em> greater than 1 element. The list is flattened with <em><strong>flatMap()</strong></em> and collected to <em><strong>List&#x3C;Employee></strong></em>.
+<p>[tabby title=“code”]</p>
+<pre class="language-java"><code>public static List&#x3C;Employee> employeesWithDuplicateFirstName(
+		List&#x3C;Employee> employees) {
+	return employees.stream()
+		.collect(Collectors.groupingBy(Employee::getFirstName,
+						Collectors.toList()))
+		.entrySet().stream()
+		.filter(entry -> entry.getValue().size() > 1)
+		.flatMap(entry -> entry.getValue().stream())
+		.collect(Collectors.toList());
+}
+</code></pre>
+<p>[tabby title=“unit test”]</p>
+<pre class="language-java"><code>@Test
+public void test_employeesWithDuplicateFirstName() {
+	List&#x3C;Employee> company = createCompany();
+
+	List&#x3C;Employee> employees = AdvancedStreamExamples
+			.employeesWithDuplicateFirstName(company);
+
+	assertThat(employees.size(), is(2));
+	assertThat(employees.get(0).getName(), is("John Doe"));
+	assertThat(employees.get(1).getName(), is("John Smith"));
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Conclusion</h2>
+In this post, I have just scratched the Java 8 Stream API. It offers a vast amount of functionalities which can be very useful for data processing. Beware when generating stream pipeline because it might end up consuming too many resources.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

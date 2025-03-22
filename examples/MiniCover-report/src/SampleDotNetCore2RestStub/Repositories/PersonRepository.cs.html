@@ -1,0 +1,60 @@
+<html>
+<body style="font-family: sans-serif;">
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Collections.Generic;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Linq;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using SampleDotNetCore2RestStub.Models;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">namespace SampleDotNetCore2RestStub.Repositories</div>
+<div style="white-space: pre;background-color: #EEF4ED;">{</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    public class PersonRepository : IPersonRepository</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    {</div>
+<div style="white-space: pre;background-color: #EACECC;">        private Dictionary&lt;int, Person&gt; _persons = new Dictionary&lt;int, Person&gt;();</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EACECC;">        public PersonRepository()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            _persons.Add(1, new Person { Id = 1, FirstName = &quot;FN1&quot;, LastName = &quot;LN1&quot;, Email = &quot;email1@email.na&quot; });</div>
+<div style="white-space: pre;background-color: #EACECC;">            _persons.Add(2, new Person { Id = 2, FirstName = &quot;FN2&quot;, LastName = &quot;LN2&quot;, Email = &quot;email2@email.na&quot; });</div>
+<div style="white-space: pre;background-color: #EACECC;">            _persons.Add(3, new Person { Id = 3, FirstName = &quot;FN3&quot;, LastName = &quot;LN3&quot;, Email = &quot;email3@email.na&quot; });</div>
+<div style="white-space: pre;background-color: #EACECC;">            _persons.Add(4, new Person { Id = 4, FirstName = &quot;FN4&quot;, LastName = &quot;LN4&quot;, Email = &quot;email4@email.na&quot; });</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public Person GetById(int id)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            return _persons[id];</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public List&lt;Person&gt; GetAll()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            return _persons.Values.ToList();</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public int GetCount()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            return _persons.Count();</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public void Remove()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            if (_persons.Keys.Any())</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #EACECC;">                _persons.Remove(_persons.Keys.Last());</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public string Save(Person person)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            if (_persons.ContainsKey(person.Id))</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #EACECC;">                _persons[person.Id] = person;</div>
+<div style="white-space: pre;background-color: #EACECC;">                return &quot;Updated Person with id=&quot; + person.Id;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            else</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #EACECC;">                _persons.Add(person.Id, person);</div>
+<div style="white-space: pre;background-color: #EACECC;">                return &quot;Added Person with id=&quot; + person.Id;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">}</div>
+</body>
+</html>

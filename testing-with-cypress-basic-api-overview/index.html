@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/testing-with-cypress-basic-api-overview/"><!-- Primary Meta Tags --><title>Testing with Cypress - Basic API overview</title><meta name="title" content="Testing with Cypress - Basic API overview"><meta name="description" content="Basic overview of the Cypress API with code samples for some of the interesting features."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/testing-with-cypress-basic-api-overview/"><meta property="og:title" content="Testing with Cypress - Basic API overview"><meta property="og:description" content="Basic overview of the Cypress API with code samples for some of the interesting features."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/testing-with-cypress-basic-api-overview/"><meta property="twitter:title" content="Testing with Cypress - Basic API overview"><meta property="twitter:description" content="Basic overview of the Cypress API with code samples for some of the interesting features."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2019-06-29T00:00:00.000Z"> Jun 29, 2019 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Testing with Cypress - Basic API overview</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of a Cypress series, you can see all post from the series in <a href="/testing-with-cypress-lessons-learned-in-a-complete-framework/">Testing with Cypress - lessons learned in a complete framework</a>. Examples code is located <span>in </span><a href="https://github.com/llatinov/cypress-testing-framework" target="_blank" rel="noopener noreferrer">cypress-testing-framework</a><span> GitHub repository.</span></p>
+<h2>Cypress API</h2>
+Cypress is so much different than Selenium, so it takes some time to get used to the way elements are located and interacted with. I am not going into details about the API here but will mention some basic things. Methods in the API are kind of self-explanatory, mainly used ones are: <em><strong>get</strong></em>, <em><strong>find</strong></em>, <em><strong>click</strong></em>, <em><strong>type</strong></em>, <em><strong>first</strong></em>, <em><strong>last</strong></em>, <em><strong>prev</strong></em>, <em><strong>next</strong></em>, <em><strong>children</strong></em>, <em><strong>parent</strong></em>, etc.
+<p>Cypress uses jQuery selectors to locate elements, so you can have things like <em><strong>contains</strong></em>, <em><strong>nth-child</strong></em>, <em><strong>.class</strong></em>, <em><strong>#id</strong></em>, <em><strong>[name*=”value”]</strong></em> (and all variations). A very interesting and sometimes useful feature is that you can make Cypress click hidden elements with <em><strong>click({force: true})</strong></em>, Cypress gives you an error that element is not clickable from a user point of view, and you can choose to find another element or just force the click. Also, you can click multiple elements with <em><strong>click({multiple: true})</strong></em>.</p>
+<h2>Explore Cypress API</h2>
+When every project is created for the first time, Cypress installs examples for all their APIs. Those are very good and extensive. I have preserved their examples in the current project and they are available in <em><strong>cypress/examples</strong></em> folder. You can run all the examples with <em><strong>yarn cypress:examples:run</strong></em> command. You can explore them one by one in the <em><strong>Test Runner</strong></em>, which can be opened with <em><strong>yarn cypress:examples:open</strong></em> command.
+<h2>Page Object Model</h2>
+As mentioned in the main topic, Cypress recommends using custom commands instead of Page Objects. I do not like this idea, so I use page objects, as I believe they make the code more focused. Here is an example of a page object I am conformable with:
+<pre class="language-javascript"><code>export default class AboutPage {
+  constructor() {
+    this.elements = {
+      navigation: () => cy.getSilent('a[href$=about]'),
+      paragraph: index => cy.getSilent('section.m-3 div p').eq(index),
+    };
+  }
+
+  goTo() {
+    cy.visit('/');
+    this.elements.navigation().click();
+  }
+
+  /**
+   * @param {string} version
+   * @param {Date} datetime
+   */
+  verifyPage(version, datetime) {
+    this.elements.paragraph(0)
+      .should('text', 'Welcome to the about page.');
+    this.elements.paragraph(1)
+      .should('text', `Current API version is: ${version}`);
+    this.elements.paragraph(2)
+      .should('text', `Current time is: ${datetime.toISOString()}`);
+  }
+}
+</code></pre>
+<h2>Clock</h2>
+Cypress allows you to modify the clock in the browser. For e.g. About page of the application under test shows the current time. It makes much more easy to validate the visualization in case you control the current time. Otherwise, you have to parse the time and put some thresholds in the verifications.
+<h2>Stub response</h2>
+Another very handy feature is to be able to stub the response that API is supposed to return. In this way, you can very easily test for situations like timeout, incorrect response, error in response, etc.
+<h2>Clock and Stub example</h2>
+I have combined clock and stubbing into one example. The test suite file is cypress/tests/stub/response_and_clock_spec.js. The <em><strong>cy.clock(datetime.getTime());</strong></em> sets the date to one you need. The <em><strong>cy.route('GET', '/api/version', version);</strong></em> simulates that API returns the version as a response. In the current case, it is a plain string, but in general case, this s JSON object.
+<p>[tabby title=“response_and_clock_spec.js”]</p>
+<pre class="language-javascript"><code>import AboutPage from '../../pages/about_page';
+
+describe('Check about page', () => {
+  it('should show correct stubbed data and clock', () => {
+    const aboutPage = new AboutPage();
+    const version = '2.33';
+    const datetime = new Date('2014-07-22T15:24:00');
+
+    cy.server();
+    cy.route('GET', '/api/version', version);
+    cy.clock(datetime.getTime());
+
+    aboutPage.goTo();
+
+    aboutPage.verifyPage(version, datetime);
+  });
+});
+</code></pre>
+<p>[tabby title=“about_page.js”]</p>
+<pre class="language-javascript"><code>  verifyPage(version, datetime) {
+    this.elements.paragraph(0)
+      .should('text', 'Welcome to the about page.');
+    this.elements.paragraph(1)
+      .should('text', `Current API version is: ${version}`);
+    this.elements.paragraph(2)
+      .should('text', `Current time is: ${datetime.toISOString()}`);
+  }
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Running custom Node.js code</h2>
+Cypress runs into the browser, this is its biggest strength as you have direct access to your application and the browser. This is its weakness as well because the browser is much restrictive in terms of running code. In order to run custom Node.js code, you have to wrap it as a task. The Cypress task accepts only one argument, so if you need to pass more, you have to wrap them in a JSON object. The task should also return a promise. Tasks are registered into <em><strong>cypress/plugins/index.js</strong></em> file. See examples below. Task <em><strong>copyFile</strong></em> is used in <em><strong>cypress_loggin.js</strong></em>, a parameter that is passed to it is a JSON object with <em><strong>from</strong></em> and <em><strong>to</strong></em> keys. This task is registered with Cypress in <em><strong>index.js</strong></em>. Implementation is done in <em><strong>tasks.js</strong></em> where actual Node.js code is used to manipulate the file system and a <em><strong>Promise</strong></em> is returned.
+<p>[tabby title=“cypress_logging.js”]</p>
+<pre class="language-javascript"><code>cy.task('copyFile', {
+  from: `cypress/screenshots/${screenshotFilename}`,
+  to: getFilePath(screenshotFilename),
+});
+</code></pre>
+<p>[tabby title=“index.js”]</p>
+<pre class="language-javascript"><code>const tasks = require('./tasks');
+
+module.exports = (on, config) => {
+  // `on` is used to hook into various events Cypress emits
+  on('task', {
+    copyFile: tasks.copyFile,
+  });
+
+  // `config` is the resolved Cypress config
+  const newConfig = config;
+  newConfig.watchForFileChanges = false;
+
+  return newConfig;
+};
+</code></pre>
+<p>[tabby title=“tasks.js”]</p>
+<pre class="language-javascript"><code>const fs = require('fs');
+
+const copyFile = args =>
+  new Promise(resolve => {
+    if (fs.existsSync(args.from)) {
+      fs.writeFileSync(args.to, fs.readFileSync(args.from));
+      resolve(`File ${args.from} copied to ${args.to}`);
+    }
+    resolve(`File ${args.from} does not exist`);
+  });
+
+module.exports = { copyFile };
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Working with promises</h2>
+Cypress is based on <a href="https://developers.google.com/web/fundamentals/primers/promises" target="_blank" rel="noopener noreferrer">promises</a>. Each Cypress command returns a command which is similar to a promise, but actually is different, read mode in <a href="https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Not-Promises" target="_blank" rel="noopener noreferrer">Commands Are Not Promises</a>. If you want to access the value from the previous operation you have to unwrap it with a <em><strong>then()</strong></em> method. If you have several dependencies then this nesting becomes bigger and bigger. This is why I have adopted some code from <a href="https://medium.com/@NicholasBoll/cypress-io-using-async-and-await-4034e9bab207" target="_blank" rel="noopener noreferrer">Nicholas Boll</a> to avoid nesting. The article above is about using <em><strong>async/await</strong></em> but actually, it is not going to work with my custom logging, I will write in the next section. Initially, I started using directly the plugin from Nicholas, but I have observed strange bugs where a test fails but is not reported as such, so I modified it and it is proved stable now.
+<p>See examples below. The standard way of doing it is by unwrapping the command with the <em><strong>then()</strong></em> method. This is working but can get really ugly if you have too many nested unwrappings. The option is to use <em><strong>promisify()</strong></em> which wraps the Cypress command into a promise. The promise is then resolved only inside some other Cypress command, such as <em><strong>cy.log()</strong></em> or custom command <em><strong>cy.apiGetPerson()</strong></em>. If you print it directly the result in the <em><strong>console</strong></em> is a <em><strong>Promise</strong></em>.</p>
+<p>[tabby title=“with unwrap”]</p>
+<pre class="language-javascript"><code>it('should work with regular unwrap', () => {
+  const person = new Person();
+  // This is a command
+  cy.apiSavePerson(person).then(personId => {
+    // Value is unwrapped and printed properly
+    cy.log(personId);
+    console.log(personId);
+
+    // Value is passed unwrapped
+    cy.apiGetPerson(personId).then(res => cy.log(res));
+  });
+});
+</code></pre>
+<p>[tabby title=“with promisify()”]</p>
+<pre class="language-javascript"><code>it('should work with promisify', () => {
+  const person = new Person();
+  // This is a promise
+  const personId = cy.apiSavePerson(person).promisify();
+  // Cypress internally resolves the promise
+  cy.log(personId);
+  // Prints a Promise
+  console.log(personId);
+  // Value is accessible after unwrap
+  personId.then(pid => console.log(pid));
+
+  // Cypress internally unwraps the value
+  cy.apiGetPerson(personId).then(res => cy.log(res));
+});
+</code></pre>
+<p>[tabby title=“cypress_promisify.js”]</p>
+<pre class="language-javascript"><code>function promisify(chain) {
+  return new Cypress.Promise((resolve, reject) => {
+    chain.then(resolve);
+  });
+}
+
+before(function() {
+  cy.wrap('').__proto__.promisify = function() {
+    return promisify(this);
+  };
+});
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Working with async/await</h2>
+The code above should work with <a href="https://javascript.info/async-await" target="_blank" rel="noopener noreferrer">async/await</a>, which is an amazing JavaScript feature. It does work but it messes up with the custom logging I have described into <a href="/testing-with-cypress-custom-logging-of-errors-and-junit-results/">Testing with Cypress - Custom logging of errors and JUnit results</a> post. The code below works, but the custom logging is not triggered. So I would say, do not use async/await if you need those customizations. The bigger issue is that async/await does not seem to work in Electron, <em><strong>cy.apiGetPerson()</strong></em> is actually not invoked if you run the code in Electron browser.
+<pre class="language-javascript"><code>it('should work with async/await', async () => {
+  const person = new Person();
+  // This is a resolved promise
+  const personId = await cy.apiSavePerson(person).promisify();
+  // Value is wrapped and printed properly
+  cy.log(personId);
+  console.log(personId);
+
+  // Value is passed unwrapped
+  cy.apiGetPerson(personId).then(res => cy.log(res));
+});
+</code></pre>
+<h2>Full API documentation</h2>
+Cypress has very good and extensive documentation, you can read more at <a href="https://docs.cypress.io/api/api/table-of-contents.html" target="_blank" rel="noopener noreferrer">Cypress API</a> article.
+<h2>Conclusion</h2>
+Cypress has a rich API which requires some time investments to get used to. You have good things like controlling the clock of the browser, controlling the API response from the backend. Good thing is that you have a way to run whatever code you want in your tests, but it has to wrapped as a task, otherwise you cannot just run any code in the browser.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

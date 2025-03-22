@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-run-the-solution/"><!-- Primary Meta Tags --><title>AWS examples in C# - run the solution</title><meta name="title" content="AWS examples in C# - run the solution"><meta name="description" content="Explanation of how to install and use the solution in AWS examples in C# blog post series."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-run-the-solution/"><meta property="og:title" content="AWS examples in C# - run the solution"><meta property="og:description" content="Explanation of how to install and use the solution in AWS examples in C# blog post series."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-run-the-solution/"><meta property="twitter:title" content="AWS examples in C# - run the solution"><meta property="twitter:description" content="Explanation of how to install and use the solution in AWS examples in C# blog post series."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-02-18T00:00:00.000Z"> Feb 18, 2020 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - run the solution</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository. In the current post, I give information on how to install and run the project.</p>
+<h2>Disclaimer</h2>
+The solution has commands to deploy to the cloud as well as to clean resources. Note not all resources are cleaned, read more in the <em><strong>Cleanup</strong></em> section. In order to be run in AWS valid account is needed. I am not going to describe how to create an account. If an account is present, then there is also knowledge and awareness of how to use it.
+<p><em><strong>Important: current examples generate costs on AWS account. Use cautiously at your own risk!</strong></em></p>
+<h2>Restrictions</h2>
+The project was tested to be working on Linux and Windows. For Windows, it is working only with Git Bash. The project requires a valid AWS account.
+<h2>Required installations</h2>
+In order to fully run and enjoy the project following needs to be installed:
+<ul>
+ 	<li>Docker - see more in <a href="https://docs.docker.com/install/" target="_blank" rel="noopener noreferrer">Docker Engine overview</a> page.</li>
+ 	<li>Git Bash - see more in <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">Download Git</a> page.</li>
+ 	<li>AWS CLI - see more in <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html" target="_blank" rel="noopener noreferrer">Installing the AWS CLI</a> page.</li>
+ 	<li>jq - see more in <a href="https://stedolan.github.io/jq/download/" target="_blank" rel="noopener noreferrer">Download jq</a> page, for Windows it comes by default with Git Bash.</li>
+ 	<li>.NET Core SDK 2.1 and 3.1 - see more in <a href="https://docs.microsoft.com/en-us/dotnet/core/install/sdk" target="_blank" rel="noopener noreferrer">Install the .NET Core SDK</a> page.</li>
+ 	<li>.NET Core Lambda plugin - run: <em><strong>dotnet tool install -g Amazon.Lambda.Tools</strong></em>.</li>
+ 	<li>Node Package Manager (npm) - see more in <a href="https://www.npmjs.com/get-npm" target="_blank" rel="noopener noreferrer">Get npm!</a> page.</li>
+ 	<li>Serverless - see more in <a href="https://serverless.com/framework/docs/providers/aws/guide/installation/" target="_blank" rel="noopener noreferrer">Serverless AWS Installation</a> page.</li>
+ 	<li>Postman - see more in <a href="https://www.postman.com/downloads/" target="_blank" rel="noopener noreferrer">Download Postman</a> page, this is an optional step.</li>
+</ul>
+<h2>Configurations</h2>
+AWS CLI has to be configured in order to run properly. It happens with <em><strong>aws configure</strong></em>. If there is no AWS account, this is not an issue, put some values for access and secret key and put a correct region, like <em><strong>us-east-1</strong></em>.
+<p>Import Postman collection, in order to be able to try the examples. Postman collection is in <em><strong>aws.examples.csharp.postman_collection.json</strong></em> file in the code. This is an optional step, below there are cURL examples also.</p>
+<h2>Run the project in AWS</h2>
+Running on AWS requires the setting of environment variables:
+<pre class="language-bash"><code>export AwsAccessKey=KIA57FV4.....
+export AwsSecretKey=mSgsxOWVh...
+export AwsRegion=us-east-1
+</code></pre>
+Then the solution is deployed to AWS with <em><strong>./solution-deploy.sh</strong></em> script. Note that the output of the command gives the API Gateway URL and API key, as well as the SqsWriter and SqsReader endpoints. See image below:
+<img src="/images/2020/02/aws.csharp.exmaples-deploy.aws_.png">
+<h2>Run the project partly in AWS</h2>
+The most expensive part of the current setup is the running of the docker containers in EC2 (<span>Elastic Compute Cloud)</span>. I have prepared a script called <em><strong>./solution-deploy-hybrid.sh</strong></em>, which runs the containers locally and all other things are in AWS. Still, environment variables from the previous section are mandatory to be set. I believe this is the optimal variant if you want to test and run the code in a "production-like" environment.
+<h2>Run the project in LocalStack</h2>
+<span><a href="https://localstack.cloud/" target="_blank" rel="noopener noreferrer">LocalStack</a> provides an easy-to-use test/mocking framework for developing Cloud applications. It spins up a testing environment on local machines that provide the same functionality and APIs as the real AWS cloud environment. I have experimented with LocalStack, there is a <a href="https://github.com/llatinov/aws.examples.csharp/tree/localstack" target="_blank" rel="noopener noreferrer">localstack branch in GitHub</a>. The solution can be run with <em><strong>solution-deploy-localstack.sh</strong></em> command. I cannot really estimate if this is a good alternative, because I am running the free tier in AWS and the most expensive part is ECS, which I skip by running the containers locally, instead of AWS. See the previous section on how to run a hybrid.</span>
+<h2>Usage</h2>
+There is a Postman collection which allows easy firing of the requests. Another option is to use cURL, examples of all requests with their Postman names are available below.
+<h3>SqsWriter</h3>
+<a href="https://github.com/llatinov/aws.examples.csharp/tree/master/SqsWriter" target="_blank" rel="noopener noreferrer">SqsWriter</a> is a .NET Core 3.0 application, that is dockerized and run in AWS ECS (Elastic Container Service). It exposes an API that can be used to publish Actor or Movie objects. There is also a health check request. After AWS deployment proper endpoint is needed. The endpoint can be found as an output of deployment scripts. See the image above.
+<p><strong>PublishActor</strong></p>
+<pre class="language-bash"><code>curl --location --request POST 'http://localhost:5100/api/publish/actor' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"FirstName": "Bruce",
+	"LastName": "Willis"
+}'
+</code></pre>
+<p><strong>PublishMovie</strong></p>
+<pre class="language-bash"><code>curl --location --request POST 'http://localhost:5100/api/publish/movie' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"Title": "Die Hard",
+	"Genre": "Action Movie"
+}'
+</code></pre>
+<p>When Actor or Movie is published, it goes to the SQS queue, SqsReader picks it up from there and processes it. What is visible in the logs is that both LogEntryMessageProcessor and ActorMessageProcessor are invoked. See the screenshot:</p>
+<p><a href="/images/2020/02/aws.csharp.exmaples-publish.actor_.png"><img src="/images/2020/02/aws.csharp.exmaples-publish.actor_.png"></a></p>
+<p><strong>SqsWriterHealthCheck</strong></p>
+<pre class="language-bash"><code>curl --location --request GET 'http://localhost:5100/health'
+</code></pre>
+<h3>SqsReader</h3>
+<a href="https://github.com/llatinov/aws.examples.csharp/tree/master/SqsReader" target="_blank" rel="noopener noreferrer">SqsReader</a> is a .NET Core 3.0 application, that is dockerized and run in AWS ECS. It has a consumer that listens to the SQS queue and processes the messages by writing them into appropriate AQS DynamoDB tables. It also exposes API to stop or start processing, as long as reprocess the dead-letter queue or simply get the queue status. After AWS deployment proper endpoint is needed. The endpoint can be found as an output of deployment scripts. See the image above.
+<p><strong>ConsumerStart</strong></p>
+<pre class="language-bash"><code>curl --location --request POST 'http://localhost:5200/api/consumer/start' \
+--header 'Content-Type: application/json' \
+--data-raw ''
+</code></pre>
+<p><strong>ConsumerStop</strong></p>
+<pre class="language-bash"><code>curl --location --request POST 'http://localhost:5200/api/consumer/stop' \
+--header 'Content-Type: application/json' \
+--data-raw ''
+</code></pre>
+<p><strong>ConsumerStatus</strong></p>
+<pre class="language-bash"><code>curl --location --request GET 'http://localhost:5200/api/consumer/status'
+</code></pre>
+<p><strong>ConsumerReprocess</strong>
+If this one is invoked with no messages in the dead-letter queue then it takes 20 seconds to finish, because it actually waits for long polling timeout.</p>
+<pre class="language-bash"><code>curl --location --request POST 'http://localhost:5200/api/consumer/reprocess' \
+--header 'Content-Type: application/json' \
+--data-raw ''
+</code></pre>
+<p><strong>SqsReaderHealthCheck</strong></p>
+<pre class="language-bash"><code>curl --location --request GET 'http://localhost:5200/health'
+</code></pre>
+<h3>ActorsServerlessLambda</h3>
+This lambda is managed by the Serverless framework. It is exposed as REST API via AWS API Gateway. It also has a custom authorizer as well as API Key attached. Those are described in a further post.
+<p><strong>ServerlessActors</strong></p>
+<p>In the case of AWS, the <em><strong>API Key</strong></em> and <em><strong>URL</strong></em> are needed, those can be obtained from deployment command logs. See the screenshot above. Put correct values to <em><strong>CHANGE_ME</strong></em> and <em><strong>REGION</strong></em> placeholders. Request is:</p>
+<pre class="language-bash"><code>curl --location --request POST 'https://CHANGE_ME.execute-api.REGION.amazonaws.com/dev/actors/search' \
+--header 'Content-Type: application/json' \
+--header 'x-api-key: CHANGE_ME' \
+--header 'Authorization: Bearer validToken' \
+--data-raw '{
+    "FirstName": "Bruce",
+    "LastName": "Willis"
+}'
+</code></pre>
+<h3>MoviesServerlessLambda</h3>
+<strong>ServerlessMovies</strong>
+<p>Put correct values to <em><strong>CHANGE_ME</strong></em> and <em><strong>REGION</strong></em> placeholders. Request is:</p>
+<pre class="language-bash"><code>curl --location --request GET 'https://CHANGE_ME.execute-api.REGION.amazonaws.com/dev/movies/title/Die Hard'
+</code></pre>
+<h2>Cleanup</h2>
+<em><strong>Nota bene: This is a very important step, as leaving the solution running in AWS will accumulate costs.</strong></em>
+<p>In order to stop and clean up all AWS resources run <em><strong>./solution-delete.sh</strong></em> script.</p>
+<p><em><strong>Nota bene:</strong></em> There a resource that is not automatically deleted by the scripts. This is a <em><strong>Route53</strong></em> resource created by <em><strong>AWS Cloud Map</strong></em>. It has to be deleted with the following commands. Note that the <em><strong>id</strong></em> in the delete command comes from the result of <em><strong>list-namespaces</strong></em> command.</p>
+<pre class="language-bash"><code>aws servicediscovery list-namespaces
+aws servicediscovery delete-namespace --id ns-kneie4niu6pwwela
+</code></pre>
+<h2>Verify cleanup</h2>
+In order to be sure there are no leftovers from the examples, following AWS services has to be checked:
+<ul>
+ 	<li>SQS</li>
+ 	<li>DynamoDB</li>
+ 	<li>IAM -> Roles</li>
+ 	<li>EC2 -> Security Groups</li>
+ 	<li>ECS -> Clusters</li>
+ 	<li>ECS -> Task Definitions</li>
+ 	<li>ECR -> Repositories</li>
+ 	<li>Lambda -> Functions</li>
+ 	<li>Lambda -> Applications</li>
+ 	<li>CloudFormation -> Stacks</li>
+ 	<li>S3</li>
+ 	<li>CloudWatch -> Log Groups</li>
+ 	<li>Route 53</li>
+ 	<li>AWS Cloud Map</li>
+</ul>
+On top of it, Billing should be regularly monitored to ensure no costs are applied.
+<h2>Conclusion</h2>
+This post describes how to run and they the solution described in <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

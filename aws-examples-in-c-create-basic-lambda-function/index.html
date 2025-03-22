@@ -1,0 +1,183 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-create-basic-lambda-function/"><!-- Primary Meta Tags --><title>AWS examples in C# - create basic Lambda function</title><meta name="title" content="AWS examples in C# - create basic Lambda function"><meta name="description" content="Code examples on how to create AWS Lambda function in .NET Core."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-create-basic-lambda-function/"><meta property="og:title" content="AWS examples in C# - create basic Lambda function"><meta property="og:description" content="Code examples on how to create AWS Lambda function in .NET Core."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-create-basic-lambda-function/"><meta property="twitter:title" content="AWS examples in C# - create basic Lambda function"><meta property="twitter:description" content="Code examples on how to create AWS Lambda function in .NET Core."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-03-15T00:00:00.000Z"> Mar 15, 2020 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - create basic Lambda function</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository.</p>
+<h2>AWS Lambda</h2>
+AWS Lambda allows easy ramp-up of service without all the hassle to manage servers and environments. The ready code is uploaded to Lambda and automatically run. More detailed information and design considerations about AWS Lambda can be found in <a href="/aws-examples-in-c-working-with-lambda-functions/">AWS examples in C# – working with Lambda functions</a> post.
+<h2>Create Lambda</h2>
+Amazon provides <em><strong>Amazon.Lambda.Templates</strong></em> NuGet package which contains a lot of templates for Lambda functions. The NuGet package can be installed with <em><strong>dotnet new -i Amazon.Lambda.Templates</strong></em>. Once templates are installed, a new empty function is created with:
+<pre class="language-bash"><code>dotnet new lambda.EmptyFunction --name MyFunction</code></pre>
+Two projects are created: <em><strong>src</strong></em> and <em><strong>test</strong></em>. The source project is with <em><strong>netcoreapp2.1</strong></em> runtime and has reference to <em><strong>Amazon.Lambda.Core</strong></em> and <em><strong>Amazon.Lambda.Serialization.Json</strong></em> NuGet packages. It has only one simple function that takes a string input and converts it to uppercase. The test project has a unit test that tests this function.
+<p>Once the function is ready, it can be deployed to AWS Lambda and tested. In order to deploy, the Amazon lambda tools should be installed with: <em><strong>dotnet tool install -g Amazon.Lambda.Tools</strong></em>. Once the tool is installed, there should be an IAM role created with name <em><strong>MyRole</strong></em> for e.g. Before deploying the lambda, environment variable with AWS access information should be set:</p>
+<pre class="language-bash"><code>export AwsAccessKey=KIA57FV4.....
+export AwsSecretKey=mSgsxOWVh...
+export AwsRegion=us-east-1
+</code></pre>
+<p>Then lambda is deployed with:</p>
+<pre class="language-bash"><code>dotnet lambda deploy-function MyFunction \
+	--function-role MyRole \
+	--project-location src/MyFunction \
+	--region $AwsRegion \
+	--aws-access-key-id $AwsAccessKey \
+	--aws-secret-key $AwsSecretKey
+</code></pre>
+<p>The function can be tested with:</p>
+<pre class="language-bash"><code>dotnet lambda invoke-function MyFunction \
+	--payload "Just Testing the Payload" \
+	--project-location src/MyFunction \
+	--region $AwsRegion \
+	--aws-access-key-id $AwsAccessKey \
+	--aws-secret-key $AwsSecretKey
+</code></pre>
+<p>The result is shown:</p>
+<pre class="language-bash"><code>Amazon Lambda Tools for .NET Core applications (3.3.1)
+Project Home: https://github.com/aws/aws-extensions-for-dotnet-cli, https://github.com/aws/aws-lambda-dotnet
+
+Payload:
+"JUST TESTING THE PAYLOAD"
+
+Log Tail:
+START RequestId: 3f1844e0-7437-4219-a391-621a55dec0e9 Version: $LATEST
+END RequestId: 3f1844e0-7437-4219-a391-621a55dec0e9
+REPORT RequestId: 3f1844e0-7437-4219-a391-621a55dec0e9  Duration: 925.38 ms    Billed Duration: 1000 ms Memory Size: 256 MB     Max Memory Used: 62 MB  Init Duration: 196.85 ms
+</code></pre>
+<p>The duration in the example above is <em><strong>925.38ms</strong></em>, billed duration is 1000ms. This is the first run, the <em><strong>cold start</strong></em> as described in the previous section, which took almost a second for a very simple function. Next run the duration was 0.28ms.</p>
+<p>The lambda can also manually be deployed and tested, see how in <a href="https://aws.amazon.com/getting-started/tutorials/run-serverless-code/" target="_blank" rel="noopener noreferrer">Run a “Hello, World!” with AWS Lambda</a> article.</p>
+<h2>Listen to DynamoDB events</h2>
+In <a href="/aws-examples-in-c-create-a-service-working-with-dynamodb/">AWS examples in C# – create a service working with DynamoDB</a> post, I have described more about DynamoDB and its streams are very well integrated with AWS Lambda. In the current examples, the lambda functions are designed to process DynamoDB stream events. DynamoDB stream <em><strong>ARN</strong></em> (Amazon Resource Name) is defined as an <em><strong>event source</strong></em> for the lambda. Then the lambda receives <em><strong>DynamoDBEvent</strong></em> object, which is defined in <em><strong>Amazon.Lambda.DynamoDBEvents</strong></em> NuGet package. There is not much business logic in the lambda function, once the event object is received, it is read, logged to <em><strong>AWS CloudWatc</strong></em>h with <em><strong>ILambdaContext</strong></em>, and its data is written to another <em><strong>DynamoDB table</strong></em> and to an <em><strong>SQS queue</strong></em>. For this purpose, references to <em><strong>AWSSDK.DynamoDBv2</strong></em> and <em><strong>AWSSDK.SQS</strong></em> NuGet packages are made. In the example code, I have created SQS and DynamoDB proxies, so functionalities are isolated and only what is needed is exposed, these are <em><strong>DynamoDbWriter</strong></em> and <em><strong>SqsWriter</strong></em>. In both proxies, the configuration is done with <em><strong>Region</strong></em>, which is read by <em><strong>AWS_REGION</strong></em> environment variable. This variable is always present in the AWS Lambda environment. In this case, there is no need for authentication with <em><strong>AWSCredentials</strong></em> class, as everything happens inside AWS. The lambda function has two constructors, one is receiving instances of both proxies, if none are passed it instantiates them. An automatic dependency injection is not used with lambda. This constructor is used by the unit tests to pass mocked objects. The parameterless constructor is needed by AWS Lambda to instantiate the function class.
+<p>[tabby title=“MoviesFunction”]</p>
+<pre class="language-csharp"><code>public class MoviesFunction
+{
+	private readonly ISqsWriter _sqsWriter;
+	private readonly IDynamoDbWriter _dynamoDbWriter;
+
+	public MoviesFunction() : this(null, null) { }
+
+	public MoviesFunction(ISqsWriter sqsWriter, IDynamoDbWriter dynamoDbWriter)
+	{
+		_sqsWriter = sqsWriter ?? new SqsWriter();
+		_dynamoDbWriter = dynamoDbWriter ?? new DynamoDbWriter();
+	}
+
+	public async Task FunctionHandler(DynamoDBEvent dynamoEvent, ILambdaContext context)
+	{
+		context.Logger.LogLine($"Beginning to process {dynamoEvent.Records.Count} records...");
+
+		foreach (var record in dynamoEvent.Records)
+		{
+			context.Logger.LogLine($"Event ID: {record.EventID}");
+			context.Logger.LogLine($"Event Name: {record.EventName}");
+
+			var streamRecordJson = _dynamoDbWriter.SerializeStreamRecord(record.Dynamodb);
+			context.Logger.LogLine($"DynamoDB Record:{streamRecordJson}");
+			context.Logger.LogLine(streamRecordJson);
+
+			var logEntry = new LogEntry
+			{
+				Message = $"Movie '{record.Dynamodb.NewImage["Title"].S}' processed by lambda",
+				DateTime = DateTime.Now
+			};
+			await _sqsWriter.WriteLogEntryAsync(logEntry);
+			await _dynamoDbWriter.PutLogEntryAsync(logEntry);
+		}
+
+		context.Logger.LogLine("Stream processing complete.");
+	}
+}
+</code></pre>
+<p>[tabby title=“DynamoDbWriter”]</p>
+<pre class="language-csharp"><code>public interface IDynamoDbWriter
+{
+	Task PutLogEntryAsync(LogEntry logEntry);
+	string SerializeStreamRecord(StreamRecord streamRecord);
+}
+
+public class DynamoDbWriter : IDynamoDbWriter
+{
+	private static readonly string Region = Environment.GetEnvironmentVariable("AWS_REGION") ?? "us-east-1";
+
+	private readonly IAmazonDynamoDB _dynamoDbClient;
+	private readonly JsonSerializer _jsonSerializer;
+
+	public DynamoDbWriter()
+	{
+		var dynamoDbConfig = new AmazonDynamoDBConfig
+		{
+			RegionEndpoint = RegionEndpoint.GetBySystemName(Region)
+		};
+		_dynamoDbClient = new AmazonDynamoDBClient(dynamoDbConfig);
+		_jsonSerializer = new JsonSerializer();
+	}
+
+	public async Task PutLogEntryAsync(LogEntry logEntry)
+	{
+		var request = new PutItemRequest
+		{
+			TableName = "LogEntries",
+			Item = new Dictionary&#x3C;string, AttributeValue>
+			{
+				{"Message", new AttributeValue {S = logEntry.Message}},
+				{"DateTime", new AttributeValue {S = logEntry.ToString()}}
+			}
+		};
+
+		await _dynamoDbClient.PutItemAsync(request);
+	}
+
+	public string SerializeStreamRecord(StreamRecord streamRecord)
+	{
+		using (var writer = new StringWriter())
+		{
+			_jsonSerializer.Serialize(writer, streamRecord);
+			return writer.ToString();
+		}
+	}
+}
+</code></pre>
+<p>[tabby title=“SqsWriter”]</p>
+<pre class="language-csharp"><code>public interface ISqsWriter
+{
+	Task WriteLogEntryAsync(LogEntry logEntry);
+}
+
+public class SqsWriter : ISqsWriter
+{
+	private static readonly string QueueName = Environment.GetEnvironmentVariable("AWS_SQS_QUEUE_NAME");
+	private static readonly bool IsQueueFifo = bool.Parse(Environment.GetEnvironmentVariable("AWS_SQS_IS_FIFO") ?? "false");
+	private static readonly string Region = Environment.GetEnvironmentVariable("AWS_REGION") ?? "us-east-1";
+
+	private readonly IAmazonSQS _sqsClient;
+
+	public SqsWriter()
+	{
+		var sqsConfig = new AmazonSQSConfig
+		{
+			RegionEndpoint = RegionEndpoint.GetBySystemName(Region)
+		};
+		_sqsClient = new AmazonSQSClient(sqsConfig);
+	}
+
+	public async Task WriteLogEntryAsync(LogEntry logEntry)
+	{
+		var queueUrl = await _sqsClient.GetQueueUrlAsync(QueueName);
+		var sendMessageRequest = new SendMessageRequest
+		{
+			QueueUrl = queueUrl.QueueUrl,
+			MessageBody = JsonConvert.SerializeObject(logEntry),
+			MessageAttributes = SqsMessageTypeAttribute.CreateAttributes(typeof(LogEntry).Name)
+		};
+		if (IsQueueFifo)
+		{
+			sendMessageRequest.MessageGroupId = typeof(LogEntry).Name;
+			sendMessageRequest.MessageDeduplicationId = Guid.NewGuid().ToString();
+		}
+
+		await _sqsClient.SendMessageAsync(sendMessageRequest);
+	}
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Conclusion</h2>
+As shown in the current post, it is very easy to create lambda function, deploy and run it. The current post shows a lambda function that listens to DynamoDB events and processes those events by writing into another DynamoDB table and SQS queue.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

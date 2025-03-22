@@ -1,0 +1,21 @@
+<html>
+<body style="font-family: sans-serif;">
+<div style="white-space: pre;background-color: #EEF4ED;">using Microsoft.AspNetCore;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using Microsoft.AspNetCore.Hosting;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">namespace SampleDotNetCore2RestStub</div>
+<div style="white-space: pre;background-color: #EEF4ED;">{</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    public class Program</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    {</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public static void Main(string[] args)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            var webHost = WebHost.CreateDefaultBuilder(args)</div>
+<div style="white-space: pre;background-color: #EACECC;">                .UseStartup&lt;Startup&gt;()</div>
+<div style="white-space: pre;background-color: #EACECC;">                .Build();</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EACECC;">            webHost.Run();</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }            </div>
+<div style="white-space: pre;background-color: #EEF4ED;">    }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">}</div>
+</body>
+</html>

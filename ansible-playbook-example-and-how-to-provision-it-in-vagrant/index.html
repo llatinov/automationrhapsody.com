@@ -1,0 +1,119 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/ansible-playbook-example-and-how-to-provision-it-in-vagrant/"><!-- Primary Meta Tags --><title>Ansible playbook example and how to provision it in Vagrant</title><meta name="title" content="Ansible playbook example and how to provision it in Vagrant"><meta name="description" content="Brief introduction to Ansible with and playbook example. Example of provisioning of the Ansible Playbook into Vagrant."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/ansible-playbook-example-and-how-to-provision-it-in-vagrant/"><meta property="og:title" content="Ansible playbook example and how to provision it in Vagrant"><meta property="og:description" content="Brief introduction to Ansible with and playbook example. Example of provisioning of the Ansible Playbook into Vagrant."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/ansible-playbook-example-and-how-to-provision-it-in-vagrant/"><meta property="twitter:title" content="Ansible playbook example and how to provision it in Vagrant"><meta property="twitter:description" content="Brief introduction to Ansible with and playbook example. Example of provisioning of the Ansible Playbook into Vagrant."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2019-07-17T00:00:00.000Z"> Jul 17, 2019 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Ansible playbook example and how to provision it in Vagrant</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>The code below can be found in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/sample-dropwizard-rest-stub" target="_blank" rel="noopener noreferrer">sample-dropwizard-rest-stub</a> repository in <em><strong>Vagrantfile-ansible</strong></em> and <em><strong>playbook.yml</strong></em> files. Since Vagrant requires to have only one Vagrantfile if you want to run this example you have to rename <em><strong>Vagrantfile-ansible</strong></em> to <em><strong>Vagrantfile</strong></em> then run Vagrant commands described at the end of this post. This post is part of Vagrant series. All of other Vagrant related posts, as well as more theoretical information what is Vagrant and why to use it, can be found in <a href="/what-is-vagrant-and-why-to-use-it/">What is Vagrant and why to use it</a> post. I have used Ansible and Chef for deployments, unlike Chef, Ansible can easily be demonstrated in an offline demo. In order to test your Ansible playbook, it can be easily provisioned into Vagrant. This will be demonstrated into the current post.</p>
+<h2>Ansible introduction</h2>
+Ansible is a tool used for managing repetitive IT tasks, such as deployments, infrastructure management, etc. It connects to the machines it has to configure via SSH. Commands are written in a Playbook, which can be saved under version control. The playbook contains some actions that have to be performed, those actions are described in YAML format using so-called modules. A module is a small step that performs a certain action, such as copy file, execute a bash command, etc. Full list of modules can be found in <a href="https://docs.ansible.com/ansible/2.8/modules/list_of_all_modules.html" target="_blank" rel="noopener noreferrer">Ansible modules index</a>. Playbooks can be reused, which gives flexibility. Full Ansible documentation can be found in <a href="https://docs.ansible.com/ansible/latest/user_guide/index.html" target="_blank" rel="noopener noreferrer">Ansible user guide</a>. If things become way too big to manage, there is Ansible Tower which can centrally control all your Ansible environment.
+<h2>Example Playbook</h2>
+In <a href="/run-dropwizard-java-application-vagrant/" target="_blank" rel="noopener noreferrer">Run Dropwizard Java application on Vagrant</a> post, I have shown how to deploy a single fat JAR Java service in Vagrant. The commands from that post are translated to an Ansible Playbook and service is deployed with Ansible.
+<pre class="language-text"><code>---
+
+- name: Deploy 'dropwizard-rest-stub'
+  hosts: all
+  vars:
+    service_file: /etc/init.d/dropwizard
+  tasks:
+
+    - name: Check if service is installed
+      stat:
+        path: '{{ service_file }}'
+      register: service_result
+
+    - name: Stop service
+      service:
+        name: dropwizard
+        state: stopped
+        use: service
+      when: service_result.stat.exists == True
+
+    - name: Install Java 8
+      yum:
+        name: java-1.8.0-openjdk-devel
+
+    - name: Create folders
+      file:
+        path: /var/dropwizard-rest-stub/logs
+        state: directory
+
+    - name: Copy JAR file
+      copy:
+        src: target/sample-dropwizard-rest-stub-1.0-SNAPSHOT.jar
+        dest: /var/dropwizard-rest-stub/dropwizard-rest-stub.jar
+
+    - name: Copy configuration file
+      copy:
+        src: config-vagrant.yml
+        dest: /var/dropwizard-rest-stub/config.yml
+
+    - name: Copy service file
+      copy:
+        src: linux_service_file
+        dest: '{{ service_file }}'
+
+    - name: Fix service file because of Windows new lines
+      replace:
+        path: '{{ service_file }}'
+        regexp: '\r'
+        replace: ''
+
+    - name: Make service file executable
+      file:
+        path: '{{ service_file }}'
+        mode: 755
+
+    - name: Reload services
+      systemd:
+        daemon_reload: yes
+
+    - name: Start service
+      service:
+        name: dropwizard
+        state: started
+        use: service
+</code></pre>
+<p>I will not go into details about the playbook, each step is self-explanatory. The service file path is declared as a <em><strong>service_file</strong></em> variable, which is later used as <strong><em>’{{</em> service_file }}’</strong>. Service has to be shut down in case the playbook is run for an upgrade, this is why a conditional <em><strong>stat</strong></em> module task is used. It checks if the service file exists and if it does then <em><strong>service</strong></em> task tries to stop the service. Then playbook installs Java 8, copies the JAR and configurations, creates the service and starts it. Important here in <em><strong>service</strong></em> task is <em><strong>use: service</strong></em>, otherwise it will try the default <em><strong>systemd</strong></em> which will produce an error.</p>
+<h2>Run the Playbook</h2>
+Running the Playbook is a task that requires more effort. What happens usually, is that you have boxes with SSH installed which are ready to get configured with Ansible. In this demo, you have to make this box on your own. I use <a href="https://www.virtualbox.org/" target="_blank" rel="noopener noreferrer">Oracle's VirtualBox</a>. CentOS 7 image can be downloaded from <a href="https://www.osboxes.org/centos/" target="_blank" rel="noopener noreferrer">CentOS boxes</a>, the password for the user is <em><strong>osboxes.org</strong></em>. Once you download the image, you create VirtualBox instance with an existing hard drive, instructions can be found in <a href="https://docs.oracle.com/cd/E36500_01/E36502/html/qs-create-vm.html" target="_blank" rel="noopener noreferrer">Creating a New Virtual Machine in VirtualBox</a> tutorial. Once you do that, you have to configure the Network to Bridged Adapter.
+<p><a href="/images/2019/07/VirtualBox-BridgedAdapter.png"><img src="/images/2019/07/VirtualBox-BridgedAdapter.png"></a></p>
+<p>Then you login to the virtual machine and install OpenSSH. Install in with <em><strong>yum -y install openssh-server openssh-clients</strong></em> command. Start the SSH service with <em><strong>chkconfig sshd on</strong></em> and then <em><strong>service sshd start</strong></em> commands. Edit configuration with <strong><em>sudo</em> vi /etc/ssh/sshd_config</strong> command and permit root login by adding <em><strong>PermitRootLogin yes</strong></em> in the config file. Note that permitting root login should never be done in a real environment, I do it here just to make our demo easier, otherwise, I would have to create a separate user with permissions, which is more effort. Finally, restart the SSH service with <em><strong>service sshd restart</strong></em> command. Full details can be found in <a href="https://www.ait.com/support/9714-install-configure-ssh-server-client-centos-linux-operating-systems" target="_blank" rel="noopener noreferrer">Install and configure ssh server and client under CentOS</a> post. Find the IP of the virtual machine by executing <em><strong>ifconfig</strong></em> command inside the box. In my case IP was <em><strong>192.168.1.59</strong></em>, I have highlighted it in the image below and will be using it in the commands further into the post.</p>
+<p><a href="/images/2019/07/VirtualBox-ifconfig.png"><img src="/images/2019/07/VirtualBox-ifconfig.png"></a></p>
+<p>After you have the SSH running you are now ready to run the Ansible Playbook. Before doing that you have to add the ECDSA key fingerprint to your known_hosts, otherwise Ansible connection will fail. To do so just SSH to the virtual box from your machine with <em><strong>ssh root@192.168.1.59</strong></em> command. You will be asked whether to continue connecting, answer with <em><strong>yes</strong></em> and then <em><strong>exit</strong></em> the SSH session.</p>
+<p>Create hosts file with the following content:</p>
+<pre class="language-bash"><code>[all]
+192.168.1.59
+</code></pre>
+<p>In Playbook we have defined hosts affected by this playbook with <em><strong>hosts: all</strong></em>, but this is only abstract definition, this is why you need the <em><strong>hosts</strong></em> file, which provides the actual machines matching the abstract definition. Once you have the <em><strong>hosts</strong></em> file playbook is run with:</p>
+<pre class="language-bash"><code>ansible-playbook -i hosts -u root --ask-pass -e ansible_network_os=vyos playbook.yml
+</code></pre>
+<p>The command runs the <em><strong>playbook.yml</strong></em> file with user <em><strong>-u root</strong></em> and asks for password with <em><strong>—ask-pass</strong></em>. Command has a configuration passed with <em><strong>-e ansible_network_os=vyos</strong></em>, this basically sets a network protocol for Ansible to communicate with the virtual box.</p>
+<p><a href="/images/2019/07/VirtualBox-provision.png"><img src="/images/2019/07/VirtualBox-provision.png"></a></p>
+<p>Once the playbook is executed you can log in to the virtual machine and check <a href="http://localhost:9000/person/all">http://localhost:9000/person/all</a> in the browser.</p>
+<p><a href="/images/2019/07/VirtualBox-call-service.png"><img src="/images/2019/07/VirtualBox-call-service.png"></a></p>
+<h2>Provision into Vagrant</h2>
+Vagrant is<span> a tool for building and managing virtual machine environments in a single workflow. Vagrant provides an <a href="https://www.vagrantup.com/docs/provisioning/ansible.html" target="_blank" rel="noopener noreferrer">Ansible provisioner</a>. There are two modes of this provisioner - <em><strong>ansible</strong></em> and <em><strong>ansible_local</strong></em>. The difference is that with <em><strong>ansible_local</strong></em> you do not need to have real Ansible installation on your host operating system. In the current example, <em><strong>ansible_local</strong></em> is used so anyone can go directly to Vagrant provisioning without the need to install Ansible. It takes some more time as Ansible should be installed on Vagrant virtual box, so if you have Ansible installed already you can switch to <em><strong>ansible</strong></em> provisioner. Vagranfile is:</span>
+<pre class="language-text"><code>Vagrant.configure('2') do |config|
+
+  config.vm.hostname = 'dropwizard'
+  config.vm.box = 'opscode-centos-7.2'
+  config.vm.box_url = 'http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-7.2_chef-provisionerless.box'
+
+  config.vm.network :forwarded_port, guest: 9000, host: 9200
+  config.vm.network :forwarded_port, guest: 9001, host: 9201
+
+  config.vm.provider :virtualbox do |vb|
+    vb.name = 'dropwizard-rest-stub-ansible'
+  end
+
+  config.vm.provision :ansible_local do |ansible|
+    ansible.become = true
+    ansible.playbook = 'playbook.yml'
+  end
+
+end
+</code></pre>
+<p>Guest’s port <em><strong>9000</strong></em> is exposed to <em><strong>9200</strong></em> to your host, so once you provision with Vagrant, you can check <em><strong><a href="http://localhost:9200/person/all">http://localhost:9200/person/all</a></strong></em>. One important piece here is <em><strong>ansible.become = true</strong></em> which basically is the analog for <em><strong>sudo</strong></em> in the normal commands.</p>
+<h2>Conclusion</h2>
+Ansible is an easy way to streamline your configuration changes like deployments, infrastructure configuration, etc. In the current post, I have given an example of very simple Ansible Playbook which deploys a single JAR Java application. In order to test Ansible Playbook, it can be provisioned into Vagrant.
+<p> </p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

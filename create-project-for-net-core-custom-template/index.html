@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/create-project-for-net-core-custom-template/"><!-- Primary Meta Tags --><title>Create project for .NET Core custom template</title><meta name="title" content="Create project for .NET Core custom template"><meta name="description" content="How to create a custom .NET Core template, install it and create projects from it."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/create-project-for-net-core-custom-template/"><meta property="og:title" content="Create project for .NET Core custom template"><meta property="og:description" content="How to create a custom .NET Core template, install it and create projects from it."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/create-project-for-net-core-custom-template/"><meta property="twitter:title" content="Create project for .NET Core custom template"><meta property="twitter:description" content="How to create a custom .NET Core template, install it and create projects from it."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2019-12-02T00:00:00.000Z"> Dec 2, 2019 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Create project for .NET Core custom template</h1> <hr data-astro-cid-bvzihdzo> </div>  <p><span>The code used for this blog post is located </span><span>in </span><a href="https://github.com/llatinov/dotnet.core.templates" target="_blank" rel="noopener noreferrer">dotnet.core.templates</a><span> GitHub repository.</span></p>
+<h2>.NET Core</h2>
+In short .NET Core is a cross-platform development platform supporting Windows, macOS, and Linux, and can be used in device, cloud, and embedded/IoT scenarios. It is maintained by Microsoft and the .NET community on GitHub. More can be read on<span> </span><a href="https://docs.microsoft.com/en-us/dotnet/core/" target="_blank" rel="noopener noreferrer">.NET Core Guide</a>.
+<h2>Why .NET Core templates</h2>
+When you create a new .NET Core project with <em><strong>dotnet new</strong></em> command it is possible to select from a list of predefined templates. This is a very handy feature, but out of the box templates are not really convenient, additional changes are required afterward to make the project fit for purpose. In a situation where many projects with similar structures are created, such as many micro-services, a custom template is very helpful. Users can define a custom template and easily create new projects out of it. In the current post, I will describe how to create an elaborate custom template.
+<h2>Create template</h2>
+What has to be done is just to create a project and customize it according to the needs. Once code is ready, a file named <em><strong>template.json</strong></em> located in <em><strong>.template.config</strong></em> folder should be added. The file should conform to <a href="http://json.schemastore.org/template" target="_blank" rel="noopener noreferrer">http://json.schemastore.org/template</a> JSON schema. See the file below, it is more or less self-explanatory. An important field is <em><strong>identity</strong></em>, which is basically the unique template name, it is not visible to users though. What is visible are <em><strong>name</strong></em> and <em><strong>shortName</strong></em>. ShortName is actually used when creating a project from this template: <em><strong>dotnet new shortName</strong></em>. Guids used in the template are defined in <em><strong>guids</strong></em> section in <em><strong>template.json</strong></em> file and they are replaced with a fresh set of guids on each project creation. More details on each and every possible option can be found in <a href="https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates" target="_blank" rel="noopener noreferrer">"Runnable-Project"-Templates</a> page.
+<pre class="language-json"><code>{
+	"$schema": "http://json.schemastore.org/template",
+	"author": "Lyudmil Latinov",
+	"classifications": [
+		"Common",
+		"Code"
+	],
+	"identity": "dotnet.core.micro.service",
+	"name": ".NET Core 3.0 micro-service",
+	"shortName": "microservice",
+	"tags": {
+		"language": "C#",
+		"type": "item"
+	},
+	"guids": [
+		"9A19103F-16F7-4668-BE54-9A1E7A4F7556"
+	]
+}
+</code></pre>
+<p>This is it, the template is now ready to be installed and used.</p>
+<h2>Install template and create project</h2>
+The template is installed with <em><strong>dotnet new -i &#x3C;PATH_TO_FOLDER></strong></em>. Once the template is installed <em><strong>dotnet new</strong></em> command lists it along with all predefined templates.
+<p><a href="/images/2019/12/dotnet-core-new-command.png"><img src="/images/2019/12/dotnet-core-new-command.png"></a></p>
+<p>Creating a project is similar as it is created from standard templates: <em><strong>dotnet new &#x3C;SHORT_NAME>, dotnet new microservice</strong></em> in this example.</p>
+<p>Uninstalling of a template is done with <em><strong>dotnet new -u &#x3C;PATH_TO_FOLDER></strong></em> command. There is another command which uninstalls all custom template from the system: <em><strong>dotnet new —debug:reinit</strong></em>.</p>
+<h2>Replace project name</h2>
+A custom template is a very handy thing and I would like to go one step further in making this template more flexible. When a new project is created it is good to have a proper name, which is reflected in the file names, folders' names and into the namespace. For this reason, a custom replace task can be added to the template definition. A placeholder <em><strong>PROJECT_NAME</strong></em> is added to namespaces, Dockerfile, folder names, solution file name, and .csproj files names. This is done by adding and external required parameter in <em><strong>symbols</strong></em> section of <em><strong>template.json</strong></em> file. On project creation, this parameter is provided with value, which gets replaced in files content and file names.
+<pre class="language-json"><code>{
+	"$schema": "http://json.schemastore.org/template",
+	...
+	"symbols": {
+		"ProjectName": {
+			"type": "parameter",
+			"replaces": "PROJECT_NAME",
+			"FileRename": "PROJECT_NAME",
+			"isRequired": true
+		}
+	}
+}
+</code></pre>
+<p>When <em><strong>dotnet new microservice -h</strong></em> is executed it outputs the possible parameters that are needed to create a project from this template:</p>
+<pre class="language-bash"><code>.NET Core 3.0 micro-service (C#)
+Author: Lyudmil Latinov
+Options:
+  -P|--ProjectName
+                    string - Required
+</code></pre>
+<p>Now, the project cannot be created without providing this parameter. Command <em><strong>dotnet new microservice</strong></em> returns error <em><strong>Mandatory parameter —ProjectName missing for template .NET Core 3.0 micro-service.</strong></em> The proper command now is <em><strong>dotnet new microservice —ProjectName SampleMicroservice</strong></em>.</p>
+<h2>Conditional files and features</h2>
+So far template is much nicer and looks more real. It can be also further enhanced. For e.g. there are two major types of projects needed. One option is to have two separate templates, which means maintaining two templates. Another option, in case of insignificant differences, is to have conditional functionality added based on a parameter during template creation. A boolean parameter is added into <em><strong>symbols</strong></em> section of <em><strong>template.json</strong></em> file. Another thing to be done is to exclude files depending on this parameter. This is done in the <em><strong>sources</strong></em> section of <em><strong>template.json</strong></em> file.
+<pre class="language-json"><code>{
+	"$schema": "http://json.schemastore.org/template",
+	...
+	"symbols": {
+		...
+		"AddHealthChecks": {
+			"type": "parameter",
+			"datatype": "bool",
+			"defaultValue": "false"
+		}
+	},
+	"sources": [
+		{
+			"modifiers": [
+				{
+					"condition": "(!AddHealthChecks)",
+					"exclude": [
+						"src/**/HealthChecks/**",
+						"test/**/Client/HealthCheckClient.cs",
+						"test/**/Tests/HealthCheckTest.cs"
+					]
+				}
+			]
+		}
+	]
+}
+</code></pre>
+<h2>Customize parameters switches</h2>
+If you add several of those parameters, then .NET gives them an automatic name, which may not be very meaningful. So the names of those can be customized. In the example here, which <span>is located </span><span>in </span><a href="https://github.com/llatinov/dotnet.core.templates" target="_blank" rel="noopener noreferrer">dotnet.core.templates</a><span> GitHub repository, the default parameter names are (<em><strong>dotnet new microservice -h</strong></em>):</span>
+<pre class="language-bash"><code>.NET Core 3.0 micro-service (C#)
+Author: Lyudmil Latinov
+Options:
+  -P|--ProjectName
+                         string - Required
+
+  -A|--AddHealthChecks
+                         bool - Optional
+                         Default: false / (*) true
+
+  -Ad|--AddSqsPublisher
+                         bool - Optional
+                         Default: false / (*) true
+
+  -p:A|--AddSqsConsumer
+                         bool - Optional
+                         Default: false / (*) true
+
+
+* Indicates the value used if the switch is provided without a value.
+</code></pre>
+<p>Short names like <em><strong>-p:A</strong></em>, <em><strong>-Ad</strong></em> does not seem too convenient. Those can be easily customized by adding <em><strong>dotnetcli.host.json</strong></em> file into <em><strong>.template.config</strong></em> folder:</p>
+<pre class="language-json"><code>{
+	"$schema": "http://json.schemastore.org/dotnetcli.host",
+	"symbolInfo": {
+		"ProjectName": {
+			"longName": "ProjectName",
+			"shortName": "pn"
+		},
+		"AddHealthChecks": {
+			"longName": "AddHealthChecks",
+			"shortName": "ah"
+		},
+		"AddSqsPublisher": {
+			"longName": "AddSqsPublisher",
+			"shortName": "ap"
+		},
+		"AddSqsConsumer": {
+			"longName": "AddSqsConsumer",
+			"shortName": "ac"
+		}
+	}
+}
+</code></pre>
+<p>Now options are much different:</p>
+<pre class="language-bash"><code>.NET Core 3.0 micro-service (C#)
+Author: Lyudmil Latinov
+Options:
+  -pn|--ProjectName
+                         string - Required
+
+  -ah|--AddHealthChecks
+                         bool - Optional
+                         Default: false / (*) true
+
+  -ap|--AddSqsPublisher
+                         bool - Optional
+                         Default: false / (*) true
+
+  -ac|--AddSqsConsumer
+                         bool - Optional
+                         Default: false / (*) true
+
+
+* Indicates the value used if the switch is provided without a value.
+</code></pre>
+<h2>Conclusion</h2>
+.NET Core provides an easy and extensible way to make project templates, which are stored and maintained under version control and can be used for creating new projects. Those templates can be project-specific, product-specific, company-specific.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

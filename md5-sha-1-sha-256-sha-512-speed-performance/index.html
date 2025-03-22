@@ -1,0 +1,476 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/md5-sha-1-sha-256-sha-512-speed-performance/"><!-- Primary Meta Tags --><title>MD5, SHA-1, SHA-256 and SHA-512 speed performance</title><meta name="title" content="MD5, SHA-1, SHA-256 and SHA-512 speed performance"><meta name="description" content="Speed performance comparison of MD5, SHA-1, SHA-256 and SHA-512 cryptographic hash functions in Java."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/md5-sha-1-sha-256-sha-512-speed-performance/"><meta property="og:title" content="MD5, SHA-1, SHA-256 and SHA-512 speed performance"><meta property="og:description" content="Speed performance comparison of MD5, SHA-1, SHA-256 and SHA-512 cryptographic hash functions in Java."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/md5-sha-1-sha-256-sha-512-speed-performance/"><meta property="twitter:title" content="MD5, SHA-1, SHA-256 and SHA-512 speed performance"><meta property="twitter:description" content="Speed performance comparison of MD5, SHA-1, SHA-256 and SHA-512 cryptographic hash functions in Java."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-07-11T00:00:00.000Z"> Jul 11, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>MD5, SHA-1, SHA-256 and SHA-512 speed performance</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>For <a href="/implement-secure-api-authentication-http-dropwizard/">Implement secure API authentication over HTTP with Dropwizard</a> post, a one-way hash function was needed. Several factors are important when choosing hash algorithm: security, speed, and purpose of use.</p>
+<h2>Security</h2>
+MD5 and SHA-1 are compromised. Those shall not be used unless their speed is several times slower than SHA-256 or SHA-512. Other that remain are SHA-256 and SHA-512. They are from SHA-2 family and are much more secure. SHA-256 is computed with 32-bit words, SHA-512 with 64-bit words.
+<h2>Hash implementations</h2>
+For generating cryptographic hashes in Java there is <a href="https://commons.apache.org/proper/commons-codec/">Apache Commons Codec</a> library which is very convenient.
+<h2>Speed performance</h2>
+In order to test the speed sample code is used:
+<pre class="language-java"><code>import java.util.UUID;
+
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang.time.StopWatch;
+
+public class Test {
+
+	private static final int TIMES = 1_000_000;
+	private static final String UUID_STRING = UUID.randomUUID().toString();
+
+	public static void main(String[] args) {
+		System.out.println(generateStringToHash());
+		System.out.println("MD5: " + md5());
+		System.out.println("SHA-1: " + sha1());
+		System.out.println("SHA-256: " + sha256());
+		System.out.println("SHA-512: " + sha512());
+	}
+
+	public static long md5() {
+		StopWatch watch = new StopWatch();
+		watch.start();
+		for (int i = 0; i &#x3C; TIMES; i++) {
+			DigestUtils.md5Hex(generateStringToHash());
+		}
+		watch.stop();
+		System.out.println(DigestUtils.md5Hex(generateStringToHash()));
+		return watch.getTime();
+	}
+
+	public static long sha1() {
+		...
+		System.out.println(DigestUtils.sha1Hex(generateStringToHash()));
+		return watch.getTime();
+	}
+
+	public static long sha256() {
+		...
+		System.out.println(DigestUtils.sha256Hex(generateStringToHash()));
+		return watch.getTime();
+	}
+
+	public static long sha512() {
+		...
+		System.out.println(DigestUtils.sha512Hex(generateStringToHash()));
+		return watch.getTime();
+	}
+
+	public static String generateStringToHash() {
+		return UUID.randomUUID().toString() + System.currentTimeMillis();
+	}
+}
+</code></pre>
+<p>Several measurements were done. Two groups - one with smaller length string to hash and one with longer. Each group had following variations of <em><strong>generateStringToHash()</strong></em> method:</p>
+<ul>
+ 	<li>cached UUID - no extra time should be consumed</li>
+ 	<li>cached UUID + current system time - in this case, time is consumed to get system time</li>
+ 	<li>new UUID + current system time - in this case, time is consumed for generating the UUID and to get system time</li>
+</ul>
+<h2>Raw results</h2>
+Five measurements were made for each case an average value calculated. Time is in milliseconds per 1 000 000 calculations. The system is 64 bits Windows 10 with 1 core Intel i7 2.60GHz and 16GB RAM.
+<ul>
+ 	<li><em><strong>generateStringToHash() with: return UUID_STRING;</strong></em></li>
+</ul>
+Data to encode is ~36 characters in length (f5cdcda7-d873-455f-9902-dc9c7894bee0). UUID is cached and time stamp is not taken. No additional time is wasted.
+<table>
+<tbody>
+<tr>
+<th>Hash</th>
+<th>#1 (ms)</th>
+<th>#2 (ms)</th>
+<th>#3 (ms)</th>
+<th>#4 (ms)</th>
+<th>#5 (ms)</th>
+<th>Average per 1M (ms)</th>
+</tr>
+<tr>
+<td>MD5</td>
+<td>649</td>
+<td>623</td>
+<td>621</td>
+<td>624</td>
+<td>620</td>
+<td>627.4</td>
+</tr>
+<tr>
+<td>SHA-1</td>
+<td>608</td>
+<td>588</td>
+<td>630</td>
+<td>600</td>
+<td>594</td>
+<td>604</td>
+</tr>
+<tr>
+<td>SHA-256</td>
+<td>746</td>
+<td>724</td>
+<td>741</td>
+<td>720</td>
+<td>758</td>
+<td>737.8</td>
+</tr>
+<tr>
+<td>SHA-512</td>
+<td>1073</td>
+<td>1055</td>
+<td>1050</td>
+<td>1052</td>
+<td>1052</td>
+<td>1056.4</td>
+</tr>
+</tbody>
+</table>
+<ul>
+ 	<li><em><strong>generateStringToHash() with: return UUID_STRING + System.currentTimeMillis();</strong></em></li>
+</ul>
+Data to encode is ~49 characters in length (aa096640-21d6-4f44-9c49-4115d3fa69381468217419114). UUID is cached.
+<table>
+<tbody>
+<tr>
+<th>Hash</th>
+<th>#1 (ms)</th>
+<th>#2 (ms)</th>
+<th>#3 (ms)</th>
+<th>#4 (ms)</th>
+<th>#5 (ms)</th>
+<th>Average per 1M (ms)</th>
+</tr>
+<tr>
+<td>MD5</td>
+<td>751</td>
+<td>789</td>
+<td>745</td>
+<td>806</td>
+<td>737</td>
+<td>765.6</td>
+</tr>
+<tr>
+<td>SHA-1</td>
+<td>768</td>
+<td>765</td>
+<td>694</td>
+<td>763</td>
+<td>751</td>
+<td>748.2</td>
+</tr>
+<tr>
+<td>SHA-256</td>
+<td>842</td>
+<td>876</td>
+<td>848</td>
+<td>839</td>
+<td>850</td>
+<td>851</td>
+</tr>
+<tr>
+<td>SHA-512</td>
+<td>1161</td>
+<td>1152</td>
+<td>1164</td>
+<td>1154</td>
+<td>1163</td>
+<td>1158.8</td>
+</tr>
+</tbody>
+</table>
+<ul>
+ 	<li><em><strong>generateStringToHash() with: return UUID.randomUUID().toString() + System.currentTimeMillis();</strong></em></li>
+</ul>
+Data to encode is ~49 characters in length (1af4a3e1-1d92-40e7-8a74-7bb7394211e01468216765464). New UUID is generated on each calculation so time for its generation is included in total time.
+<table>
+<tbody>
+<tr>
+<th>Hash</th>
+<th>#1 (ms)</th>
+<th>#2 (ms)</th>
+<th>#3 (ms)</th>
+<th>#4 (ms)</th>
+<th>#5 (ms)</th>
+<th>Average per 1M (ms)</th>
+</tr>
+<tr>
+<td>MD5</td>
+<td>1505</td>
+<td> 1471</td>
+<td>1518</td>
+<td>1463</td>
+<td>1487</td>
+<td>1488.8</td>
+</tr>
+<tr>
+<td>SHA-1</td>
+<td>1333</td>
+<td>1309</td>
+<td>1323</td>
+<td>1326</td>
+<td>1334</td>
+<td>1325</td>
+</tr>
+<tr>
+<td>SHA-256</td>
+<td>1505</td>
+<td>1496</td>
+<td>1507</td>
+<td>1498</td>
+<td>1516</td>
+<td>1504.4</td>
+</tr>
+<tr>
+<td>SHA-512</td>
+<td>1834</td>
+<td>1827</td>
+<td>1833</td>
+<td>1836</td>
+<td>1857</td>
+<td>1837.4</td>
+</tr>
+</tbody>
+</table>
+<ul>
+ 	<li><em><strong>generateStringToHash() with: return UUID_STRING + UUID_STRING;</strong></em></li>
+</ul>
+Data to encode is ~72 characters in length (57149cb6-991c-4ffd-9c98-d823ee8a61f757149cb6-991c-4ffd-9c98-d823ee8a61f7). UUID is cached and time stamp is not taken. No additional time is wasted.
+<table>
+<tbody>
+<tr>
+<th>Hash</th>
+<th>#1 (ms)</th>
+<th>#2 (ms)</th>
+<th>#3 (ms)</th>
+<th>#4 (ms)</th>
+<th>#5 (ms)</th>
+<th>Average per 1M (ms)</th>
+</tr>
+<tr>
+<td>MD5</td>
+<td>856</td>
+<td>824</td>
+<td>876</td>
+<td>811</td>
+<td>828</td>
+<td>839</td>
+</tr>
+<tr>
+<td>SHA-1</td>
+<td>921</td>
+<td>896</td>
+<td>970</td>
+<td>904</td>
+<td>893</td>
+<td>916.8</td>
+</tr>
+<tr>
+<td>SHA-256</td>
+<td>1145</td>
+<td>1137</td>
+<td>1241</td>
+<td>1141</td>
+<td>1177</td>
+<td>1168.2</td>
+</tr>
+<tr>
+<td>SHA-512</td>
+<td>1133</td>
+<td>1131</td>
+<td>1116</td>
+<td>1102</td>
+<td>1110</td>
+<td>1118.4</td>
+</tr>
+</tbody>
+</table>
+<ul>
+ 	<li><em><strong>generateStringToHash() with: return UUID_STRING + UUID_STRING + System.currentTimeMillis();</strong></em></li>
+</ul>
+Data to encode is ~85 characters in length (759529c5-1f57-4167-b289-899c163c775e759529c5-1f57-4167-b289-899c163c775e1468218673060). UUID is cached.
+<table>
+<tbody>
+<tr>
+<th>Hash</th>
+<th>#1 (ms)</th>
+<th>#2 (ms)</th>
+<th>#3 (ms)</th>
+<th>#4 (ms)</th>
+<th>#5 (ms)</th>
+<th>Average per 1M (ms)</th>
+</tr>
+<tr>
+<td>MD5</td>
+<td>1029</td>
+<td>1035</td>
+<td>1034</td>
+<td>1012</td>
+<td>1037</td>
+<td>1029.4</td>
+</tr>
+<tr>
+<td>SHA-1</td>
+<td>1008</td>
+<td>1016</td>
+<td>1027</td>
+<td>1007</td>
+<td>990</td>
+<td>1009.6</td>
+</tr>
+<tr>
+<td>SHA-256</td>
+<td>1254</td>
+<td>1249</td>
+<td>1290</td>
+<td>1259</td>
+<td>1248</td>
+<td>1260</td>
+</tr>
+<tr>
+<td>SHA-512</td>
+<td>1228</td>
+<td>1221</td>
+<td>1232</td>
+<td>1230</td>
+<td>1226</td>
+<td>1227.4</td>
+</tr>
+</tbody>
+</table>
+<ul>
+ 	<li><em><strong>generateStringToHash() with: final String randomUuid = UUID.randomUUID().toString();
+return randomUuid + randomUuid + System.currentTimeMillis();</strong></em></li>
+</ul>
+Data to encode is ~85 characters in length (2734b31f-16db-4eba-afd5-121d0670ffa72734b31f-16db-4eba-afd5-121d0670ffa71468217683040). New UUID is generated on each calculation so time for its generation is included in total time.
+<table>
+<tbody>
+<tr>
+<th>Hash</th>
+<th>#1 (ms)</th>
+<th>#2 (ms)</th>
+<th>#3 (ms)</th>
+<th>#4 (ms)</th>
+<th>#5 (ms)</th>
+<th>Average per 1M (ms)</th>
+</tr>
+<tr>
+<td>MD5</td>
+<td>1753</td>
+<td>1757</td>
+<td>1739</td>
+<td>1751</td>
+<td>1691</td>
+<td>1738.2</td>
+</tr>
+<tr>
+<td>SHA-1</td>
+<td>1634</td>
+<td>1634</td>
+<td>1627</td>
+<td>1634</td>
+<td>1633</td>
+<td>1632.4</td>
+</tr>
+<tr>
+<td>SHA-256</td>
+<td>1962</td>
+<td>1956</td>
+<td>1988</td>
+<td>1988</td>
+<td>1924</td>
+<td>1963.6</td>
+</tr>
+<tr>
+<td>SHA-512</td>
+<td>1909</td>
+<td>1946</td>
+<td>1936</td>
+<td>1929</td>
+<td>1895</td>
+<td>1923</td>
+</tr>
+</tbody>
+</table>
+<h2>Aggregated results</h2>
+Results from all iterations are aggregated and compared in the table below. There are 6 main cases. They are listed below and referenced in the table:
+<ul>
+ 	<li><strong>Case 1</strong> - 36 characters length string, UUID is cached</li>
+ 	<li><strong>Case 2</strong> - 49 characters length string, UUID is cached and system time stamp is calculated each iteration</li>
+ 	<li><strong>Case 3</strong> - 49 characters length string, new UUID is generated on each iteration and system time stamp is calculated each iteration</li>
+ 	<li><strong>Case 4</strong> - 72 characters length string, UUID is cached</li>
+ 	<li><strong>Case 5</strong> - 85 characters length string, UUID is cached and system time stamp is calculated each iteration</li>
+ 	<li><strong>Case 6</strong> - 85 characters length string, new UUID is generated on each iteration and system time stamp is calculated each iteration</li>
+</ul>
+All times below are per 1 000 000 calculations:
+<table>
+<tbody>
+<tr>
+<th>Hash</th>
+<th>Case 1 (ms)</th>
+<th>Case 2 (ms)</th>
+<th>Case 3 (ms)</th>
+<th>Case 4 (ms)</th>
+<th>Case 5 (ms)</th>
+<th>Case 6 (ms)</th>
+</tr>
+<tr>
+<td>MD5</td>
+<td>627.4</td>
+<td>765.6</td>
+<td>1488.8</td>
+<td>839</td>
+<td>1029.4</td>
+<td>1738.2</td>
+</tr>
+<tr>
+<td>SHA-1</td>
+<td>604</td>
+<td>748.2</td>
+<td>1325</td>
+<td>916.8</td>
+<td>1009.6</td>
+<td>1632.4</td>
+</tr>
+<tr>
+<td>SHA-256</td>
+<td>737.8</td>
+<td>851</td>
+<td>1504.4</td>
+<td>1168.2</td>
+<td>1260</td>
+<td>1963.6</td>
+</tr>
+<tr>
+<td>SHA-512</td>
+<td>1056.4</td>
+<td>1158.8</td>
+<td>1837.4</td>
+<td>1118.4</td>
+<td>1227.4</td>
+<td>1923</td>
+</tr>
+</tbody>
+</table>
+<h2>Compare results</h2>
+Some conclusions of the results based on two cases with short string (36 and 49 chars) and longer string (72 and 85 chars).
+<ul>
+ 	<li>SHA-256 is faster with 31% than SHA-512 only when hashing small strings. When the string is longer SHA-512 is faster with 2.9%.</li>
+ 	<li>Time to get system time stamp is ~121.6 ms per 1M iterations.</li>
+ 	<li>Time to generate UUID is ~670.4 ms per 1M iterations.</li>
+ 	<li>SHA-1 is fastest hashing function with ~587.9 ms per 1M operations for short strings and 881.7 ms per 1M for longer strings.</li>
+ 	<li>MD5 is 7.6% slower than SHA-1 for short strings and 1.3% for longer strings.</li>
+ 	<li>SHA-256 is 15.5% slower than SHA-1 for short strings and 23.4% for longer strings.</li>
+ 	<li>SHA-512 is 51.7% slower that SHA-1 for short strings and 20% for longer.</li>
+</ul>
+<h2>Hash sizes</h2>
+Important data to consider is hash size that is produced by each function:
+<ul>
+ 	<li><em><strong>MD5</strong></em> produces <em><strong>32</strong></em> chars hash - 5f3a47d4c0f703c5d83265c3669f95e6</li>
+ 	<li><em><strong>SHA-1</strong></em> produces <em><strong>40</strong></em> chars hash - 2c5a70165585bd4409aedeea289628fa6074e17e</li>
+ 	<li><em><strong>SHA-256</strong></em> produces <em><strong>64</strong></em> chars hash - b6ba4d0a53ddc447b25cb32b154c47f33770d479869be794ccc94dffa1698cd0</li>
+ 	<li><em><strong>SHA-512</strong></em> produces <em><strong>128</strong></em> chars hash - 54cdb8ee95fa7264b7eca84766ecccde7fd9e3e00c8b8bf518e9fcff52ad061ad28cae49ec3a09144ee8f342666462743718b5a73215bee373ed6f3120d30351</li>
+</ul>
+<h2>Purpose of use</h2>
+In specific case this research was made for hashed string will be passed as API request. It is constructed from API Key + Secret Key + current time in seconds. So if API Key is something like 15-20 chars, Secret Key is 10-15 chars and time is 10 chars, total length of string to hash is 35-45 chars. Since it is being passed as request param it is better to be as short as possible.
+<h2>Select hash function</h2>
+Based on all data so far SHA-256 is selected. It is from secure SHA-2 family. It is much faster than SHA-512 with shorter stings and it produces 64 chars hash.
+<h2>Conclusion</h2>
+The current post gives a comparison of MD5, SHA-1, SHA-256 and SHA-512 cryptographic hash functions. Important is that comparison is very dependant on specific implementation (Apache Commons Codec), the specific purpose of use (generate a secure token to be sent with API call). It is good MD5 and SHA-1 to be avoided as they are compromised and not secure. If their speed for given context is several times faster than secure SHA-2 ones and security is not that much important they can be chosen though. When choosing cryptographic hash function everything is up to a context of usage and benchmark tests for this context is needed.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

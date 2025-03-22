@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>PersonService.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Code coverage with JaCoCo agent</a> &gt; <a href="../../index.html" class="el_group">sample-dropwizard-rest-stub</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.automationrhapsody.reststub.resources</a> &gt; <span class="el_source">PersonService.java</span></div><h1>PersonService.java</h1><pre class="source lang-java linenums">package com.automationrhapsody.reststub.resources;
+
+import com.automationrhapsody.reststub.data.Person;
+import com.automationrhapsody.reststub.persistence.PersonDB;
+import com.codahale.metrics.annotation.Timed;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.util.List;
+
+@Path(&quot;/person&quot;)
+public class PersonService {
+
+<span class="fc" id="L14">    public PersonService() {</span>
+<span class="fc" id="L15">    }</span>
+
+    @GET
+    @Timed
+    @Path(&quot;/get/{id}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Person getPerson(@PathParam(&quot;id&quot;) int id) {
+<span class="fc" id="L22">        return PersonDB.getById(id);</span>
+    }
+
+    @GET
+    @Timed
+    @Path(&quot;/remove&quot;)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String removePerson() {
+<span class="fc" id="L30">        PersonDB.remove();</span>
+<span class="fc" id="L31">        return &quot;Last person remove. Total count: &quot; + PersonDB.getCount();</span>
+    }
+
+    @GET
+    @Timed
+    @Path(&quot;/all&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;Person&gt; getPersons() {
+<span class="fc" id="L39">        return PersonDB.getAll();</span>
+    }
+
+    @POST
+    @Timed
+    @Path(&quot;/save&quot;)
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes({MediaType.APPLICATION_JSON})
+    public String addPerson(Person person) {
+<span class="nc" id="L48">        return PersonDB.save(person);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>Code coverage with JaCoCo agent</div></body></html>

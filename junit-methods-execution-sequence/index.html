@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/junit-methods-execution-sequence/"><!-- Primary Meta Tags --><title>JUnit methods execution sequence</title><meta name="title" content="JUnit methods execution sequence"><meta name="description" content="Details with code samples on JUnit methods execution sequence."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/junit-methods-execution-sequence/"><meta property="og:title" content="JUnit methods execution sequence"><meta property="og:description" content="Details with code samples on JUnit methods execution sequence."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/junit-methods-execution-sequence/"><meta property="twitter:title" content="JUnit methods execution sequence"><meta property="twitter:description" content="Details with code samples on JUnit methods execution sequence."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-06-06T00:00:00.000Z"> Jun 6, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>JUnit methods execution sequence</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>In order to be effective in your unit tests, you need to know in details how JUnit works. In this post, I’ll show what is the execution sequence in one JUnit test. The code shown in the current post is available on GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener">java-samples/junit</a> repository.</p>
+<h2>JUnit execution sequence</h2>
+Methods that are used in a JUnit test:
+<ul>
+ 	<li>Methods annotated with @Before and @After - those are <em><strong>public void</strong></em> methods that do some specific setup/teardown before and after a test method. Generally, it is good to have just one @Before and @After method, but JUnit allows as much as you have. Execution sequence with the same annotation is in order of appearance in the file.</li>
+ 	<li>Methods annotated with @BeforeClass and @AfterClass - those <em><strong>public static void</strong></em> methods which do some setup/teardown just once before and after all tests have started/passed. An also good idea to have just one of each, but in case of more with the same annotation, they are executed in order of appearance.</li>
+ 	<li>Methods annotated with @Test - those are <em><strong>public void</strong></em> methods with actual tests logic and asserts. Generally, there should be many test methods in a class. Default JUnit execution order is by name ascending. Still, this is not always guaranteed. Although bad practice to have a sequence of unit tests this can be done by annotating your test class with <em><strong>@FixMethodOrder(MethodSorters.NAME_ASCENDING).</strong></em></li>
+ 	<li>Test class constructor - each and every test method is run in its own object instance, so constructor is run on instantiation. It is not very good practice to do something in test class constructor. Setup should be done in a @Before method.</li>
+</ul>
+Order of differently annotated methods does not depend on where they are put in the file but depends on types of annotations. Order of methods with one and the same annotations is described above. Here is the output of ExecutionSequenceTest:
+<pre class="language-text"><code>@BeforeClass
+
+	TestClass constructor
+	@Before
+	test1 body
+	@After
+
+	TestClass constructor
+	@Before
+	test2 body
+	@After
+
+	TestClass constructor
+	@Before
+	test3 body
+	@After
+
+@AfterClass
+</code></pre>
+<h2>JUnit execution sequence with rules</h2>
+In <a href="/use-junit-rules-debug-failed-api-tests/">Use JUnit rules to debug failed API tests</a> post, I have described rules and how they work. TestWatcher gives access to tests results when the test starts and finishes. The example here is with @Rule and @ClassRule annotated objects from a custom PrintSequenceRule class extending TestWatcher class. Along with methods described in the previous section, there are several that come into play when rules are involved:
+<ul>
+ 	<li>starting() and finished() - methods come from TestWatcher class and are run on start/finish of class/method.</li>
+ 	<li>succeeded(), failed() or skipped() - one of this is executed based on class method result.</li>
+ 	<li>Rule constructor - it is not recommended to use something in rule constructor.</li>
+</ul>
+Output of ExecutionSequenceRulesTest class is:
+<pre class="language-text"><code>RuleClass constructor
+starting() of TestClass
+@BeforeClass
+
+	RuleClass constructor
+	TestClass constructor
+	starting() of TestMethod test1()
+	@Before
+	test1 body
+	@After
+	succeeded() of TestMethod test1()
+	finished() of TestMethod test1()
+
+	RuleClass constructor
+	TestClass constructor
+	starting() of TestMethod test2()
+	@Before
+	test2 body
+	@After
+	succeeded() of TestMethod test2()
+	finished() of TestMethod test2()
+
+	RuleClass constructor
+	TestClass constructor
+	starting() of TestMethod test3()
+	@Before
+	test3 body
+	@After
+	succeeded() of TestMethod test3()
+	finished() of TestMethod test3()
+
+@AfterClass
+succeeded() of TestClass
+finished() of TestClass
+</code></pre>
+<h2>Conclusion</h2>
+In order to design your tests correctly, it is good to know what is JUnit methods execution order. @Before/@After methods are executed before/after each test method. @BeforeClass/@AfterClass are executed just once per test class on its start and end. Rules provide a capability of extending the standard functionality. It is possible to use @Rule for each test method or @ClassRule for the whole test class.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

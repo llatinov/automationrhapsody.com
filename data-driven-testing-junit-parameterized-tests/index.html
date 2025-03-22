@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/data-driven-testing-junit-parameterized-tests/"><!-- Primary Meta Tags --><title>Data driven testing with JUnit parameterized tests</title><meta name="title" content="Data driven testing with JUnit parameterized tests"><meta name="description" content="How to do data-driven testing with JUnit parameterized tests."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/data-driven-testing-junit-parameterized-tests/"><meta property="og:title" content="Data driven testing with JUnit parameterized tests"><meta property="og:description" content="How to do data-driven testing with JUnit parameterized tests."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/data-driven-testing-junit-parameterized-tests/"><meta property="twitter:title" content="Data driven testing with JUnit parameterized tests"><meta property="twitter:description" content="How to do data-driven testing with JUnit parameterized tests."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-10-28T00:00:00.000Z"> Oct 28, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Data driven testing with JUnit parameterized tests</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>In <a href="/mock-junit-tests-mockito-example/">Mock JUnit tests with Mockito example</a> post, I have introduced Mockito and showed how to use for proper unit testing. In current post I will show how to improve test coverage by adding more scenarios. One solution is to copy and then paste single unit test and change input and expected output values, but this is a failure-prone approach. A smarter approach is needed - data-driven testing.</p>
+<h2>Data Driven Testing</h2>
+The term from Wikipedia is: Data-driven testing (DDT) is a term used in the testing of computer software to describe testing done using a table of conditions directly as test inputs and verifiable outputs as well as the process where test environment settings and control are not hard-coded.
+<p>This exactly what is needed to improve test coverage - test with different scenarios and different input data without hard-coding the scenario itself, but just feeding different input and expected output data to it.</p>
+<h2>Parameterized JUnit tests</h2>
+JUnit supports running test or several tests with given data table. Several things have to be done in order to do this:
+<ol>
+ 	<li>Annotate the test class</li>
+ 	<li>Define test data</li>
+ 	<li>Define variables to store the test data and read it</li>
+ 	<li>Use tests data in tests</li>
+</ol>
+<em><strong>Nota bene:</strong></em> Every JUnit test (class annotated with <em><strong>@Test</strong></em>) is be executed with each row of the test data set. If you have 3 tests and 12 data rows this will result in 36 tests.
+<h2>Annotate the class</h2>
+The class needs to be run with a specialized runner in order to be treated as data-driven one. Runner is: <em><strong>org.junit.runners.Parameterized</strong></em>. The class looks like:
+<pre class="language-java"><code>import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+@RunWith(Parameterized.class)
+public class LocatorParameterizedTest {
+}
+</code></pre>
+<h2>Define test data</h2>
+Test data is seeded from static method: <em><strong>public static Iterable&#x3C;Object[]> data()</strong></em>. This method returns a collection of Object arrays where each array is one row with input and expected output test data. This method is annotated with <em><strong>@Parameterized.Parameters</strong></em>. The annotation may accept <em><strong>name</strong></em> argument which can display data from each row by its index: <em><strong>name = "{index}: Test with X={0}, Y={1}, result is: {2}"</strong></em>, where <em><strong>{index}</strong></em> is current test sequence, <em><strong>{0}</strong></em> is the first element from Object array. Here is how test data is defined:
+<pre class="language-java"><code>@Parameterized.Parameters(name = "{index}: Test with X={0}, Y={1}, result: {2}")
+public static Iterable&#x3C;Object[]> data() {
+	return Arrays.asList(new Object[][] {
+		{-1, -1, new Point(1, 1)},
+		{-1, 0, new Point(1, 0)},
+		{-1, 1, new Point(1, 1)},
+	});
+}
+</code></pre>
+<h2>Define variables to store the test data and read it</h2>
+Private fields are needed to store every index from Object array representing test data row. In the constructor of the class, those variables are stored. Not that constructor must have the same number of parameters. If there is difference running the test fails with: <em><strong>java.lang.IllegalArgumentException: wrong number of arguments</strong></em> exception. Code is:
+<pre class="language-java"><code>private final int x;
+private final int y;
+private final Point expected;
+
+public LocatorParameterizedTest(int x, int y, Point expected, int a) {
+	this.x = x;
+	this.y = y;
+	this.expected = expected;
+}
+</code></pre>
+<h2>Use tests data in tests</h2>
+Once read test data is accessed in tests by using the private fields that were read through the constructor:
+<pre class="language-java"><code>@Test
+public void testLocateLocalResult() {
+	assertTrue(arePointsEqual(expected, locatorUnderTest.locate(x, y)));
+}
+
+private boolean arePointsEqual(Point p1, Point p2) {
+	return p1.getX() == p2.getX()
+		&#x26;&#x26; p1.getY() == p2.getY();
+}
+</code></pre>
+<h2>Putting it all together</h2>
+Combining all steps into one class leads to unit test shown below. If you switch the tabs you can see original test class with just two tests as described Mock JUnit tests with Mockito example post:
+[tabby title="Data-driven test with 12 cases"]
+<pre class="language-java"><code>import java.util.Arrays;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+@RunWith(Parameterized.class)
+public class LocatorParameterizedTest {
+
+	private static final Point MOCKED_POINT = new Point(11, 11);
+
+	private LocatorService locatorServiceMock = mock(LocatorService.class);
+
+	private Locator locatorUnderTest;
+
+	@Parameterized.Parameters(name 
+		= "{index}: Test with X={0}, Y={1}, result: {2}")
+	public static Iterable&#x3C;Object[]> data() {
+		return Arrays.asList(new Object[][] {
+			{-1, -1, new Point(1, 1)},
+			{-1, 0, new Point(1, 0)},
+			{-1, 1, new Point(1, 1)},
+
+			{0, -1, new Point(0, 1)},
+			{0, 0, MOCKED_POINT},
+			{0, 1, MOCKED_POINT},
+
+			{1, -1, new Point(1, 1)},
+			{1, 0, MOCKED_POINT},
+			{1, 1, MOCKED_POINT}
+		});
+	}
+
+	private final int x;
+	private final int y;
+	private final Point expected;
+
+	public LocatorParameterizedTest(int x, int y, Point expected) {
+		this.x = x;
+		this.y = y;
+		this.expected = expected;
+	}
+
+	@Before
+	public void setUp() {
+		when(locatorServiceMock.geoLocate(any(Point.class)))
+			.thenReturn(MOCKED_POINT);
+
+		locatorUnderTest = new Locator(locatorServiceMock);
+	}
+
+	@Test
+	public void testLocateResults() {
+		assertTrue(arePointsEqual(expected, 
+			locatorUnderTest.locate(x, y)));
+	}
+
+	private boolean arePointsEqual(Point p1, Point p2) {
+		return p1.getX() == p2.getX()
+			&#x26;&#x26; p1.getY() == p2.getY();
+	}
+}
+</code></pre>
+<p>[tabby title=“Simple test with 2 cases”]</p>
+<pre class="language-java"><code>import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
+
+@RunWith(MockitoJUnitRunner.class)
+public class LocatorTest {
+
+	private static final Point TEST_POINT = new Point(11, 11);
+
+	@Mock
+	private LocatorService locatorServiceMock;
+
+	private Locator locatorUnderTest;
+
+	@Before
+	public void setUp() {
+		when(locatorServiceMock.geoLocate(any(Point.class)))
+			.thenReturn(TEST_POINT);
+
+		locatorUnderTest = new Locator(locatorServiceMock);
+	}
+
+	@Test
+	public void testLocateWithServiceResult() {
+		assertEquals(TEST_POINT, locatorUnderTest.locate(1, 1));
+	}
+
+	@Test
+	public void testLocateLocalResult() {
+		Point expected = new Point(1, 1);
+		assertTrue(arePointsEqual(expected, 
+			locatorUnderTest.locate(-1, -1)));
+	}
+
+	private boolean arePointsEqual(Point p1, Point p2) {
+		return p1.getX() == p2.getX()
+			&#x26;&#x26; p1.getY() == p2.getY();
+	}
+}
+</code></pre>
+<p>[tabbyending]</p>
+<p>The full example can be found in <a href="https://github.com/llatinov/java-samples/blob/master/junit/src/test/java/com/automationrhapsody/junit/LocatorParameterizedTest.java" target="_blank" rel="noopener noreferrer">LocatorParameterizedTest.java</a> class.</p>
+<h2><a href="/images/2016/10/Data-Driven-JUnit.png"><img src="/images/2016/10/Data-Driven-JUnit.png" alt="data-driven-junit"></a></h2>
+<h2>Better alternatives</h2>
+Standard JUnit data provider is not very flexible. Define the data set is used for the whole test class, thus every test method in this class will be run with each of dataset rows. If you have 4 rows and 3 test methods then this will result in 12 tests being run. TestNG provides much better data provider where a dataset is defined and can be applied to individual test method only. More details can be found in <a href="https://testng.org/doc/documentation-main.html#parameters-dataproviders" target="_blank" rel="noopener noreferrer">TestNG data provider</a> page. This data provider is available for JUnit by external Java library called <a href="https://github.com/TNG/junit-dataprovider/wiki" target="_blank" rel="noopener noreferrer">junit-dataprovider</a>. More details how to use this data provider can be found in <a href="/data-driven-testing-junit-gradle/">Data driven testing with JUnit and Gradle</a> post.
+<h2>Conclusion</h2>
+Data-driven testing is very powerful instrument. With current post, I showed how easy it is to do it with JUnit as well as what alternatives are available.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/convert-nunit-3-nunit-2-results-xml-file/"><!-- Primary Meta Tags --><title>Convert NUnit 3 to NUnit 2 results XML file</title><meta name="title" content="Convert NUnit 3 to NUnit 2 results XML file"><meta name="description" content="Examples how to convert NUnit 3 result XML file into NUnit 2 result XML file."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/convert-nunit-3-nunit-2-results-xml-file/"><meta property="og:title" content="Convert NUnit 3 to NUnit 2 results XML file"><meta property="og:description" content="Examples how to convert NUnit 3 result XML file into NUnit 2 result XML file."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/convert-nunit-3-nunit-2-results-xml-file/"><meta property="twitter:title" content="Convert NUnit 3 to NUnit 2 results XML file"><meta property="twitter:description" content="Examples how to convert NUnit 3 result XML file into NUnit 2 result XML file."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-06-30T00:00:00.000Z"> Jun 30, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Convert NUnit 3 to NUnit 2 results XML file</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Although NUnit 3 was officially released in November 2015 still there are CI tools that do not provide support for parsing NUnit 3 result XML files. In this post, I will show how to convert between formats so CI tools can read NUnit 2 format.</p>
+<h2>NUnit 3 console runner</h2>
+The easiest way is if you are using NUnit 3 console runner. It can be provided with an option: <em><strong>--result=TestResult.xml;format=nunit2</strong></em>.
+<p><em><strong>Nota bene:</strong></em> Mandatory for this to work is to have <a href="https://github.com/nunit/nunit-v2-result-writer" target="_blank" rel="noopener">nunit-v2-result-writer</a> in NuGet packages directory otherwise an error will be shown: <em><strong>Unknown result format: nunit2</strong></em>.</p>
+<h2>Convert NUnit 3 to NUnit 2</h2>
+If tests are being run in some other way other than NUnit 3 console runner then solution below is needed. There is no program or tool that can do this conversion, so custom one is needed. This is a <em><strong>Powershell</strong></em> script that uses <em><strong>nunit-v2-result-writer</strong></em> assemblies and with their functionality converts the XML files:
+<pre class="language-powershell"><code>$assemblyNunitEngine = 'nunit.engine.api.dll';
+$assemblyNunitWriter = 'nunit-v2-result-writer.dll';
+$inputV3Xml = 'TestResult.xml';
+$outputV2Xml = 'TestResultV2.xml';
+
+Add-Type -Path $assemblyNunitEngine;
+Add-Type -Path $assemblyNunitWriter;
+$xmldoc = New-Object -TypeName System.Xml.XmlDataDocument;
+$fs = New-Object -TypeName System.IO.FileStream -ArgumentList $inputV3Xml,'Open','Read';
+$xmldoc.Load($fs);
+$xmlnode = $xmldoc.GetElementsByTagName('test-run').Item(0);
+$writer = New-Object -TypeName NUnit.Engine.Addins.NUnit2XmlResultWriter;
+$writer.WriteResultFile($xmlnode, $outputV2Xml);
+</code></pre>
+<p>Important here is to give a proper path to <em><strong>nunit.engine.api.dll</strong></em>, <em><strong>nunit-v2-result-writer.dll</strong></em> and NUnit 3 <em><strong>TestResult.xml</strong></em> files. Powershell script above is equivalent to following C# code:</p>
+<pre class="language-csharp"><code>using System.IO;
+using System.Xml;
+using NUnit.Engine.Addins;
+
+public class NUnit3ToNUnit2Converter
+{
+	public static void Main(string[] args)
+	{
+		var xmldoc = new XmlDataDocument();
+		var fileStream 
+			= new FileStream("TestResult.xml", FileMode.Open, FileAccess.Read);
+		xmldoc.Load(fileStream);
+		var xmlnode = xmldoc.GetElementsByTagName("test-run").Item(0);
+
+		var writer = new NUnit2XmlResultWriter();
+		writer.WriteResultFile(xmlnode, "TestResultV2.xml");
+	}
+}
+</code></pre>
+<h2>File samples</h2>
+Here <a href="/examples/NUnitFileSamples.zip" target="_blank" rel="noopener">NUnitFileSamples.zip</a> is a collection of several NUnit result files. there with <em><strong>V3</strong></em> are NUnit 3 format, those with <em><strong>V2_NUnit</strong></em> are generated with --result=TestResult.xml;format=nunit2 option and those with <em><strong>V2_Converted</strong></em> are converted with the code above.
+<h2>Conclusion</h2>
+Although little inconvenient it is possible to convert NUnit 3 to NUnit 2 result XML files using Powershell scripts and nunit-v2-result-writer assemblies.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

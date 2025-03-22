@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/mock-static-methods-junit-powermock-example/"><!-- Primary Meta Tags --><title>Mock static methods in JUnit with PowerMock example</title><meta name="title" content="Mock static methods in JUnit with PowerMock example"><meta name="description" content="Examples how to mock static methods in JUnit tests with PowerMock."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/mock-static-methods-junit-powermock-example/"><meta property="og:title" content="Mock static methods in JUnit with PowerMock example"><meta property="og:description" content="Examples how to mock static methods in JUnit tests with PowerMock."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/mock-static-methods-junit-powermock-example/"><meta property="twitter:title" content="Mock static methods in JUnit with PowerMock example"><meta property="twitter:description" content="Examples how to mock static methods in JUnit tests with PowerMock."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-10-31T00:00:00.000Z"> Oct 31, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Mock static methods in JUnit with PowerMock example</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/powermock-examples-better-not-use/">PowerMock series examples</a>. The code shown in examples below is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener noreferrer">java-samples/junit</a> repository.</p>
+<p>In <a href="/mock-junit-tests-mockito-example/">Mock JUnit tests with Mockito example</a> post, I have shown how and why to use Mockito java mocking framework to create good unit tests. There are several things that Mockito is not supporting, but one of them is mocking of static methods. It is not that common to encounter such situation is real life, but the moment you encounter it Mockito is not able to solve the task. This is where PowerMock comes to the rescue.</p>
+<h2>PowerMock</h2>
+<a href="http://powermock.github.io/" target="_blank" rel="noopener noreferrer">PowerMock</a> is a framework that extends other mock libraries giving them more powerful capabilities. PowerMock uses a custom classloader and bytecode manipulation to enable mocking of static methods, constructors, final classes and methods, private methods, removal of static initializers and more.
+<h2>Example class for unit test</h2>
+We are going to unit test a class called <em><strong>LocatorService</strong></em> that internally uses a static method from utility class <em><strong>Utils</strong></em>. Method <em><strong>randomDistance(int distance)</strong></em> in <em><strong>Utils</strong></em> is returning random variable, hence it has no predictable behavior and the only way to test it is by mocking it:
+<pre class="language-java"><code>public class LocatorService {
+
+	public Point generatePointWithinDistance(Point point, int distance) {
+		return new Point(point.getX() + Utils.randomDistance(distance), 
+			point.getY() + Utils.randomDistance(distance));
+	}
+}
+</code></pre>
+<p>And Utils class is:</p>
+<pre class="language-java"><code>import java.util.Random;
+
+public final class Utils {
+
+	private static final Random RAND = new Random();
+
+	private Utils() {
+		// Utilities class
+	}
+
+	public static int randomDistance(int distance) {
+		return RAND.nextInt(distance + distance) - distance;
+	}
+}
+</code></pre>
+<p><em><strong>Nota bene:</strong></em> it is good code design practice to make utility classes final and with a private constructor.</p>
+<h2>Using PowerMock</h2>
+In order to use PowerMock two things has to be done:
+<ol>
+ 	<li>Import PowerMock into the project</li>
+ 	<li>Annotate unit test class</li>
+ 	<li>Mock the static class</li>
+</ol>
+<h2>Import PowerMock into the project</h2>
+In case of using Maven import statement is:
+<pre class="language-xml"><code>&#x3C;dependency>
+	&#x3C;groupId>org.powermock&#x3C;/groupId>
+	&#x3C;artifactId>powermock-module-junit4&#x3C;/artifactId>
+	&#x3C;version>1.6.5&#x3C;/version>
+	&#x3C;scope>test&#x3C;/scope>
+&#x3C;/dependency>
+&#x3C;dependency>
+	&#x3C;groupId>org.powermock&#x3C;/groupId>
+	&#x3C;artifactId>powermock-api-mockito&#x3C;/artifactId>
+	&#x3C;version>1.6.5&#x3C;/version>
+	&#x3C;scope>test&#x3C;/scope>
+&#x3C;/dependency>
+</code></pre>
+<p><em><strong>Nota bene</strong></em>: there is a possibility of version mismatch between PowerMock and Mockito. I’ve received: <em><strong>java.lang.NoSuchMethodError: org.mockito.mock.MockCreationSettings.isUsingConstructor()Z</strong></em> exception when using PowerMock 1.6.5 with Mockito 1.9.5, so I had to upgrade to Mockito 1.10.19.</p>
+<h2>Annotate JUnit test class</h2>
+Two annotations are needed. One is to run unit test with PowerMockRunner: <em><strong>@RunWith(PowerMockRunner.class)</strong></em>. Other is to prepare Utils class for testing: <em><strong>@PrepareForTest({Utils.class})</strong></em>. The final code is:
+<pre class="language-java"><code>import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({Utils.class})
+public class LocatorServiceTest {
+}
+</code></pre>
+<h2>Mock static class</h2>
+Explicit mocking to static class should be made in order to be able to use standard Mockito when().thenReturn() construction:
+<pre class="language-java"><code>int distance = 111;
+PowerMockito.mockStatic(Utils.class);
+when(Utils.randomDistance(anyInt())).thenReturn(distance);
+</code></pre>
+<h2>Putting it all together</h2>
+Final JUnit test class is shown below. The code in tests verifies logic in <em><strong>LocatorService</strong></em>, if a point is given then new point is returned by adding random to its X and Y coordinates. By removing the random element with mocking code can be tested with specific values.
+<pre class="language-java"><code>package com.automationrhapsody.junit;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
+
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({Utils.class})
+public class LocatorServiceTest {
+
+	private LocatorService locatorServiceUnderTest;
+
+	@Before
+	public void setUp() {
+		PowerMockito.mockStatic(Utils.class);
+
+		locatorServiceUnderTest = new LocatorService();
+	}
+
+	@Test
+	public void testGeneratePointWithinDistance() {
+		int distance = 111;
+
+		when(Utils.randomDistance(anyInt())).thenReturn(distance);
+
+		Point input = new Point(11, 11);
+		Point expected = new Point(input.getX() + distance, 
+				input.getY() + distance);
+
+		assertTrue(arePointsEqual(expected, 
+			locatorServiceUnderTest.generatePointWithinDistance(input, 1)));
+	}
+
+	public static boolean arePointsEqual(Point p1, Point p2) {
+		return p1.getX() == p2.getX()
+			&#x26;&#x26; p1.getY() == p2.getY();
+	}
+}
+</code></pre>
+<h2>Conclusion</h2>
+PowerMock is a powerful addition to standard mocking libraries as Mockito. Using it has some specifics, but once you understand them it is easy and fun to use it. Keep in mind that if you encounter a need to use PowerMock that can mean that code under test is not well designed. In my experience, it is possible to have very good unit tests with more than 85% coverage without any PowerMock usage. Still, there are some exceptional cases where PowerMock can be put in operation.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

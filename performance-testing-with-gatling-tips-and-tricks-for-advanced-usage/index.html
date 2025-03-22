@@ -1,0 +1,394 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/performance-testing-with-gatling-tips-and-tricks-for-advanced-usage/"><!-- Primary Meta Tags --><title>Performance testing with Gatling – advanced usage</title><meta name="title" content="Performance testing with Gatling – advanced usage"><meta name="description" content="Code samples and explanation how to do advanced performance testing with Gatling, such as proper scenarios structure, checks, feeding test data, session maintenance, etc."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/performance-testing-with-gatling-tips-and-tricks-for-advanced-usage/"><meta property="og:title" content="Performance testing with Gatling – advanced usage"><meta property="og:description" content="Code samples and explanation how to do advanced performance testing with Gatling, such as proper scenarios structure, checks, feeding test data, session maintenance, etc."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/performance-testing-with-gatling-tips-and-tricks-for-advanced-usage/"><meta property="twitter:title" content="Performance testing with Gatling – advanced usage"><meta property="twitter:description" content="Code samples and explanation how to do advanced performance testing with Gatling, such as proper scenarios structure, checks, feeding test data, session maintenance, etc."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-11-12T00:00:00.000Z"> Nov 12, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Performance testing with Gatling – advanced usage</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Current post is part of <a href="/performance-testing-with-gatling/">Performance testing with Gatling</a> series in which Gatling performance testing tool is explained in details.</p>
+<p>Code samples are available in GitHub <a href="https://github.com/llatinov/sample-performance-with-gatling" target="_blank" rel="noopener">sample-performance-with-gatling</a> repository.</p>
+<p>In previous post <a href="/performance-testing-with-gatling-integration-with-maven/">Performance testing with Gatling – integration with Maven</a> there is description how to setup Maven project. In <a href="/performance-testing-with-gatling-recorded-simulation-explanation/">Performance testing with Gatling – recorded simulation explanation</a> there is information what a simulation consists of. Simulations from this post will be refactored in current post and more advanced topics will be discussed how to make flexible automation testing with Gatling.</p>
+<h2>What is included</h2>
+Following topics are included in the current post:
+<ul>
+ 	<li>Access external configuration data</li>
+ 	<li>Define single HTTP requests for better re-usability</li>
+ 	<li>Add checks for content on HTTP response</li>
+ 	<li>Check and extract data from HTTP response</li>
+ 	<li>More checks and extract List with values</li>
+ 	<li>Create HTTP POST request with the body from a template file</li>
+ 	<li>Manage session variables</li>
+ 	<li>Standard CSV feeder</li>
+ 	<li>Create custom feeder</li>
+ 	<li>Create unified scenarios</li>
+ 	<li>Conditional scenario execution</li>
+ 	<li>Only one HTTP protocol</li>
+ 	<li>Extract data from HTTP request and response</li>
+ 	<li>Advanced simulation setUp</li>
+ 	<li>Virtual users vs requests per second</li>
+</ul>
+<h2>Refactored code</h2>
+Below are all classes that are created after they have been refactored. In order to separate things and make it easier to read ProductSimulation and PersonSimulation classes contain only the <em><strong>setUp()</strong></em> method. Request, scenarios and external configurations are being defined into Constants, Product and Person singleton objects.
+<p>[tabby title=“Constants”]</p>
+<pre class="language-scala"><code>object Constants {
+	val numberOfUsers: Int = System.getProperty("numberOfUsers").toInt
+	val duration: FiniteDuration = System.getProperty("durationMinutes").toInt.minutes
+	val pause: FiniteDuration = System.getProperty("pauseBetweenRequestsMs").toInt.millisecond
+	val responseTimeMs = 500
+	val responseSuccessPercentage = 99
+	private val url: String = System.getProperty("url")
+	private val repeatTimes: Int = System.getProperty("numberOfRepetitions").toInt
+	private val successStatus: Int = 200
+	private val isDebug = System.getProperty("debug").toBoolean
+
+	val httpProtocol = http
+		.baseURL(url)
+		.check(status.is(successStatus))
+		.extraInfoExtractor { extraInfo => List(getExtraInfo(extraInfo)) }
+
+	def createScenario(name: String, feed: FeederBuilder[_], chains: ChainBuilder*): ScenarioBuilder = {
+		if (Constants.repeatTimes > 0) {
+			scenario(name).feed(feed).repeat(Constants.repeatTimes) {
+				exec(chains).pause(Constants.pause)
+			}
+		} else {
+			scenario(name).feed(feed).forever() {
+				exec(chains).pause(Constants.pause)
+			}
+		}
+	}
+
+	private def getExtraInfo(extraInfo: ExtraInfo): String = {
+		if (isDebug
+			|| extraInfo.response.statusCode.get != successStatus
+			|| extraInfo.status.eq(Status.apply("KO"))) {
+			",URL:" + extraInfo.request.getUrl +
+				" Request: " + extraInfo.request.getStringData +
+				" Response: " + extraInfo.response.body.string
+		} else {
+			""
+		}
+	}
+}
+</code></pre>
+<p>[tabby title=“Product”]</p>
+<pre class="language-scala"><code>object Product {
+
+	private val reqGoToHome = exec(http("Open home page")
+		.get("/products")
+		.check(regex("Search: "))
+	)
+
+	private val reqSearchProduct = exec(http("Search product")
+		.get("/products?q=${search_term}&#x26;action=search-results")
+		.check(regex("Your search for '${search_term}' gave ([\\d]{1,2}) results:").saveAs("numberOfProducts"))
+		.check(regex("NotFound").optional.saveAs("not_found"))
+	)
+
+	private val reqOpenProduct = exec(session => {
+		var numberOfProducts = session("numberOfProducts").as[String].toInt
+		var productId = Random.nextInt(numberOfProducts) + 1
+		session.set("productId", productId)
+	}).exec(http("Open Product")
+		.get("/products?action=details&#x26;id=${productId}")
+		.check(regex("This is 'Product ${productId} name' details page."))
+	)
+	
+	private val csvFeeder = csv("search_terms.csv").circular.random
+
+	val scnSearch = Constants.createScenario("Search", csvFeeder,
+		reqGoToHome, reqSearchProduct, reqGoToHome)
+
+	val scnSearchAndOpen = Constants.createScenario("Search and Open", csvFeeder,
+		reqGoToHome, reqSearchProduct, reqOpenProduct, reqGoToHome)
+}
+</code></pre>
+<p>[tabby title=“ProductSimulation”]</p>
+<pre class="language-scala"><code>class ProductSimulation extends Simulation {
+
+	setUp(
+		Product.scnSearch.inject(rampUsers(Constants.numberOfUsers) over 10.seconds),
+		Product.scnSearchAndOpen.inject(atOnceUsers(Constants.numberOfUsers))
+	)
+		.protocols(Constants.httpProtocol.inferHtmlResources())
+		.pauses(constantPauses)
+		.maxDuration(Constants.duration)
+		.assertions(
+			global.responseTime.max.lessThan(Constants.responseTimeMs),
+			global.successfulRequests.percent.greaterThan(Constants.responseSuccessPercentage)
+		)
+}
+</code></pre>
+<p>[tabby title=“Person”]</p>
+<pre class="language-scala"><code>object Person {
+
+	private val added = "Added"
+	private val updated = "Updated"
+
+	private val reqGetAll = exec(http("Get All Persons")
+		.get("/person/all")
+		.check(regex("\"firstName\":\"(.*?)\"").count.greaterThan(1).saveAs("count"))
+		.check(regex("\\[").count.is(1))
+		.check(regex("\"id\":([\\d]{1,6})").findAll.saveAs("person_ids"))
+	).exec(session => {
+		val count = session("count").as[Int]
+		val personIds = session("person_ids").as[List[Int]]
+		val personId = personIds(Random.nextInt(count)).toString.toInt
+		session.set("person_id", personId)
+	}).exec(session => {
+		println(session)
+		session
+	})
+
+	private val reqGetPerson = exec(http("Get Person")
+		.get("/person/get/${person_id}")
+		.check(regex("\"firstName\":\"(.*?)\"").count.is(1))
+		.check(regex("\\[").notExists)
+	)
+
+	private val reqSavePerson = exec(http("Save Person")
+		.post("/person/save")
+		.body(ElFileBody("person.json"))
+		.header("Content-Type", "application/json")
+		.check(regex("Person with id=([\\d]{1,6})").saveAs("person_id"))
+		.check(regex("\\[").notExists)
+		.check(regex("(" + added + "|" + updated + ") Person with id=").saveAs("action"))
+	)
+
+	private val reqGetPersonAferSave = exec(http("Get Person After Save")
+		.get("/person/get/${person_id}")
+		.check(regex("\"id\":${person_id}"))
+		.check(regex("\"firstName\":\"${first_name}\""))
+		.check(regex("\"lastName\":\"${last_name}\""))
+		.check(regex("\"email\":\"${email}\""))
+	)
+
+	private val reqGetPersonAferUpdate = exec(http("Get Person After Update")
+		.get("/person/get/${person_id}")
+		.check(regex("\"id\":${person_id}"))
+	)
+
+	private val uniqueIds: List[String] = Source
+		.fromInputStream(getClass.getResourceAsStream("/account_ids.txt"))
+		.getLines().toList
+
+	private val feedSearchTerms = Iterator.continually(buildFeeder(uniqueIds))
+
+	private def buildFeeder(dataList: List[String]): Map[String, Any] = {
+		Map(
+			"id" -> (Random.nextInt(100) + 1),
+			"first_name" -> Random.alphanumeric.take(5).mkString,
+			"last_name" -> Random.alphanumeric.take(5).mkString,
+			"email" -> Random.alphanumeric.take(5).mkString.concat("@na.na"),
+			"unique_id" -> dataList(Random.nextInt(dataList.size))
+		)
+	}
+
+	val scnGet = Constants.createScenario("Get all then one", feedSearchTerms,
+		reqGetAll, reqGetPerson)
+
+	val scnSaveAndGet = Constants.createScenario("Save and get", feedSearchTerms, reqSavePerson)
+		.doIfEqualsOrElse("${action}", added) {
+			reqGetPersonAferSave
+		} {
+			reqGetPersonAferUpdate
+		}
+}
+</code></pre>
+<p>[tabby title=“PersonSimulation”]</p>
+<pre class="language-scala"><code>class PersonSimulation extends Simulation {
+
+	setUp(
+		Person.scnGet.inject(atOnceUsers(Constants.numberOfUsers)),
+		Person.scnSaveAndGet.inject(atOnceUsers(Constants.numberOfUsers))
+	)
+		.protocols(Constants.httpProtocol)
+		.pauses(constantPauses)
+		.maxDuration(Constants.duration)
+		.assertions(
+			global.responseTime.max.lessThan(Constants.responseTimeMs),
+			global.successfulRequests.percent.greaterThan(Constants.responseSuccessPercentage)
+		)
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Access external configuration data</h2>
+In order to have flexibility it is mandatory to be able to sent different configurations parameters from command line when invoking the scenario. With Gatling Maven plugin it is done with  configurations. See more in <a href="/performance-testing-with-gatling-integration-with-maven/">Performance testing with Gatling – integration with Maven</a> post.
+<pre class="language-scala"><code>val numberOfUsers: Int = System.getProperty("numberOfUsers").toInt
+val duration: FiniteDuration = System.getProperty("durationMinutes").toInt.minutes
+private val url: String = System.getProperty("url")
+private val repeatTimes: Int = System.getProperty("numberOfRepetitions").toInt
+private val isDebug = System.getProperty("debug").toBoolean
+</code></pre>
+<h2>Define single HTTP requests for better re-usability</h2>
+It is a good idea to define each HTTP request as a separate object. This gives the flexibility to reuse one and the same requests in different scenarios. Below is shown how to create HTTP GET request with <em><strong>http().get()</strong></em>.
+<h2>Add checks for content on HTTP response</h2>
+On HTTP request creation there is a possibility to add checks that certain string or regular expression pattern exists in response. The code below created HTTP Request and add check that <em><strong>"Search: "</strong></em> text exists in response. This is done with <em><strong>regex()</strong></em> method by passing just a string to it.
+<pre class="language-scala"><code>private val reqGoToHome = exec(http("Open home page")
+	.get("/products")
+	.check(regex("Search: "))
+)
+</code></pre>
+<h2>Check and extract data from HTTP response</h2>
+It is possible along with the check to extract data into a variable that is being saved to the session. This is done with <em><strong>saveAs()</strong></em> method. In some cases value we are searching for, might not be in the response. We can use <em><strong>optional</strong></em> method to specify that value is saved in session only if existing. If it is not existing it won't be captured and this will not break the execution. As shown below session variables can be also used in the checks. Session variable is accessed with <em><strong>${}</strong></em>,  such as <em><strong>${search_term}</strong></em>.
+<pre class="language-scala"><code>private val reqSearchProduct = exec(http("Search product")
+	.get("/products?q=${search_term}&#x26;action=search-results")
+	.check(regex("Your search for '${search_term}' gave ([\\d]{1,2}) results:")
+		.saveAs("numberOfProducts"))
+	.check(regex("NotFound").optional.saveAs("not_found"))
+)
+</code></pre>
+<h2>More checks and extract List with values</h2>
+There are many types of checks. In code below <em><strong>count.greaterThan(1)</strong></em> and <em><strong>count.is(1)</strong></em> are used. It is possible to search for multiple occurrences of given regular expression with <em><strong>findAll</strong></em>. In such case <em><strong>saveAs()</strong></em> saves the results to a "person_ids" List object in session. More information about checks can be found in <a href="https://gatling.io/docs/current/http/http_check/" target="_blank" rel="noopener">Gatling Checks page</a>.
+<pre class="language-scala"><code>private val reqGetAll = exec(http("Get All Persons")
+	.get("/person/all")
+	.check(regex("\"firstName\":\"(.*?)\"").count.greaterThan(1).saveAs("count"))
+	.check(regex("\\[").count.is(1))
+	.check(regex("\"id\":([\\d]{1,6})").findAll.saveAs("person_ids"))
+)
+</code></pre>
+<h2>Create HTTP POST request with the body from a template file</h2>
+If you need to post data to server HTTP POST request is to be used. The request is created with <em><strong>http().post()</strong></em> method. Headers can be added to the request with <em><strong>header()</strong></em> or <em><strong>headers()</strong></em> methods. In the current example, without Content-Type=application/json header REST service will throw an error for unrecognized content. Data that will be sent is added in <em><strong>body()</strong></em> method. It accepts Body object. You can generate body from a file (<em><strong>RawFileBody</strong></em> method) or string (<em><strong>StringBody</strong></em> method).
+<pre class="language-scala"><code>private val reqSavePerson = exec(http("Save Person")
+	.post("/person/save")
+	.body(ElFileBody("person.json"))
+	.header("Content-Type", "application/json")
+	.check(regex("Person with id=([\\d]{1,6})").saveAs("person_id"))
+	.check(regex("\\[").notExists)
+	.check(regex("(" + added + "|" + updated + ") Person with id=")
+		.saveAs("action"))
+)
+</code></pre>
+<p>In current case body is generated from file, which have variables that can be later on found in session. This is done with <em><strong>ElFileBody</strong></em> (ELFileBody in 2.0.0) method and actual replace with value is done by Gatling EL (expression language). More about what can you do with EL can be found on <a href="https://gatling.io/docs/current/session/expression_el/" target="_blank" rel="noopener">Gatling EL page</a>. EL body file is shown below, where variables ${id}, ${first_name}, ${last_name} ${email} are searched in session and replaced if found. If not found error is shown on scenario execution output.</p>
+<pre class="language-json"><code>{
+	"id": "${id}",
+	"firstName": "${first_name}",
+	"lastName": "${last_name}",
+	"email": "${email}"
+}
+</code></pre>
+<h2>Manage session variables</h2>
+Each virtual user has its own session. The scenario can store or read data from the session. Data is saved in session with key/value pairs, where the key is the variable name. Variables are stored in session in three ways: using <em><strong>feeders</strong></em> (this is explained later in the current post), using <em><strong>saveAs()</strong></em> method and <em><strong>session</strong></em> API. More details on session API can be found in <a href="https://gatling.io/docs/current/session/session_api/" target="_blank" rel="noopener">Gatling Session API page</a>.
+<p>Manipulating session through API is kind of tricky. Gatling documentation is vague about it. Below is shown a code where session variable is extracted first as String and then converted to Int with: <em><strong>var numberOfProducts = session(“numberOfProducts”).as[String].toInt</strong></em>. On next step some manipulation is done with this variable, in current case, a random product id from 1 to “numberOfProducts” to is picked. At last a new variable is saved in session with <em><strong>session.set(“productId”, productId)</strong></em>. It is important that this is the last line of session manipulation code block done in first <em><strong>exec()</strong></em>. This is the return statement of the code block. In other words, new Session object with saved “productId” in it is returned. If on the last line is just “session” as stated in the docs, then old, an unmodified session object is returned without variable being added.</p>
+<p>Sessions as most of the objects in Gatling and in Scala are immutable. This is designed for thread safety. So adding a variable to session actually creates a new object. This is why newly added session variable cannot be used in the same <em><strong>exec()</strong></em> block, but have to be used on next one, as in same block variable is yet not accessible. See code below in the second <em><strong>exec()</strong></em> “productId” is already available and can be used in <em><strong>get()</strong></em>.</p>
+<pre class="language-scala"><code>private val reqOpenProduct = exec(session => {
+	var numberOfProducts = session("numberOfProducts").as[String].toInt
+	var productId = Random.nextInt(numberOfProducts) + 1
+	session.set("productId", productId)
+}).exec(http("Open Product")
+	.get("/products?action=details&#x26;id=${productId}")
+	.check(regex("This is 'Product ${productId} name' details page."))
+)
+</code></pre>
+<p>Same logic being explained above is implemented in next code fragment. The below example shows usage of session variable saved in previous <em><strong>exec()</strong></em> fragment. Count of persons and List with ids are being saved by <em><strong>saveAs()</strong></em> method. The list is extracted from the session and random index of it has been accessed, so random person is being selected. This is again saved into session as “person_id”. In third <em><strong>exec()</strong></em> statement “session” object is just printed to output for debugging purposes.</p>
+<pre class="language-scala"><code>private val reqGetAll = exec(http("Get All Persons")
+	.get("/person/all")
+	.check(regex("\"firstName\":\"(.*?)\"").count.greaterThan(1).saveAs("count"))
+	.check(regex("\\[").count.is(1))
+	.check(regex("\"id\":([\\d]{1,6})").findAll.saveAs("person_ids"))
+).exec(session => {
+	val count = session("count").as[Int]
+	val personIds = session("person_ids").as[List[Int]]
+	val personId = personIds(Random.nextInt(count)).toString.toInt
+	session.set("person_id", personId)
+}).exec(session => {
+	println(session)
+	session
+})
+</code></pre>
+<h2>Standard CSV feeder</h2>
+A feeder is a way to generate unique data for each virtual user. This how tests are made real. Below is a way to read data from CSV file. The first line of the CSV file is the header which is saved to the session as a variable name. In the current example, CSV has only one column, but it is possible to have CSV file with several columns. <em><strong>circular</strong></em> means that if file end is reached feeder will start from the beginning. <em><strong>random</strong></em> means elements are taken in random order. More about feeders can be found in <a href="https://gatling.io/docs/current/session/feeder/" target="_blank" rel="noopener">Gatling Feeders page</a>.
+<pre class="language-scala"><code>private val csvFeeder = csv("search_terms.csv").circular.random
+</code></pre>
+<h2>Create custom feeder</h2>
+Feeder actually is Iterator[Map[String, T]], so you can do your own feeders. Below is shown code where some unique ids are read from file and converted to List[String] with <em><strong>Source .fromInputStream(getClass.getResourceAsStream("/account_ids.txt")) .getLines().toList</strong></em>. This list is used in <em><strong>buildFeeder()</strong></em> method to access random element from it. Finally <em><strong>Iterator.continually(buildFeeder(uniqueIds))</strong></em> creates infinite length iterator.
+<pre class="language-scala"><code>private val uniqueIds: List[String] = Source
+	.fromInputStream(getClass.getResourceAsStream("/account_ids.txt"))
+	.getLines().toList
+
+private val feedSearchTerms = Iterator.continually(buildFeeder(uniqueIds))
+
+private def buildFeeder(dataList: List[String]): Map[String, Any] = {
+	Map(
+		"id" -> (Random.nextInt(100) + 1),
+		"first_name" -> Random.alphanumeric.take(5).mkString,
+		"last_name" -> Random.alphanumeric.take(5).mkString,
+		"email" -> Random.alphanumeric.take(5).mkString.concat("@na.na"),
+		"unique_id" -> dataList(Random.nextInt(dataList.size))
+	)
+}
+</code></pre>
+<p>The current business case doesn’t make much sense to have a custom feeder with values from a file, just <em><strong>Map()</strong></em> generator is enough. But let us imagine a case where you search for a hotel by unique id and some date in the future. Hard coding date in CSV file is not a wise solution, you will want to be always in the future. Also making different combinations from hotelId, start and end dates is not possible to be maintained in a file. The best solution is to have a file with hotel ids and dates to be dynamically generated as shown in <em><strong>buildFeeder()</strong></em> method.</p>
+<h2>Create unified scenarios</h2>
+The scenario is created from HTTP requests. This is why it is good to have each HTTP request as a separate object so you can reuse them in different scenarios. In order to unify scenario creation, there is a special method. It takes scenario name, feeder and list of requests and returns a scenario object. Method checks if the scenario is supposed to be repeated several times and uses <em><strong>repeat()</strong></em> method. Else scenarios are repeated <em><strong>forever()</strong></em>. In both cases, there is constant pause time introduced between requests with <em><strong>pause()</strong></em>.
+<pre class="language-scala"><code>def createScenario(name: String, 
+					feed: FeederBuilder[_],
+					chains: ChainBuilder*): ScenarioBuilder = {
+	if (Constants.repeatTimes > 0) {
+		scenario(name).feed(feed).repeat(Constants.repeatTimes) {
+			exec(chains).pause(Constants.pause)
+		}
+	} else {
+		scenario(name).feed(feed).forever() {
+			exec(chains).pause(Constants.pause)
+		}
+	}
+}
+</code></pre>
+<p>With this approach, a method can be reused from many places avoiding duplication of code.</p>
+<pre class="language-scala"><code>val scnSearch = Constants.createScenario("Search", csvFeeder,
+		reqGoToHome, reqSearchProduct, reqGoToHome)
+</code></pre>
+<h2>Conditional scenario execution</h2>
+It is possible one scenario to have different execution paths based on a condition. This condition is generally a value of a session variable. Branching is done with <em><strong>doIf</strong></em>, <em><strong>doIfElse</strong></em>, <em><strong>doIfEqualsOrElse</strong></em>, etc methods. In the current example, if this is Save request then additional <em><strong>reqGetPersonAferSave</strong></em> HTTP request is executed. Else additional <em><strong>reqGetPersonAferUpdate</strong></em> HTTP request is executed. In the end, there is only one scenario <em><strong>scnSaveAndGet</strong></em> but it can have different execution paths based on "action" session variable.
+<pre class="language-scala"><code>val scnSaveAndGet = Constants
+	.createScenario("Save and get", feedSearchTerms, reqSavePerson)
+	.doIfEqualsOrElse("${action}", added) {
+		reqGetPersonAferSave
+	} {
+		reqGetPersonAferUpdate
+	}
+</code></pre>
+<h2>Only one HTTP protocol</h2>
+In general case, several performance testing simulations can be done for one and the same application. During simulation setUp an HTTP protocol object is needed. Since the application is the same HTTP protocol can be one and the same object, so it is possible to define it and reuse it. If changes are needed new HTTP protocol object can be defined or a copy of current one can be created and modified.
+<pre class="language-scala"><code>val httpProtocol = http
+	.baseURL(url)
+	.check(status.is(successStatus))
+	.extraInfoExtractor { extraInfo => List(getExtraInfo(extraInfo)) }
+</code></pre>
+<h2>Extract data from HTTP request and response</h2>
+In order to ease debugging of failures or debugging at all, it is possible to extract information from HTTP request and response. Extraction is configured on HTTP protocol level with <em><strong>extraInfoExtractor { extraInfo => List(getExtraInfo(extraInfo)) }</strong></em> as shown above. In order to simplify code processing of extra info object is done in a separate method. If debug is enabled or response code is not 200 or Gatling status is KO then request URL, request data and response body are dumped into <em><strong>simulation.log</strong></em> file that resides in results folder. Note that response body is extracted only if there is check on it, otherwise, there is <em><strong>NoResponseBody</strong></em> in the output. This is done to improve performance.
+<pre class="language-scala"><code>private def getExtraInfo(extraInfo: ExtraInfo): String = {
+	if (isDebug
+		|| extraInfo.response.statusCode.get != successStatus
+		|| extraInfo.status.eq(Status.apply("KO"))) {
+		",URL:" + extraInfo.request.getUrl +
+			" Request: " + extraInfo.request.getStringData +
+			" Response: " + extraInfo.response.body.string
+	} else {
+		""
+	}
+}
+</code></pre>
+<h2>Advanced simulation setUp</h2>
+It is a good idea to keep simulation class clean by defining all objects in external classes or singleton objects. Simulation is mandatory to have <em><strong>setUp()</strong></em> method. It receives a comma-separated list of scenarios. In order scenario to be valid, it should have users injected with <em><strong>inject()</strong></em> method. There are different strategies to inject users. The protocol should also be defined per scenario setup. In this particular example default protocol is used with the change to fetch all HTTP resources on a page (JS, CSS, images, etc.) with <em><strong>inferHtmlResources()</strong></em>. Since objects are immutable this creates a copy of default HTTP protocol and does not modify the original one. Assertions is a way to verify certain performance KPI it is defined with <em><strong>assertions()</strong></em> method. In this example, we should have a response time less than 500ms and more than 99% of requests should be successful.
+<pre class="language-scala"><code>private val rampUpTime: FiniteDuration = 10.seconds
+
+setUp(
+	Product.scnSearch.inject(rampUsers(Constants.numberOfUsers) over rampUpTime),
+	Product.scnSearchAndOpen.inject(atOnceUsers(Constants.numberOfUsers))
+)
+	.protocols(Constants.httpProtocol.inferHtmlResources())
+	.pauses(constantPauses)
+	.maxDuration(Constants.duration)
+	.assertions(
+		global.responseTime.max.lessThan(Constants.responseTimeMs),
+		global.successfulRequests.percent
+			.greaterThan(Constants.responseSuccessPercentage)
+	)
+	.throttle(reachRps(100) in rampUpTime, holdFor(Constants.duration))
+</code></pre>
+<h2>Cookies management</h2>
+Cookie support is enabled by default and then Gatling handles Cookies transparently, just like a browser would. It is possible to add or delete cookies during the simulation run. See more details how this is done in <a href="https://gatling.io/docs/current/http/http_helpers/" target="_blank" rel="noopener">Gatling Cookie management page</a>.
+<h2>Virtual users vs requests per second</h2>
+Since users are vague metric, but requests per second is metric that most server monitoring tools support it is possible to use this approach. Gatling supports so-called throttling: <em><strong>throttle(reachRps(100) in 10.seconds, holdFor(5.minutes))</strong></em>. It is important to put <em><strong>holdFor()</strong></em> method, otherwise, Gatling goes to unlimited requests per second and can crash the server. More details on simulation setup can be found on <a href="https://gatling.io/docs/current/general/simulation_setup/" target="_blank" rel="noopener">Gatling Simulation setup page</a>.
+<h2>Conclusion</h2>
+Keeping Gatling code maintainable and reusable is a good practice to create complex performance scenarios. Gatling API provides a wide range of functionalities to support this task. In the current post, I have shown cases and solution to them which I have encountered in real life projects.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/how-to-use-aws-transcribe-in-real-time-with-react-and-net-core/"><!-- Primary Meta Tags --><title>How to use AWS Transcribe in real-time with React and .NET Core</title><meta name="title" content="How to use AWS Transcribe in real-time with React and .NET Core"><meta name="description" content="Practical code example how to use AWS Transcribe from an application with React frontend and .NET Core backend."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/how-to-use-aws-transcribe-in-real-time-with-react-and-net-core/"><meta property="og:title" content="How to use AWS Transcribe in real-time with React and .NET Core"><meta property="og:description" content="Practical code example how to use AWS Transcribe from an application with React frontend and .NET Core backend."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/how-to-use-aws-transcribe-in-real-time-with-react-and-net-core/"><meta property="twitter:title" content="How to use AWS Transcribe in real-time with React and .NET Core"><meta property="twitter:description" content="Practical code example how to use AWS Transcribe from an application with React frontend and .NET Core backend."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2021-01-06T00:00:00.000Z"> Jan 6, 2021 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>How to use AWS Transcribe in real-time with React and .NET Core</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>AWS Transcribe</h2>
+Amazon Transcribe makes it easy for developers to add speech to text capabilities to their applications. Amazon Transcribe uses a deep learning process called automatic speech recognition (ASR) to convert speech to text quickly and accurately. Amazon Transcribe can be used to transcribe customer service calls, automate subtitling, and generate metadata for media assets to create a fully searchable archive. You can use Amazon Transcribe Medical to add medical speech to text capabilities to clinical documentation applications.
+<h2>Real-time usage</h2>
+Streaming Transcription utilizes HTTP 2’s implementation of bidirectional streams to handle streaming audio and transcripts between your application and the Amazon Transcribe service. Bidirectional streams allow your application to handle sending and receiving data at the same time, resulting in quicker, more reactive results. Read more along with a Java example in <a href="https://aws.amazon.com/blogs/machine-learning/amazon-transcribe-now-supports-real-time-transcriptions/" target="_blank" rel="noopener noreferrer">Amazon Transcribe now supports real-time transcriptions</a> article. The way to achieve bidirectional communication in the browser is to use <a href="https://en.wikipedia.org/wiki/WebSocket" target="_blank" rel="noopener noreferrer">WebSocket</a>.
+<h2>How to use AWS Transcribe</h2>
+The first thing that is needed is an AWS account with sufficient Transcribe privileges, read more in <a href="https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_service-with-iam.html#security_iam_service-with-iam-roles" target="_blank" rel="noopener noreferrer">How Amazon Transcribe Works with IAM</a> article. Once you have this, generate AWS AccessKey and SecretKey. With the AccessKey, SecretKey, and Region, a special pre-signed URL is generated, which is a rather complex process. A WebSocket connection is opened with this pre-signed URL. A full explanation of the process can be found in <a href="https://docs.aws.amazon.com/transcribe/latest/dg/websocket.html" target="_blank" rel="noopener noreferrer">Using Amazon Transcribe Streaming with WebSockets</a> article. Another very useful example of how to generate the pre-signed URL and open a WebSocket connection is shown in <a href="https://github.com/amazon-archives/amazon-transcribe-websocket-static" target="_blank" rel="noopener noreferrer">amazon-archives/amazon-transcribe-websocket-static</a> GitHub repo.
+<h2>Issues with generating pre-signed URL in the browser</h2>
+So far so good, things are starting to make sense. In order to generate a pre-signed URL in the browser, AWS AccessKey and SecretKey are needed. One option is to make the users provide them every time they want to use the application, which is not really user friendly. Another option is to have the web application generate it automatically, which exposes the AWS credentials and is not really an option. The solution is to have a backend application, which can be even a Lambda function, to calculate the pre-signed URL.
+<h2>Generate the pre-signed URL in C#</h2>
+Below is a .NET Core example controller code on how to generate the pre-signed URL in C#:
+<pre class="language-csharp"><code>public class PresignedUrlController : ControllerBase
+{
+	private const string Service = "transcribe";
+	private const string Path = "/stream-transcription-websocket";
+	private const string Scheme = "AWS4";
+	private const string Algorithm = "HMAC-SHA256";
+	private const string Terminator = "aws4_request";
+	private const string HmacSha256 = "HMACSHA256";
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private readonly string _region;</span></span>
+<span class="line"><span>private readonly string _awsAccessKey;</span></span>
+<span class="line"><span>private readonly string _awsSecretKey;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public PresignedUrlController(IOptions&#x26;lt;Config&#x26;gt; options)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	_region = options.Value.AWS_SPEECH_REGION;</span></span>
+<span class="line"><span>	_awsAccessKey = options.Value.AWS_SPEECH_ACCESS_KEY;</span></span>
+<span class="line"><span>	_awsSecretKey = options.Value.AWS_SPEECH_SECRET_KEY;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[HttpPost]</span></span>
+<span class="line"><span>public ActionResult&#x26;lt;string&#x26;gt; GetPresignedUrl()</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	return GenerateUrl();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>private string GenerateUrl()</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	var host = $"transcribestreaming.{_region}.amazonaws.com:8443";</span></span>
+<span class="line"><span>	var dateNow = DateTime.UtcNow;</span></span>
+<span class="line"><span>	var dateString = dateNow.ToString("yyyyMMdd");</span></span>
+<span class="line"><span>	var dateTimeString = dateNow.ToString("yyyyMMddTHHmmssZ");</span></span>
+<span class="line"><span>	var credentialScope = $"{dateString}/{_region}/{Service}/{Terminator}";</span></span>
+<span class="line"><span>	var query = GenerateQueryParams(dateTimeString, credentialScope);</span></span>
+<span class="line"><span>	var signature = GetSignature(host, dateString, dateTimeString, credentialScope);</span></span>
+<span class="line"><span>	return $"wss://{host}{Path}?{query}&#x26;amp;X-Amz-Signature={signature}";</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>private string GenerateQueryParams(string dateTimeString, string credentialScope)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	var credentials = $"{_awsAccessKey}/{credentialScope}";</span></span>
+<span class="line"><span>	var result = new Dictionary&#x26;lt;string, string&#x26;gt;</span></span>
+<span class="line"><span>	{</span></span>
+<span class="line"><span>		{"X-Amz-Algorithm", "AWS4-HMAC-SHA256"},</span></span>
+<span class="line"><span>		{"X-Amz-Credential", credentials},</span></span>
+<span class="line"><span>		{"X-Amz-Date", dateTimeString},</span></span>
+<span class="line"><span>		{"X-Amz-Expires", "30"},</span></span>
+<span class="line"><span>		{"X-Amz-SignedHeaders", "host"},</span></span>
+<span class="line"><span>		{"language-code", "en-US"},</span></span>
+<span class="line"><span>		{"media-encoding", "pcm"},</span></span>
+<span class="line"><span>		{"sample-rate", "44100"}</span></span>
+<span class="line"><span>	};</span></span>
+<span class="line"><span>	return string.Join("&#x26;amp;", result.Select(x =&#x26;gt; $"{x.Key}={Uri.EscapeDataString(x.Value)}"));</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>private string GetSignature(string host, string dateString, string dateTimeString, string credentialScope)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	var canonicalRequest = CanonicalizeRequest(Path, host, dateTimeString, credentialScope);</span></span>
+<span class="line"><span>	var canonicalRequestHashBytes = ComputeHash(canonicalRequest);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>	// construct the string to be signed</span></span>
+<span class="line"><span>	var stringToSign = new StringBuilder();</span></span>
+<span class="line"><span>	stringToSign.AppendFormat("{0}-{1}\n{2}\n{3}\n", Scheme, Algorithm, dateTimeString, credentialScope);</span></span>
+<span class="line"><span>	stringToSign.Append(ToHexString(canonicalRequestHashBytes, true));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>	var kha = KeyedHashAlgorithm.Create(HmacSha256);</span></span>
+<span class="line"><span>	kha.Key = DeriveSigningKey(HmacSha256, _awsSecretKey, _region, dateString, Service);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>	// compute the final signature for the request, place into the result and return to the </span></span>
+<span class="line"><span>	// user to be embedded in the request as needed</span></span>
+<span class="line"><span>	var signature = kha.ComputeHash(Encoding.UTF8.GetBytes(stringToSign.ToString()));</span></span>
+<span class="line"><span>	var signatureString = ToHexString(signature, true);</span></span>
+<span class="line"><span>	return signatureString;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>private string CanonicalizeRequest(string path, string host, string dateTimeString, string credentialScope)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	var canonicalRequest = new StringBuilder();</span></span>
+<span class="line"><span>	canonicalRequest.AppendFormat("{0}\n", "GET");</span></span>
+<span class="line"><span>	canonicalRequest.AppendFormat("{0}\n", path);</span></span>
+<span class="line"><span>	canonicalRequest.AppendFormat("{0}\n", GenerateQueryParams(dateTimeString, credentialScope));</span></span>
+<span class="line"><span>	canonicalRequest.AppendFormat("{0}\n", $"host:{host}");</span></span>
+<span class="line"><span>	canonicalRequest.AppendFormat("{0}\n", "");</span></span>
+<span class="line"><span>	canonicalRequest.AppendFormat("{0}\n", "host");</span></span>
+<span class="line"><span>	canonicalRequest.Append(ToHexString(ComputeHash(""), true));</span></span>
+<span class="line"><span>	return canonicalRequest.ToString();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>private static string ToHexString(byte[] data, bool lowercase)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	var sb = new StringBuilder();</span></span>
+<span class="line"><span>	for (var i = 0; i &#x26;lt; data.Length; i++)</span></span>
+<span class="line"><span>	{</span></span>
+<span class="line"><span>		sb.Append(data[i].ToString(lowercase ? "x2" : "X2"));</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span>	return sb.ToString();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>private static byte[] DeriveSigningKey(string algorithm, string awsSecretAccessKey, string region, string date, string service)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	char[] ksecret = (Scheme + awsSecretAccessKey).ToCharArray();</span></span>
+<span class="line"><span>	byte[] hashDate = ComputeKeyedHash(algorithm, Encoding.UTF8.GetBytes(ksecret), Encoding.UTF8.GetBytes(date));</span></span>
+<span class="line"><span>	byte[] hashRegion = ComputeKeyedHash(algorithm, hashDate, Encoding.UTF8.GetBytes(region));</span></span>
+<span class="line"><span>	byte[] hashService = ComputeKeyedHash(algorithm, hashRegion, Encoding.UTF8.GetBytes(service));</span></span>
+<span class="line"><span>	return ComputeKeyedHash(algorithm, hashService, Encoding.UTF8.GetBytes(Terminator));</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>private static byte[] ComputeKeyedHash(string algorithm, byte[] key, byte[] data)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	var kha = KeyedHashAlgorithm.Create(algorithm);</span></span>
+<span class="line"><span>	kha.Key = key;</span></span>
+<span class="line"><span>	return kha.ComputeHash(data);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>private static byte[] ComputeHash(string data)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>	return HashAlgorithm.Create("SHA-256").ComputeHash(Encoding.UTF8.GetBytes(data));</span></span>
+<span class="line"><span>}</span></span></code></pre>
+</code><p><code>}
+</code></p></pre><p></p>
+<h2>Use the pre-signed URL in a React application</h2>
+In one of the examples above, there was a raw code of how to open a WebSocket and use it. In the code below an example is given how to do the same in React with TypeScript. Note that there is a WebSocket closer configured to 15 seconds with setTimeout(). It is important to have some kind of a breaker because leave the socket open can generate a significant AWS bill.
+<pre class="language-csharp"><code>import React from 'react';
+import { EventStreamMarshaller, Message } from '@aws-sdk/eventstream-marshaller';
+import { toUtf8, fromUtf8 } from '@aws-sdk/util-utf8-node';
+import mic from 'microphone-stream';
+import Axios from 'axios';
+<p>const sampleRate = 44100;
+const eventStreamMarshaller = new EventStreamMarshaller(toUtf8, fromUtf8);</p>
+<p>export default () => {
+const [webSocket, setWebSocket] = React.useState&#x3C;WebSocket>();
+const [inputSampleRate, setInputSampleRate] = React.useState&#x3C;number>();</p>
+<p>const streamAudioToWebSocket = async (userMediaStream: any) => {
+const micStream = new mic();</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>micStream.on('format', (data: any) =&#x26;gt; {</span></span>
+<span class="line"><span>  setInputSampleRate(data.sampleRate);</span></span>
+<span class="line"><span>});</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>micStream.setStream(userMediaStream);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>const url = await Axios.post&#x26;lt;string&#x26;gt;('http://localhost:3016/url');</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>//open up our WebSocket connection</span></span>
+<span class="line"><span>const socket = new WebSocket(url.data);</span></span>
+<span class="line"><span>socket.binaryType = 'arraybuffer';</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>socket.onopen = () =&#x26;gt; {</span></span>
+<span class="line"><span>  micStream.on('data', (rawAudioChunk: any) =&#x26;gt; {</span></span>
+<span class="line"><span>    // the audio stream is raw audio bytes. Transcribe expects PCM with additional metadata, encoded as binary</span></span>
+<span class="line"><span>    const binary = convertAudioToBinaryMessage(rawAudioChunk);</span></span>
+<span class="line"><span>    if (socket.readyState === socket.OPEN) {</span></span>
+<span class="line"><span>      socket.send(binary);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  });</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>socket.onmessage = (message: MessageEvent) =&#x26;gt; {</span></span>
+<span class="line"><span>  const messageWrapper = eventStreamMarshaller.unmarshall(Buffer.from(message.data));</span></span>
+<span class="line"><span>  const messageBody = JSON.parse(String.fromCharCode.apply(String, messageWrapper.body as any));</span></span>
+<span class="line"><span>  if (messageWrapper.headers[':message-type'].value === 'event') {</span></span>
+<span class="line"><span>    handleEventStreamMessage(messageBody);</span></span>
+<span class="line"><span>  } else {</span></span>
+<span class="line"><span>    console.error(messageBody.Message);</span></span>
+<span class="line"><span>    stop(socket);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>socket.onerror = () =&#x26;gt; {</span></span>
+<span class="line"><span>  stop(socket);</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>socket.onclose = () =&#x26;gt; {</span></span>
+<span class="line"><span>  micStream.stop();</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>setWebSocket(socket);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>setTimeout(() =&#x26;gt; {</span></span>
+<span class="line"><span>  stop(socket);</span></span>
+<span class="line"><span>}, 15000);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>console.log('Amazon started');</span></span></code></pre>
+<p>};</p>
+<p>const convertAudioToBinaryMessage = (audioChunk: any): any => {
+const raw = mic.toRaw(audioChunk);</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>if (raw == null) return;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// downsample and convert the raw audio bytes to PCM</span></span>
+<span class="line"><span>const downsampledBuffer = downsampleBuffer(raw, inputSampleRate, sampleRate);</span></span>
+<span class="line"><span>const pcmEncodedBuffer = pcmEncode(downsampledBuffer);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// add the right JSON headers and structure to the message</span></span>
+<span class="line"><span>const audioEventMessage = getAudioEventMessage(Buffer.from(pcmEncodedBuffer));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>//convert the JSON object + headers into a binary event stream message</span></span>
+<span class="line"><span>const binary = eventStreamMarshaller.marshall(audioEventMessage);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>return binary;</span></span></code></pre>
+<p>};</p>
+<p>const getAudioEventMessage = (buffer: Buffer): Message => {
+// wrap the audio data in a JSON envelope
+return {
+headers: {
+‘:message-type’: {
+type: ‘string’,
+value: ‘event’,
+},
+‘:event-type’: {
+type: ‘string’,
+value: ‘AudioEvent’,
+},
+},
+body: buffer,
+};
+};</p>
+<p>const pcmEncode = (input: any) => {
+var offset = 0;
+var buffer = new ArrayBuffer(input.length * 2);
+var view = new DataView(buffer);
+for (var i = 0; i &#x3C; input.length; i++, offset += 2) {
+var s = Math.max(-1, Math.min(1, input[i]));
+view.setInt16(offset, s &#x3C; 0 ? s * 0x8000 : s * 0x7fff, true);
+}
+return buffer;
+};</p>
+<p>const downsampleBuffer = (buffer: any, inputSampleRate: number = 44100, outputSampleRate: number = 16000) => {
+if (outputSampleRate === inputSampleRate) {
+return buffer;
+}</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>var sampleRateRatio = inputSampleRate / outputSampleRate;</span></span>
+<span class="line"><span>var newLength = Math.round(buffer.length / sampleRateRatio);</span></span>
+<span class="line"><span>var result = new Float32Array(newLength);</span></span>
+<span class="line"><span>var offsetResult = 0;</span></span>
+<span class="line"><span>var offsetBuffer = 0;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>while (offsetResult &#x26;lt; result.length) {</span></span>
+<span class="line"><span>  var nextOffsetBuffer = Math.round((offsetResult + 1) * sampleRateRatio);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  var accum = 0,</span></span>
+<span class="line"><span>    count = 0;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  for (var i = offsetBuffer; i &#x26;lt; nextOffsetBuffer &#x26;amp;&#x26;amp; i &#x26;lt; buffer.length; i++) {</span></span>
+<span class="line"><span>    accum += buffer[i];</span></span>
+<span class="line"><span>    count++;</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  result[offsetResult] = accum / count;</span></span>
+<span class="line"><span>  offsetResult++;</span></span>
+<span class="line"><span>  offsetBuffer = nextOffsetBuffer;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>return result;</span></span></code></pre>
+<p>};</p>
+<p>const handleEventStreamMessage = (messageJson: any) => {
+const results = messageJson.Transcript.Results;
+if (results.length > 0) {
+if (results[0].Alternatives.length > 0) {
+const transcript = decodeURIComponent(escape(results[0].Alternatives[0].Transcript));
+// if this transcript segment is final, add it to the overall transcription
+if (!results[0].IsPartial) {
+const text = transcript.toLowerCase().replace(’.’, ”).replace(’?’, ”).replace(’!’, ”);
+console.log(text);
+}
+}
+}
+};</p>
+<p>const start = () => {
+// first we get the microphone input from the browser (as a promise)…
+window.navigator.mediaDevices
+.getUserMedia({
+video: false,
+audio: true,
+})
+// …then we convert the mic stream to binary event stream messages when the promise resolves
+.then(streamAudioToWebSocket)
+.catch(() => {
+console.error(‘Please check thet you microphose is working and try again.’);
+});
+};</p>
+<p>const stop = (socket: WebSocket) => {
+if (socket) {
+socket.close();
+setWebSocket(undefined);
+console.log(‘Amazon stoped’);
+}
+};</p>
+</code><p><code>return (
+&#x3C;div className=“App”>
+&#x3C;button onClick={() => (webSocket ? stop(webSocket) : start())}>{webSocket ? ‘Stop’ : ‘Start’}&#x3C;/button>
+&#x3C;/div>
+);
+};
+</code></p></pre><p></p>
+<h2>TypeScript declaration</h2>
+Module microphone-stream does not have a TypeScript package. In order to create one, a file named <em><strong>microphone-stream.d.ts</strong></em> with content <em><strong>declare module 'microphone-stream'</strong></em> is needed.
+<h2>Conclusion</h2>
+AWS Transcribe is really easy to use service, which does not require a significant implementation effort. I can compare it with Google Speech-To-Text and it is much harder to make that one work.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

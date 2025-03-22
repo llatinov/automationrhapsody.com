@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/automated-code-coverage-of-unit-tests-with-jacoco-and-maven/"><!-- Primary Meta Tags --><title>Automated code coverage of unit tests with JaCoCo and Maven</title><meta name="title" content="Automated code coverage of unit tests with JaCoCo and Maven"><meta name="description" content="Tutorial how to setup code coverage with JaCoCo on unit tests to be done on each Maven build."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/automated-code-coverage-of-unit-tests-with-jacoco-and-maven/"><meta property="og:title" content="Automated code coverage of unit tests with JaCoCo and Maven"><meta property="og:description" content="Tutorial how to setup code coverage with JaCoCo on unit tests to be done on each Maven build."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/automated-code-coverage-of-unit-tests-with-jacoco-and-maven/"><meta property="twitter:title" content="Automated code coverage of unit tests with JaCoCo and Maven"><meta property="twitter:description" content="Tutorial how to setup code coverage with JaCoCo on unit tests to be done on each Maven build."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-08-18T00:00:00.000Z"> Aug 18, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Automated code coverage of unit tests with JaCoCo and Maven</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>Code coverage</h2>
+There are two main streamlines in code coverage. One is running code coverage on each build measuring unit tests coverage. Once configured this needs no manual intervention. Depending on the tools there is even an option to fail the build if code coverage doesn’t reach the desired threshold. Current post is designated to this aspect. Other is running code coverage on automated or even manual functional tests scenarios. Latter is described in <a href="/code-coverage-of-manual-or-automated-tests-with-jacoco/">Code coverage of manual or automated tests with JaCoCo</a> post.
+<h2>Unit tests code coverage</h2>
+The theory described in <a href="/what-about-code-coverage/">What about code coverage</a> post is applicable for unit tests code coverage, but the real benefit of unit tests code coverage is:
+<ul>
+ 	<li>Unit tests code coverage can be automated on every build</li>
+ 	<li>The build can be configured to fail if a specific threshold is not met</li>
+</ul>
+<h2>JaCoCo for Maven</h2>
+There is JaCoCo plugin that is used with Maven builds. More details and what goals can be accomplished with it can be seen in <a href="https://www.eclemma.org/jacoco/trunk/doc/maven.html" target="_blank" rel="noopener">JaCoCo Maven plugin</a> page. The very minimum to make it work is to setup <em><strong>prepare-agent</strong></em> and <em><strong>report</strong></em> goals. Report goal is good to be called during <em><strong>test</strong></em> Maven task. This is done with test instruction. You can define it on other tasks, like <em><strong>install</strong></em> or <em><strong>package</strong></em>, however, code coverage is done for tests. XML block to be added to <em><strong>pom.xml</strong></em> file is:
+<pre class="language-xml"><code>&#x3C;plugin>
+	&#x3C;groupId>org.jacoco&#x3C;/groupId>
+	&#x3C;artifactId>jacoco-maven-plugin&#x3C;/artifactId>
+	&#x3C;version>0.7.4.201502262128&#x3C;/version>
+	&#x3C;executions>
+		&#x3C;execution>
+			&#x3C;id>jacoco-initialize&#x3C;/id>
+			&#x3C;goals>
+				&#x3C;goal>prepare-agent&#x3C;/goal>
+			&#x3C;/goals>
+		&#x3C;/execution>
+		&#x3C;execution>
+			&#x3C;id>jacoco-report&#x3C;/id>
+			&#x3C;phase>test&#x3C;/phase>
+			&#x3C;goals>
+				&#x3C;goal>report&#x3C;/goal>
+			&#x3C;/goals>
+		&#x3C;/execution>
+	&#x3C;/executions>
+&#x3C;/plugin>
+</code></pre>
+<p>Once this is configured it can be run with <em><strong>mvn clean test</strong></em> command. Once successfully build JaCoCo report can be found in <em><strong>/target/site/jacoco/index.html</strong></em> file. A similar report can be found in <a href="/examples/JaCoCo-results/index.html" target="_blank" rel="noopener">HTML JaCoCo report</a>.</p>
+<h2>Add coverage thresholds</h2>
+Just adding unit tests code coverage report is good but can be rather improved. A good practice is to add code coverage thresholds. If predefined code coverage percentage is not reached build will fail. This practice could have a negative effect on putting unit tests just for the sake of code coverage, but then again it is up to the development team to keep the good quality. Adding thresholds is done with <em><strong>check</strong></em> Maven task:
+<pre class="language-xml"><code>&#x3C;execution>
+	&#x3C;id>jacoco-check&#x3C;/id>
+	&#x3C;phase>test&#x3C;/phase>
+	&#x3C;goals>
+		&#x3C;goal>check&#x3C;/goal>
+	&#x3C;/goals>
+	&#x3C;configuration>
+		&#x3C;rules>
+			&#x3C;rule implementation="org.jacoco.maven.RuleConfiguration">
+				&#x3C;element>BUNDLE&#x3C;/element>
+				&#x3C;limits>
+					&#x3C;limit implementation="org.jacoco.report.check.Limit">
+						&#x3C;counter>INSTRUCTION&#x3C;/counter>
+						&#x3C;value>COVEREDRATIO&#x3C;/value>
+						&#x3C;minimum>0.60&#x3C;/minimum>
+					&#x3C;/limit>
+				&#x3C;/limits>
+			&#x3C;/rule>
+		&#x3C;/rules>
+	&#x3C;/configuration>
+&#x3C;/execution>
+</code></pre>
+<p><em><strong>check</strong></em> task should be added along with <em><strong>prepare-agent</strong></em>. <em><strong>report</strong></em> is not mandatory but could also be added in order to inspect where code coverage is not enough. Note that <em><strong>implementation</strong></em> attribute is mandatory only for <em><strong>Maven 2</strong></em>. If <em><strong>Maven 3</strong></em> is used then attributes can be removed.</p>
+<h2>JaCoCo check rules</h2>
+In order <em><strong>check</strong></em> task to work is should be added at least one <em><strong>goal</strong></em> element as shown above. The rule is defined for a particular scope. Available scopes are: <em><strong>BUNDLE</strong></em>, <em><strong>PACKAGE</strong></em>, <em><strong>CLASS</strong></em>, <em><strong>SOURCEFILE</strong></em> or <em><strong>METHOD</strong></em>. More details can be found in <a href="https://www.eclemma.org/jacoco/trunk/doc/check-mojo.html" target="_blank" rel="noopener">JaCoCo check Maven task</a> documentation. In current example rule is for <em><strong>BUNDLE</strong></em>, which means whole code under analysis. <em><strong>PACKAGE</strong></em> is the far I would go. Even with it, there could be unpleasant surprises like a utility package or <a href="https://en.wikipedia.org/wiki/Plain_Old_Java_Object" target="_blank" rel="noopener">POJO</a> (data object without business logic inside) packages where objects do not have essential business logic but the <em><strong>PACKAGE</strong></em> rule will still require given code coverage for this package. This means you will have to write unit tests just to satisfy the coverage demand.
+<h2>JaCoCo check limits</h2>
+Although not mandatory each rule is good to have at least one <em><strong>limit</strong></em> element as shown above.
+<p>Available limit counters are: <em><strong>INSTRUCTION</strong></em>, <em><strong>LINE</strong></em>, <em><strong>BRANCH</strong></em>, <em><strong>COMPLEXITY</strong></em>, <em><strong>METHOD</strong></em>, <em><strong>CLASS</strong></em>. Those are the values measured in the report. Some of them are JaCoCo specific other are accordance with code coverage general theory. See more details on counters in <a href="https://www.eclemma.org/jacoco/trunk/doc/counters.html" target="_blank" rel="noopener">JaCoCo counters page</a>. Check sample report at <a href="/examples/JaCoCo-results/index.html" target="_blank" rel="noopener">HTML JaCoCo report</a> to see how counters are displayed.</p>
+<p>Available limit values are: <em><strong>TOTALCOUNT</strong></em>, <em><strong>COVEREDCOUNT</strong></em>, <em><strong>MISSEDCOUNT</strong></em>, <em><strong>COVEREDRATIO</strong></em>, <em><strong>MISSEDRATIO</strong></em>. Those are the magnitude values for measuring. <em><strong>COUNT</strong></em> values are bounding with current implementation and cannot be referred to some industry standards. This is why <em><strong>RATIO</strong></em> values are much more suitable.</p>
+<p>Actual measuring value is set in <em><strong>minimum</strong></em> or <em><strong>maximum</strong></em> elements. <em><strong>Minimum</strong></em> is generally used with <em><strong>COVERED</strong></em> values, <em><strong>maximum</strong></em> with <em><strong>MISSED</strong></em> values. Note that in case of <em><strong>RATIO</strong></em> this should be a double value less than 1, e.g. <em><strong>0.60</strong></em> in the example above means <em><strong>60%</strong></em>.</p>
+<p>With given counters and values there could be lots of combinations. The very minimum is to use <em><strong>INSTRUCTION</strong></em> with <em><strong>COVEREDRATIO</strong></em> as shown in the example above. Still, if you want to be really precise several limits with different counters can be used. Below is an example of Maven 3 where defining that every class should have been covered in unit tests:</p>
+<pre class="language-xml"><code>&#x3C;limit>
+	&#x3C;counter>CLASS&#x3C;/counter>
+	&#x3C;value>MISSEDCOUNT&#x3C;/value>
+	&#x3C;maximum>0&#x3C;/maximum>
+&#x3C;/limit>
+</code></pre>
+<h2>Configurations are good practice</h2>
+Hard-coding is never a good practice anywhere. The example above has a hard-coded value of <em><strong>60%</strong></em> instruction code coverage, otherwise build will fail. This is not a proper way to do it. The proper way is to define a property and then use it. Properties element is defined as a root level:
+<pre class="language-xml"><code>&#x3C;properties>
+	&#x3C;jacoco.percentage.instruction>0.60&#x3C;/jacoco.percentage.instruction>
+&#x3C;/properties>
+
+...
+
+&#x3C;limit>
+	&#x3C;counter>INSTRUCTION&#x3C;/counter>
+	&#x3C;value>COVEREDRATIO&#x3C;/value>
+	&#x3C;minimum>${jacoco.percentage.instruction}&#x3C;/minimum>
+&#x3C;/limit>
+</code></pre>
+<p>The benefit of a property is that it can be easily overridden at runtime, just specify the new value as a system property: <em><strong>mvn clean test -Djacoco.percentage.instruction=0.20</strong></em>. In this way, there could be a general value of <em><strong>0.60</strong></em> in pom.xml, but until this is not reached it can be overridden with <em><strong>0.20</strong></em>.</p>
+<h2>Experiment with JaCoCo checks</h2>
+Sample application to experiment with is the one introduced in <a href="/rest-performance-problems-with-dropwizard-and-jersey-jaxb-provider/" target="_blank" rel="noopener">Build a RESTful stub server with Dropwizard</a> post. It can be found in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/sample-dropwizard-rest-stub" target="_blank" rel="noopener">sample-dropwizard-rest-stub</a> repository. It has a very low amount of code in it and just one unit test with very low code coverage. This gives good opportunities to try different combinations of counters and values to see how exactly JaCoCo works.
+<h2>Conclusion</h2>
+Code coverage of unit tests with thresholds is a good practice. This tutorial gives very good introduction how to implement and use them, so apply and use them.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

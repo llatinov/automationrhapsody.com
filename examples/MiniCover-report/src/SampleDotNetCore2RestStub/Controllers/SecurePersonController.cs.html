@@ -1,0 +1,29 @@
+<html>
+<body style="font-family: sans-serif;">
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Collections.Generic;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using Microsoft.AspNetCore.Mvc;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using SampleDotNetCore2RestStub.Attributes;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using SampleDotNetCore2RestStub.Models;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using SampleDotNetCore2RestStub.Repositories;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">namespace SampleDotNetCore2RestStub.Controllers</div>
+<div style="white-space: pre;background-color: #EEF4ED;">{</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    [ServiceFilter(typeof(AuthenticationFilterAttribute))]</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    public class SecurePersonController : Controller</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    {</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        private readonly IPersonRepository _personRepository;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EACECC;">        public SecurePersonController(IPersonRepository personRepository)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            _personRepository = personRepository;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        [HttpGet(&quot;secure/person/all&quot;)]</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public List&lt;Person&gt; GetPersons()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            return _personRepository.GetAll();</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">}</div>
+</body>
+</html>

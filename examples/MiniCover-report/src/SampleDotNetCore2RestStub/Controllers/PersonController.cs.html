@@ -1,0 +1,47 @@
+<html>
+<body style="font-family: sans-serif;">
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Collections.Generic;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Linq;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using Microsoft.AspNetCore.Mvc;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using SampleDotNetCore2RestStub.Models;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using SampleDotNetCore2RestStub.Repositories;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">namespace SampleDotNetCore2RestStub.Controllers</div>
+<div style="white-space: pre;background-color: #EEF4ED;">{</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    public class PersonController : Controller</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    {</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        private readonly IPersonRepository _personRepository;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">        public PersonController(IPersonRepository personRepository)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            _personRepository = personRepository;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        [HttpGet(&quot;person/get/{id}&quot;)]</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public Person GetPerson(int id)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            return _personRepository.GetById(id);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        [HttpGet(&quot;person/remove&quot;)]</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public string RemovePerson()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            _personRepository.Remove();</div>
+<div style="white-space: pre;background-color: #EACECC;">            return &quot;Last person remove. Total count: &quot; + _personRepository.GetCount();</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        [HttpGet(&quot;person/all&quot;)]</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public List&lt;Person&gt; GetPersons()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            return _personRepository.GetAll();</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        [HttpPost(&quot;person/save&quot;)]</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public string AddPerson([FromBody]Person person)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            return _personRepository.Save(person);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">}</div>
+</body>
+</html>

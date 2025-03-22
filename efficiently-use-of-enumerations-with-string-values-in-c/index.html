@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/efficiently-use-of-enumerations-with-string-values-in-c/"><!-- Primary Meta Tags --><title>Efficiently use of enumerations with string values in C#</title><meta name="title" content="Efficiently use of enumerations with string values in C#"><meta name="description" content="Using enumerations or specialized classes makes your automation tests easy to understand and maintain. Show with code samples how to define and read string value to enumeration elements."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/efficiently-use-of-enumerations-with-string-values-in-c/"><meta property="og:title" content="Efficiently use of enumerations with string values in C#"><meta property="og:description" content="Using enumerations or specialized classes makes your automation tests easy to understand and maintain. Show with code samples how to define and read string value to enumeration elements."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/efficiently-use-of-enumerations-with-string-values-in-c/"><meta property="twitter:title" content="Efficiently use of enumerations with string values in C#"><meta property="twitter:description" content="Using enumerations or specialized classes makes your automation tests easy to understand and maintain. Show with code samples how to define and read string value to enumeration elements."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-03-04T00:00:00.000Z"> Mar 4, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Efficiently use of enumerations with string values in C#</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>When you do automation tests and have to pass a value to a method it is so easy and natural to just use strings. There are many cases where a string is a correct solution. There are also many cases where a string can be a solution, but enumeration or specialized class are better and more efficient solution.</p>
+<h2>Why not strings</h2>
+Having the following example - web application with drop down which has several options. We are using <a title="Page objects pattern" href="/page-objects-design-pattern/">Page objects pattern</a> to model the page. Page object has a method which accepts the option to be selected. String seems like a natural solution but is wrong. Although string will work enumeration is the only right solution. Drop down has limited and already defined options that can be selected. Exposing just string may cause misinterpretations for the consumer of your method. It is much more easy to limit the consumer to several enumeration values. In this way, consumer knows what data to provide and this automatically keeps code clean from magic strings. If changes are needed they will be done only in the enumeration making code easier to maintain.
+<h2>Problem with enumerations in C#</h2>
+Using enumerations for example given above will not work. Unlike Java enumerations in C# are wrappers for int or other numeric types value. You are not able to use text with enumeration element.
+<h2>Using string values with enumerations</h2>
+Only way to use string values in enumerations is by adding it as an attribute to each enumeration's element. It takes several steps in order to accomplish this.
+<ol>
+ 	<li>Create the attribute class that will be applied to enumeration element</li>
+ 	<li>Create extension method that is responsible for reading a string value from enumeration element</li>
+ 	<li>Apply string value attribute to enumeration element</li>
+ 	<li>Use in code</li>
+</ol>
+Below are code samples how to use string values with enumerations in C#. Defining and reading of the attribute is functionality built in <a title="NTestsRunner" href="/ntestsrunner/">NTestsRunner</a>.
+<h2>Define attribute</h2>
+The first step is to create a class that extends <em><strong>System. Attribute</strong></em>. It has only one string property to hold the text in it. The text is passed in the constructor. Note that this class is defined in System namespace in order to have it by default skipping the need of importing namespace you might not be aware of.
+<pre class="language-csharp"><code>namespace System
+{
+	public class StringValue : Attribute
+	{
+		public string Value { get; private set; }
+
+		public StringValue(string value)
+		{
+			Value = value;
+		}
+	}
+}
+</code></pre>
+<h2>Read the attribute</h2>
+C# provides so-called <a title="Extension methods" href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods" target="_blank" rel="noopener">extension methods</a>, a great way to add new functionality to the existing type without creating new derived type. Reading of string value from enumeration element is done with a <em><strong>GetStringValue</strong></em> extension method. With reflection, all <em><strong>StringValue</strong></em> custom attributes of an element are obtained. If some found text of first is returned. If not then string representation of the element is returned.
+<pre class="language-csharp"><code>using System.Reflection;
+
+namespace System
+{
+	public static class ExtensionMethods
+	{
+		public static string GetStringValue(this Enum value)
+		{
+			string stringValue = value.ToString();
+			Type type = value.GetType();
+			FieldInfo fieldInfo = type.GetField(value.ToString());
+			StringValue[] attrs = fieldInfo.
+				GetCustomAttributes(typeof(StringValue), false) as StringValue[];
+			if (attrs.Length > 0)
+			{
+				stringValue = attrs[0].Value;
+			}
+			return stringValue;
+		}
+	}
+}
+</code></pre>
+<h2>Apply to enumerations</h2>
+Once StringValue class is ready it can be applied as an attribute to any enumeration.
+<pre class="language-csharp"><code>public enum Messages
+{
+	[StringValue("Problem occured, try again later")]
+	ProblemOccured,
+	[StringValue("Successfully done")]
+	Success
+}
+</code></pre>
+<h2>Use in code</h2>
+In code string value can be obtained from enumeration's element with a GetStringValue method.
+<pre class="language-csharp"><code>Assert.AreEqual(Messages.ProblemOccured.GetStringValue(), App.MessageBox.GetText());
+</code></pre>
+<h2>Conclusion</h2>
+Using enumerations is mandatory to make readable and maintainable automation. Working effectively with enumerations will increase your value as automation specialist.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

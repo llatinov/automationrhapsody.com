@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/manage-microsoft-excel-files-java-apache-poi/"><!-- Primary Meta Tags --><title>Manage Microsoft Excel files in Java with Apache POI</title><meta name="title" content="Manage Microsoft Excel files in Java with Apache POI"><meta name="description" content="Code examples how to manage Microsoft Excel documents with Apache POI Java library."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/manage-microsoft-excel-files-java-apache-poi/"><meta property="og:title" content="Manage Microsoft Excel files in Java with Apache POI"><meta property="og:description" content="Code examples how to manage Microsoft Excel documents with Apache POI Java library."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/manage-microsoft-excel-files-java-apache-poi/"><meta property="twitter:title" content="Manage Microsoft Excel files in Java with Apache POI"><meta property="twitter:description" content="Code examples how to manage Microsoft Excel documents with Apache POI Java library."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-05-25T00:00:00.000Z"> May 25, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Manage Microsoft Excel files in Java with Apache POI</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Code examples in the current post can be found in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/java-samples/tree/master/apache-poi" target="_blank" rel="noopener noreferrer">java-samples/apache-poi</a> repository.</p>
+<p>Two most important use cases where MS Excel documents are useful in automation testing are:</p>
+<ul>
+ 	<li>Data-driven testing where test data is input from an Excel file</li>
+ 	<li>Output test results to an Excel file for stakeholders</li>
+</ul>
+So far I did not need to use Excel in my automation. Where data-driven testing was needed I either used JUnit data provider (see more in <a href="/data-driven-testing-junit-parameterized-tests/">Data driven testing with JUnit parameterized tests</a> and <a href="/data-driven-testing-junit-gradle/">Data driven testing with JUnit and Gradle</a> posts) or feeding data in CSV format and reading them with <a href="http://commons.apache.org/proper/commons-csv/" target="_blank" rel="noopener noreferrer">Apache Commons CSV</a> library. My colleague <a href="https://www.linkedin.com/in/petar-yordanov-34a55111a/" target="_blank" rel="noopener noreferrer">Petar Yordanov</a> introduced me to Apache POI which is very powerful for Excel and other MS format documents management.
+<h2>Apache POI</h2>
+The Apache POI Project's mission is to create and maintain Java APIs for manipulating various file formats based upon the Office Open XML standards (OOXML) and Microsoft's OLE 2 Compound Document format (OLE2). In short, you can read and write MS Excel files using Java. In addition, you can read and write MS Word and MS PowerPoint files using Java. Apache POI is your Java Excel solution (for Excel 97-2008). See more on <a href="https://poi.apache.org/" target="_blank" rel="noopener noreferrer">Apache POI home page</a>. Full details on supported POI formats can be found in <a href="http://poi.apache.org/components/index.html" target="_blank" rel="noopener noreferrer">Apache POI Component Overview</a>. From this page, you can navigate to more details how to work with a specific type of document. Full details on Excel management can be found on <a href="http://poi.apache.org/components/spreadsheet/quick-guide.html" target="_blank" rel="noopener noreferrer">Apache POI Spreadsheet Guide</a>.
+<h2>Usage</h2>
+<h3>Include in Maven project</h3>
+In the current example, I will use the <strong><em>poi-ooxml</em></strong> library which for XML based formats introduced in Microsoft Office 2007.
+<pre class="language-xml"><code>&#x3C;dependency>
+	&#x3C;groupId>org.apache.poi&#x3C;/groupId>
+	&#x3C;artifactId>poi-ooxml&#x3C;/artifactId>
+	&#x3C;version>3.16&#x3C;/version>
+&#x3C;/dependency>
+</code></pre>
+<h3>Creating a Workbook</h3>
+Excel file is actually a <em><strong>XSSFWorkbook</strong></em> object from <em><strong>org.apache.poi.xssf.usermodel</strong></em> package. Workbook can be created empty or from existing file:
+<pre class="language-java"><code>// Create empty workbook
+XSSFWorkbook newWorkBook = new XSSFWorkbook();
+// Create workbook from existing file
+XSSFWorkbook existingWorkBook = new XSSFWorkbook(new File("fileName.xlsx"));
+</code></pre>
+<h3>Manage sheets</h3>
+<em><strong>XSSFWorkbook</strong></em> class provides different methods for sheet management: <em><strong>createSheet()</strong></em>, <em><strong>cloneSheet()</strong></em>, <em><strong>getNumberOfSheets()</strong></em>, <em><strong>getSheet()</strong></em>, <em><strong>getSheetAt()</strong></em>, <em><strong>getSheetName()</strong></em>, <em><strong>getSheetIndex()</strong></em>. Create or get sheet methods return a <em><strong>XSSFSheet</strong></em> object.
+<h3>Manage sheet content</h3>
+Once you have the <em><strong>XSSFSheet</strong></em> object, either from create or get, you can manage rows in it. Some of the methods are: <em><strong>createRow()</strong></em>, <em><strong>getRow()</strong></em>, <em><strong>removeRow()</strong></em>, <em><strong>getLastRowNum()</strong></em>, <em><strong>getPhysicalNumberOfRows()</strong></em>, <em><strong>rowIterator()</strong></em>. Create or get row methods return a <em><strong>XSSFRow</strong></em> object. Inside row you can manage cells. Some of the methods are: <em><strong>createCell()</strong></em>, <em><strong>getCell()</strong></em>, <em><strong>removeCell()</strong></em>, <em><strong>getLastCellNum()</strong></em>, <em><strong>getPhysicalNumberOfCells()</strong></em>, <em><strong>cellIterator()</strong></em>. Create or get cell methods return a <em><strong>XSSFCell</strong></em> object. Some the methods are: <em><strong>setCellComment()</strong></em>, <em><strong>setCellFormula()</strong></em>, <em><strong>setCellStyle()</strong></em>, <em><strong>setCellType()</strong></em>, <em><strong>setCellValue()</strong></em>.
+<h2>Manage Excel documents</h2>
+Below are shown examples of simple ExcelWriter class that writes to Excel file. This class is used in SampleExcelApp showing how to write the text. Reading from Excel is shown in SampleExcelAppTest verifying the correct saving of the document.
+<p>[tabby title=“ExcelWriter”]</p>
+<pre class="language-java"><code>package com.automationrhapsody.apachepoi;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class ExcelWriter {
+
+	private final XSSFWorkbook workBook;
+
+	private Map&#x3C;String, Integer> nextRows = new HashMap&#x3C;>();
+	private String currentSheet;
+	private boolean isSaved;
+
+	public ExcelWriter() {
+		workBook = new XSSFWorkbook();
+	}
+
+	public void writeAndClose(File excelFile) {
+		if (isSaved) {
+			throw new IllegalArgumentException("Workbook already saved!");
+		}
+		try {
+			workBook.write(new FileOutputStream(excelFile));
+			workBook.close();
+			isSaved = true;
+		} catch (IOException ioe) {
+			// TODO log
+		}
+	}
+
+	public void switchToSheet(String sheetName) {
+		currentSheet = sheetName;
+		if (workBook.getSheet(sheetName) == null) {
+			workBook.createSheet(currentSheet);
+			nextRows.put(currentSheet, 0);
+		}
+	}
+
+	public void writeRow(String... values) {
+		XSSFSheet sheet = workBook.getSheet(currentSheet);
+		int nextRow = nextRows.get(currentSheet);
+		XSSFRow row = sheet.createRow(nextRow);
+
+		for (int i = 0; i &#x3C; values.length; i++) { 
+			XSSFCell cell = row.createCell(i);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(values[i]);
+		}
+
+		nextRows.put(currentSheet, nextRow + 1);
+	}
+
+	public void setCellColour(int rowNumber, int cellNumber,
+			IndexedColors colour) {
+		XSSFCellStyle style = workBook.createCellStyle();
+		style.setFillForegroundColor(colour.getIndex());
+		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+		int nextRow = nextRows.get(currentSheet);
+		if (rowNumber > nextRow) {
+			// TODO log or exception?
+			rowNumber = nextRow;
+		}
+		XSSFSheet sheet = workBook.getSheet(currentSheet);
+		int lastCell = sheet.getRow(rowNumber - 1).getLastCellNum();
+		if (cellNumber > lastCell) {
+			// TODO log or exception?
+			cellNumber = lastCell;
+		}
+
+		sheet.getRow(rowNumber - 1).getCell(cellNumber - 1)
+			.setCellStyle(style);
+	}
+}
+</code></pre>
+<p>[tabby title=“SampleExcelApp”]</p>
+<pre class="language-java"><code>package com.automationrhapsody.apachepoi;
+
+import java.io.File;
+
+import org.apache.poi.ss.usermodel.IndexedColors;
+
+public class SampleExcelApp {
+
+	public static void main(String[] args) {
+		String sheetName = "SheetName";
+
+		ExcelWriter excelWriter = new ExcelWriter();
+		excelWriter.switchToSheet(sheetName);
+		excelWriter.writeRow("A1-blue", "B1", "C1");
+		excelWriter.writeRow("A2", "B2", "C2");
+		excelWriter.setCellColour(1, 1, IndexedColors.BLUE);
+
+		excelWriter.switchToSheet("NewSheetName");
+		excelWriter.writeRow("A1", "B1");
+		excelWriter.writeRow("A2", "B2-red");
+		excelWriter.setCellColour(2, 2, IndexedColors.RED);
+
+		excelWriter.switchToSheet(sheetName);
+		excelWriter.writeRow("A3", "B3", "C3");
+		excelWriter.writeRow("A4", "B4", "C4");
+
+		File excelFile = new File("testReport.xlsx");
+		excelWriter.writeAndClose(excelFile);
+	}
+}
+</code></pre>
+<p>[tabby title=“SampleExcelAppTest”]</p>
+<pre class="language-java"><code>package com.automationrhapsody.apachepoi;
+
+import java.io.File;
+
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
+public class SampleExcelAppTest {
+
+	private static final File FILE = new File("testReport.xlsx");
+
+	private static XSSFWorkbook workbookUnderTest;
+
+	@BeforeClass
+	public static void beforeClass() throws Exception {
+		if (FILE.exists()) {
+			FILE.delete();
+		}
+
+		App.main(null);
+
+		workbookUnderTest = new XSSFWorkbook(FILE);
+	}
+
+	@Test
+	public void testNumberOfSheets() {
+		assertThat(workbookUnderTest.getNumberOfSheets(), is(2));
+	}
+
+	@Test
+	public void testSheetName() {
+		assertThat(workbookUnderTest.getSheetName(0), is("SheetName"));
+		assertThat(workbookUnderTest.getSheetName(1), is("NewSheetName"));
+	}
+
+	@Test
+	public void testFirstSheetContent() {
+		XSSFSheet sheet = workbookUnderTest.getSheetAt(0);
+		assertThat(sheet.getLastRowNum(), is(3));
+		assertThat(sheet.getRow(3).getLastCellNum(), is((short) 3));
+		assertThat(sheet.getRow(3).getCell(2).getStringCellValue(), 
+				is("C4"));
+
+		assertThat(sheet.getRow(0).getCell(0).getCellStyle()
+			.getFillForegroundColor(), is(IndexedColors.BLUE.getIndex()));
+		assertThat(sheet.getRow(1).getCell(1).getCellStyle()
+			.getFillForegroundColor(), 
+				is(IndexedColors.AUTOMATIC.getIndex()));
+	}
+
+	@Test
+	public void testSecondSheetContent() {
+		XSSFSheet sheet = workbookUnderTest.getSheetAt(1);
+		assertThat(sheet.getLastRowNum(), is(1));
+		assertThat(sheet.getRow(1).getLastCellNum(), is((short) 2));
+		assertThat(sheet.getRow(1).getCell(1).getStringCellValue(), 
+				is("B2-red"));
+
+		assertThat(sheet.getRow(1).getCell(1).getCellStyle()
+			.getFillForegroundColor(), is(IndexedColors.RED.getIndex()));	
+		assertThat(sheet.getRow(0).getCell(0).getCellStyle()
+			.getFillForegroundColor(), 
+				is(IndexedColors.AUTOMATIC.getIndex()));
+	}
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Conclusion</h2>
+Apache POI is a very powerful toolkit for managing MS documents especially Excel, which might be needed in your test automation for reporting of data-driven testing.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

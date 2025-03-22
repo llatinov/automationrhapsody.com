@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/ntestsrunner-for-functional-automated-tests/"><!-- Primary Meta Tags --><title>NTestsRunner for functional automated tests</title><meta name="title" content="NTestsRunner for functional automated tests"><meta name="description" content="NTestsRunner implementation details and features."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/ntestsrunner-for-functional-automated-tests/"><meta property="og:title" content="NTestsRunner for functional automated tests"><meta property="og:description" content="NTestsRunner implementation details and features."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/ntestsrunner-for-functional-automated-tests/"><meta property="twitter:title" content="NTestsRunner for functional automated tests"><meta property="twitter:description" content="NTestsRunner implementation details and features."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-02-24T00:00:00.000Z"> Feb 24, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>NTestsRunner for functional automated tests</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>In the previous post I’ve described unit testing frameworks and why they are not suitable for <a title="Running functional automation tests" href="/running-functional-automation-tests/">running functional automated tests</a>. I introduced NTestsRunner - very simple runner that can be used for running your automation tests. This topic is dedicated to implementation details of the NTestsRunner.</p>
+<h2>Verifications</h2>
+It is important in functional testing to be able to place several verification points in one test. For this purpose, abstract class Verification is implemented. It has two properties to store more details about verification and time it was taken. Constructor receives comma separated string values. In case of zero strings are passed then the result is an empty string. If one string is passed then this is the result. If more than one string is added then first string is taken as formatting string and others are used to build up the result. Logic is similar to <a title="string format" href="https://www.dotnetperls.com/format" target="_blank" rel="noopener noreferrer">string.Format(String, Object[])</a> method.
+<pre class="language-csharp"><code>public abstract class Verification
+{
+	public string Result { get; private set; }
+	public DateTime ExecutedAt { get; private set; }
+
+	public Verification(params object[] args)
+	{
+		...
+	}
+}
+</code></pre>
+<h2>Passed or Failed</h2>
+In automation test may have two conditions - passed or failed. This is why two concrete classes are extending Verification: <em><strong>VerificationPassed</strong></em> and <em><strong>VerificationFailed</strong></em>. They do not add any other functionality. Those classes use parent's class constructor. This is an example how to instantiate an object from those classes:
+<pre class="language-csharp"><code>string value = "number";
+int number = 1;
+Verification result =
+	new VerificationFailed("This is formatting string {0} {1}. ",
+		value,
+		number);
+</code></pre>
+<h2>Test case result</h2>
+<a title="Test case" href="https://en.wikipedia.org/wiki/Test_case" target="_blank" rel="noopener noreferrer">Test case</a> is generally a set of conditions to verify whether given scenario works are per user requirements. In automation, world test case is test method with several verification points inside. In NTestsRunner TestCaseResult is class representing the idea of a test case. It has properties for name, time to run and list of all verifications with a count of passed and failed.
+<pre class="language-csharp"><code>public class TestCaseResult
+{
+	public List&#x3C;Verification> Verifications = new List&#x3C;Verification>();
+	public string Name { get; set; }
+	public int VerificationsFailed { get; set; }
+	public int VerificationsPassed { get; set; }
+	public TimeSpan Time { get; set; }
+}
+</code></pre>
+<h2>Test plan result</h2>
+TestPlanResult in NTestsRunner has nothing to do with test plan term from QA world. Here this is a representation of a test class with test methods inside. It has properties for name and time to run. Also, there is a list of all <em><strong>TestCaseResults</strong></em>, i.e. test methods in that class. There are counters for passed and failed test cases and also counters for all passed and failed verifications inside all <em><strong>TestCaseResults</strong></em>.
+<pre class="language-csharp"><code>public class TestPlanResult
+{
+	public List&#x3C;TestCaseResult> TestCases = new List&#x3C;TestCaseResult>();
+	public string Name { get; set; }
+	public int TestCasesPassed { get; private set; }
+	public int TestCasesFailed { get; private set; }
+	public int VerificationsPassed { get; private set; }
+	public int VerificationsFailed { get; private set; }
+	public TimeSpan Time { get; private set; }
+
+	public void Count()
+	{
+		...
+	}
+}
+</code></pre>
+<h2>Class and method attributes</h2>
+In order to make one class a test class, it should have with [TestClass] attributes. To convert method to a test one it should have [TestMethod] attribute. Just the attribute is not enough though. The method should have special method signature. This is required by NTestsRunner.
+<h2>Test method signature</h2>
+In order to run without exception test method needs to conform to two rules:
+<ol>
+ 	<li>To have attribute [TestMethod]</li>
+ 	<li>Method to receive parameter List verifications in its signature, i.e.
+<pre class="language-csharp"><code>[TestMethod]
+public void TestMethod1(List&#x3C;Verification> verifications)
+</code></pre>
+</li>
+</ol>
+<h2>Configurations</h2>
+Configurations can be found on <a title="NTestsRunner" href="/ntestsrunner/">NTestRunner</a> home page.
+<h2>Execution</h2>
+Once object from NTestsRunner is instantiated and configured tests with <em><strong>Execute()</strong></em> method. Inside this method, all classes from calling assembly (the one that holds the tests) are taken. If <em><strong>TestsToExecute</strong></em> is configured then only those with name matching is given values are taken. If no <em><strong>TestsToExecute</strong></em> is provided then all classes with the attribute <em><strong>[TestClass]</strong></em> are taken. Methods from each class are taken by default in order of appearance in the class. If the method has <em><strong>[TestClass]</strong></em> attribute then the method is executed by passing List object to it. Inside the method, <em><strong>Verifications</strong></em> are collected as a list into a <em><strong>TestCaseResult</strong></em> object. After the method is run TestCaseResult is added to its parent TestPlanResult which is added to list with all results. In the end, results are saved as XML and HTML.
+<h2>Results in JUnit XML</h2>
+In order to integrate with <a title="Continuous integration" href="https://en.wikipedia.org/wiki/Continuous_integration" target="_blank" rel="noopener noreferrer">CI</a> tools such as Jenkins or Bamboo results are exported to XML file after execution has finished. The file is named Results.xml and is located in test results folder. XML format is implemented according to <a title="junit-4.xsd" href="https://github.com/llatinov/NTestsRunner/blob/master/NTestsRunner/junit-4.xsd" target="_blank" rel="noopener noreferrer">junit-4.xsd</a>.
+<h2>Results in HTML</h2>
+Tests result are saved as HTML report for better readability. The file is named <em><strong>Results.html</strong></em> and is located in test results folder.
+<h2>Usage</h2>
+In order to use NTestsRunner a console application project is needed. This project will hold test classes. As the one below. Take into consideration that this is very simplified usage pattern. In reality, <a title="Page objects pattern" href="/page-objects-design-pattern/">Page objects design</a> pattern will be used. Page objects will make the verifications and return them.
+<pre class="language-csharp"><code>[TestClass]
+public class TestClass1
+{
+	[TestMethod]
+	public void TestMethod1(List&#x3C;Verification> verifications)
+	{
+		// Do some actions
+		verifications.Add(new VerificationFailed("There is error"));
+		// Do some actions
+		verifications.Add(new VerificationPassed("Everythign is OK"));
+	}
+}
+</code></pre>
+<p>In its main method, a new instance of NTestsRunner is created. Configurations are done and test executions are started. It is that simple to use it.</p>
+<pre class="language-csharp"><code>class Program
+{
+	static void Main(string[] args)
+	{
+		NTestsRunnerSettings settings = new NTestsRunnerSettings();
+		settings.TestResultsDir = @"C:\temp";
+		settings.MaxTestCaseRuntimeMinutes = 2;
+		settings.TestsToExecute.Add("TestClass1");
+		settings.PreventScreenLock = true;
+
+		NTestsRunner runner = new NTestsRunner(settings);
+		runner.Execute();
+	}
+}
+</code></pre>
+<h2>Pros and cons</h2>
+NTestsRunner has its pros and cons.
+Pros are:
+<ul>
+ 	<li>Pretty easy to use</li>
+ 	<li>Open source and can be customized to your specific needs</li>
+ 	<li>Gives you ability to make several verifications in one test and in case of failure it doesn't break current test method</li>
+ 	<li>Tests are stored in console application that can be easily run</li>
+ 	<li>Results are saved in JUnit XML for CI integration</li>
+ 	<li>Results are saved in HTML</li>
+</ul>
+Cons are:
+<ul>
+ 	<li>Test methods should have a specific signature</li>
+ 	<li>It is not easy to migrate existing tests to a new format</li>
+</ul>
+<h2>Conclusions</h2>
+This is a pretty good tool for running functional automated tests. It is very easy to use and is made especially for running functional automated tests. You can definitely give it a try.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/assert-mockito-mock-method-arguments-no-equals-method-implemented/"><!-- Primary Meta Tags --><title>Assert Mockito mock method arguments if no equals() method implemented</title><meta name="title" content="Assert Mockito mock method arguments if no equals() method implemented"><meta name="description" content="How to assert mock method is called with the specific object as an argument in case no equals() method is implemented on argument object."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/assert-mockito-mock-method-arguments-no-equals-method-implemented/"><meta property="og:title" content="Assert Mockito mock method arguments if no equals() method implemented"><meta property="og:description" content="How to assert mock method is called with the specific object as an argument in case no equals() method is implemented on argument object."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/assert-mockito-mock-method-arguments-no-equals-method-implemented/"><meta property="twitter:title" content="Assert Mockito mock method arguments if no equals() method implemented"><meta property="twitter:description" content="How to assert mock method is called with the specific object as an argument in case no equals() method is implemented on argument object."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-06-15T00:00:00.000Z"> Jun 15, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Assert Mockito mock method arguments if no equals() method implemented</h1> <hr data-astro-cid-bvzihdzo> </div>  <p><a href="/mock-junit-tests-mockito-example/">Mock JUnit tests with Mockito example</a> post introduces Mockito as Java mocking framework. The code shown in examples below is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener">java-samples/junit</a> repository. Mockito makes it possible to verify whether a mock method has been called and with what specific object:</p>
+<pre class="language-java"><code>verify(locatorServiceMock, times(1)).geoLocate(new Point(1, 1));
+</code></pre>
+<p>The code above verifies that mock’s <em><strong>geoLocate()</strong></em> method was called with argument object with coordinates (1, 1).</p>
+<h2>Missing equals() method</h2>
+Internally Mockito uses Point class's <em><strong>equals()</strong></em> method to compare object that has been passed to the method as an argument with object configured as expected in <em><strong>verify()</strong></em> method. If <em><strong>equals()</strong></em> is not overridden then <em><strong>java.lang.Object's equals()</strong></em> is used which compares only the references, i.e. if both variables point to one and the same object in heap. In the current example, Point class has no <em><strong>equals()</strong></em> method implemented. When providing expected a new object is created, references are not one and the same, so Mockito will fail the verification.
+<h2>Override equals()</h2>
+In order to make verification works simplest solution is to implement <em><strong>equals()</strong></em> method in Point class. Personally, I'm not a big fan of changing production code for sake of testing. Maybe there is a valid reason for a developer to have designed current class in such manner. A more realistic scenario is that Point class comes from some external library which there is no control over, so overriding <em><strong>equals()</strong></em> method is not possible at all.
+<h2>Use Mockito argThat matcher</h2>
+Mockito provides a method called <em><strong>argThat()</strong></em> in <em><strong>org.mockito.Matchers</strong></em> class. It accepts an object from the class that implements <em><strong>org.hamcrest.Matcher&#x3C;T></strong></em> interface. Actual equals implementation is done in its <em><strong>matches()</strong></em> method:
+<pre class="language-java"><code>private class PointMatcher extends ArgumentMatcher&#x3C;Point> {
+	private final Point expected;
+
+	public PointMatcher(Point expected) {
+		this.expected = expected;
+	}
+
+	@Override
+	public boolean matches(Object obj) {
+		if (!(obj instanceof Point)) {
+			return false;
+		}
+		Point actual = (Point) obj;
+
+		return actual.getX() == expected.getX()
+			&#x26;&#x26; actual.getY() == expected.getY();
+	}
+}
+</code></pre>
+<p>Once implemented this class can be used in tests:</p>
+<pre class="language-java"><code>verify(locatorServiceMock, times(1))
+	.geoLocate(argThat(new PointMatcher(new Point(1, 1))));
+</code></pre>
+<h2>Conclusion</h2>
+In examples above is shown how to implement or change <em><strong>equals()</strong></em> method behavior for a specific class in unit tests so that Mockito can verify object from this class is provided as an argument for mock's method call.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/install-java-application-linux-service/"><!-- Primary Meta Tags --><title>Install Java application as a Linux service</title><meta name="title" content="Install Java application as a Linux service"><meta name="description" content="Code snippet how to start Java application as a Linux service."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/install-java-application-linux-service/"><meta property="og:title" content="Install Java application as a Linux service"><meta property="og:description" content="Code snippet how to start Java application as a Linux service."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/install-java-application-linux-service/"><meta property="twitter:title" content="Install Java application as a Linux service"><meta property="twitter:description" content="Code snippet how to start Java application as a Linux service."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-06-06T00:00:00.000Z"> Jun 6, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Install Java application as a Linux service</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>The code below can be found in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/sample-dropwizard-rest-stub" target="_blank" rel="noopener noreferrer">sample-dropwizard-rest-stub</a> repository in <em><strong>linux_service_file</strong></em> file. This post is related to <a href="/build-a-rest-stub-server-with-dropwizard/">Build a RESTful stub server with Dropwizard</a> post. REST server builds there is being set up to run as Linux service with the code snippet shown below.</p>
+<h2>Service snippet</h2>
+This snippet can be used for other applications to be run as Linux service, not only Java.
+<pre class="language-bash"><code>#!/bin/bash
+
+BASE_DIR=/var/dropwizard-rest-stub
+START_COMMAND="java -jar $BASE_DIR/dropwizard-rest-stub.jar server $BASE_DIR/config.yml"
+PID_FILE=$BASE_DIR/dropwizard-rest-stub.pid
+LOG_DIR=$BASE_DIR/logs
+
+start() {
+  PID=`$START_COMMAND > $LOG_DIR/init.log 2>$LOG_DIR/init.error.log &#x26; echo $!`
+}
+
+case "$1" in
+start)
+    if [ -f $PID_FILE ]; then
+        PID=`cat $PID_FILE`
+        if [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+            start
+        else
+            echo "Already running [$PID]"
+            exit 0
+        fi
+    else
+        start
+    fi
+
+    if [ -z $PID ]; then
+        echo "Failed starting"
+        exit 1
+    else
+        echo $PID > $PID_FILE
+        echo "Started [$PID]"
+        exit 0
+    fi
+;;
+status)
+    if [ -f $PID_FILE ]; then
+        PID=`cat $PID_FILE`
+        if [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+            echo "Not running (process dead but PID file exists)"
+            exit 1
+        else
+            echo "Running [$PID]"
+            exit 0
+        fi
+    else
+        echo "Not running"
+        exit 0
+    fi
+;;
+stop)
+    if [ -f $PID_FILE ]; then
+        PID=`cat $PID_FILE`
+        if [ -z "`ps axf | grep ${PID} | grep -v grep`" ]; then
+            echo "Not running (process dead but PID file exists)"
+            rm -f $PID_FILE
+            exit 1
+        else
+            PID=`cat $PID_FILE`
+            kill -term $PID
+            echo "Stopped [$PID]"
+            rm -f $PID_FILE
+            exit 0
+        fi
+    else
+        echo "Not running (PID not found)"
+        exit 0
+    fi
+;;
+restart)
+    $0 stop
+    $0 start
+;;
+*)
+    echo "Usage: $0 {status|start|stop|restart}"
+    exit 0
+esac
+</code></pre>
+<h2>Install as a Linux service</h2>
+In order to make it a Linux service following file has to be copied into <em><strong>/etc/init.d/</strong></em> Linux folder with the name that you want your service to be. If you want your service to be named <em><strong>service_name</strong></em> then you put the same name as filename: <em><strong>/etc/init.d/service_name</strong></em>.
+<p><em><strong>Nota bene:</strong></em> If you are creating the service and copying the file from Windows machine it has different new line endings (CR + LF) than Linux (LF). Also by default Git amends line endings on a pull and push depending on the OS. If you receive message: <em><strong>env: /etc/init.d/service_name: No such file or directory</strong></em> then you have to replace <em><strong>CR+LF</strong></em> to <em><strong>LF</strong></em> only. This can be done with following command: <em><strong>sed -i -e ‘s/\r//g’ /etc/init.d/service_name</strong></em>.</p>
+<h2>Manage service</h2>
+Assume you have named your file <em><strong>dropwizard</strong></em> then you manage your service with that name. Service has 4 commands: <em><strong>status</strong></em>, <em><strong>start</strong></em>, <em><strong>stop</strong></em> and <em><strong>restart</strong></em>. You start the service with <em><strong>service dropwizard start</strong></em> command. If you input something different than 4 options given above service will output its usage pattern.
+<h2>Conclusion</h2>
+In current post I have provided sample bash script that is used to install Java or any other application as a Linux service and then start, stop or restart it.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

@@ -1,0 +1,620 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/"><!-- Primary Meta Tags --><title>Build a REST API with .NET Core 2 and run it on Docker Linux container</title><meta name="title" content="Build a REST API with .NET Core 2 and run it on Docker Linux container"><meta name="description" content="Code examples how to create RESTful API with .NET Core 2.0 and then run it on Docker Linux container."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/"><meta property="og:title" content="Build a REST API with .NET Core 2 and run it on Docker Linux container"><meta property="og:description" content="Code examples how to create RESTful API with .NET Core 2.0 and then run it on Docker Linux container."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/"><meta property="twitter:title" content="Build a REST API with .NET Core 2 and run it on Docker Linux container"><meta property="twitter:description" content="Code examples how to create RESTful API with .NET Core 2.0 and then run it on Docker Linux container."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-12-19T00:00:00.000Z"> Dec 19, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Build a REST API with .NET Core 2 and run it on Docker Linux container</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Code below can be found in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/SampleDotNetCore2RestStub" target="_blank" rel="noopener noreferrer">SampleDotNetCore2RestStub</a> repository. In the current post is shown a sample application that can be a very good foundation for a real production application. This project can be easily used as a template for real API service.</p>
+<h2>Microsoft and open source</h2>
+I was doing Java for about 2 years and got back to .NET six months ago. Recently we had to do a project in .NET Core 2.0, a technology I haven't heard of before. I was truly amazed how much open source Microsoft had begun. .NET now can be developed and even run on Linux. This definitely makes it really competitive to Java which advantage was multi-platform ability. Another benefit is that documentation is very extensive and there is a huge community out there that makes solving issues really fast and easy.
+<h2>.NET Core</h2>
+In short .NET Core is a cross-platform development platform supporting Windows, macOS, and Linux, and can be used in device, cloud, and embedded/IoT scenarios. It is maintained by Microsoft and the .NET community on GitHub. More can be read on <a href="https://docs.microsoft.com/en-us/dotnet/core/" target="_blank" rel="noopener noreferrer">.NET Core Guide</a>.
+<h2>.NET Core 2.0</h2>
+The special thing about .NET Core 2.0 is the implementation of <a href="https://github.com/dotnet/announcements/issues/24" target="_blank" rel="noopener noreferrer">.NET Standard 2.0</a>. This makes it possible to use almost <em><strong>70%</strong></em> of already existing NuGet packages, which is a big step forward and eases development of .NET applications because of reusability.
+<h2>Create simple .NET Core project</h2>
+Making default .NET Core console application is really simple:
+<ol>
+ 	<li>Download and install <em><strong>.NET Core SDK</strong></em>. For Windows and MacOS there are installers available. For Linux it depends on distribution used, see more at <a href="https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-rhel7" target="_blank" rel="noopener noreferrer">.NET Core Linux installation guide</a>.</li>
+ 	<li>Create an application with following command: <em><strong>dotnet new console -o ProjectName</strong></em>. Option <em><strong>-o</strong></em> specifies the output folder to be created which also becomes the project name. If <em><strong>-o</strong></em> is omitted then the project will be created in the current folder with current folder's name.</li>
+ 	<li>Run the newly created application with: <em><strong>dotnet run</strong></em>.</li>
+</ol>
+<a href="/images/2017/12/NET-Core-Rest-API-create.png"><img src="/images/2017/12/NET-Core-Rest-API-create.png"></a>
+<h2>Using Visual Studio Code</h2>
+Once the project is created it can be developed in any text editor. Most convenient is Visual Studio 2017 because it provides lots of tools that make development very fast and efficient. In this tutorial, I will be using <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual Studio Code</a> - open-source multi-platform editor maintained by Microsoft. I admit it is much harder that Visual Studio 2017 but is free and multi-platform. Once project folder is imported, hitting <em><strong>Ctrl+F5</strong></em> runs the project.
+<p><a href="/images/2017/12/NET-Core-Rest-API-VS-Code.png"><img src="/images/2017/12/NET-Core-Rest-API-VS-Code.png"></a></p>
+<h2>ASP.NET Core MVC</h2>
+ASP.NET Core MVC provides features to build web APIs or web UIs. It has to be used in order to continue with the current example. Dependency to its NuGet package is added with the following command:
+<pre class="language-bash"><code>dotnet add package Microsoft.AspNetCore
+dotnet add package Microsoft.AspNetCore.All
+</code></pre>
+<h2>Create REST API</h2>
+After project structure is done it is time to add classes needed to make the REST API. Functionality is very similar to one described in <a href="/build-a-rest-stub-server-with-dropwizard/">Build a RESTful stub server with Dropwizard</a> post. There is a Person API which can retrieve, save or delete persons. They are kept in an in-memory data structure which mimics DB layer. Following classes are needed:
+<ul>
+ 	<li><em><strong>PersonController</strong></em> - a controller that exposes the API endpoints. By extending <em><strong>Controller</strong></em> class the runtime makes all endpoints available as long as they have proper routing. In current example routing is done inside action attributes <em><strong>[HttpGet("person/get/{id}")]</strong></em>. There are different routing options described in this extensive documentation <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.1" target="_blank" rel="noopener noreferrer">Routing to Controller Actions</a>. Adding of person is done with POST: <em><strong>[HttpPost("person/save")]</strong></em>. The important bit here is <em><strong>[FromBody]</strong></em> attribute which takes HTTP body and deserializes it to a <em><strong>Person</strong></em> object.</li>
+ 	<li><em><strong>Person</strong></em> - this is data model class with properties.</li>
+ 	<li><em><strong>PersonRepository</strong></em> - in-memory DB abstraction that keeps the data in a Dictionary. In reality, there will be DB layer responsible for managing data.</li>
+ 	<li><em><strong>Startup</strong></em> - class with services configuration. Both <em><strong>ConfigureServices</strong></em> and <em><strong>Configure</strong></em> methods are called behind the scenes from the runtime. Any configurations needed goes to those two methods. Current configuration adds MVC to services and instructs the application to use it. This is not really Model View Controller pattern, but this is what is needed to enable controllers and get API running.</li>
+ 	<li><em><strong>Program</strong></em> - main program entry point where web host is built and started. It uses <em><strong>Startup.cs</strong></em> to run the configurations. More details on WebHost can be found in <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/index?tabs=windows&#x26;view=aspnetcore-2.1#host" target="_blank" rel="noopener noreferrer">Hosting in ASP.NET Core</a>. This article also shows how the external configuration is managed, something that will be presented later in the current post.</li>
+</ul>
+[tabby title="PersonController"]
+<pre class="language-csharp"><code>using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using SampleDotNetCore2RestStub.Models;
+using SampleDotNetCore2RestStub.Repositories;
+
+namespace SampleDotNetCore2RestStub.Controllers
+{
+	public class PersonController : Controller
+	{
+		[HttpGet("person/get/{id}")]
+		public Person GetPerson(int id)
+		{
+			return PersonRepository.GetById(id);
+		}
+
+		[HttpGet("person/remove")]
+		public string RemovePerson()
+		{
+			PersonRepository.Remove();
+			return "Last person remove. Total count: " 
+						+ PersonRepository.GetCount();
+		}
+
+		[HttpGet("person/all")]
+		public List&#x3C;Person> GetPersons()
+		{
+			return PersonRepository.GetAll();
+		}
+
+		[HttpPost("person/save")]
+		public string AddPerson([FromBody]Person person)
+		{
+			return PersonRepository.Save(person);
+		}
+	}
+}
+</code></pre>
+<p>[tabby title=“Person”]</p>
+<pre class="language-csharp"><code>namespace SampleDotNetCore2RestStub.Models
+{
+	public class Person
+	{
+		public int Id { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string Email { get; set; }
+	}
+}
+</code></pre>
+<p>[tabby title=“PersonRepository”]</p>
+<pre class="language-csharp"><code>using System.Collections.Generic;
+using System.Linq;
+using SampleDotNetCore2RestStub.Models;
+
+namespace SampleDotNetCore2RestStub.Repositories
+{
+	public class PersonRepository
+	{
+		private static Dictionary&#x3C;int, Person> PERSONS 
+								= new Dictionary&#x3C;int, Person>();
+
+		static PersonRepository()
+		{
+			PERSONS.Add(1, new Person
+			{
+				Id = 1,
+				FirstName = "FN1",
+				LastName = "LN1",
+				Email = "email1@email.na"
+			});
+			PERSONS.Add(2, new Person
+			{
+				Id = 2,
+				FirstName = "FN2",
+				LastName = "LN2",
+				Email = "email2@email.na"
+			});
+		}
+
+		public static Person GetById(int id)
+		{
+			return PERSONS[id];
+		}
+
+		public static List&#x3C;Person> GetAll()
+		{
+			return PERSONS.Values.ToList();
+		}
+
+		public static int GetCount()
+		{
+			return PERSONS.Count();
+		}
+
+		public static void Remove()
+		{
+			if (PERSONS.Keys.Any())
+			{
+				PERSONS.Remove(PERSONS.Keys.Last());
+			}
+		}
+
+		public static string Save(Person person)
+		{
+			var result = "";
+			if (PERSONS.ContainsKey(person.Id))
+			{
+				result = "Updated Person with id=" + person.Id;
+			}
+			else
+			{
+				result = "Added Person with id=" + person.Id;
+			}
+			PERSONS.Add(person.Id, person);
+			return result;
+		}
+	}
+}
+</code></pre>
+<p>[tabby title=“Startup”]</p>
+<pre class="language-csharp"><code>using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
+
+namespace SampleDotNetCore2RestStub
+{
+	public class Startup
+	{
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
+
+		public IConfiguration Configuration { get; }
+
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddMvc();
+		}
+
+		public void Configure(IApplicationBuilder app,
+					IHostingEnvironment env)
+		{
+			app.UseMvc();
+		}
+	}
+}
+</code></pre>
+<p>[tabby title=“Program”]</p>
+<pre class="language-csharp"><code>using System;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+
+namespace SampleDotNetCore2RestStub
+{
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			BuildWebHost(args).Run();
+		}
+
+		public static IWebHost BuildWebHost(string[] args) =>
+			WebHost.CreateDefaultBuilder(args)
+				.UseStartup&#x3C;Startup>()
+				.Build();
+	}
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h2>External configuration</h2>
+Service so far is pretty much useless as it does not give an opportunity for external configurations. Adding external configuration consist of adding and changing following files:
+<ul>
+ 	<li style="list-style-type: none;">
+<ul>
+ 	<li><em><strong>VersionController</strong></em> - controller to actually show full working configuration. Routing in this controller is handled by <em><strong>[Route("api/[controller]")]</strong></em>. This exposes <em><strong>/api/version</strong></em> endpoint because <em><strong>[controller]</strong></em> is a template that stands for controller name. Controller constructor takes <em><strong>IOptions</strong></em> object and extracts <em><strong>Value</strong></em> out of it. Actual object value is injected in <em><strong>Startup.cs</strong></em>.</li>
+ 	<li><em><strong>appsettings.json</strong></em> - JSON file with application configurations.</li>
+ 	<li><em><strong>AppConfig</strong></em> - data model class that represents JSON configuration as an object.</li>
+ 	<li><em><strong>Startup</strong></em> - change is needed to read file <em><strong>appsettings.json</strong></em> and bind it to <em><strong>AppConfig</strong></em> object. Configuration is read with: <em><strong>var configurationBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json", false, true)</strong></em> then it is saved internally with <em><strong>Configuration = configurationBuilder.Build()</strong></em>. JSON configuration is bound to a <em><strong>AppConfig</strong></em> object with following line: <em><strong>services.Configure&#x3C;AppConfig>(Configuration)</strong></em>.</li>
+ 	<li><em><strong>SampleDotNetCore2RestStub.csproj</strong></em> - change is needed in the project file to instruct build process to copy <em><strong>appsettings.json</strong></em> to the output folder. This is where VS 2017 makes it much easier as it exposes property config to change, with VS Code you have to edit the csproj XML.</li>
+</ul>
+</li>
+</ul>
+[tabby title="VersionController"]
+<pre class="language-csharp"><code>using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+
+namespace SampleDotNetCore2RestStub.Controllers
+{
+	[Route("api/[controller]")]
+	public class VersionController : Controller
+	{
+		private readonly AppConfig _config;
+
+		public VersionController(IOptions&#x3C;AppConfig> options)
+		{
+			_config = options.Value;
+		}
+
+		[HttpGet]
+		public string Version()
+		{
+			return _config.Version;
+		}
+	}
+}
+</code></pre>
+<p>[tabby title=“appsettings.json”]</p>
+<pre class="language-text"><code>{
+	"Version": "1.0"
+}
+</code></pre>
+<p>[tabby title=“AppConfig”]</p>
+<pre class="language-csharp"><code>namespace SampleDotNetCore2RestStub
+{
+	public class AppConfig
+	{
+		public string Version { get; set; }
+	}
+}
+</code></pre>
+<p>[tabby title=“Startup”]</p>
+<pre class="language-csharp"><code>using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
+
+namespace SampleDotNetCore2RestStub
+{
+	public class Startup
+	{
+		public Startup()
+		{
+			var configurationBuilder = new ConfigurationBuilder()
+				.AddJsonFile("appsettings.json", false, true);
+
+			Configuration = configurationBuilder.Build();
+		}
+
+		public IConfiguration Configuration { get; }
+
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddMvc();
+			services.Configure&#x3C;AppConfig>(Configuration);
+		}
+
+		public void Configure(IApplicationBuilder app, 
+					IHostingEnvironment env)
+		{
+			app.UseMvc();
+		}
+	}
+}
+</code></pre>
+<p>[tabby title=“csproj”]</p>
+<pre class="language-csharp"><code>&#x3C;ItemGroup>
+	&#x3C;None Include="appsettings.json" CopyToOutputDirectory="Always" />
+&#x3C;/ItemGroup>
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Request filtering</h2>
+An almost mandatory feature is to have some kind of filtering on the request. The current example will provide a very basic implementation of authentication filter achieved with an attribute. Following files are needed:
+<ul>
+ 	<li><em><strong>SecurePersonController</strong></em> - controller that demonstrates filtering. The controller is no more different than other discussed above. Important bit is <em><strong>[ServiceFilter(typeof(AuthenticationFilterAttribute))]</strong></em> which assigns <em><strong>AuthenticationFilterAttribute</strong></em> to current controller.</li>
+ 	<li><em><strong>AuthenticationFilterAttribute</strong></em> - very basic implementation to illustrate how it works. Request headers are extracted from <em><strong>HttpContext</strong></em> and are checked for the existence of <em><strong>Authorization</strong></em>. If not found <em><strong>Exception</strong></em> is thrown. In next section, I will show how to handle this exception more gracefully.</li>
+ 	<li><em><strong>Startup</strong></em> - <em><strong>AuthenticationFilterAttribute</strong></em> is registered to runtime with: <em><strong>services.AddScoped&#x3C;AuthenticationFilterAttribute>()</strong></em>. .NET Core dependency injection mechanism is used here, which I have described it in more details in separate section below.</li>
+</ul>
+[tabby title="SecurePersonController"]
+<pre class="language-csharp"><code>using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using SampleDotNetCore2RestStub.Attributes;
+using SampleDotNetCore2RestStub.Models;
+using SampleDotNetCore2RestStub.Repositories;
+
+namespace SampleDotNetCore2RestStub.Controllers
+{
+	[ServiceFilter(typeof(AuthenticationFilterAttribute))]
+	public class SecurePersonController : Controller
+	{
+		[HttpGet("secure/person/all")]
+		public List&#x3C;Person> GetPersons()
+		{
+			return PersonRepository.GetAll();
+		}
+	}
+}
+</code></pre>
+<p>[tabby title=“AuthenticationFilterAttribute”]</p>
+<pre class="language-csharp"><code>using System;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Filters;
+
+namespace SampleDotNetCore2RestStub.Attributes
+{
+	public class AuthenticationFilterAttribute : ActionFilterAttribute
+	{
+		public override void OnActionExecuting(ActionExecutingContext ctx)
+		{
+			string authKey = ctx.HttpContext.Request
+					.Headers["Authorization"].SingleOrDefault();
+
+			if (string.IsNullOrWhiteSpace(authKey))
+				throw new Exception();
+		}
+	}
+}
+</code></pre>
+<p>[tabby title=“Startup”]</p>
+<pre class="language-csharp"><code>public void ConfigureServices(IServiceCollection services)
+{
+	services.AddMvc();
+	services.Configure&#x3C;AppConfig>(Configuration);
+	services.AddScoped&#x3C;AuthenticationFilterAttribute>();
+}
+</code></pre>
+<p>[tabbyending]</p>
+<p>If endpoint <em><strong>/secure/person/all</strong></em> is queried without <em><strong>Authorization</strong></em> header there is <em><strong>500 Internal Server Error</strong></em> response from the application. If <em><strong>Authorization</strong></em> header is present with any value all persons are retrieved.</p>
+<h2>Middleware</h2>
+<p class="lf-text-block lf-block" data-lf-anchor-id="b1b45126054eb4f9ac4448c69b39ce68:0">Middleware is a software that is assembled into an application pipeline to handle requests and responses. Each component chooses whether to pass the request to the next component in the pipeline or perform work before that. More on middleware can be found in <a href="https://docs.microsoft.com/en-gb/aspnet/core/fundamentals/middleware/index?tabs=aspnetcore2x&#x26;view=aspnetcore-2.1" target="_blank" rel="noopener noreferrer">ASP.NET Core Middleware Fundamentals</a>. In current example middleware is used to handle better exceptions. In the previous point, <em><strong>AuthenticationFilterAttribute</strong></em> was throwing an exception which was transformed to <em><strong>500 Internal Server Error</strong></em> which is not pretty. In case of not authorized application should return <em><strong>401 Unauthorized</strong></em>. In order to do this following files are needed:</p>
+<ul>
+ 	<li data-lf-anchor-id="b1b45126054eb4f9ac4448c69b39ce68:0"><em><strong>HttpException</strong></em> - a custom exception which then will be caught and processed in <em><strong>HttpExceptionMiddleware</strong></em>.</li>
+ 	<li data-lf-anchor-id="b1b45126054eb4f9ac4448c69b39ce68:0"><em><strong>HttpExceptionMiddleware</strong></em> - this is where handling happens. Code checks for custom <em><strong>HttpException</strong></em> and if such is thrown pipeline changes <em><strong>HttpContext.Response</strong></em> object with proper values.</li>
+ 	<li data-lf-anchor-id="b1b45126054eb4f9ac4448c69b39ce68:0"><em><strong>AuthenticationFilterAttribute</strong></em> - instead of Exception filter attribute throws new
+<div>
+<div><em><strong>HttpException(HttpStatusCode.Unauthorized)</strong></em>. This way middleware will get invoked.</div>
+</div></li>
+ 	<li data-lf-anchor-id="b1b45126054eb4f9ac4448c69b39ce68:0"><em><strong>Startup</strong></em> - middleware get registered here with <em><strong>app.UseMiddleware&#x3C;HttpExceptionMiddleware>()</strong></em>. It is extremely important that this stands before <em><strong>app.UseMvc()</strong></em> otherwise it will <em><strong>not</strong></em> work.</li>
+</ul>
+[tabby title="HttpException"]
+<pre class="language-csharp"><code>using System;
+using System.Net;
+
+namespace SampleDotNetCore2RestStub.Exceptions
+{
+	public class HttpException : Exception
+	{
+		public int StatusCode { get; }
+
+		public HttpException(HttpStatusCode httpStatusCode)
+			: base(httpStatusCode.ToString())
+		{
+			this.StatusCode = (int)httpStatusCode;
+		}
+	}
+}
+</code></pre>
+<p>[tabby title=“HttpExceptionMiddleware”]</p>
+<pre class="language-csharp"><code>using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
+using SampleDotNetCore2RestStub.Exceptions;
+
+namespace SampleDotNetCore2RestStub.Middleware
+{
+	public class HttpExceptionMiddleware
+	{
+		private readonly RequestDelegate _next;
+
+		public HttpExceptionMiddleware(RequestDelegate next)
+		{
+			_next = next;
+		}
+
+		public async Task Invoke(HttpContext context)
+		{
+			try
+			{
+				await _next.Invoke(context);
+			}
+			catch (HttpException httpException)
+			{
+				context.Response.StatusCode = httpException.StatusCode;
+				var feature = context.Features.Get&#x3C;IHttpResponseFeature>();
+				feature.ReasonPhrase = httpException.Message;
+			}
+		}
+	}
+}
+</code></pre>
+<p>[tabby title=“AuthenticationFilterAttribute”]</p>
+<pre class="language-csharp"><code>public override void OnActionExecuting(ActionExecutingContext context)
+{
+	string authKey = context.HttpContext.Request
+			.Headers["Authorization"].SingleOrDefault();
+
+	if (string.IsNullOrWhiteSpace(authKey))
+		throw new HttpException(HttpStatusCode.Unauthorized);
+}
+</code></pre>
+<p>[tabby title=“Startup”]</p>
+<pre class="language-csharp"><code>public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+	app.UseMiddleware&#x3C;HttpExceptionMiddleware>();
+	app.UseMvc();
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Dependency Injection</h2>
+So far there is running service with basic functionality. It is missing very important bit though, something that should have been considered and added earlier. Actually, it was added but only when registering <em><strong>AuthenticationFilterAttribute</strong></em>, but here I will go into more details. Dependency injection (DI) is a technique for achieving loose coupling between objects and their dependencies. Rather than directly instantiating an object or using static references, the objects a class needs are provided to the class in some fashion. ASP.NET Core provides its own dependency injection mechanisms, read more on <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-2.1" target="_blank" rel="noopener noreferrer">Introduction to Dependency Injection in ASP.NET Core</a>. The code will now get refactored to match this pattern.
+<ul>
+ 	<li><em><strong>IPersonRepository</strong></em> - all database operations are declared in this interface.</li>
+ 	<li><em><strong>PersonRepository</strong></em> - implements all methods of <em><strong>IPersonRepository</strong></em> interface. It still does not have real interaction with the database, data is kept in a dictionary. Refactor is that all static methods are removed. In order to use this class, you need an instance of it. Sample data is populated on object creation in its constructor.</li>
+ 	<li><em><strong>SecurePersonController </strong></em>- an instance of an implementation of <em><strong>IPersonRepository</strong></em> is passed through the constructor and is used internally. By using interfaces a level of abstraction is achieved, where multiple implementations may be used for the same interface.</li>
+ 	<li><em><strong>PersonController </strong></em>- same as <em><strong>SecurePersonController</strong></em>.</li>
+ 	<li><em><strong>Startup</strong></em> - this is where DI is used to register that <em><strong>PersonRepository</strong></em> is the implementation of <em><strong>IPersonRepository</strong></em>: <em><strong>services.AddSingleton&#x3C;IPersonRepository, PersonRepository>()</strong></em>.</li>
+</ul>
+Three different object life scopes are available in .NET Core DI. It is important to know the difference in order to use them properly. If object creation is expensive operation misuse of proper DI lifetime scope might be crucial for performance:
+<ul>
+ 	<li><em><strong>AddSingleton</strong></em> - only one instance is created for the whole application. In the example above PersonRepository needed to have one instance because sample data is initialized in the constructor.</li>
+ 	<li><span><em><strong>AddScoped</strong></em> - one instance is created per HTTP request scope. </span></li>
+ 	<li><span><em><strong>AddTransient</strong></em> - instance is created every time it is needed. Let us say there are 3 places where an object is needed and an HTTP request is coming to the application. <em><strong>AddTransient</strong></em> will create 3 different objects, while <em><strong>AddScoped</strong></em> will create just one that will be used for current HTTP request scope.</span></li>
+</ul>
+[tabby title="IPersonRepository"]
+<pre class="language-csharp"><code>using System.Collections.Generic;
+using SampleDotNetCore2RestStub.Models;
+
+namespace SampleDotNetCore2RestStub.Repositories
+{
+	public interface IPersonRepository
+	{
+		Person GetById(int id);
+		List&#x3C;Person> GetAll();
+		int GetCount();
+		void Remove();
+		string Save(Person person);
+	}
+}
+</code></pre>
+<p>[tabby title=“PersonRepository”]</p>
+<pre class="language-csharp"><code>using System.Collections.Generic;
+using System.Linq;
+using SampleDotNetCore2RestStub.Models;
+
+namespace SampleDotNetCore2RestStub.Repositories
+{
+	public class PersonRepository : IPersonRepository
+	{
+		private Dictionary&#x3C;int, Person> _persons 
+						= new Dictionary&#x3C;int, Person>();
+
+		public PersonRepository()
+		{
+			_persons .Add(1, new Person
+			{
+				Id = 1,
+				FirstName = "FN1",
+				LastName = "LN1",
+				Email = "email1@email.na"
+			});
+			_persons .Add(2, new Person
+			{
+				Id = 2,
+				FirstName = "FN2",
+				LastName = "LN2",
+				Email = "email2@email.na"
+			});
+		}
+
+		public Person GetById(int id)
+		{
+			return _persons[id];
+		}
+
+		public List&#x3C;Person> GetAll()
+		{
+			return _persons.Values.ToList();
+		}
+
+		public int GetCount()
+		{
+			return _persons.Count();
+		}
+
+		public void Remove()
+		{
+			if (_persons.Keys.Any())
+			{
+				_persons.Remove(_persons.Keys.Last());
+			}
+		}
+
+		public string Save(Person person)
+		{
+			if (_persons.ContainsKey(person.Id))
+			{
+				_persons[person.Id] = person;
+				return "Updated Person with id=" + person.Id;
+			}
+			else
+			{
+				_persons.Add(person.Id, person);
+				return "Added Person with id=" + person.Id;
+			}
+		}
+	}
+}
+</code></pre>
+<p>[tabby title=“SecurePersonController”]</p>
+<pre class="language-csharp"><code>using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using SampleDotNetCore2RestStub.Attributes;
+using SampleDotNetCore2RestStub.Models;
+using SampleDotNetCore2RestStub.Repositories;
+
+namespace SampleDotNetCore2RestStub.Controllers
+{
+	[ServiceFilter(typeof(AuthenticationFilterAttribute))]
+	public class SecurePersonController : Controller
+	{
+		private readonly IPersonRepository _personRepository;
+
+		public SecurePersonController(IPersonRepository personRepository)
+		{
+			_personRepository = personRepository;
+		}
+
+		[HttpGet("secure/person/all")]
+		public List&#x3C;Person> GetPersons()
+		{
+			return _personRepository.GetAll();
+		}
+	}
+}
+</code></pre>
+<p>[tabby title=“Startup”]</p>
+<pre class="language-csharp"><code>public void ConfigureServices(IServiceCollection services)
+{
+	services.AddMvc();
+	services.Configure&#x3C;AppConfig>(Configuration);
+	services.AddScoped&#x3C;AuthenticationFilterAttribute>();
+	services.AddSingleton&#x3C;IPersonRepository, PersonRepository>();
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Docker file</h2>
+Docker file that packs application is shown below:
+<pre class="language-docker"><code>FROM microsoft/dotnet:2.0-sdk
+COPY pub/ /root/
+WORKDIR /root/
+ENV ASPNETCORE_URLS="http://*:80"
+EXPOSE 80/tcp
+ENTRYPOINT ["dotnet", "SampleDotNetCore2RestStub.dll"]
+</code></pre>
+<p>Docker container that is used is <em><strong>microsoft/dotnet:2.0-sdk</strong></em>. Everything from <em><strong>pub</strong></em> folder is copied to container <em><strong>root</strong></em> folder. <em><strong>ASPNETCORE_URLS</strong></em> is used to set the URLs that the server listens on by default. Current config runs and exposes application at port 80 in the container. With <em><strong>ENTRYPOINT</strong></em> is configured the command that is run when the container is started.</p>
+<h2>Build, package and run Docker</h2>
+The application is built and published in <em><strong>Release</strong></em> mode into <em><strong>pub</strong></em> folder with the following command:
+<pre class="language-bash"><code>dotnet publish --configuration=Release -o pub
+</code></pre>
+<p>Docker container is packaged with tag <em><strong>netcore-rest</strong></em> with the following command:</p>
+<pre class="language-bash"><code>docker build . -t netcore-rest
+</code></pre>
+<p>Docker container is run with exposing port <em><strong>80</strong></em> from the container to port <em><strong>9000</strong></em> on the host with the following command:</p>
+<pre class="language-bash"><code>docker run -e Version=1.1 -p 9000:80 netcore-rest
+</code></pre>
+<p>Notice the <em><strong>-e Version=1.1</strong></em> which sets an environment variable to be used inside the container. The intention is to use this variable in application. This can be enabled by modifying <em><strong>Startup.cs</strong></em> file by adding <em><strong>AddEnvironmentVariables()</strong></em>:</p>
+<pre class="language-csharp"><code>public Startup()
+{
+	var configurationBuilder = new ConfigurationBuilder()
+		.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+		.AddEnvironmentVariables();
+
+	Configuration = configurationBuilder.Build();
+}
+</code></pre>
+<p>If invoked now <em><strong>/api/version</strong></em> returns <em><strong>1.1</strong></em>.</p>
+<h2>Docker optimisation</h2>
+When the container with <em><strong>microsoft/dotnet:2.0-sdk</strong></em> is packed it gets to a size of <em><strong>1.7GB</strong></em> which is quite a lot. There is much leaner container image: <em><strong>microsoft/dotnet:2.0-runtime</strong></em>, but it requires all runtime assemblies to be present in <em><strong>pub</strong></em> folder. This can be done by changing the <em><strong>csproj</strong></em> file by adding <em><strong>PublishWithAspNetCoreTargetManifest</strong></em> = false:
+<pre class="language-xml"><code>&#x3C;PropertyGroup>
+	&#x3C;OutputType>Exe&#x3C;/OutputType>
+	&#x3C;TargetFramework>netcoreapp2.0&#x3C;/TargetFramework>
+	&#x3C;PublishWithAspNetCoreTargetManifest>false&#x3C;/PublishWithAspNetCoreTargetManifest> 
+&#x3C;/PropertyGroup>
+</code></pre>
+<p>This makes <em><strong>pub</strong></em> folder about <em><strong>37MB</strong></em>, but container size is <em><strong>258MB</strong></em>. Problem with this proposal is that it might not be very reliable as some assemblies might not be copied or might not be the correct version.</p>
+<p>Since Docker is keeping layers in the repository, proposed optimization might turn out not to be actual optimization. It will consume much more space in the repository since layer that changes and is always saved is <em><strong>258MB</strong></em>. Layers with OS might not change often if it changes at all.</p>
+<h2>Testing</h2>
+How to given application can be integration tested is described in <a href="/net-core-integration-testing-mock-dependencies/">.NET Core integration testing and mock dependencies</a> post.
+<h2>Conclusion</h2>
+In the current tutorial, I have shown how to create API from scratch with .NET Core 2.0 SDK on any platform. It is very easy to run .NET Core app and even run it Docker with Linux container.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>RestStubApp.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Code coverage with JaCoCo agent</a> &gt; <a href="../../index.html" class="el_group">sample-dropwizard-rest-stub</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.automationrhapsody.reststub</a> &gt; <span class="el_source">RestStubApp.java</span></div><h1>RestStubApp.java</h1><pre class="source lang-java linenums">package com.automationrhapsody.reststub;
+
+import com.automationrhapsody.reststub.resources.BookService;
+import com.automationrhapsody.reststub.resources.PersonService;
+import com.automationrhapsody.reststub.resources.ProductsServlet;
+import io.dropwizard.Application;
+import io.dropwizard.setup.Environment;
+
+<span class="fc" id="L9">public class RestStubApp extends Application&lt;RestStubConfig&gt; {</span>
+
+    public static void main(String[] args) throws Exception {
+<span class="fc" id="L12">        new RestStubApp().run(args);</span>
+<span class="fc" id="L13">    }</span>
+
+    @Override
+    public void run(RestStubConfig config, Environment env) {
+<span class="fc" id="L17">        final PersonService personService = new PersonService();</span>
+<span class="fc" id="L18">        env.jersey().register(personService);</span>
+
+<span class="fc" id="L20">        final BookService bookService = new BookService();</span>
+<span class="fc" id="L21">        env.jersey().register(bookService);</span>
+
+<span class="fc" id="L23">        env.servlets().addServlet(&quot;ProductsServlet&quot;, ProductsServlet.class).addMapping(&quot;/products&quot;);</span>
+
+<span class="fc" id="L25">        final RestStubCheck healthCheck = new RestStubCheck(config.getVersion());</span>
+<span class="fc" id="L26">        env.healthChecks().register(&quot;template&quot;, healthCheck);</span>
+<span class="fc" id="L27">        env.jersey().register(healthCheck);</span>
+<span class="fc" id="L28">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>Code coverage with JaCoCo agent</div></body></html>

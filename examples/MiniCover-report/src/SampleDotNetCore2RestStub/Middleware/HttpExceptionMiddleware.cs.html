@@ -1,0 +1,35 @@
+<html>
+<body style="font-family: sans-serif;">
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Threading.Tasks;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using Microsoft.AspNetCore.Http;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using Microsoft.AspNetCore.Http.Features;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using SampleDotNetCore2RestStub.Exceptions;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">namespace SampleDotNetCore2RestStub.Middleware</div>
+<div style="white-space: pre;background-color: #EEF4ED;">{</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    public class HttpExceptionMiddleware</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    {</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        private readonly RequestDelegate _next;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">        public HttpExceptionMiddleware(RequestDelegate next)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            _next = next;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public async Task Invoke(HttpContext context)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            try</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                await _next.Invoke(context);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EACECC;">            catch (HttpException httpException)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #EACECC;">                context.Response.StatusCode = httpException.StatusCode;</div>
+<div style="white-space: pre;background-color: #EACECC;">                var feature = context.Features.Get&lt;IHttpResponseFeature&gt;();</div>
+<div style="white-space: pre;background-color: #EACECC;">                feature.ReasonPhrase = httpException.Message;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">}</div>
+</body>
+</html>

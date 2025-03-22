@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/coloured-log-files-linux/"><!-- Primary Meta Tags --><title>Coloured log files in Linux</title><meta name="title" content="Coloured log files in Linux"><meta name="description" content="How to colour your log files for better perception under Linux."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/coloured-log-files-linux/"><meta property="og:title" content="Coloured log files in Linux"><meta property="og:description" content="How to colour your log files for better perception under Linux."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/coloured-log-files-linux/"><meta property="twitter:title" content="Coloured log files in Linux"><meta property="twitter:description" content="How to colour your log files for better perception under Linux."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-11-25T00:00:00.000Z"> Nov 25, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Coloured log files in Linux</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>I’m far away from being a Linux guru and honestly, I like it that way. In order to be effective as a QA, you need to have minimal knowledge how to do certain things under Linux. This post is devoted to working with logs.</p>
+<h2>Chaining commands</h2>
+Linux offers a possibility to combine several commands by chaining them. In the current post, I will just one of them, the PIPE (I) operator. By using it the output of one command is used as input for other.
+<p>I would strongly recommend reading following post if you are interested in chaining Linux commands: <a href="https://www.tecmint.com/chaining-operators-in-linux-with-practical-examples/" target="_blank" rel="noopener noreferrer">10 Useful Chaining Operators in Linux with Practical Examples</a>.</p>
+<h2>Useful commands</h2>
+Commands below are one I use on a daily basis when working with logs. I will show basic usage, if you need more detail on certain command then you can type: <em><strong>man &#x3C;command></strong></em> e.g. <em><strong>man cat</strong></em> in Linux console and it will display you more information.
+<h3>grep</h3>
+It is used to search in text files or print lines matching some pattern. Usage is: <em><strong>grep text filename.log</strong></em>. If <em><strong>text</strong></em> contains spaces it should be wrapped around single quote (') or double quote ("). If <em><strong>text</strong></em> contains a single quote, then you have to wrap it around with double quote and vice versa.
+<h3>cat</h3>
+Prints file content to standard out put. Usage is: <em><strong>cat filename.log</strong></em>. You can concatenate several files: <em><strong>cat file1.log file2.log</strong></em>. Drawback using this command is when you have large files. It combines very well with grep to search output of the file: <em><strong>cat filename.log | grep text</strong></em>.
+<h3>zcat</h3>
+Prints content of a zipped file. Usage: <em><strong>zcat filename.gz</strong></em>. Combines with grep: <em><strong>zcat filename.gz | grep text</strong></em>.
+<h3>tail</h3>
+Prints last 10 lines from a file. Usage: <em><strong>tail filename.log</strong></em>. Most valuable tail usage is with <em><strong>-f</strong></em> option: <em><strong>tail -f filename.log</strong></em>. This monitor file in real time and outputs all new text appended to the file. You can also monitor several files: <em><strong>tail -f file1.log file2.log</strong></em>.
+<h3>less</h3>
+Used for paging through a file. It shows one page and with arrow key up and down you can scroll through the file. Usage: <em><strong>less filename.txt</strong></em>. In order to exit just type <em><strong>q</strong></em>. Valuable with this command is that you can type a search term <em><strong>/text</strong></em> and then with <em><strong>n</strong></em> go to next appearance and with <em><strong>N</strong></em> go to previous.
+<h2>Colours</h2>
+Commands above are nice, but using colours aid for a much better perception of information in the files. In order to use colours <em><strong>perl -pe</strong></em> command will be used as a chained command to colour the output of commands described above. Syntax is: <em><strong>perl -pe 's/^.*INFO.*$/\e[0;36;40m$&#x26;\e[0m/g'</strong></em>. It is quite a complex expression and I will try to explain it in details.
+<h3>Match text to be highlighted</h3>
+<em><strong>^.*INFO.*$</strong></em> is a regular expression that matches a text to be highlighted. Character <em><strong>^</strong></em> means from the beginning of the string or line, character <em><strong>$</strong></em> means to end of string or line. Group <em><strong>.*</strong></em> matches any character. So this regular expression means inspect every string or line and match those that contain <em><strong>INFO</strong></em>.
+<h3>Text effects</h3>
+<em><strong>\e[0;36;40m</strong></em> is the colouring part of the expression. <em><strong>0</strong></em> is value for ANSI escape code. Possible values for escape code are shown in the table below. Note that not all of them are supported by all OS.
+<table>
+<thead>
+<tr>
+<td bgcolor="E7E7E7">Code</td>
+<td bgcolor="E7E7E7">Effect</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Reset / Normal</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Bold or increased intensity</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Faint (decreased intensity)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Italic: on</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Underline: Single</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Blink: Slow</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Blink: Rapid</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Image: Negative</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Conceal</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Crossed-out</td>
+</tr>
+</tbody>
+</table>
+More codes can be found in <a href="https://en.wikipedia.org/wiki/ANSI_escape_code" target="_blank" rel="noopener noreferrer">ANSI escape code wiki</a>.
+<h3>Text colour</h3>
+<em><strong>36</strong></em> from <em><strong>\e[0;36;40m</strong></em> is colour code of text. Colour depends and is different based on escape code. Possible combinations of escape and colour codes are:
+<table>
+<thead>
+<tr>
+<td bgcolor="E7E7E7">Code</td>
+<td bgcolor="E7E7E7">Colour</td>
+<td bgcolor="E7E7E7">Code</td>
+<td bgcolor="E7E7E7">Colour</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0;30</td>
+<td bgcolor="000000"><span style="color: #ffffff;">Black</span></td>
+<td>1;30</td>
+<td bgcolor="404040">Dark Grey</td>
+</tr>
+<tr>
+<td>0;31</td>
+<td bgcolor="BF0000">Red</td>
+<td>1;31</td>
+<td bgcolor="FF4040">Light Red</td>
+</tr>
+<tr>
+<td>0;32</td>
+<td bgcolor="00BF00">Green</td>
+<td>1;32</td>
+<td bgcolor="40FF40">Lime</td>
+</tr>
+<tr>
+<td>0;33</td>
+<td bgcolor="BFBF00">Dark Yellow</td>
+<td>1;33</td>
+<td bgcolor="FFFF40">Yellow</td>
+</tr>
+<tr>
+<td>0;34</td>
+<td bgcolor="0000BF">Blue</td>
+<td>1;34</td>
+<td bgcolor="6060FF">Light Blue</td>
+</tr>
+<tr>
+<td>0;35</td>
+<td bgcolor="BF00BF">Purple</td>
+<td>1;35</td>
+<td bgcolor="FF40FF">Magenta</td>
+</tr>
+<tr>
+<td>0;36</td>
+<td bgcolor="00BFBF">Dark Cyan</td>
+<td>1;36</td>
+<td bgcolor="40FFFF">Cyan</td>
+</tr>
+<tr>
+<td>0;37</td>
+<td bgcolor="BFBFBF">Light Grey</td>
+<td>1;37</td>
+<td bgcolor="FFFFFF">White</td>
+</tr>
+</tbody>
+</table>
+<h3>Background colour</h3>
+<em><strong>40m</strong></em> from <em><strong>\e[0;36;40m</strong></em> is colour code of background. Background colours are:
+<table>
+<thead>
+<tr>
+<td bgcolor="E7E7E7">Code</td>
+<td bgcolor="E7E7E7">Colour</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>40m</td>
+<td bgcolor="000000"><span style="color: #ffffff;">Black</span></td>
+</tr>
+<tr>
+<td>41m</td>
+<td bgcolor="BF0000">Red</td>
+</tr>
+<tr>
+<td>42m</td>
+<td bgcolor="00BF00">Green</td>
+</tr>
+<tr>
+<td>43m</td>
+<td bgcolor="BFBF00">Yellow</td>
+</tr>
+<tr>
+<td>44m</td>
+<td bgcolor="0000BF">Blue</td>
+</tr>
+<tr>
+<td>45m</td>
+<td bgcolor="BF00BF">Purple</td>
+</tr>
+<tr>
+<td>46m</td>
+<td bgcolor="00BFBF">Cyan</td>
+</tr>
+<tr>
+<td>47m</td>
+<td bgcolor="BFBFBF">Light Grey</td>
+</tr>
+</tbody>
+</table>
+<h2>Sample colour scheme for logs</h2>
+One possible colour scheme I like is: <em><strong>cat application.log | perl -pe 's/^.*FATAL.*$/\e[1;37;41m$&#x26;\e[0m/g; s/^.*ERROR.*$/\e[1;31;40m$&#x26;\e[0m/g; s/^.*WARN.*$/\e[0;33;40m$&#x26;\e[0m/g; s/^.*INFO.*$/\e[0;36;40m$&#x26;\e[0m/g; s/^.*DEBUG.*$/\e[0;37;40m$&#x26;\e[0m/g'</strong></em> which will produce following output:
+<img src="/images/2016/12/Linux-logs-colour.png" alt="linux-logs-colour">
+<h2>Conclusion</h2>
+Having coloured logs makes it much easier to investigate logs. Linux provides tooling for better visualisation so it is good to take advantage of those.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

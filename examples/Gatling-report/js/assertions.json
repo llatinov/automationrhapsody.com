@@ -1,0 +1,27 @@
+{
+  "simulation": "com.automationrhapsody.gatling.simulations.PersonSimulation",
+  "simulationId": "personsimulation",
+  "start": 1457264339477,
+  "description": "",
+  "scenarios": ["Get all then one", "Save and get"],
+  "assertions": [
+{
+  "path": "Global",
+  "target": "max of response time",
+  "condition": "is less than",
+  "conditionValues": [800],
+  "result": true,
+  "message": "Global: max of response time is less than 800",
+  "values": [160]
+},
+{
+  "path": "Global",
+  "target": "percentage of successful requests",
+  "condition": "is greater than",
+  "conditionValues": [99],
+  "result": true,
+  "message": "Global: percentage of successful requests is greater than 99",
+  "values": [100]
+}
+  ]
+}

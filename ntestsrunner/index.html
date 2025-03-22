@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/ntestsrunner/"><!-- Primary Meta Tags --><title>NTestsRunner</title><meta name="title" content="NTestsRunner"><meta name="description" content="NTestsRunner is a tool for running functional automated tests."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/ntestsrunner/"><meta property="og:title" content="NTestsRunner"><meta property="og:description" content="NTestsRunner is a tool for running functional automated tests."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/ntestsrunner/"><meta property="twitter:title" content="NTestsRunner"><meta property="twitter:description" content="NTestsRunner is a tool for running functional automated tests."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-03-04T00:00:00.000Z"> Mar 4, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2017-10-22T00:00:00.000Z"> Oct 22, 2017 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>NTestsRunner</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>About</h2>
+<p>NTestsRunner is a tool for running functional automated tests. It gives you flexibility to use many verification points in one test. Tests are run in consequence order from their containing class. Results are saved in jUnit XML and HTML.</p>
+<p>In <a title="running functional automated tests" href="/running-functional-automation-tests/">running functional automated tests</a> post there are more details why unit testing frameworks are not suitable for this purpose. In <a title="NTestsRunner for functional automated tests" href="/ntestsrunner-for-functional-automated-tests/">NTestsRunner for functional automated tests</a> post is more details about the tool and its configurations.</p>
+<h2>Download</h2>
+<p>Tool can be found as DLL in <a title="GitHub" href="https://github.com/llatinov/NTestsRunner/releases" target="_blank">GitHub releases</a>.</p>
+<h2>Configurations</h2>
+<p>Following configuration options are available:</p>
+<ul>
+	<li><strong>TestResultsDir</strong> - where test results will be saved. If none is provided then current directory will be used. Inside TestResultsDir folder with time stamp is automatically created and actual results are saved inside this folder. Each run new folder is created according to time of run.</li>
+	<li><strong>MaxTestCaseRuntimeMinutes</strong> - maximum allowed time per test method. If execution of given method takes more than given minutes then current test is aborted and marked as failed. Execution continues with next test. Default value is 15 minutes.</li>
+	<li><strong>TestsToExecute</strong> - list of tests to be executed. By default all test classes with [TestClass] attribute are taken. In this configuration test classes can be configured as string values. Only classes given here are executed if they exits.</li>
+	<li><strong>PreventScreenLock</strong> - boolean property to enable or disable functionality that will prevent system from going to sleep or account to lock. Default value is false.</li>
+</ul>
+<h2>Usage</h2>
+<ol>
+<li>Create new console application in MS Visual Studio.</li>
+<li>Add reference to NTestsRunner.dll.</li>
+<li>Create test classes with test methods. Important is that test methods should have specific signature. It should accept List of Verifications as argument:</li>
+</ol>
+<pre class="language-csharp"><code>public void TestMethod(List&#x3C;Verification> verifications)
+</code></pre>
+<ol start="4">
+<li>In console application’s main method instantiate NTestsRunner, configure it and run the tests.</li>
+</ol>
+<pre class="language-csharp"><code>static void Main(string[] args)
+{
+	NTestsRunnerSettings settings = new NTestsRunnerSettings();
+	settings.TestResultsDir = @"C:\temp";
+
+	NTestsRunner runner = new NTestsRunner(settings);
+	runner.Execute();
+}
+</code></pre>
+<h2>Reference</h2>
+<p>See following GitHub <a title="SampleAppPlus" href="https://github.com/llatinov/SampleAppPlus" target="_blank">SampleAppPlus</a> repository for reference how to use NTestsRunner.</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

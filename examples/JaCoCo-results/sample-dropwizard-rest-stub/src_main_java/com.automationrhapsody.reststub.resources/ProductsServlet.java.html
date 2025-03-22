@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>ProductsServlet.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Code coverage with JaCoCo agent</a> &gt; <a href="../../index.html" class="el_group">sample-dropwizard-rest-stub</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.automationrhapsody.reststub.resources</a> &gt; <span class="el_source">ProductsServlet.java</span></div><h1>ProductsServlet.java</h1><pre class="source lang-java linenums">package com.automationrhapsody.reststub.resources;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Properties;
+import java.util.Random;
+
+<span class="fc" id="L18">public class ProductsServlet extends HttpServlet {</span>
+
+    private Template search;
+    private Template searchResults;
+    private Template details;
+
+    public void init() throws ServletException {
+<span class="fc" id="L25">        Properties props = new Properties();</span>
+<span class="fc" id="L26">        props.setProperty(&quot;resource.loader&quot;, &quot;class&quot;);</span>
+<span class="fc" id="L27">        props.setProperty(&quot;class.resource.loader.class&quot;,</span>
+<span class="fc" id="L28">                &quot;org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader&quot;);</span>
+<span class="fc" id="L29">        VelocityEngine engine = new VelocityEngine(props);</span>
+<span class="fc" id="L30">        engine.init();</span>
+<span class="fc" id="L31">        search = engine.getTemplate(&quot;velocity.search.html&quot;);</span>
+<span class="fc" id="L32">        searchResults = engine.getTemplate(&quot;velocity.search-results.html&quot;);</span>
+<span class="fc" id="L33">        details = engine.getTemplate(&quot;velocity.details.html&quot;);</span>
+<span class="fc" id="L34">    }</span>
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<span class="fc" id="L37">        String result = getContent(request);</span>
+        // Output
+<span class="fc" id="L39">        response.setContentType(&quot;text/html&quot;);</span>
+<span class="fc" id="L40">        PrintWriter out = response.getWriter();</span>
+<span class="fc" id="L41">        out.println(result);</span>
+<span class="fc" id="L42">    }</span>
+
+    private String getContent(HttpServletRequest request) {
+<span class="fc" id="L45">        String action = request.getParameter(&quot;action&quot;);</span>
+<span class="fc" id="L46">        String q = request.getParameter(&quot;q&quot;);</span>
+<span class="fc" id="L47">        String id = request.getParameter(&quot;id&quot;);</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (StringUtils.isEmpty(action)) {</span>
+<span class="fc" id="L49">            action = &quot;search&quot;;</span>
+        }
+
+<span class="pc bpc" id="L52" title="4 of 10 branches missed.">        switch (action) {</span>
+            case &quot;search-results&quot;:
+<span class="fc" id="L54">                return getSearchResults(q);</span>
+            case &quot;details&quot;:
+<span class="fc" id="L56">                return getProductDetails(id);</span>
+            case &quot;search&quot;:
+            default:
+<span class="fc" id="L59">                return getSearchPage();</span>
+        }
+    }
+
+    public String getSearchPage() {
+<span class="fc" id="L64">        VelocityContext context = new VelocityContext();</span>
+<span class="fc" id="L65">        StringWriter writer = new StringWriter();</span>
+<span class="fc" id="L66">        search.merge(context, writer);</span>
+<span class="fc" id="L67">        return writer.toString();</span>
+    }
+
+    public String getSearchResults(String searchString) {
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if (StringUtils.isEmpty(searchString)) {</span>
+<span class="fc" id="L72">            searchString = &quot;&quot;;</span>
+        }
+<span class="fc" id="L74">        Random random = new Random();</span>
+<span class="fc" id="L75">        int count = random.nextInt(49) + 1;</span>
+<span class="fc" id="L76">        VelocityContext context = new VelocityContext();</span>
+<span class="fc" id="L77">        context.put(&quot;searchString&quot;, searchString);</span>
+<span class="fc" id="L78">        context.put(&quot;results&quot;, count);</span>
+<span class="fc" id="L79">        StringWriter writer = new StringWriter();</span>
+<span class="fc" id="L80">        searchResults.merge(context, writer);</span>
+<span class="fc" id="L81">        return writer.toString();</span>
+    }
+
+    public String getProductDetails(String productId) {
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if (StringUtils.isEmpty(productId)) {</span>
+<span class="nc" id="L86">            productId = &quot;&quot;;</span>
+        }
+<span class="fc" id="L88">        VelocityContext context = new VelocityContext();</span>
+<span class="fc" id="L89">        context.put(&quot;productId&quot;, productId);</span>
+<span class="fc" id="L90">        StringWriter writer = new StringWriter();</span>
+<span class="fc" id="L91">        details.merge(context, writer);</span>
+<span class="fc" id="L92">        return writer.toString();</span>
+    }
+
+    public void destroy() {
+        // Do nothing
+<span class="nc" id="L97">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>Code coverage with JaCoCo agent</div></body></html>

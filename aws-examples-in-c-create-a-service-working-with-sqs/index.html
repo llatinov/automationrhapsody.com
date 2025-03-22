@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-create-a-service-working-with-sqs/"><!-- Primary Meta Tags --><title>AWS examples in C# - create a service working with SQS</title><meta name="title" content="AWS examples in C# - create a service working with SQS"><meta name="description" content="To give a basic overview of AWS SQS, how to write a message to it and how to make a consumer that constantly polls the queue for new messages."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-create-a-service-working-with-sqs/"><meta property="og:title" content="AWS examples in C# - create a service working with SQS"><meta property="og:description" content="To give a basic overview of AWS SQS, how to write a message to it and how to make a consumer that constantly polls the queue for new messages."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-create-a-service-working-with-sqs/"><meta property="twitter:title" content="AWS examples in C# - create a service working with SQS"><meta property="twitter:description" content="To give a basic overview of AWS SQS, how to write a message to it and how to make a consumer that constantly polls the queue for new messages."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-02-20T00:00:00.000Z"> Feb 20, 2020 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - create a service working with SQS</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository.</p>
+<h2>Event-driven architecture</h2>
+I would like to briefly touch the topic of <a href="https://en.wikipedia.org/wiki/Event-driven_architecture" target="_blank" rel="noopener noreferrer">event-driven architecture</a> since message service providers, such as SQS or RabbitMQ are the basis of its implementation. This is a software architecture paradigm promoting the production, detection, consumption of, and reaction to events. An event is a significant change in the state of an object, to which someone might be interested in. All communication happens asynchronously and systems are loosely coupled. An event-driven system typically consists of event emitters, event consumers, and event channels. Emitters have the responsibility to detect, gather, and transfer events. Emitters do not know the consumers of the events, they do not even know if a consumer exists. Consumers have the responsibility of applying a reaction as soon as an event is presented in a dedicated channel. This leads to the pattern commonly known as eventual consistency, which pushes the complexity of consistency to the application tier, which is the biggest challenge to solve in an event-driven architecture.
+<p>Apart from SQS, there is even more sophisticated service from AWS called <em><strong>EventBridge</strong></em>, which makes it easy to build event-driven applications because it takes care of event ingestion and delivery, security, authorization, and error handling. It is basically a serverless event bus that makes it easy to connect applications together using data from its own applications, integrated Software-as-a-Service (SaaS) applications, and AWS services.</p>
+<h2>AWS SQS</h2>
+SQS stands for Simple Queue Service, it is a fully managed message queuing service that enables to decouple and scale microservices, distributed systems, and serverless applications. SQS eliminates the complexity and overhead associated with managing and operating message-oriented middleware and empowers developers to focus on differentiating work.
+<h3>Types of queues</h3>
+SQS offers two types of message queues:
+<ul>
+ 	<li>Standard queues - they offer maximum throughput, best-effort ordering, and at-least-once delivery. This means there is no guaranteed order and messages can be duplicated.</li>
+ 	<li>FIFO queues - they are designed to guarantee that messages are processed exactly once, in the exact order that they are sent.</li>
+</ul>
+<h3>Dead-letter queue</h3>
+In addition to those, there is a special type of queues, called dead-letter queues. They are used mainly for debugging and failure proofing applications. If a message cannot be successfully processed after several retries from one of the source queues above, it ends in the dead-letter queue, from which it can be analyzed and returned back to source queue for reprocessing.
+<h3>Message processing</h3>
+It is important to know how SQS operates, in order to make good architectural decisions. When a message is published to the queue it becomes <em><strong>visible</strong></em>. When some consumer reads the message, then the message becomes <em><strong>not visible</strong></em>, but still present in the queue, its status now is <em><strong>in-flight</strong></em>. There is <em><strong>visibility timeout</strong></em> which by default is 30 seconds, the maximum value is 12 hours. After the visibility timeout passes then the message is visible again to be read by consumers. In case there is no dead-letter queue, this process happens over and over until the <em><strong>message retention period</strong></em> is reached, afterward message gets automatically deleted. The retention period default value is 4 days, the maximum value is 14 days. In case of a dead-letter queue, after the message cannot be processed for more than <em><strong>maximum receive count times</strong></em>, then it goes to dead-letter queue and stays in the dead-letter for its <em><strong>message retention period</strong></em>. See more info on SQS on <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-how-it-works.html" target="_blank" rel="noopener noreferrer">How Amazon SQS Works</a> page.
+<h2>Architectural approaches</h2>
+<h3>One queue or many queues</h3>
+Since many event emitters can write messages to the queue it gets tricky to process the messages properly. One option is to have a separate queue for separate types of messages, another option is to put some metadata into the messages. I have decided to go for the solution with one queue because I have just one consumer which knows which message processor to call and thus simplify the code. In the case of many SQS queues, there should be many consumers defined in the code, which is better to split into many micro-services, for each SQS queue.
+<h3>Dead-letter</h3>
+I would say a dead-letter queue with the maximum retention period of 14 days is a good idea. In this case, messages can be quarantined which will not slow down the normal queue operations. In the case of no dead-letter queue and default timeouts, if a message cannot be processed, then it will appear every 30 seconds for a period of 4 days, this makes 2880 times a day, 11520 times in total. Now imagine there are thousands of messages like this one. I have decided to go for a dead-letter queue with the default retention period.
+<h3>Long polling</h3>
+Long polling is another aspect that has to be considered. It can be enabled in two ways. One is on a queue level, by setting the <em><strong>ReceiveMessageWaitTimeSeconds</strong></em> when creating the queue, it can be from 1 to 20 seconds. Other way to enable it is when messages are read from the queue, there is <em><strong>WaitTimeSeconds</strong></em> setting in the request, which can be from 1 to 20 seconds. In case both options are combined, then <em><strong>WaitTimeSeconds</strong></em> takes precedence.
+<h3>Unknown messages</h3>
+Another architectural decision in case there is only one queue is what to be done with unknown messages. In the case of no dead-letter queue, messages are good to be deleted, otherwise, they will keep showing for the queue's retention period. I throw an error in the logs and after 3 unsuccessful attempts, which is the receive count times I have configured, the message goes to the dead-letter queue.
+<h3>Standard vs. FIFO queues</h3>
+SQS is able to handle a high amount of messages, theoretically an unlimited amount of messages per second. Standard SQS queue does not maintain any order of messages and also it is possible that there is a duplication of messages delivery. For this reason, AWS offers a FIFO (First-In-First-Out) queue, they provide message order and ensure <span>exactly-once processing. The limitation of the FIFO queue is its number of transactions per second, which are 300 messages per second or 3000 if they are in batched mode.</span>
+<h2>SQS queue operations at a glance</h2>
+In <a href="/aws-examples-in-c-basic-sqs-queue-operations/">AWS examples in C# – basic SQS queue operations</a> post following the operations briefed below were described in more details:
+<ul>
+ 	<li>Create queue with dead-letter queue</li>
+ 	<li>Read messages from the queue</li>
+ 	<li>Write a message to the queue (comes in two flavors)</li>
+ 	<li>Delete messages to the queue</li>
+ 	<li>Move messages from dead-letter to source queue</li>
+</ul>
+<h2>Creating SQS message consumer</h2>
+In order to read the messages, there should be a consumer that constantly polls the queue and processes the messages. <em><strong>ProcessMessageAsync</strong></em> uses the <em><strong>strategy design pattern</strong></em> to get the proper message processor based on <em><strong>MessageType</strong></em> attribute. Processors are stored in <em><strong>_messageProcessors</strong></em> which is <em><strong>IEnumerable&#x3C;IMessageProcessor></strong></em> and is injected by .NET Core dependency injection. If a processor is found, then the processor is invoked, if not an error is shown in the logs. This logic can be subject to change if unknown messages are tolerated in the queue. In <em><strong>ProcessAsync</strong></em> method there is a while loop, which constantly reads for messages by <em><strong>_sqsClient</strong></em> which <em><strong>SqsClient</strong></em> class described in previous sections. SQS returns the response if there are some messages or if <em><strong>WaitTimeSeconds</strong></em> time expired when reading the message or <em><strong>ReceiveMessageWaitTimeSeconds</strong></em> configured by <em><strong>AwsQueueLongPollTimeSeconds</strong></em> environment variable has expired. This while loop is a little tricky to unit test though as it consumes the main thread, and the mocked object should be instructed to wait. Everything is controlled by a <em><strong>CancellationTokenSource</strong></em>, when this is canceled, then consumption is stopped.
+<p>[tabby title=“ProcessMessageAsync”]</p>
+<pre class="language-csharp"><code>private async Task ProcessMessageAsync(Message message)
+{
+	try
+	{
+		var messageType = message.MessageAttributes.GetMessageTypeAttributeValue();
+		if (messageType == null)
+		{
+			throw new Exception($"No 'MessageType' attribute present in message {JsonConvert.SerializeObject(message)}");
+		}
+
+		var processor = _messageProcessors.SingleOrDefault(x => x.CanProcess(messageType));
+		if (processor == null)
+		{
+			throw new Exception($"No processor found for message type '{messageType}'");
+		}
+
+		await processor.ProcessAsync(message);
+		await _sqsClient.DeleteMessageAsync(message.ReceiptHandle);
+	}
+	catch (Exception ex)
+	{
+		_logger.LogError(ex, $"Cannot process message [id: {message.MessageId}, receiptHandle: {message.ReceiptHandle}, body: {message.Body}] from queue {_sqsClient.GetQueueName()}");
+	}
+}
+</code></pre>
+<p>[tabby title=“ProcessAsync”]</p>
+<pre class="language-csharp"><code>private async void ProcessAsync()
+{
+	try
+	{
+		while (!_tokenSource.Token.IsCancellationRequested)
+		{
+			var messages = await _sqsClient.GetMessagesAsync(_tokenSource.Token);
+			messages.ForEach(async x => await ProcessMessageAsync(x));
+		}
+	}
+	catch (OperationCanceledException)
+	{
+		//operation has been canceled but it shouldn't be propagated
+	}
+}
+</code></pre>
+<p>[tabby title=“StartConsuming”]</p>
+<pre class="language-csharp"><code>public void StartConsuming()
+{
+	if (!IsConsuming())
+	{
+		_tokenSource = new CancellationTokenSource();
+		ProcessAsync();
+	}
+}
+
+private bool IsConsuming()
+{
+	return _tokenSource != null &#x26;&#x26; !_tokenSource.Token.IsCancellationRequested;
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h2>Message processors</h2>
+In the current example, I have taken the architectural design decision to have one queue and different messages into it. For each different type of message, there is a relevant processor. With the <a href="https://en.wikipedia.org/wiki/Strategy_pattern" target="_blank" rel="noopener noreferrer">strategy design pattern</a>, the appropriate message processor is picked based on <em><strong>MessageType</strong></em> attribute. Processors implement a very simple interface <em><strong>IMessageProcessor</strong></em>. In the current example, they take the message as a string, serialize it to an object and save this object to <em><strong>DynamoDB</strong></em>. A sample implementation is shown below:
+<p>[tabby title=“IMessageProcessor”]</p>
+<pre class="language-csharp"><code>public interface IMessageProcessor
+{
+	bool CanProcess(string messageType);
+	Task ProcessAsync(Message message);
+}
+</code></pre>
+<p>[tabby title=“ActorMessageProcessor”]</p>
+<pre class="language-csharp"><code>public bool CanProcess(string messageType)
+{
+	return messageType == typeof(Actor).Name;
+}
+
+public async Task ProcessAsync(Message message)
+{
+	var actor = JsonConvert.DeserializeObject&#x3C;Actor>(message.Body);
+	await _actorsRepository.SaveActorAsync(actor);
+	_logger.LogInformation($"ActorMessageProcessor invoked with: {message.Body}");
+}
+</code></pre>
+<p>[tabbyending]</p>
+<h2>AWS ECS and AWS ECR</h2>
+ECS stands for Elastic Container Service is a fully managed container orchestration service. Containers can be run in clusters using <em><strong>AWS Fargate</strong></em>, which is a serverless compute for containers. Fargate removes the need to provision and manage servers, lets you specify and pay for resources per application, and improves security through application isolation by design.
+<p>ECR stands for Elastic Container Registry is a fully-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images. ECR is integrated with ECS, eliminating the need to operate own container repositories or worry about scaling the underlying infrastructure.</p>
+<h2>SqsWriter and SqsReader</h2>
+<a href="https://github.com/llatinov/aws.examples.csharp/tree/master/SqsWriter" target="_blank" rel="noopener noreferrer">SqsWriter</a> is a .NET Core 3.0 application, that is dockerized and run in AWS ECS with Fargate, and its container images are stored in ECR. It exposes an API that can be used to publish Actor or Movie objects as messages with separate MessageType attributes in the SQS queue.
+<p><a href="https://github.com/llatinov/aws.examples.csharp/tree/master/SqsReader" target="_blank" rel="noopener noreferrer">SqsReader</a> is a .NET Core 3.0 application, that is dockerized and run in AWS ECS with Fargate, and its container images are stored in ECR. It has a consumer that listens to the SQS queue and processes the messages by writing them into appropriate AQS DynamoDB tables. It also exposes API to stop or start processing, as long as reprocess the dead-letter queue or simply get the queue status.</p>
+<p>More information on how to run the solution can be found in <a href="/aws-examples-in-c-run-the-solution/">AWS examples in C# – run the solution</a> post.</p>
+<h2>Conclusion</h2>
+In the current post, I have given some concepts of event-driven architecture and how SQS fits in it. Also, I have described some architectural considerations when using SQS queues, such as dead-letter queues, one queue with different message type or several queues, etc. In the end, I have given practical code on how to make a consumer for the SQS queue.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

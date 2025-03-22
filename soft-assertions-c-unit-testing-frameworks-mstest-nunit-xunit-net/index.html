@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/soft-assertions-c-unit-testing-frameworks-mstest-nunit-xunit-net/"><!-- Primary Meta Tags --><title>Soft assertions for C# unit testing frameworks (MSTest, NUnit, xUnit.net)</title><meta name="title" content="Soft assertions for C# unit testing frameworks (MSTest, NUnit, xUnit.net)"><meta name="description" content="Code example of very easy and useful custom implementation of soft assertions in C# unit testing frameworks such as MSTest, NUnit or xUnit.net."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/soft-assertions-c-unit-testing-frameworks-mstest-nunit-xunit-net/"><meta property="og:title" content="Soft assertions for C# unit testing frameworks (MSTest, NUnit, xUnit.net)"><meta property="og:description" content="Code example of very easy and useful custom implementation of soft assertions in C# unit testing frameworks such as MSTest, NUnit or xUnit.net."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/soft-assertions-c-unit-testing-frameworks-mstest-nunit-xunit-net/"><meta property="twitter:title" content="Soft assertions for C# unit testing frameworks (MSTest, NUnit, xUnit.net)"><meta property="twitter:description" content="Code example of very easy and useful custom implementation of soft assertions in C# unit testing frameworks such as MSTest, NUnit or xUnit.net."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-09-13T00:00:00.000Z"> Sep 13, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Soft assertions for C# unit testing frameworks (MSTest, NUnit, xUnit.net)</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>The code shown in examples below is available in GitHub <a href="https://github.com/llatinov/DotNetSamples/tree/master/SoftAssertions" target="_blank" rel="noopener noreferrer">DotNetSamples/SoftAssertions</a> repository.</p>
+<h2>Unit vs Functional testing</h2>
+Unit testing paradigm states that each test exercises particular code behavior. So in a perfect world, one unit test would have one assertion which defines unit test result – either passed or failed. This is why unit testing frameworks provide only asserts which stop further execution of current test method. In functional testing usually, one test verifies several conditions. Not debating if this is good or bad. Assume you are doing GUI testing, once you have opened particular page you’d better do as much verification as possible to reduce the risk of bugs. Having this page opened over and over for every single check is not the most efficient way of testing. This is why when you run functional tests you need some kind of assert that indicates whether passed or failed but to let the test continue in no critical issue is present. Those are generally called “soft” asserts.
+<h2>Soft assertions code</h2>
+Following code is an implementation of soft assertions:
+<pre class="language-csharp"><code>using System.Collections.Generic;
+using System.Linq;
+using FluentAssertions;
+
+public class SoftAssertions
+{
+	private readonly List&#x3C;SingleAssert> 
+		_verifications = new List&#x3C;SingleAssert>();
+
+	public void Add(string message, string expected, string actual)
+	{
+		_verifications.Add(new SingleAssert(message, expected, actual));
+	}
+
+	public void Add(string message, bool expected, bool actual)
+	{
+		Add(message, expected.ToString(), actual.ToString());
+	}
+
+	public void Add(string message, int expected, int actual)
+	{
+		Add(message, expected.ToString(), actual.ToString());
+	}
+
+	public void AddTrue(string message, bool actual)
+	{
+		_verifications
+			.Add(new SingleAssert(message, true.ToString(), actual.ToString()));
+	}
+
+	public void AssertAll()
+	{
+		var failed = _verifications.Where(v => v.Failed).ToList();
+		failed.Should().BeEmpty();
+	}
+
+	private class SingleAssert
+	{
+		private readonly string _message;
+		private readonly string _expected;
+		private readonly string _actual;
+
+		public bool Failed { get; }
+
+		public SingleAssert(string message, string expected, string actual)
+		{
+			_message = message;
+			_expected = expected;
+			_actual = actual;
+
+			Failed = _expected != _actual;
+			if (Failed)
+			{
+				// TODO Act in case of failure, e.g. take screenshot
+				var screenshot = "MethodToSaveScreenshotAndReturnFilename";
+				_message += $". Screenshot captured at: {screenshot}";
+			}
+		}
+
+		public override string ToString()
+		{
+			return $"'{_message}' assert was expected to be " +
+					$"'{_expected}' but was '{_actual}'";
+		}
+	}
+}
+</code></pre>
+<h2>Soft assertions details</h2>
+The actual assertion is handled by <em><strong>SingleAssert</strong></em> class. It contains a message to be displayed to the user in case of failing test as well as expected and actual values. It is possible to extend the <em><strong>SingleAssert</strong></em> class so in case of failure you can do some specific actions, such as taking a screenshot. They are stored as strings. All asserts during testing are stored in a <em><strong>List&#x3C;SingleAssert></strong></em>. There are several methods that add assert. There are such that accept <em><strong>bool</strong></em>, <em><strong>string</strong></em>, and <em><strong>int</strong></em>. You can extend and add as many as you want. It is mandatory to call <em><strong>AssertAll()</strong></em> method so asserts can be evaluated. The evaluation consists of filtering out passed asserts leaving only failed: <em><strong>var failed = _verifications.Where(v => v.Failed).ToList()</strong></em>. Then list with failed is checked for empty <em><strong>failed.Should().BeEmpty()</strong></em>. In this case, <a href="https://fluentassertions.com/" target="_blank" rel="noopener">FluentAssertions</a> framework is used, but the code can be changed to such that suits your particular needs.
+<h2>Soft assertions usage</h2>
+Usage is pretty straightforward. <em><strong>SoftAssertions</strong></em> object should be created before each test and asserted after each test:
+<pre class="language-csharp"><code>
+[TestClass]
+public class UnitTest
+{
+	private SoftAssertions _softAssertions;
+
+	[TestInitialize]
+	public void SetUp()
+	{
+		_softAssertions = new SoftAssertions();
+	}
+
+	[TestCleanup]
+	public void TearDown()
+	{
+		_softAssertions.AssertAll();
+	}
+
+	[TestMethod]
+	public void TestMixedSoftAssertions()
+	{
+		_softAssertions.Add("Passing bool Add assertion", true, true);
+		_softAssertions.Add("Failing bool Add assertion", true, false);
+		_softAssertions
+			.Add("Passing string Add assertion", "SameString", "SameString");
+		_softAssertions
+			.Add("Failing string Add assertion", "SameString", "OtherString");
+		_softAssertions.Add("Passing int Add assertion", 1, 1);
+		_softAssertions.Add("Failing int Add assertion", 1, 2);
+		_softAssertions.AddTrue("Passing AddTrue assertion", true);
+		_softAssertions.AddTrue("Failing AddTrue assertion", false);
+	}
+}
+</code></pre>
+<h2>Soft assertions result</h2>
+Result of test shown above is: <em><strong>Result Message: Expected collection to be empty, but found {'Failing bool Add assertion' assert was expected to be 'True' but was 'False', 'Failing string Add assertion' assert was expected to be 'SameString' but was 'DifferentString', 'Failing int Add assertion' assert was expected to be '1' but was '2', 'Failing AddTrue assertion' assert was expected to be 'True' but was 'False'}.</strong></em>
+<p>This comes out of the box because FluentAssertions is used. Otherwise, you have to do some other output and assertions.</p>
+<h2>Other soft assertions</h2>
+Some custom implementation of soft assertions is as well available in <a href="/ntestsrunner/">NTestRunner</a> framework, but it is more complex and demanding special approach for writing tests.
+<h2>Conclusion</h2>
+Soft assertions are very useful in functional testing. With this simple class, you can directly have them in your functional tests.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/json-format-register-service-eureka/"><!-- Primary Meta Tags --><title>JSON format to register service with Eureka</title><meta name="title" content="JSON format to register service with Eureka"><meta name="description" content="What JSON data is needed to register service node with Eureka server."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/json-format-register-service-eureka/"><meta property="og:title" content="JSON format to register service with Eureka"><meta property="og:description" content="What JSON data is needed to register service node with Eureka server."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/json-format-register-service-eureka/"><meta property="twitter:title" content="JSON format to register service with Eureka"><meta property="twitter:description" content="What JSON data is needed to register service node with Eureka server."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-10-25T00:00:00.000Z"> Oct 25, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
+Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>JSON format to register service with Eureka</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Eureka is a REST based service that is primarily used in the AWS cloud for locating services for the purpose of load balancing and failover of middle-tier servers.</p>
+<h2>Jersey 1 vs Jersey 2</h2>
+As of now, Eureka client works only with Jersey 1. There is <a href="https://github.com/Netflix/eureka/pull/821" target="_blank" rel="noopener">PR to create Jersey 2 client</a>, but by the time this post is created, it is still not developed. Jersey 1 and Jersey 2 are mutually exclusive. If your product works with Jersey 2 then in order to register with Eureka you have to write your own client.
+<h2>Registering with Eureka</h2>
+<a href="https://github.com/Netflix/eureka/wiki/Eureka-REST-operations" target="_blank" rel="noopener">Eureka documentation</a> is giving example how to register a server or service node with Eureka server. Given example is an XML one and there is no JSON example. The XML example cannot be straight-forward converted for JSON because JSON does not support attributes as XML does.
+<h2>Solution</h2>
+Use following JSON in order to register with Eureka server with custom REST client:
+<pre class="language-json"><code>{
+	"instance": {
+		"hostName": "WKS-SOF-L011",
+		"app": "com.automationrhapsody.eureka.app",
+		"vipAddress": "com.automationrhapsody.eureka.app",
+		"secureVipAddress": "com.automationrhapsody.eureka.app"
+		"ipAddr": "10.0.0.10",
+		"status": "STARTING",
+		"port": {"$": "8080", "@enabled": "true"},
+		"securePort": {"$": "8443", "@enabled": "true"},
+		"healthCheckUrl": "http://WKS-SOF-L011:8080/healthcheck",
+		"statusPageUrl": "http://WKS-SOF-L011:8080/status",
+		"homePageUrl": "http://WKS-SOF-L011:8080",
+		"dataCenterInfo": {
+			"@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo", 
+			"name": "MyOwn"
+		},
+	}
+}
+</code></pre>
+<h2>Implementation details</h2>
+Important part which is not clear enough in standard documentation is: <em><strong>"securePort": {"$": "8443", "@enabled": "true"}</strong></em>. Note that <em><strong>"securePort": "8443"</strong></em> would also work, but this will just set the port number without enabling it. By default secure port is disabled unless register call enables it.
+<p>I would recommend using one and the same for <em><strong>“vipAddress”</strong></em> and <em><strong>“secureVipAddress”</strong></em>. When searching for HTTP endpoint Eureka server uses “vipAddress” and if you switch your client to search for HTTPS port Eureka server will now search for “secureVipAddress”. If both are different this may lead to confusion why no endpoint is returned although there is one with HTTPS enabled.</p>
+<p>Implementation is needed for <em><strong>DataCenterInfo</strong></em> interface. One such implementation is:</p>
+<pre class="language-java"><code>private static final class DefaultDataCenterInfo implements DataCenterInfo {
+	private final Name name;
+
+	private DefaultDataCenterInfo(Name name) {
+		this.name = name;
+	}
+
+	@Override
+	public Name getName() {
+		return name;
+	}
+
+	public static DataCenterInfo myOwn() {
+		return new DefaultDataCenterInfo(Name.MyOwn);
+	}
+}
+</code></pre>
+<p>As seen in JSON example application status is STARTING. This is good practice to keep STARTING state until the application is fully started. This will prevent current not yet ready node to be returned for usage by Eureka server. Once the application is fully started then with subsequent call you can change the status to UP. This is done with REST PUT call to <em><strong>/eureka/v2/apps/appID/instanceID/status?value=UP</strong></em>. InstanceID is basically the hostname. AppID is the one registered with “app” in JSON. Also, good idea is to have <em><strong>“app”</strong></em> same as <em><strong>“vipAddress”</strong></em> to minimize confusion.</p>
+<h2>Conclusion</h2>
+Eureka is a really nice tool. It has a default client which can be used out of the box. Problem is that this client uses Jersey 1. If you need Jersey 2 client by the time of this post you have to make it on your own. This post gives basic direction how to do this. Since official documentation is lacking details how to register a node with JSON this port gives more clarity. The most important part is: <em><strong>"securePort": {"$": "8443", "@enabled": "true"}.</strong></em>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2025 - Automation Rhapsody. All rights reserved.
+</footer>  </body></html>
