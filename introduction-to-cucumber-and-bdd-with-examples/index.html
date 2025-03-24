@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/introduction-to-cucumber-and-bdd-with-examples/"><!-- Primary Meta Tags --><title>Introduction to Cucumber and BDD with examples</title><meta name="title" content="Introduction to Cucumber and BDD with examples"><meta name="description" content="Code examples and introduction to Cucumber, a framework that runs automated tests written in behavior driven development (BDD) style."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/introduction-to-cucumber-and-bdd-with-examples/"><meta property="og:title" content="Introduction to Cucumber and BDD with examples"><meta property="og:description" content="Code examples and introduction to Cucumber, a framework that runs automated tests written in behavior driven development (BDD) style."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/introduction-to-cucumber-and-bdd-with-examples/"><meta property="twitter:title" content="Introduction to Cucumber and BDD with examples"><meta property="twitter:description" content="Code examples and introduction to Cucumber, a framework that runs automated tests written in behavior driven development (BDD) style."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-01-04T00:00:00.000Z"> Jan 4, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Introduction to Cucumber and BDD with examples</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Cucumber examples can be found in <a href="https://github.com/llatinov/selenium-samples-java/tree/master/cucumber-parallel" target="_blank" rel="noopener noreferrer">selenium-samples-java/cucumber-parallel</a> GitHub repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/introduction-to-cucumber-and-bdd-with-examples/"><!-- Primary Meta Tags --><title>Introduction to Cucumber and BDD with examples</title><meta name="title" content="Introduction to Cucumber and BDD with examples"><meta name="description" content="Code examples and introduction to Cucumber, a framework that runs automated tests written in behavior driven development (BDD) style."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/introduction-to-cucumber-and-bdd-with-examples/"><meta property="og:title" content="Introduction to Cucumber and BDD with examples"><meta property="og:description" content="Code examples and introduction to Cucumber, a framework that runs automated tests written in behavior driven development (BDD) style."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/introduction-to-cucumber-and-bdd-with-examples/"><meta property="twitter:title" content="Introduction to Cucumber and BDD with examples"><meta property="twitter:description" content="Code examples and introduction to Cucumber, a framework that runs automated tests written in behavior driven development (BDD) style."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Introduction to Cucumber and BDD with examples</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-01-04T00:00:00.000Z"> Jan 4, 2016 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>Cucumber examples can be found in <a href="https://github.com/llatinov/selenium-samples-java/tree/master/cucumber-parallel" target="_blank" rel="noopener noreferrer">selenium-samples-java/cucumber-parallel</a> GitHub repository.</p>
 <p>Before going into details how to create tests with Cucumber first is good to do some context introduction why this framework is created and getting more popular.</p>
 <h2>Test-driven development (TDD)</h2>
 TDD (test driven development) is software development process in which developers first write the unit tests for feature or module based on requirements and then implement the feature or module itself. In short TDD cycle is "red > green > refactor":
@@ -18,57 +17,57 @@ BDD ideas sound very nice but actually are not so easy to put in practice. In o
 <a href="https://cucumber.io/" target="_blank" rel="noopener noreferrer">Cucumber</a> is not a testing tool it is a BDD tool for collaboration between all members of the team. So if you are using Cucumber just for automated testing you can do better. Testwise Cucumber is a framework that understands Gherkin and runs the automated tests. It sounds like a fairy tale, you get your documentation described in Gherkin and tests just run. Actually, it is not that simple, each step from documentation should have underlying test code that manipulates the application and should have test conditions. All process will be described in details with code samples below.
 <h2>Setup Maven project</h2>
 The proper way to do things is by using some build automation tool. Most used ones are Gradle and Maven. Maven is more simple to use and works fine for normal workflows. Gradle can do anything you want to do, but it comes at a price of complexity since you have to write Groovy code for custom stuff. In order to use Cucumber-JVM (Cucumber implementation for the most popular JVM languages: Java, Groovy, Scala, etc.) in Java 8 POM looks like this:
-<pre class="language-xml"><code>&#x3C;properties>
-	&#x3C;project.build.sourceEncoding>UTF-8&#x3C;/project.build.sourceEncoding>
-	&#x3C;cucumber.version>1.2.4&#x3C;/cucumber.version>
-	&#x3C;selenium.version>2.48.2&#x3C;/selenium.version>
-&#x3C;/properties>
-&#x3C;dependencies>
-	&#x3C;dependency>
-		&#x3C;groupId>info.cukes&#x3C;/groupId>
-		&#x3C;artifactId>cucumber-java8&#x3C;/artifactId>
-		&#x3C;version>${cucumber.version}&#x3C;/version>
-		&#x3C;scope>test&#x3C;/scope>
-	&#x3C;/dependency>
-	&#x3C;dependency>
-		&#x3C;groupId>info.cukes&#x3C;/groupId>
-		&#x3C;artifactId>cucumber-junit&#x3C;/artifactId>
-		&#x3C;version>${cucumber.version}&#x3C;/version>
-		&#x3C;scope>test&#x3C;/scope>
-	&#x3C;/dependency>
-	&#x3C;dependency>
-		&#x3C;groupId>org.seleniumhq.selenium&#x3C;/groupId>
-		&#x3C;artifactId>selenium-server&#x3C;/artifactId>
-		&#x3C;version>${selenium.version}&#x3C;/version>
-		&#x3C;scope>test&#x3C;/scope>
-	&#x3C;/dependency>
-&#x3C;/dependencies>
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;properties></span></span>
+<span class="line"><span>    &#x3C;project.build.sourceEncoding>UTF-8&#x3C;/project.build.sourceEncoding></span></span>
+<span class="line"><span>    &#x3C;cucumber.version>1.2.4&#x3C;/cucumber.version></span></span>
+<span class="line"><span>    &#x3C;selenium.version>2.48.2&#x3C;/selenium.version></span></span>
+<span class="line"><span>&#x3C;/properties></span></span>
+<span class="line"><span>&#x3C;dependencies></span></span>
+<span class="line"><span>    &#x3C;dependency></span></span>
+<span class="line"><span>        &#x3C;groupId>info.cukes&#x3C;/groupId></span></span>
+<span class="line"><span>        &#x3C;artifactId>cucumber-java8&#x3C;/artifactId></span></span>
+<span class="line"><span>        &#x3C;version>${cucumber.version}&#x3C;/version></span></span>
+<span class="line"><span>        &#x3C;scope>test&#x3C;/scope></span></span>
+<span class="line"><span>    &#x3C;/dependency></span></span>
+<span class="line"><span>    &#x3C;dependency></span></span>
+<span class="line"><span>        &#x3C;groupId>info.cukes&#x3C;/groupId></span></span>
+<span class="line"><span>        &#x3C;artifactId>cucumber-junit&#x3C;/artifactId></span></span>
+<span class="line"><span>        &#x3C;version>${cucumber.version}&#x3C;/version></span></span>
+<span class="line"><span>        &#x3C;scope>test&#x3C;/scope></span></span>
+<span class="line"><span>    &#x3C;/dependency></span></span>
+<span class="line"><span>    &#x3C;dependency></span></span>
+<span class="line"><span>        &#x3C;groupId>org.seleniumhq.selenium&#x3C;/groupId></span></span>
+<span class="line"><span>        &#x3C;artifactId>selenium-server&#x3C;/artifactId></span></span>
+<span class="line"><span>        &#x3C;version>${selenium.version}&#x3C;/version></span></span>
+<span class="line"><span>        &#x3C;scope>test&#x3C;/scope></span></span>
+<span class="line"><span>    &#x3C;/dependency></span></span>
+<span class="line"><span>&#x3C;/dependencies></span></span>
+<span class="line"><span></span></span></code></pre>
 <p>In order to build project in Java 8 this should be specified explicitly in POM by using <strong>maven-compiler-plugin</strong>:</p>
-<pre class="language-xml"><code>&#x3C;build>
-	&#x3C;plugins>
-		&#x3C;plugin>
-			&#x3C;groupId>org.apache.maven.plugins&#x3C;/groupId>
-			&#x3C;artifactId>maven-compiler-plugin&#x3C;/artifactId>
-			&#x3C;version>3.3&#x3C;/version>
-			&#x3C;configuration>
-				&#x3C;source>1.8&#x3C;/source>
-				&#x3C;target>1.8&#x3C;/target>
-			&#x3C;/configuration>
-		&#x3C;/plugin>
-	&#x3C;/plugins>
-&#x3C;/build>
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;build></span></span>
+<span class="line"><span>    &#x3C;plugins></span></span>
+<span class="line"><span>        &#x3C;plugin></span></span>
+<span class="line"><span>            &#x3C;groupId>org.apache.maven.plugins&#x3C;/groupId></span></span>
+<span class="line"><span>            &#x3C;artifactId>maven-compiler-plugin&#x3C;/artifactId></span></span>
+<span class="line"><span>            &#x3C;version>3.3&#x3C;/version></span></span>
+<span class="line"><span>            &#x3C;configuration></span></span>
+<span class="line"><span>                &#x3C;source>1.8&#x3C;/source></span></span>
+<span class="line"><span>                &#x3C;target>1.8&#x3C;/target></span></span>
+<span class="line"><span>            &#x3C;/configuration></span></span>
+<span class="line"><span>        &#x3C;/plugin></span></span>
+<span class="line"><span>    &#x3C;/plugins></span></span>
+<span class="line"><span>&#x3C;/build></span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Once the project is setup then real Cucumber usage can start.</p>
 <h2>Feature files</h2>
 Everything starts with a plain text file with .feature extension written in Gherkin language that describes only one product feature. It may contain from one to many scenarios. Below is a file with a simple scenario for searching in Wikipedia.
-<pre class="language-text"><code>Feature: search Wikipedia
-
-  Scenario: direct search article
-    Given Enter search term 'Cucumber'
-    When Do search
-    Then Single result is shown for 'Cucumber'
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Feature: search Wikipedia</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  Scenario: direct search article</span></span>
+<span class="line"><span>    Given Enter search term 'Cucumber'</span></span>
+<span class="line"><span>    When Do search</span></span>
+<span class="line"><span>    Then Single result is shown for 'Cucumber'</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>In Gherkin, each line that isn’t blank has to start with a Gherkin keyword, followed by any text you like. The main keywords are:</p>
 <ul>
  	<li>Feature</li>
@@ -81,61 +80,61 @@ Everything starts with a plain text file with .feature extension written in Ghe
 More information can be found in <a href="https://cucumber.io/docs/cucumber/" target="_blank" rel="noopener noreferrer">Cucumber reference</a> page.
 <h2>Don't repeat yourself</h2>
 In some features, there might be one and the same Given steps before each scenario. In order to avoid copy/paste, it is better to define those steps as feature prerequisite with <strong>Background</strong> keyword.
-<pre class="language-text"><code>Feature: search Wikipedia
-
-  Background:
-    Given Open http://en.wikipedia.org
-    And Do login
-
-  Scenario: direct search article
-    Given Enter search term 'Cucumber'
-    When Do search
-    Then Single result is shown for 'Cucumber'
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Feature: search Wikipedia</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  Background:</span></span>
+<span class="line"><span>    Given Open http://en.wikipedia.org</span></span>
+<span class="line"><span>    And Do login</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  Scenario: direct search article</span></span>
+<span class="line"><span>    Given Enter search term 'Cucumber'</span></span>
+<span class="line"><span>    When Do search</span></span>
+<span class="line"><span>    Then Single result is shown for 'Cucumber'</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Data-driven testing</h2>
 Cucumber makes it very easy to handle cases of different business scenarios with different input data and different results based on that input data. The scenario is defined with <strong>Scenario Outline</strong>. Then data is fed to this scenario with <strong>Examples</strong> table where <strong>variables</strong> are defined with concrete values. The example below shows a scenario where a search is done for two keywords and expected results for each is defined. It is very easy just to add more keywords and expected result which is actually treated by Cucumber reporting as a different scenario.
-<pre class="language-text"><code>Feature:
-
-  Scenario Outline:
-    Given Enter search term '&#x3C;searchTerm>'
-    When Do search
-    Then Multiple results are shown for '&#x3C;result>'
-
-    Examples:
-      | searchTerm | result                |
-      | mercury    | Mercury may refer to: |
-      | max        | Max may refer to:     |
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Feature:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  Scenario Outline:</span></span>
+<span class="line"><span>    Given Enter search term '&#x3C;searchTerm>'</span></span>
+<span class="line"><span>    When Do search</span></span>
+<span class="line"><span>    Then Multiple results are shown for '&#x3C;result>'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Examples:</span></span>
+<span class="line"><span>      | searchTerm | result                |</span></span>
+<span class="line"><span>      | mercury    | Mercury may refer to: |</span></span>
+<span class="line"><span>      | max        | Max may refer to:     |</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Organise features and scenarios</h2>
 Tags can be used in order to group feature files. A tag can be applied as annotation above Feature or Scenario keyword in .feature file. Having correctly tagged different scenarios or features runners can be created per each tag and run when needed. See more for tags in <a href="https://github.com/cucumber/cucumber/wiki/Tags" target="_blank" rel="noopener noreferrer">Cucumber tags</a> page.
 <h2>Runners</h2>
 Next step in the process is to add runners. Cucumber supports running tests with JUnit and TestNG. In the current post, JUnit will be used. It has been imported in POM project file with <strong>cucumber-junit</strong>. In order to run a test with JUnit a special runner class should be created. The very basic form of the file is an empty class with <strong>@RunWith(Cucumber.class)</strong> annotation.
-<pre class="language-java"><code>import org.junit.runner.RunWith;
-
-import cucumber.api.junit.Cucumber;
-
-@RunWith(Cucumber.class)
-public class RunWikipediaTest {
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import org.junit.runner.RunWith;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import cucumber.api.junit.Cucumber;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@RunWith(Cucumber.class)</span></span>
+<span class="line"><span>public class RunWikipediaTest {</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>This will run the tests and JUnit results file will be generated. Although it works it is much better to provide some Cucumber options with <strong>@CucumberOptions</strong> annotation.</p>
-<pre class="language-java"><code>import org.junit.runner.RunWith;
-
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-
-@RunWith(Cucumber.class)
-@CucumberOptions(
-		format = {
-				"json:target/cucumber/wikipedia.json",
-				"html:target/cucumber/wikipedia.html",
-				"pretty"
-		},
-		tags = {"~@ignored"}
-)
-public class RunWikipediaTest {
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import org.junit.runner.RunWith;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import cucumber.api.CucumberOptions;</span></span>
+<span class="line"><span>import cucumber.api.junit.Cucumber;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@RunWith(Cucumber.class)</span></span>
+<span class="line"><span>@CucumberOptions(</span></span>
+<span class="line"><span>        format = {</span></span>
+<span class="line"><span>                "json:target/cucumber/wikipedia.json",</span></span>
+<span class="line"><span>                "html:target/cucumber/wikipedia.html",</span></span>
+<span class="line"><span>                "pretty"</span></span>
+<span class="line"><span>        },</span></span>
+<span class="line"><span>        tags = {"~@ignored"}</span></span>
+<span class="line"><span>)</span></span>
+<span class="line"><span>public class RunWikipediaTest {</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Runner above runs all feature files which does not have tag <strong>@ignored</strong> and outputs the results in three different formats: JSON in target/cucumber/wikipedia.json file, HTML in target/cucumber/wikipedia.html and Pretty - a console output with colours. All formatting options are available in <a href="https://github.com/cucumber/cucumber-jvm/blob/4687dd84a7d5f9b6103c9b76aa86ea28af00f3c2/core/src/main/java/cucumber/api/CucumberOptions.java" target="_blank" rel="noopener noreferrer">Cucumber options</a> page.</p>
 <h2>Runners strategy</h2>
 Different runners can be created for different purposes. There could be runners based on specific tags and those to be invoked in specific cases like regression and smoke testing, or full or partial regression testing. Depends on the needs. It is possible to create runners for each feature and run tests in parallel. There is a way to automatically generate runners and run tests in parallel. This will speed up execution and will keep the project clean from unessential runners. More details can be found in <a href="/running-cucumber-tests-in-parallel/">Running Cucumber tests in parallel</a> post.
@@ -147,81 +146,81 @@ If the runner is not linked to any feature file (no <strong>features</strong> s
 <p>The easiest way is to put just one runner into <em>default</em> package and it will run all feature files available. This gives more limitations than benefits in the long run though.</p>
 <h2>Running feature files without step definitions</h2>
 So far feature file and the runner has been created. If now tests are started build will successes but tests will be skipped. This is because there is no implementation available for Given, When, Then commands in the feature file. Those should be implemented and Cucumber gives hints in build output how to do it.
-<pre class="language-text"><code>You can implement missing steps with the snippets below:
-
-Given("^Enter search term 'Cucumber'$", () -> {
-	// Write code here that turns the phrase above into concrete actions
-	throw new PendingException();
-});
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>You can implement missing steps with the snippets below:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Given("^Enter search term 'Cucumber'$", () -> {</span></span>
+<span class="line"><span>    // Write code here that turns the phrase above into concrete actions</span></span>
+<span class="line"><span>    throw new PendingException();</span></span>
+<span class="line"><span>});</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Step definitions code / glue</h2>
 So far feature file has been defined with a runner for it. In terms of BDD this is OK, but in terms of testing a step, definitions should be created so tests can actually be executed. As shown in hint above a method with annotation <strong>@Given</strong> is needed. Annotation text is actually a regular expression this is why it is good to start with <strong>^</strong> and end with <strong>$</strong> which means the whole line from the feature file to be matched. In order to make the step reusable, some regular expression can be added in order to be able to pass different search terms, not only 'Cucumber'. If there is regular expression defined then the method can take arguments which will be actually what regex will match in feature file text. Step definition for Given command is:
-<pre class="language-java"><code>@Given("^Enter search term '(.*?)'$")
-public void searchFor(String searchTerm) {
-	WebElement searchField = driver.findElement(By.id("searchInput"));
-	searchField.sendKeys(searchTerm);
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Given("^Enter search term '(.*?)'$")</span></span>
+<span class="line"><span>public void searchFor(String searchTerm) {</span></span>
+<span class="line"><span>    WebElement searchField = driver.findElement(By.id("searchInput"));</span></span>
+<span class="line"><span>    searchField.sendKeys(searchTerm);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>(.*?) is very basic regex, but it can do the work. It matches all zero or more characters surrounded by quotes in the end of the line after “Enter search term ” text. Once matched this is passed as argument to searchFor() method invocation.</p>
 <p>Full step definitions for initial feature file are shown in class below:</p>
-<pre class="language-java"><code>package com.automationrhapsody.cucumber.parallel.tests.wikipedia;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-
-import static junit.framework.Assert.assertTrue;
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertEquals;
-
-public class WikipediaSteps {
-
-	private WebDriver driver;
-
-	@Before
-	public void before() {
-		driver = new FirefoxDriver();
-		driver.navigate().to("http://en.wikipedia.org");
-	}
-
-	@After
-	public void after() {
-		driver.quit();
-	}
-
-	@Given("^Enter search term '(.*?)'$")
-	public void searchFor(String searchTerm) {
-		WebElement searchField = driver.findElement(By.id("searchInput"));
-		searchField.sendKeys(searchTerm);
-	}
-
-	@When("^Do search$")
-	public void clickSearchButton() {
-		WebElement searchButton = driver.findElement(By.id("searchButton"));
-		searchButton.click();
-	}
-
-	@Then("^Single result is shown for '(.*?)'$")
-	public void assertSingleResult(String searchResult) {
-		WebElement results = driver
-			.findElement(By.cssSelector("div#mw-content-text.mw-content-ltr p"));
-		assertFalse(results.getText().contains(searchResult + " may refer to:"));
-		assertTrue(results.getText().startsWith(searchResult));
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>package com.automationrhapsody.cucumber.parallel.tests.wikipedia;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import org.openqa.selenium.By;</span></span>
+<span class="line"><span>import org.openqa.selenium.WebDriver;</span></span>
+<span class="line"><span>import org.openqa.selenium.WebElement;</span></span>
+<span class="line"><span>import org.openqa.selenium.firefox.FirefoxDriver;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import cucumber.api.java.After;</span></span>
+<span class="line"><span>import cucumber.api.java.Before;</span></span>
+<span class="line"><span>import cucumber.api.java.en.Given;</span></span>
+<span class="line"><span>import cucumber.api.java.en.Then;</span></span>
+<span class="line"><span>import cucumber.api.java.en.When;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import static junit.framework.Assert.assertTrue;</span></span>
+<span class="line"><span>import static junit.framework.TestCase.assertFalse;</span></span>
+<span class="line"><span>import static org.junit.Assert.assertEquals;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class WikipediaSteps {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private WebDriver driver;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Before</span></span>
+<span class="line"><span>    public void before() {</span></span>
+<span class="line"><span>        driver = new FirefoxDriver();</span></span>
+<span class="line"><span>        driver.navigate().to("http://en.wikipedia.org");</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @After</span></span>
+<span class="line"><span>    public void after() {</span></span>
+<span class="line"><span>        driver.quit();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Given("^Enter search term '(.*?)'$")</span></span>
+<span class="line"><span>    public void searchFor(String searchTerm) {</span></span>
+<span class="line"><span>        WebElement searchField = driver.findElement(By.id("searchInput"));</span></span>
+<span class="line"><span>        searchField.sendKeys(searchTerm);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @When("^Do search$")</span></span>
+<span class="line"><span>    public void clickSearchButton() {</span></span>
+<span class="line"><span>        WebElement searchButton = driver.findElement(By.id("searchButton"));</span></span>
+<span class="line"><span>        searchButton.click();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Then("^Single result is shown for '(.*?)'$")</span></span>
+<span class="line"><span>    public void assertSingleResult(String searchResult) {</span></span>
+<span class="line"><span>        WebElement results = driver</span></span>
+<span class="line"><span>            .findElement(By.cssSelector("div#mw-content-text.mw-content-ltr p"));</span></span>
+<span class="line"><span>        assertFalse(results.getText().contains(searchResult + " may refer to:"));</span></span>
+<span class="line"><span>        assertTrue(results.getText().startsWith(searchResult));</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Before and After</h2>
 As noticeable above there is method annotated with <strong>@Before</strong>. This is executed before each scenario being run. It is used to allocate resources needed for a particular scenario to run. It is a good idea to instantiate WebDriver into this method. <strong>@After</strong> method is run at the end of the scenario so this is where resources are released, e.g. quitting WebDriver.
 <h2>Page objects</h2>
 Steps definitions code above is NOT well written. It is not a good idea to locate elements directly in the method where they are used. Never do this in real automation! Always use Page Object pattern. More details on it can be found in <a href="/page-objects-design-pattern/">Page objects design pattern</a> post.
 <h2>Conclusion</h2>
-BDD as an idea is good as it is according to Agile methodologies and stories definitions. Cucumber is very good BDD tool giving lots of flexibility and features with a big community supporting it. Cucumber-JVM is very easy to start working with. Be careful though, when steps definitions grow in count the main challenge will be to make those reusable. Challenge will be to avoid writing new steps code if such is already written for semantically the same commands but written in different words.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+BDD as an idea is good as it is according to Agile methodologies and stories definitions. Cucumber is very good BDD tool giving lots of flexibility and features with a big community supporting it. Cucumber-JVM is very easy to start working with. Be careful though, when steps definitions grow in count the main challenge will be to make those reusable. Challenge will be to avoid writing new steps code if such is already written for semantically the same commands but written in different words.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/running-cucumber-tests-in-parallel/" data-astro-cid-bvzihdzo>Running Cucumber tests in parallel</a> </li><li data-astro-cid-bvzihdzo> <a href="/page-objects-design-pattern/" data-astro-cid-bvzihdzo>Page objects design pattern</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/cucumber" data-astro-cid-bvzihdzo>Cucumber</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

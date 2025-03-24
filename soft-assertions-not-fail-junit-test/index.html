@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/soft-assertions-not-fail-junit-test/"><!-- Primary Meta Tags --><title>Soft assertions that do not fail JUnit test</title><meta name="title" content="Soft assertions that do not fail JUnit test"><meta name="description" content="Code examples how to use assertions that do not fail the unit test immediately."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/soft-assertions-not-fail-junit-test/"><meta property="og:title" content="Soft assertions that do not fail JUnit test"><meta property="og:description" content="Code examples how to use assertions that do not fail the unit test immediately."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/soft-assertions-not-fail-junit-test/"><meta property="twitter:title" content="Soft assertions that do not fail JUnit test"><meta property="twitter:description" content="Code examples how to use assertions that do not fail the unit test immediately."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-05-27T00:00:00.000Z"> May 27, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Soft assertions that do not fail JUnit test</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>The code shown in examples below is available in GitHub <a href="https://github.com/llatinov/api-testing-samples/tree/master/jersey1" target="_blank" rel="noopener noreferrer">java-samples/jersey1</a> repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/soft-assertions-not-fail-junit-test/"><!-- Primary Meta Tags --><title>Soft assertions that do not fail JUnit test</title><meta name="title" content="Soft assertions that do not fail JUnit test"><meta name="description" content="Code examples how to use assertions that do not fail the unit test immediately."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/soft-assertions-not-fail-junit-test/"><meta property="og:title" content="Soft assertions that do not fail JUnit test"><meta property="og:description" content="Code examples how to use assertions that do not fail the unit test immediately."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/soft-assertions-not-fail-junit-test/"><meta property="twitter:title" content="Soft assertions that do not fail JUnit test"><meta property="twitter:description" content="Code examples how to use assertions that do not fail the unit test immediately."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Soft assertions that do not fail JUnit test</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-05-27T00:00:00.000Z"> May 27, 2017 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>The code shown in examples below is available in GitHub <a href="https://github.com/llatinov/api-testing-samples/tree/master/jersey1" target="_blank" rel="noopener noreferrer">java-samples/jersey1</a> repository.</p>
 <h2>Unit vs Functional testing</h2>
 Unit testing paradigm states that each test exercises particular code behavior. So in a perfect world, one unit test would have one assertion which defines unit test result - either passed or failed. This is why unit testing frameworks provide only asserts which stop further execution of current test method. In functional testing usually, one test verifies several conditions. Not debating if this is good or bad. Assume you are doing GUI testing, once you have opened particular page you'd better do as much verification as possible to reduce the risk of bugs. Having this page opened over and over for every single check is not the most efficient way of testing. This is why when you run functional tests you need some kind of assert that indicates whether passed or failed but to let the test continue in no critical issue is present. Those are generally called "soft" asserts.
 <h2>Soft assertions and JUnit</h2>
@@ -10,69 +9,69 @@ Unit testing paradigm states that each test exercises particular code behavior. 
 <a href="http://joel-costigliola.github.io/assertj/" target="_blank" rel="noopener noreferrer">AssertJ</a> is a library providing fluent assertions. It is very similar to <a href="http://hamcrest.org/" target="_blank" rel="noopener noreferrer">Hamcrest</a> which comes by default with JUnit. Along with all the asserts, AssertJ provides soft assertions with its <em><strong>SoftAssertions</strong></em> class inside <em><strong>org.assertj.core.api</strong></em> package.
 <h2>Usage</h2>
 Below is a functional test run against Dropwizard stub described in <a href="/build-a-rest-stub-server-with-dropwizard/">Build a RESTful stub server with Dropwizard</a> post. Important is to instantiate a new <em><strong>SoftAssertions </strong></em>object before the test verifications and to call <em><strong>assertAll()</strong></em> method in the end to collect results. Best way to do this is to use JUnit's <em><strong>@Before</strong></em> and <em><strong>@After</strong></em> annotated methods.
-<pre class="language-java"><code>package com.automationrhapsody.jersey1;
-
-import com.automationrhapsody.jersey1.model.Person;
-import com.automationrhapsody.jersey1.rules.PersonServiceJerseyClient;
-
-import java.util.List;
-
-import org.assertj.core.api.SoftAssertions;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-
-public class PersonServiceTest {
-
-	@ClassRule
-	public static final PersonServiceJerseyClient CLIENT 
-		= new PersonServiceJerseyClient();
-
-	private SoftAssertions softAssertions;
-
-	private Person person;
-
-	@Before
-	public void setUp() {
-		person = new Person();
-		person.setId(123);
-		person.setFirstName("First Name");
-		person.setLastName("Last Name");
-		person.setEmail("Email");
-
-		softAssertions = new SoftAssertions();
-	}
-
-	@After
-	public void tearDown() {
-		softAssertions.assertAll();
-	}
-
-	@Test
-	public void testAllOperations() {
-		String saveResult = CLIENT.save(person);
-		assertThat(saveResult, is("Added Person with id=123"));
-
-		Person actual = CLIENT.get(person.getId());
-		softAssertions
-			.assertThat(actual.getId()).isEqualTo(person.getId());
-		softAssertions
-			.assertThat(actual.getFirstName()).isEqualTo(person.getFirstName());
-		softAssertions
-			.assertThat(actual.getLastName()).isEqualTo(person.getLastName());
-		softAssertions
-			.assertThat(actual.getEmail()).isEqualTo(person.getEmail());
-
-		String result = CLIENT.remove();
-		assertThat(result, is("Last person remove. Total count: 4"));
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>package com.automationrhapsody.jersey1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import com.automationrhapsody.jersey1.model.Person;</span></span>
+<span class="line"><span>import com.automationrhapsody.jersey1.rules.PersonServiceJerseyClient;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import java.util.List;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import org.assertj.core.api.SoftAssertions;</span></span>
+<span class="line"><span>import org.junit.After;</span></span>
+<span class="line"><span>import org.junit.Before;</span></span>
+<span class="line"><span>import org.junit.ClassRule;</span></span>
+<span class="line"><span>import org.junit.Test;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import static org.hamcrest.MatcherAssert.assertThat;</span></span>
+<span class="line"><span>import static org.hamcrest.core.Is.is;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class PersonServiceTest {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @ClassRule</span></span>
+<span class="line"><span>    public static final PersonServiceJerseyClient CLIENT </span></span>
+<span class="line"><span>        = new PersonServiceJerseyClient();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private SoftAssertions softAssertions;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private Person person;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Before</span></span>
+<span class="line"><span>    public void setUp() {</span></span>
+<span class="line"><span>        person = new Person();</span></span>
+<span class="line"><span>        person.setId(123);</span></span>
+<span class="line"><span>        person.setFirstName("First Name");</span></span>
+<span class="line"><span>        person.setLastName("Last Name");</span></span>
+<span class="line"><span>        person.setEmail("Email");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        softAssertions = new SoftAssertions();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @After</span></span>
+<span class="line"><span>    public void tearDown() {</span></span>
+<span class="line"><span>        softAssertions.assertAll();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Test</span></span>
+<span class="line"><span>    public void testAllOperations() {</span></span>
+<span class="line"><span>        String saveResult = CLIENT.save(person);</span></span>
+<span class="line"><span>        assertThat(saveResult, is("Added Person with id=123"));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        Person actual = CLIENT.get(person.getId());</span></span>
+<span class="line"><span>        softAssertions</span></span>
+<span class="line"><span>            .assertThat(actual.getId()).isEqualTo(person.getId());</span></span>
+<span class="line"><span>        softAssertions</span></span>
+<span class="line"><span>            .assertThat(actual.getFirstName()).isEqualTo(person.getFirstName());</span></span>
+<span class="line"><span>        softAssertions</span></span>
+<span class="line"><span>            .assertThat(actual.getLastName()).isEqualTo(person.getLastName());</span></span>
+<span class="line"><span>        softAssertions</span></span>
+<span class="line"><span>            .assertThat(actual.getEmail()).isEqualTo(person.getEmail());</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        String result = CLIENT.remove();</span></span>
+<span class="line"><span>        assertThat(result, is("Last person remove. Total count: 4"));</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Conclusion</h2>
-Soft assertions are needed in case of functional tests being run with JUnit. Since such is not available out of the box because JUnit is targeted for unit tests soft assertions can be used from external libraries such as AssertJ.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Soft assertions are needed in case of functional tests being run with JUnit. Since such is not available out of the box because JUnit is targeted for unit tests soft assertions can be used from external libraries such as AssertJ.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/build-a-rest-stub-server-with-dropwizard/" data-astro-cid-bvzihdzo>Build a RESTful stub server with Dropwizard</a> </li><li data-astro-cid-bvzihdzo> <a href="/soft-assertions-c-unit-testing-frameworks-mstest-nunit-xunit-net/" data-astro-cid-bvzihdzo>Soft assertions for C# unit testing frameworks (MSTest, NUnit, xUnit.net)</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/api-automation" data-astro-cid-bvzihdzo>API Automation</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/junit" data-astro-cid-bvzihdzo>JUnit</a><a href="/tags/web-automation" data-astro-cid-bvzihdzo>Web Automation</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

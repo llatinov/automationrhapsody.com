@@ -1,56 +1,55 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/mock-new-object-creation-powermock/"><!-- Primary Meta Tags --><title>Mock new object creation with PowerMock</title><meta name="title" content="Mock new object creation with PowerMock"><meta name="description" content="How to control what objects are being instantiated when using PowerMock."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/mock-new-object-creation-powermock/"><meta property="og:title" content="Mock new object creation with PowerMock"><meta property="og:description" content="How to control what objects are being instantiated when using PowerMock."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/mock-new-object-creation-powermock/"><meta property="twitter:title" content="Mock new object creation with PowerMock"><meta property="twitter:description" content="How to control what objects are being instantiated when using PowerMock."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-05-30T00:00:00.000Z"> May 30, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Mock new object creation with PowerMock</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/powermock-examples-better-not-use/">PowerMock series examples</a>. The code shown in examples below is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener noreferrer">java-samples/junit</a> repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/mock-new-object-creation-powermock/"><!-- Primary Meta Tags --><title>Mock new object creation with PowerMock</title><meta name="title" content="Mock new object creation with PowerMock"><meta name="description" content="How to control what objects are being instantiated when using PowerMock."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/mock-new-object-creation-powermock/"><meta property="og:title" content="Mock new object creation with PowerMock"><meta property="og:description" content="How to control what objects are being instantiated when using PowerMock."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/mock-new-object-creation-powermock/"><meta property="twitter:title" content="Mock new object creation with PowerMock"><meta property="twitter:description" content="How to control what objects are being instantiated when using PowerMock."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Mock new object creation with PowerMock</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-05-30T00:00:00.000Z"> May 30, 2017 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/powermock-examples-better-not-use/">PowerMock series examples</a>. The code shown in examples below is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener noreferrer">java-samples/junit</a> repository.</p>
 <h2>Mock new object creation</h2>
 You might have a method which instantiates some object and works with it. This case could be very tricky to automate because you do not have any control over this newly created object. This is where PowerMock comes to help to allow you to control what object is being created by replacing it with an object you can control.
 <h2>Code to test</h2>
 Below is a simple method where a new object is being created inside a method that has to be unit tested.
-<pre class="language-java"><code>public class PowerMockDemo {
-
-	public Point publicMethod() {
-		return new Point(11, 11);
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class PowerMockDemo {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public Point publicMethod() {</span></span>
+<span class="line"><span>        return new Point(11, 11);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Unit test</h2>
 What we want to achieve in the unit test is to control instantiation of new Point object so that it is replaced with an object we have control over. The first thing to do is to annotate unit test with <em><strong>@RunWith(PowerMockRunner.class)</strong></em> telling JUnit to use PowerMock runner and with <em><strong>@PrepareForTest(PowerMockDemo.class) </strong></em>telling PowerMock to get inside <em><strong>PowerMockDemo</strong></em> class and prepare it for mocking. Mocking is done with <em><strong>PowerMockito.whenNew(Point.class).withAnyArguments().thenReturn(mockPoint)</strong></em>. It tells PowerMock when a new object from class <em><strong>Point</strong></em> is instantiated with whatever arguments to return <em><strong>mockPoint</strong></em> instead. It is possible to return different objects based on different arguments Point is created with <em><strong>withArguments()</strong></em> method. Full code is below:
-<pre class="language-java"><code>import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(PowerMockDemo.class)
-public class PowerMockDemoTest {
-
-	private PowerMockDemo powerMockDemo;
-
-	@Before
-	public void setUp() {
-		powerMockDemo = new PowerMockDemo();
-	}
-
-	@Test
-	public void testMockNew() throws Exception {
-		Point mockPoint = mock(Point.class);
-
-		PowerMockito.whenNew(Point.class)
-			.withAnyArguments().thenReturn(mockPoint);
-
-		Point actualMockPoint = powerMockDemo.publicMethod();
-
-		assertThat(actualMockPoint, is(mockPoint));
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import org.junit.Before;</span></span>
+<span class="line"><span>import org.junit.Test;</span></span>
+<span class="line"><span>import org.junit.runner.RunWith;</span></span>
+<span class="line"><span>import org.powermock.api.mockito.PowerMockito;</span></span>
+<span class="line"><span>import org.powermock.core.classloader.annotations.PrepareForTest;</span></span>
+<span class="line"><span>import org.powermock.modules.junit4.PowerMockRunner;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import static org.hamcrest.CoreMatchers.is;</span></span>
+<span class="line"><span>import static org.hamcrest.MatcherAssert.assertThat;</span></span>
+<span class="line"><span>import static org.mockito.Mockito.mock;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@RunWith(PowerMockRunner.class)</span></span>
+<span class="line"><span>@PrepareForTest(PowerMockDemo.class)</span></span>
+<span class="line"><span>public class PowerMockDemoTest {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private PowerMockDemo powerMockDemo;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Before</span></span>
+<span class="line"><span>    public void setUp() {</span></span>
+<span class="line"><span>        powerMockDemo = new PowerMockDemo();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Test</span></span>
+<span class="line"><span>    public void testMockNew() throws Exception {</span></span>
+<span class="line"><span>        Point mockPoint = mock(Point.class);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        PowerMockito.whenNew(Point.class)</span></span>
+<span class="line"><span>            .withAnyArguments().thenReturn(mockPoint);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        Point actualMockPoint = powerMockDemo.publicMethod();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        assertThat(actualMockPoint, is(mockPoint));</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Conclusion</h2>
-PowerMock allows you to control want new objects are being created and replacing them with an object you have control over.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+PowerMock allows you to control want new objects are being created and replacing them with an object you have control over.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/powermock-examples-better-not-use/" data-astro-cid-bvzihdzo>PowerMock examples and why better not to use them</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/junit" data-astro-cid-bvzihdzo>JUnit</a><a href="/tags/powermock" data-astro-cid-bvzihdzo>PowerMock</a><a href="/tags/unit-testing" data-astro-cid-bvzihdzo>Unit testing</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

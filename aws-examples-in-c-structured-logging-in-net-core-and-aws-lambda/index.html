@@ -1,32 +1,31 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-structured-logging-in-net-core-and-aws-lambda/"><!-- Primary Meta Tags --><title>AWS examples in C# - structured logging in .NET Core and AWS Lambda</title><meta name="title" content="AWS examples in C# - structured logging in .NET Core and AWS Lambda"><meta name="description" content="Code examples of how to do structured logging in .NET Core and C# AWS Lambda."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-structured-logging-in-net-core-and-aws-lambda/"><meta property="og:title" content="AWS examples in C# - structured logging in .NET Core and AWS Lambda"><meta property="og:description" content="Code examples of how to do structured logging in .NET Core and C# AWS Lambda."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-structured-logging-in-net-core-and-aws-lambda/"><meta property="twitter:title" content="AWS examples in C# - structured logging in .NET Core and AWS Lambda"><meta property="twitter:description" content="Code examples of how to do structured logging in .NET Core and C# AWS Lambda."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-03-29T00:00:00.000Z"> Mar 29, 2020 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - structured logging in .NET Core and AWS Lambda</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-structured-logging-in-net-core-and-aws-lambda/"><!-- Primary Meta Tags --><title>AWS examples in C# - structured logging in .NET Core and AWS Lambda</title><meta name="title" content="AWS examples in C# - structured logging in .NET Core and AWS Lambda"><meta name="description" content="Code examples of how to do structured logging in .NET Core and C# AWS Lambda."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-structured-logging-in-net-core-and-aws-lambda/"><meta property="og:title" content="AWS examples in C# - structured logging in .NET Core and AWS Lambda"><meta property="og:description" content="Code examples of how to do structured logging in .NET Core and C# AWS Lambda."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-structured-logging-in-net-core-and-aws-lambda/"><meta property="twitter:title" content="AWS examples in C# - structured logging in .NET Core and AWS Lambda"><meta property="twitter:description" content="Code examples of how to do structured logging in .NET Core and C# AWS Lambda."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - structured logging in .NET Core and AWS Lambda</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-03-29T00:00:00.000Z"> Mar 29, 2020 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository.</p>
 <h2>Structured logging</h2>
 In the general case, log files are a big text file with no structure in it. This makes it hard to search and analyze log files. The idea of structured logging is to write log files into a given format, such as JSON or XML, so they can later be machine processed such search or big data analysis. In the current post, I will describe how to log in to JSON format. For e.g. one log entry is:
-<pre class="language-bash"><code>[12:17:16 INF] New Movie published with Die Hard, {"Title": "Die Hard", "Genre": "Action", "$type": "Movie"}</code></pre>
-This is a simple text with the Movie object being input as JSON. In order to process it, a parser has to be implemented, which gets the data into the square brackets and extracts the date-time and the log level, then searching into the content itself is hard because it should be done with lots of regular expressions. With structured logging the same entity will look like this:
-<pre class="language-json"><code>{
-	"@t": "2020-03-29T10:21:24.2907688Z",
-	"@mt": "New Movie published with {Title}, {@Content}",
-	"Title": "Die Hard",
-	"Content": {
-		"Title": "Die Hard",
-		"Genre": "Action",
-		"$type": "Movie"
-	},
-	"SourceContext": "SqsWriter.Controllers.PublishController",
-	"ActionId": "20de3310-ebce-48d5-8f9c-28914e199937",
-	"ActionName": "SqsWriter.Controllers.PublishController.PublishMovie (SqsWriter)",
-	"RequestId": "0HLUJPBNDGPSJ:00000001",
-	"RequestPath": "/api/publish/movie",
-	"SpanId": "|7bab219a-415f5c121e1756f5.",
-	"TraceId": "7bab219a-415f5c121e1756f5",
-	"ParentId": "",
-	"ConnectionId": "0HLUJPBNDGPSJ"
-}
-</code></pre>
-There is much more data in the latter and it is also in JSON format which makes it easy to search with JsonPath.
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[12:17:16 INF] New Movie published with Die Hard, {"Title": "Die Hard", "Genre": "Action", "$type": "Movie"}</span></span></code></pre>
+<p>This is a simple text with the Movie object being input as JSON. In order to process it, a parser has to be implemented, which gets the data into the square brackets and extracts the date-time and the log level, then searching into the content itself is hard because it should be done with lots of regular expressions. With structured logging the same entity will look like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<span class="line"><span>    "@t": "2020-03-29T10:21:24.2907688Z",</span></span>
+<span class="line"><span>    "@mt": "New Movie published with {Title}, {@Content}",</span></span>
+<span class="line"><span>    "Title": "Die Hard",</span></span>
+<span class="line"><span>    "Content": {</span></span>
+<span class="line"><span>        "Title": "Die Hard",</span></span>
+<span class="line"><span>        "Genre": "Action",</span></span>
+<span class="line"><span>        "$type": "Movie"</span></span>
+<span class="line"><span>    },</span></span>
+<span class="line"><span>    "SourceContext": "SqsWriter.Controllers.PublishController",</span></span>
+<span class="line"><span>    "ActionId": "20de3310-ebce-48d5-8f9c-28914e199937",</span></span>
+<span class="line"><span>    "ActionName": "SqsWriter.Controllers.PublishController.PublishMovie (SqsWriter)",</span></span>
+<span class="line"><span>    "RequestId": "0HLUJPBNDGPSJ:00000001",</span></span>
+<span class="line"><span>    "RequestPath": "/api/publish/movie",</span></span>
+<span class="line"><span>    "SpanId": "|7bab219a-415f5c121e1756f5.",</span></span>
+<span class="line"><span>    "TraceId": "7bab219a-415f5c121e1756f5",</span></span>
+<span class="line"><span>    "ParentId": "",</span></span>
+<span class="line"><span>    "ConnectionId": "0HLUJPBNDGPSJ"</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>There is much more data in the latter and it is also in JSON format which makes it easy to search with JsonPath.</p>
 <h2>JSON Path</h2>
 <a href="https://goessner.net/articles/JsonPath/" target="_blank" rel="noopener noreferrer">JsonPath</a> is a way to navigate into a JSON document, very similar to XPath for XML. With <a href="https://jsonpath.com/" target="_blank" rel="noopener noreferrer">JSONPath Online Evaluator</a> is easy to try some expressions. Both <em><strong>$.Content.Title</strong></em> and <em><strong>$.Title</strong></em> resolves to <em><strong>Die Hard</strong></em>. So it is very easy for a tool that understands the JsonPath to query logs where some JSON entity is related somehow to a given rule, for e.g. <em><strong>$.Title</strong></em> equals to <em><strong>Die Hard</strong></em>.
 <h2>AWS CloudWatch</h2>
@@ -35,121 +34,128 @@ CloudWatch provides different monitoring functions, one of them is logging. By d
 <a href="https://serilog.net/" target="_blank" rel="noopener noreferrer">Serilog</a> is a .NET library that provides logging capabilities. Its main benefits are that it can log into <em><strong>JSON format</strong></em>. Serilog can be very easily integrated into any C# project. Two Nuget packages are needed: <em><strong>Serilog</strong></em> and <em><strong>Serilog.AspNetCore</strong></em>.
 <h2>Configure Serilog for .NET Core application</h2>
 In the case of .NET Core microservice Serilog is injected into <em><strong>Program.cs</strong></em>.
-<pre class="language-csharp"><code>using Serilog;
-using Serilog.Events;
-using Serilog.Formatting.Compact;
-<p>public static void Main(string[] args)
-{
-Log.Logger = new LoggerConfiguration()
-.MinimumLevel.Debug()
-.MinimumLevel.Override(“Microsoft”, LogEventLevel.Warning)
-.Enrich.FromLogContext()
-.WriteTo.Console(new CompactJsonFormatter())
-.CreateLogger();</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>var webHost = WebHost.CreateDefaultBuilder(args)</span></span>
-<span class="line"><span>	.UseStartup&#x26;lt;Startup&#x26;gt;()</span></span>
-<span class="line"><span>	.UseSerilog()</span></span>
-<span class="line"><span>	.UseUrls("http://*:5100")</span></span>
-<span class="line"><span>	.Build();</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using Serilog;</span></span>
+<span class="line"><span>using Serilog.Events;</span></span>
+<span class="line"><span>using Serilog.Formatting.Compact;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>webHost.Run();</span></span></code></pre>
-</code><p><code>}
-</code></p></pre><p></p>
+<span class="line"><span>public static void Main(string[] args)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    Log.Logger = new LoggerConfiguration()</span></span>
+<span class="line"><span>        .MinimumLevel.Debug()</span></span>
+<span class="line"><span>        .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)</span></span>
+<span class="line"><span>        .Enrich.FromLogContext()</span></span>
+<span class="line"><span>        .WriteTo.Console(new CompactJsonFormatter())</span></span>
+<span class="line"><span>        .CreateLogger();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    var webHost = WebHost.CreateDefaultBuilder(args)</span></span>
+<span class="line"><span>        .UseStartup&#x3C;Startup>()</span></span>
+<span class="line"><span>        .UseSerilog()</span></span>
+<span class="line"><span>        .UseUrls("http://*:5100")</span></span>
+<span class="line"><span>        .Build();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    webHost.Run();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Configure Serilog for AWS C# Lambda function</h2>
 In the case of C# lambda function, logging to console is enough, since all logs are sent to CloudWatch. I have created a proxy class called Logger, which instantiates an instance of <em><strong>Serilog</strong></em> logger. The custom logger is then used in lambda function itself.
-<p>[tabby title=“Logger”]</p>
-<pre class="language-csharp"><code>public interface ILogger
-{
-	void LogInformation(string messageTemplate, params object[] arguments);
-}
-
-public class Logger : ILogger
-{
-	private static Serilog.Core.Logger _logger;
-
-	public Logger()
-	{
-		_logger = new LoggerConfiguration()
-			.MinimumLevel.Debug()
-			.WriteTo.Console(new CompactJsonFormatter())
-			.CreateLogger();
-	}
-
-	public void LogInformation(string messageTemplate, params object[] arguments)
-	{
-		_logger.Information(messageTemplate, arguments);
-	}
-}
-</code></pre>
-<p>[tabby title=“MoviesFunction”]</p>
-<pre class="language-csharp"><code>private readonly ISqsWriter _sqsWriter;
-private readonly IDynamoDbWriter _dynamoDbWriter;
-private readonly ILogger _logger;
-
-public MoviesFunction() : this(null, null, null) { }
-
-public MoviesFunction(ISqsWriter sqsWriter, IDynamoDbWriter dynamoDbWriter, ILogger logger)
-{
-	_sqsWriter = sqsWriter ?? new SqsWriter();
-	_dynamoDbWriter = dynamoDbWriter ?? new DynamoDbWriter();
-	_logger = logger ?? new Logger();
-}
-
-public async Task MoviesFunctionHandler(DynamoDBEvent dynamoEvent, ILambdaContext context)
-{
-	foreach (var record in dynamoEvent.Records)
-	{
-		var title = record.Dynamodb.NewImage["Title"].S;
-		var logEntry = new LogEntry
-		{
-			Message = $"Movie '{title}' processed by lambda",
-			DateTime = DateTime.Now
-		};
-		_logger.LogInformation("MoviesFunctionHandler invoked with {Title}", title);
-
-		await _sqsWriter.WriteLogEntryAsync(logEntry);
-		await _dynamoDbWriter.PutLogEntryAsync(logEntry);
-	}
-}
-</code></pre>
-<p>[tabby title=“GetMovie”]</p>
-<pre class="language-csharp"><code>public async Task&#x3C;APIGatewayProxyResponse> GetMovie(APIGatewayProxyRequest request, ILambdaContext context)
-{
-	var title = WebUtility.UrlDecode(request.PathParameters["title"]);
-	_logger.LogInformation("GetMovie invoked with {Title}", title);
-
-	var document = await _dynamoDbReader.GetDocumentAsync(TableName, title);
-	if (document == null)
-	{
-		_logger.LogInformation("GetMovie produced no results for {Title}", title);
-		return new APIGatewayProxyResponse { StatusCode = (int)HttpStatusCode.NotFound };
-	}
-
-	var movie = new Movie
-	{
-		Title = document["Title"],
-		Genre = (MovieGenre)int.Parse(document["Genre"])
-	};
-	_logger.LogInformation("GetMovie result is {Title}, {@Content}", movie.Title, movie);
-
-	return new APIGatewayProxyResponse
-	{
-		StatusCode = (int)HttpStatusCode.OK,
-		Body = _jsonConverter.SerializeObject(movie)
-	};
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="4652-Logger" class="tablinks active" onclick="openTab(this, &#x27;content-4652-Logger&#x27;, &#x27;4652&#x27;)">Logger</button>
+<button id="4652-MoviesFunction" class="tablinks" onclick="openTab(this, &#x27;content-4652-MoviesFunction&#x27;, &#x27;4652&#x27;)">MoviesFunction</button>
+<button id="4652-GetMovie" class="tablinks" onclick="openTab(this, &#x27;content-4652-GetMovie&#x27;, &#x27;4652&#x27;)">GetMovie</button></div>
+<div id="content-4652-Logger" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public interface ILogger</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    void LogInformation(string messageTemplate, params object[] arguments);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class Logger : ILogger</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    private static Serilog.Core.Logger _logger;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public Logger()</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        _logger = new LoggerConfiguration()</span></span>
+<span class="line"><span>            .MinimumLevel.Debug()</span></span>
+<span class="line"><span>            .WriteTo.Console(new CompactJsonFormatter())</span></span>
+<span class="line"><span>            .CreateLogger();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void LogInformation(string messageTemplate, params object[] arguments)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        _logger.Information(messageTemplate, arguments);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-4652-MoviesFunction" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private readonly ISqsWriter _sqsWriter;</span></span>
+<span class="line"><span>private readonly IDynamoDbWriter _dynamoDbWriter;</span></span>
+<span class="line"><span>private readonly ILogger _logger;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public MoviesFunction() : this(null, null, null) { }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public MoviesFunction(ISqsWriter sqsWriter, IDynamoDbWriter dynamoDbWriter, ILogger logger)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    _sqsWriter = sqsWriter ?? new SqsWriter();</span></span>
+<span class="line"><span>    _dynamoDbWriter = dynamoDbWriter ?? new DynamoDbWriter();</span></span>
+<span class="line"><span>    _logger = logger ?? new Logger();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public async Task MoviesFunctionHandler(DynamoDBEvent dynamoEvent, ILambdaContext context)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    foreach (var record in dynamoEvent.Records)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        var title = record.Dynamodb.NewImage["Title"].S;</span></span>
+<span class="line"><span>        var logEntry = new LogEntry</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            Message = $"Movie '{title}' processed by lambda",</span></span>
+<span class="line"><span>            DateTime = DateTime.Now</span></span>
+<span class="line"><span>        };</span></span>
+<span class="line"><span>        _logger.LogInformation("MoviesFunctionHandler invoked with {Title}", title);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        await _sqsWriter.WriteLogEntryAsync(logEntry);</span></span>
+<span class="line"><span>        await _dynamoDbWriter.PutLogEntryAsync(logEntry);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-4652-GetMovie" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public async Task&#x3C;APIGatewayProxyResponse> GetMovie(APIGatewayProxyRequest request, ILambdaContext context)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    var title = WebUtility.UrlDecode(request.PathParameters["title"]);</span></span>
+<span class="line"><span>    _logger.LogInformation("GetMovie invoked with {Title}", title);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    var document = await _dynamoDbReader.GetDocumentAsync(TableName, title);</span></span>
+<span class="line"><span>    if (document == null)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        _logger.LogInformation("GetMovie produced no results for {Title}", title);</span></span>
+<span class="line"><span>        return new APIGatewayProxyResponse { StatusCode = (int)HttpStatusCode.NotFound };</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    var movie = new Movie</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        Title = document["Title"],</span></span>
+<span class="line"><span>        Genre = (MovieGenre)int.Parse(document["Genre"])</span></span>
+<span class="line"><span>    };</span></span>
+<span class="line"><span>    _logger.LogInformation("GetMovie result is {Title}, {@Content}", movie.Title, movie);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    return new APIGatewayProxyResponse</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        StatusCode = (int)HttpStatusCode.OK,</span></span>
+<span class="line"><span>        Body = _jsonConverter.SerializeObject(movie)</span></span>
+<span class="line"><span>    };</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>AWS CloudWatch Insights</h2>
 CloudWatch Logs Insights enables interactive search and analyze log data in Amazon CloudWatch Logs. Queries can be performed to help more efficiently and effectively respond to operational issues. Queries are done in a specific purpose-built query language with a few simple but powerful commands. A short example is to search for all logs in which <em><strong>FirstName</strong></em> field equals <em><strong>Bruce</strong></em>. Before that all log groups that has to be searched are selected above.
-<pre class="language-bash"><code>fields @@mt
-| sort @timestamp desc
-| limit 20
-| filter FirstName = 'Bruce'
-</code></pre>
-<a href="/images/2020/03/aws.csharp.exmaples-aws.cloudwatch.insights.png"><img src="/images/2020/03/aws.csharp.exmaples-aws.cloudwatch.insights.png"></a>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fields @@mt</span></span>
+<span class="line"><span>| sort @timestamp desc</span></span>
+<span class="line"><span>| limit 20</span></span>
+<span class="line"><span>| filter FirstName = 'Bruce'</span></span>
+<span class="line"><span></span></span></code></pre>
+<p><a href="/images/2020/03/aws.csharp.exmaples-aws.cloudwatch.insights.png"><img src="/images/2020/03/aws.csharp.exmaples-aws.cloudwatch.insights.png"></a></p>
 <p>An extensive guide on query language can be found on <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html" target="_blank" rel="noopener noreferrer">CloudWatch Logs Insights Query Syntax</a> page.</p>
 <h2>Conclusion</h2>
-Structured logging can bring a lot of benefits to debugging an application and analyzing its behavior. It is easy to set up and be used.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Structured logging can bring a lot of benefits to debugging an application and analyzing its behavior. It is easy to set up and be used.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/" data-astro-cid-bvzihdzo>AWS examples in C# - working with SQS, DynamoDB, Lambda, ECS</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/aws" data-astro-cid-bvzihdzo>AWS</a><a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

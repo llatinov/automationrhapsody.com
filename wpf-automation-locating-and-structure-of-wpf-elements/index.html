@@ -1,84 +1,83 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/wpf-automation-locating-and-structure-of-wpf-elements/"><!-- Primary Meta Tags --><title>WPF automation - locating and structure of WPF elements</title><meta name="title" content="WPF automation - locating and structure of WPF elements"><meta name="description" content="Guide how to locate WPF elements with Telerik Testing Framework."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/wpf-automation-locating-and-structure-of-wpf-elements/"><meta property="og:title" content="WPF automation - locating and structure of WPF elements"><meta property="og:description" content="Guide how to locate WPF elements with Telerik Testing Framework."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/wpf-automation-locating-and-structure-of-wpf-elements/"><meta property="twitter:title" content="WPF automation - locating and structure of WPF elements"><meta property="twitter:description" content="Guide how to locate WPF elements with Telerik Testing Framework."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-02-10T00:00:00.000Z"> Feb 10, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>WPF automation - locating and structure of WPF elements</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>References</h2>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/wpf-automation-locating-and-structure-of-wpf-elements/"><!-- Primary Meta Tags --><title>WPF automation - locating and structure of WPF elements</title><meta name="title" content="WPF automation - locating and structure of WPF elements"><meta name="description" content="Guide how to locate WPF elements with Telerik Testing Framework."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/wpf-automation-locating-and-structure-of-wpf-elements/"><meta property="og:title" content="WPF automation - locating and structure of WPF elements"><meta property="og:description" content="Guide how to locate WPF elements with Telerik Testing Framework."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/wpf-automation-locating-and-structure-of-wpf-elements/"><meta property="twitter:title" content="WPF automation - locating and structure of WPF elements"><meta property="twitter:description" content="Guide how to locate WPF elements with Telerik Testing Framework."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>WPF automation - locating and structure of WPF elements</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-02-10T00:00:00.000Z"> Feb 10, 2015 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <h2>References</h2>
 This post is part of <a title="Automation of WPF applications" href="/automation-of-wpf-applications/">Automation of WPF applications</a> with Telerik Testing Framework and TestStack White series. The sample application can be found in GitHub <a href="https://github.com/llatinov/SampleApp" target="_blank" rel="noopener">SampleApp</a> repository.
 <h2>MainWindow Page Object</h2>
 <em><strong>MainWindow.cs</strong></em> class is a representation of the main window of our sample application which is WPF. <em>Note that code here is shortened. The full code can be found in GitHub repository</em>.
-<pre class="language-csharp"><code>using ArtOfTest.WebAii.Controls.Xaml.Wpf;
-using ArtOfTest.WebAii.Silverlight;
-using ArtOfTest.WebAii.TestTemplates;
-using System.Threading;
-
-namespace SampleApp.Tests.Framework.Elements
-{
-	public class MainWindow : XamlElementContainer
-	{
-		public static string WINDOW_NAME = "MainWindow";
-		private string mainPath =
-			"XamlPath=/Border[0]/AdornerDecorator[0]/ContentPresenter[0]/Grid[0]/";
-		public MainWindow(VisualFind find) : base(find) { }
-
-		private Button Button_Browse
-		{
-			get
-			{
-				return Get&#x3C;Button>(mainPath + "Button[0]");
-			}
-		}
-
-		public void ClickBrowseButton()
-		{
-			Button_Browse.User.Click();
-			Thread.Sleep(500);
-		}
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using ArtOfTest.WebAii.Controls.Xaml.Wpf;</span></span>
+<span class="line"><span>using ArtOfTest.WebAii.Silverlight;</span></span>
+<span class="line"><span>using ArtOfTest.WebAii.TestTemplates;</span></span>
+<span class="line"><span>using System.Threading;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleApp.Tests.Framework.Elements</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class MainWindow : XamlElementContainer</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        public static string WINDOW_NAME = "MainWindow";</span></span>
+<span class="line"><span>        private string mainPath =</span></span>
+<span class="line"><span>            "XamlPath=/Border[0]/AdornerDecorator[0]/ContentPresenter[0]/Grid[0]/";</span></span>
+<span class="line"><span>        public MainWindow(VisualFind find) : base(find) { }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        private Button Button_Browse</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            get</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                return Get&#x3C;Button>(mainPath + "Button[0]");</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public void ClickBrowseButton()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            Button_Browse.User.Click();</span></span>
+<span class="line"><span>            Thread.Sleep(500);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p><em><strong>MainWindow</strong></em> is following <a title="Page objects pattern" href="/page-objects-design-pattern/">Page Object design pattern</a>. Elements are private <em><strong>Properties</strong></em>. Actions on elements are public methods that are the actual building blocks of the tests. Do not just add action methods for the sake of adding them. Add them if only the tests need such action.</p>
 <p>If the element is used in only one action then it could be inside the action method, but if the element is used more than one it is mandatory to keep it as separate property. The main idea is to avoid duplications in order to improve maintainability. Remember to stay <a title="DRY" href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself" target="_blank" rel="noopener">DRY</a>: one element must be defined in only one place.</p>
 <p><em><strong>MainWindow</strong></em> class extends <em><strong>XamlElementContainer</strong></em> which comes from the framework. The constructor takes <em><strong>VisualFind</strong></em> object and passes it to <em><strong>XamlElementContainer</strong></em>’s constructor. This allows us to use framework’s methods for location of elements. In our case</p>
-<pre class="language-csharp"><code>public TControl Get&#x3C;TControl>(params string[] clauses)
-	where TControl : ArtOfTest.WebAii.Controls.Xaml.IFrameworkElement;
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public TControl Get&#x3C;TControl>(params string[] clauses)</span></span>
+<span class="line"><span>    where TControl : ArtOfTest.WebAii.Controls.Xaml.IFrameworkElement;</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>This is the strategy used by the <a title="Test Studio" href="https://www.telerik.com/teststudio" target="_blank" rel="noopener" data-blogger-escaped-target="_blank">Test Studio</a> generated tests and I prefer it.</p>
 <h2>A different approach for MainWindow</h2>
 Another element structure could be not to extend XamlElementContainer but pass a <em><strong>VisualFind</strong></em> object through MainWindow's constructor and use it internally to locate elements.
-<pre class="language-csharp"><code>using ArtOfTest.WebAii.Controls.Xaml.Wpf;
-using ArtOfTest.WebAii.Silverlight;
-using System.Threading;
-
-namespace SampleApp.Tests.Framework.Elements
-{
-	public class MainWindow
-	{
-		public static string WINDOW_NAME = "MainWindow";
-		private string mainPath =
-			"XamlPath=/Border[0]/AdornerDecorator[0]/ContentPresenter[0]/Grid[0]/";
-		private VisualFind visualFind;
-		public MainWindow(VisualFind find)
-		{
-			visualFind = find;
-		}
-
-		private Button Button_Browse
-		{
-			get
-			{
-				return visualFind.ByExpression(
-					new XamlFindExpression(mainPath + "Button[0]")).
-					CastAs&#x3C;Button>();
-			}
-		}
-
-		public void ClickBrowseButton()
-		{
-			Button_Browse.User.Click();
-			Thread.Sleep(500);
-		}
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using ArtOfTest.WebAii.Controls.Xaml.Wpf;</span></span>
+<span class="line"><span>using ArtOfTest.WebAii.Silverlight;</span></span>
+<span class="line"><span>using System.Threading;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleApp.Tests.Framework.Elements</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class MainWindow</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        public static string WINDOW_NAME = "MainWindow";</span></span>
+<span class="line"><span>        private string mainPath =</span></span>
+<span class="line"><span>            "XamlPath=/Border[0]/AdornerDecorator[0]/ContentPresenter[0]/Grid[0]/";</span></span>
+<span class="line"><span>        private VisualFind visualFind;</span></span>
+<span class="line"><span>        public MainWindow(VisualFind find)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            visualFind = find;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        private Button Button_Browse</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            get</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                return visualFind.ByExpression(</span></span>
+<span class="line"><span>                    new XamlFindExpression(mainPath + "Button[0]")).</span></span>
+<span class="line"><span>                    CastAs&#x3C;Button>();</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public void ClickBrowseButton()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            Button_Browse.User.Click();</span></span>
+<span class="line"><span>            Thread.Sleep(500);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>How to locate elements is described in <a href="https://docs.telerik.com/teststudio/testing-framework/write-tests-in-code/intermediate-topics-wtc/element-identification-wtc/finding-page-elements" target="_blank" rel="noopener">finding page elements</a> article.</p>
 <h2>XamlPath</h2>
 As you can see I'm using exact <a title="XamlPath find expression" href="https://docs.telerik.com/teststudio/testing-framework/write-tests-in-code/intermediate-topics-wtc/element-identification-wtc/find-expressions" target="_blank" rel="noopener" data-blogger-escaped-target="_blank">XamlPath find expression</a> in order to locate my elements because I find it consistent and easy to maintain. XamlPath syntax is pretty similar to <a title="XPath" href="https://www.w3schools.com/xml/xml_xpath.asp" target="_blank" rel="noopener">XPath</a>. The difference is its indexes are zero-based (<em><strong>Button[0]</strong></em> is the first element) and it doesn't provide predicates and axes. The hard part is to get the XamlPath. I have found this lovely tool <a title="WPF Inspector" href="http://www.wpftutorial.net/Inspector.html" target="_blank" rel="noopener" data-blogger-escaped-target="_blank">WPF Inspector</a>. It gives a lot of information about the structure of WPF application.
@@ -86,11 +85,11 @@ As you can see I'm using exact <a title="XamlPath find expression" href="https:/
 <a href="/images/2015/02/WPFInspector.png"><img src="/images/2015/02/WPFInspector.png" alt="WPF Inspector"></a>
 <p>This is a screenshot of the <em><strong>XamlPath</strong></em> for <em><strong>Browse</strong></em> button. In more complex UIs even with this great tool, it is not that easy to get the <em><strong>XamlPath</strong></em>. If you find it hard you may consider other find expressions.</p>
 <p>All elements on MainWindow are only WPF thus an instance of White is not needed. In case of WinForms content hosted inside WPF, you can pass an instance of White through elements’ constructor and use it in actions inside.</p>
-<pre class="language-csharp"><code>public MainWindow(VisualFind find, Application applicationWhite) : base(find)
-{
-	appWhite = applicationWhite;
-}
-</code></pre>
-<p>Having an instance of White inside the class you can work with it as explained in <a title="WPF automation – locating and structure of WinForms elements" href="/wpf-automation-locating-and-structure-of-winforms-elements/" target="_blank" rel="noopener">WPF automation – locating and structure of WinForms elements</a> post.</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public MainWindow(VisualFind find, Application applicationWhite) : base(find)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    appWhite = applicationWhite;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Having an instance of White inside the class you can work with it as explained in <a title="WPF automation – locating and structure of WinForms elements" href="/wpf-automation-locating-and-structure-of-winforms-elements/" target="_blank" rel="noopener">WPF automation – locating and structure of WinForms elements</a> post.</p>  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/wpf-automation-locating-and-structure-of-winforms-elements/" data-astro-cid-bvzihdzo>WPF automation - locating and structure of WinForms elements</a> </li><li data-astro-cid-bvzihdzo> <a href="/automation-of-wpf-applications/" data-astro-cid-bvzihdzo>Automation of WPF applications</a> </li><li data-astro-cid-bvzihdzo> <a href="/page-objects-design-pattern/" data-astro-cid-bvzihdzo>Page objects design pattern</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a><a href="/tags/desktop-automation" data-astro-cid-bvzihdzo>Desktop Automation</a><a href="/tags/telerik-testing-framework" data-astro-cid-bvzihdzo>Telerik Testing Framework</a><a href="/tags/wpf" data-astro-cid-bvzihdzo>WPF</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

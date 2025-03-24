@@ -1,144 +1,143 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/create-net-core-health-checks-with-custom-response-payload/"><!-- Primary Meta Tags --><title>Create .NET Core health checks with custom response payload</title><meta name="title" content="Create .NET Core health checks with custom response payload"><meta name="description" content="How to extend custom .NET Core health checks so the response JSON provides more information."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/create-net-core-health-checks-with-custom-response-payload/"><meta property="og:title" content="Create .NET Core health checks with custom response payload"><meta property="og:description" content="How to extend custom .NET Core health checks so the response JSON provides more information."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/create-net-core-health-checks-with-custom-response-payload/"><meta property="twitter:title" content="Create .NET Core health checks with custom response payload"><meta property="twitter:description" content="How to extend custom .NET Core health checks so the response JSON provides more information."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2019-12-07T00:00:00.000Z"> Dec 7, 2019 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Create .NET Core health checks with custom response payload</h1> <hr data-astro-cid-bvzihdzo> </div>  <p><span>The code used for this blog post is located </span><span>in </span><a href="https://github.com/llatinov/dotnet.core.templates" target="_blank" rel="noopener noreferrer">dotnet.core.templates</a><span> GitHub repository. </span></p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/create-net-core-health-checks-with-custom-response-payload/"><!-- Primary Meta Tags --><title>Create .NET Core health checks with custom response payload</title><meta name="title" content="Create .NET Core health checks with custom response payload"><meta name="description" content="How to extend custom .NET Core health checks so the response JSON provides more information."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/create-net-core-health-checks-with-custom-response-payload/"><meta property="og:title" content="Create .NET Core health checks with custom response payload"><meta property="og:description" content="How to extend custom .NET Core health checks so the response JSON provides more information."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/create-net-core-health-checks-with-custom-response-payload/"><meta property="twitter:title" content="Create .NET Core health checks with custom response payload"><meta property="twitter:description" content="How to extend custom .NET Core health checks so the response JSON provides more information."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Create .NET Core health checks with custom response payload</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2019-12-07T00:00:00.000Z"> Dec 7, 2019 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p><span>The code used for this blog post is located </span><span>in </span><a href="https://github.com/llatinov/dotnet.core.templates" target="_blank" rel="noopener noreferrer">dotnet.core.templates</a><span> GitHub repository. </span></p>
 <h2>Heath checks in .NET Core</h2>
 Health checks in .NET Core is a middleware that provides a possibility to report an application's health. This allows monitoring of the application and taking corrective actions in case of issues. For e.g., if an application reports to be unhealthy, then the load balancer can exclude it from the infrastructure and appropriate alarms to be raised. More in about health checks can be read in <a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-3.1" target="_blank" rel="noopener noreferrer">Health checks in ASP.NET Core</a> page.
 <h2>Adding a health check</h2>
 In order to add a health check in a .NET Core application, then reference to <em><strong>Microsoft.AspNetCore.Diagnostics.HealthChecks</strong></em> package has to be added. Health checks themselves are classes implementing <em><strong>IHealthCheck</strong></em> interface.
-<pre class="language-csharp"><code>public class VersionHealthCheck : IHealthCheck
-{
-	private readonly AppConfig _config;
-
-	public VersionHealthCheck(IOptions&#x3C;AppConfig> options)
-	{
-		_config = options.Value;
-	}
-
-	public Task&#x3C;HealthCheckResult> CheckHealthAsync(HealthCheckContext context,
-				CancellationToken cancellationToken = new CancellationToken())
-	{
-		return Task.FromResult(string.IsNullOrEmpty(_config.Version)
-			? HealthCheckResult.Unhealthy()
-			: HealthCheckResult.Healthy());
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class VersionHealthCheck : IHealthCheck</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    private readonly AppConfig _config;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public VersionHealthCheck(IOptions&#x3C;AppConfig> options)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        _config = options.Value;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public Task&#x3C;HealthCheckResult> CheckHealthAsync(HealthCheckContext context,</span></span>
+<span class="line"><span>                CancellationToken cancellationToken = new CancellationToken())</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        return Task.FromResult(string.IsNullOrEmpty(_config.Version)</span></span>
+<span class="line"><span>            ? HealthCheckResult.Unhealthy()</span></span>
+<span class="line"><span>            : HealthCheckResult.Healthy());</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Health checks have to be registered in <em><strong>Startup.cs</strong></em> file:</p>
-<pre class="language-csharp"><code>public void ConfigureServices(IServiceCollection services)
-{
-	services.AddHealthChecks()
-		.AddCheck&#x3C;VersionHealthCheck>("Version Health Check");
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public void ConfigureServices(IServiceCollection services)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    services.AddHealthChecks()</span></span>
+<span class="line"><span>        .AddCheck&#x3C;VersionHealthCheck>("Version Health Check");</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>As a last step health checks endpoint has to be configured in <em><strong>Startup.cs</strong></em> file:</p>
-<pre class="language-csharp"><code>public void Configure(IApplicationBuilder app)
-{
-	app.UseEndpoints(endpoints =>
-	{
-		endpoints.MapHealthChecks("/health");
-	});
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public void Configure(IApplicationBuilder app)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    app.UseEndpoints(endpoints =></span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        endpoints.MapHealthChecks("/health");</span></span>
+<span class="line"><span>    });</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Now health checks report is available at <em><strong>&#x3C;HOSTNAME>/health</strong></em> URL. If everything is good, the response is <em><strong>200 OK</strong></em> with content <em><strong>Healthy</strong></em>. In case of issues, the response is <em><strong>503 Service Unavailable</strong></em> with content <em><strong>Unhealthy</strong></em>.</p>
 <h2>Extend the health checks response</h2>
 As stated above health checks are mainly intended for machine usage. I have had cases in practice, in which just looking into the health check allows faster problem solving rather than looking into the logs. For this reason, investing in more explanatory health checks is worth it. Below is a code snippet on how to have more information into the health check response payload. A new static class <em><strong>HealthCheckExtensions</strong></em> with <em><strong>MapCustomHealthChecks</strong></em> method can be added.
-<pre class="language-csharp"><code>public static class HealthCheckExtensions
-{
-	public static IEndpointConventionBuilder MapCustomHealthChecks(
-		this IEndpointRouteBuilder endpoints, string serviceName)
-	{
-		return endpoints.MapHealthChecks("/health", new HealthCheckOptions
-		{
-			ResponseWriter = async (context, report) =>
-			{
-				var result = JsonConvert.SerializeObject(
-					new HealthResult
-					{
-						Name = serviceName,
-						Status = report.Status.ToString(),
-						Duration = report.TotalDuration,
-						Info = report.Entries.Select(e => new HealthInfo
-						{
-							Key = e.Key,
-							Description = e.Value.Description,
-							Duration = e.Value.Duration,
-							Status = Enum.GetName(typeof(HealthStatus),
-													e.Value.Status),
-							Error = e.Value.Exception?.Message
-						}).ToList()
-					}, Formatting.None,
-					new JsonSerializerSettings
-					{
-						NullValueHandling = NullValueHandling.Ignore
-					});
-				context.Response.ContentType = MediaTypeNames.Application.Json;
-				await context.Response.WriteAsync(result);
-			}
-		});
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static class HealthCheckExtensions</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public static IEndpointConventionBuilder MapCustomHealthChecks(</span></span>
+<span class="line"><span>        this IEndpointRouteBuilder endpoints, string serviceName)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        return endpoints.MapHealthChecks("/health", new HealthCheckOptions</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            ResponseWriter = async (context, report) =></span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                var result = JsonConvert.SerializeObject(</span></span>
+<span class="line"><span>                    new HealthResult</span></span>
+<span class="line"><span>                    {</span></span>
+<span class="line"><span>                        Name = serviceName,</span></span>
+<span class="line"><span>                        Status = report.Status.ToString(),</span></span>
+<span class="line"><span>                        Duration = report.TotalDuration,</span></span>
+<span class="line"><span>                        Info = report.Entries.Select(e => new HealthInfo</span></span>
+<span class="line"><span>                        {</span></span>
+<span class="line"><span>                            Key = e.Key,</span></span>
+<span class="line"><span>                            Description = e.Value.Description,</span></span>
+<span class="line"><span>                            Duration = e.Value.Duration,</span></span>
+<span class="line"><span>                            Status = Enum.GetName(typeof(HealthStatus),</span></span>
+<span class="line"><span>                                                    e.Value.Status),</span></span>
+<span class="line"><span>                            Error = e.Value.Exception?.Message</span></span>
+<span class="line"><span>                        }).ToList()</span></span>
+<span class="line"><span>                    }, Formatting.None,</span></span>
+<span class="line"><span>                    new JsonSerializerSettings</span></span>
+<span class="line"><span>                    {</span></span>
+<span class="line"><span>                        NullValueHandling = NullValueHandling.Ignore</span></span>
+<span class="line"><span>                    });</span></span>
+<span class="line"><span>                context.Response.ContentType = MediaTypeNames.Application.Json;</span></span>
+<span class="line"><span>                await context.Response.WriteAsync(result);</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        });</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>All the formatting in the code depends on two additional data classes <em><strong>HealthInfo</strong></em> and <em><strong>HealthResult</strong></em>.</p>
-<pre class="language-csharp"><code>public class HealthInfo
-{
-	public string Key { get; set; }
-	public string Description { get; set; }
-	public TimeSpan Duration { get; set; }
-	public string Status { get; set; }
-	public string Error { get; set; }
-}
-</code></pre>
-<pre class="language-csharp"><code>public class HealthResult
-{
-	public string Name { get; set; }
-	public string Status { get; set; }
-	public TimeSpan Duration { get; set; }
-	public ICollection&#x3C;HealthInfo> Info { get; set; }
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class HealthInfo</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public string Key { get; set; }</span></span>
+<span class="line"><span>    public string Description { get; set; }</span></span>
+<span class="line"><span>    public TimeSpan Duration { get; set; }</span></span>
+<span class="line"><span>    public string Status { get; set; }</span></span>
+<span class="line"><span>    public string Error { get; set; }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class HealthResult</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public string Name { get; set; }</span></span>
+<span class="line"><span>    public string Status { get; set; }</span></span>
+<span class="line"><span>    public TimeSpan Duration { get; set; }</span></span>
+<span class="line"><span>    public ICollection&#x3C;HealthInfo> Info { get; set; }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Registering the endpoint happens with the same code as in the default case, with the difference that the <em><strong>MapCustomHealthChecks</strong></em> extension method is used:</p>
-<pre class="language-csharp"><code>public void Configure(IApplicationBuilder app)
-{
-	app.UseEndpoints(endpoints =>
-	{
-		endpoints.MapCustomHealthChecks("Service Name");
-	});
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public void Configure(IApplicationBuilder app)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    app.UseEndpoints(endpoints =></span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        endpoints.MapCustomHealthChecks("Service Name");</span></span>
+<span class="line"><span>    });</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Now it is possible to have some more elaborate health checks, which can capture exception for e.g. and return it as well.</p>
-<pre class="language-csharp"><code>public Task&#x3C;HealthCheckResult> CheckHealthAsync(HealthCheckContext context,
-		CancellationToken cancellationToken = new CancellationToken())
-{
-	try
-	{
-		var message = $"Version is healthy: {_config.Version}";
-		return Task.FromResult(HealthCheckResult.Healthy(message));
-	}
-	catch (Exception ex)
-	{
-		var message = "There is an error with version health check";
-		return Task.FromResult(HealthCheckResult.Unhealthy(message, ex));
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public Task&#x3C;HealthCheckResult> CheckHealthAsync(HealthCheckContext context,</span></span>
+<span class="line"><span>        CancellationToken cancellationToken = new CancellationToken())</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    try</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        var message = $"Version is healthy: {_config.Version}";</span></span>
+<span class="line"><span>        return Task.FromResult(HealthCheckResult.Healthy(message));</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    catch (Exception ex)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        var message = "There is an error with version health check";</span></span>
+<span class="line"><span>        return Task.FromResult(HealthCheckResult.Unhealthy(message, ex));</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>In the case of <em><strong>503 Service Unavailable</strong></em>, health check gives more details, which in some cases can be enough to resolve the issue without having to dig into the logs.</p>
-<pre class="language-json"><code>{
-	"Name": "Service Name",
-	"Status": "Unhealthy",
-	"Duration": "00:00:00.0159186",
-	"Info": [
-		{
-			"Key": "Version Health Check",
-			"Description": "There is an error with version health check",
-			"Duration": "00:00:00.0010564",
-			"Status": "Unhealthy",
-			"Error": "Exception's message text"
-		}
-	]
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<span class="line"><span>    "Name": "Service Name",</span></span>
+<span class="line"><span>    "Status": "Unhealthy",</span></span>
+<span class="line"><span>    "Duration": "00:00:00.0159186",</span></span>
+<span class="line"><span>    "Info": [</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            "Key": "Version Health Check",</span></span>
+<span class="line"><span>            "Description": "There is an error with version health check",</span></span>
+<span class="line"><span>            "Duration": "00:00:00.0010564",</span></span>
+<span class="line"><span>            "Status": "Unhealthy",</span></span>
+<span class="line"><span>            "Error": "Exception's message text"</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    ]</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Conclusion</h2>
-.NET Core health checks are a convenient way for automatic service monitoring and taking corrective actions. With a small effort, they can be enhanced so they can be made useful for people trying to identify what the issues with the services are.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+.NET Core health checks are a convenient way for automatic service monitoring and taking corrective actions. With a small effort, they can be enhanced so they can be made useful for people trying to identify what the issues with the services are.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/create-project-for-net-core-custom-template/" data-astro-cid-bvzihdzo>Create project for .NET Core custom template</a> </li><li data-astro-cid-bvzihdzo> <a href="/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/" data-astro-cid-bvzihdzo>Build a REST API with .NET Core 2 and run it on Docker Linux container</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/dotnet-core" data-astro-cid-bvzihdzo>.NET Core</a><a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

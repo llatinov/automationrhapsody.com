@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/amazon-s3-file-upload-curl-java-code/"><!-- Primary Meta Tags --><title>Amazon S3 file upload with cURL and Java code</title><meta name="title" content="Amazon S3 file upload with cURL and Java code"><meta name="description" content="Working Java code to upload a file to Amazon S3 bucket with cURL."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/amazon-s3-file-upload-curl-java-code/"><meta property="og:title" content="Amazon S3 file upload with cURL and Java code"><meta property="og:description" content="Working Java code to upload a file to Amazon S3 bucket with cURL."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/amazon-s3-file-upload-curl-java-code/"><meta property="twitter:title" content="Amazon S3 file upload with cURL and Java code"><meta property="twitter:description" content="Working Java code to upload a file to Amazon S3 bucket with cURL."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-11-08T00:00:00.000Z"> Nov 8, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Amazon S3 file upload with cURL and Java code</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post gives a solution to a very rare use case where you want to use cURL from Java code to upload a file to Amazon S3 bucket.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/amazon-s3-file-upload-curl-java-code/"><!-- Primary Meta Tags --><title>Amazon S3 file upload with cURL and Java code</title><meta name="title" content="Amazon S3 file upload with cURL and Java code"><meta name="description" content="Working Java code to upload a file to Amazon S3 bucket with cURL."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/amazon-s3-file-upload-curl-java-code/"><meta property="og:title" content="Amazon S3 file upload with cURL and Java code"><meta property="og:description" content="Working Java code to upload a file to Amazon S3 bucket with cURL."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/amazon-s3-file-upload-curl-java-code/"><meta property="twitter:title" content="Amazon S3 file upload with cURL and Java code"><meta property="twitter:description" content="Working Java code to upload a file to Amazon S3 bucket with cURL."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Amazon S3 file upload with cURL and Java code</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-11-08T00:00:00.000Z"> Nov 8, 2016 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>This post gives a solution to a very rare use case where you want to use cURL from Java code to upload a file to Amazon S3 bucket.</p>
 <h2>Amazon S3</h2>
 Amazon Simple Storage Service is storage for the Internet. It is designed to make web-scale computing easier for developers. Amazon S3 has a simple web services interface that you can use to store and retrieve any amount of data, at any time, from anywhere on the web.
 <h2>Upload to Amazon S3 with Java</h2>
@@ -16,77 +15,77 @@ More on each of the approaches can be found in <a href="https://docs.aws.amazon.
 <a href="https://curl.haxx.se/" target="_blank" rel="noopener noreferrer">cURL</a> is widely used and powerful tool for data transfer. It supports various protocols and functionalities. In Windows world, it is not widely used, but there are cURL implementations for Windows which can be used. Uploading to Amazon S3 bucket with cURL is pretty easy. There are bash scripts that can do it. One such is described in <a href="https://www.tothenew.com/blog/file-upload-on-amazon-s3-server-using-curl-request/" target="_blank" rel="noopener noreferrer">File Upload on Amazon S3 server using CURL request</a> post. It is the basis I took to create the Java code for upload.
 <h2>Upload with cURL and Java</h2>
 Upload with Java and cURL is a pretty rare case. Benefits of using this approach are memory and CPU optimization. If an upload is done through Java code file to be uploaded is read and stored in heap. This reading is optimized and parts already uploaded part is removed from the heap. Anyway reading and removing the not needed file parts requires memory to keep it and CPU for garbage collection, especially when a huge amount of data is to be transferred. In some cases where resources and performance are absolutely important this memory and CPU usage can be critical. cURL also uses memory to upload the file, but this becomes no longer problem of the JVM, rather than a problem of the OS. Upload Java code is:
-<pre class="language-java"><code>import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.file.Path;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Base64;
-
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-
-import org.apache.commons.io.IOUtils;
-
-public class AmazonS3CurlUploader {
-
-	private static final String ALGORITHM = "HmacSHA1";
-	private static final String CONTENT_TYPE = "application/octet-stream";
-	private static final String ENCODING = "UTF8";
-
-	public boolean upload(Path localFile, String s3Bucket, String s3FileName,
-			String s3AccessKey, String s3SecretKey) {
-		boolean result;
-		try {
-			Process cURL = createCurlProcess(localFile, s3Bucket,
-					s3FileName, s3AccessKey, s3SecretKey);
-			cURL.waitFor();
-			String response = IOUtils.toString(cURL.getInputStream())
-					+ IOUtils.toString(cURL.getErrorStream());
-			result = response.contains("HTTP/1.1 200 OK");
-		} catch (IOException | InterruptedException e) {
-			// Exception handling goes here!
-			result = false;
-		}
-		return result;
-	}
-
-	private Process createCurlProcess(Path file, String bucket, String fileName,
-			String accessKey, String secretKey) throws IOException {
-		String dateFormat = ZonedDateTime.now()
-				.format(DateTimeFormatter.RFC_1123_DATE_TIME);
-		String relativePath = "/" + bucket + "/" + fileName;
-		String stringToSign = "PUT\n\n" + CONTENT_TYPE + "\n"
-				+ dateFormat + "\n" + relativePath;
-		String signature = Base64.getEncoder()
-				.encodeToString(hmacSHA1(stringToSign, secretKey));
-
-		return new ProcessBuilder(
-				"curl", "-X", "PUT",
-				"-T", file.toString(),
-				"-H", "Host: " + bucket + ".s3.amazonaws.com",
-				"-H", "Date: " + dateFormat,
-				"-H", "Content-Type: " + CONTENT_TYPE,
-				"-H", "Authorization: AWS " + accessKey + ":" + signature,
-				"http://" + bucket + ".s3.amazonaws.com/" + fileName)
-				.start();
-	}
-
-	private byte[] hmacSHA1(String data, String key) {
-		try {
-			Mac mac = Mac.getInstance(ALGORITHM);
-			mac.init(new SecretKeySpec(key.getBytes(ENCODING), ALGORITHM));
-			return mac.doFinal(data.getBytes(ENCODING));
-		} catch (NoSuchAlgorithmException | InvalidKeyException
-				| UnsupportedEncodingException e) {
-			return new byte[] {};
-		}
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import java.io.IOException;</span></span>
+<span class="line"><span>import java.io.UnsupportedEncodingException;</span></span>
+<span class="line"><span>import java.nio.file.Path;</span></span>
+<span class="line"><span>import java.security.InvalidKeyException;</span></span>
+<span class="line"><span>import java.security.NoSuchAlgorithmException;</span></span>
+<span class="line"><span>import java.time.ZonedDateTime;</span></span>
+<span class="line"><span>import java.time.format.DateTimeFormatter;</span></span>
+<span class="line"><span>import java.util.Base64;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import javax.crypto.Mac;</span></span>
+<span class="line"><span>import javax.crypto.spec.SecretKeySpec;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import org.apache.commons.io.IOUtils;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class AmazonS3CurlUploader {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private static final String ALGORITHM = "HmacSHA1";</span></span>
+<span class="line"><span>    private static final String CONTENT_TYPE = "application/octet-stream";</span></span>
+<span class="line"><span>    private static final String ENCODING = "UTF8";</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public boolean upload(Path localFile, String s3Bucket, String s3FileName,</span></span>
+<span class="line"><span>            String s3AccessKey, String s3SecretKey) {</span></span>
+<span class="line"><span>        boolean result;</span></span>
+<span class="line"><span>        try {</span></span>
+<span class="line"><span>            Process cURL = createCurlProcess(localFile, s3Bucket,</span></span>
+<span class="line"><span>                    s3FileName, s3AccessKey, s3SecretKey);</span></span>
+<span class="line"><span>            cURL.waitFor();</span></span>
+<span class="line"><span>            String response = IOUtils.toString(cURL.getInputStream())</span></span>
+<span class="line"><span>                    + IOUtils.toString(cURL.getErrorStream());</span></span>
+<span class="line"><span>            result = response.contains("HTTP/1.1 200 OK");</span></span>
+<span class="line"><span>        } catch (IOException | InterruptedException e) {</span></span>
+<span class="line"><span>            // Exception handling goes here!</span></span>
+<span class="line"><span>            result = false;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        return result;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private Process createCurlProcess(Path file, String bucket, String fileName,</span></span>
+<span class="line"><span>            String accessKey, String secretKey) throws IOException {</span></span>
+<span class="line"><span>        String dateFormat = ZonedDateTime.now()</span></span>
+<span class="line"><span>                .format(DateTimeFormatter.RFC_1123_DATE_TIME);</span></span>
+<span class="line"><span>        String relativePath = "/" + bucket + "/" + fileName;</span></span>
+<span class="line"><span>        String stringToSign = "PUT\n\n" + CONTENT_TYPE + "\n"</span></span>
+<span class="line"><span>                + dateFormat + "\n" + relativePath;</span></span>
+<span class="line"><span>        String signature = Base64.getEncoder()</span></span>
+<span class="line"><span>                .encodeToString(hmacSHA1(stringToSign, secretKey));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        return new ProcessBuilder(</span></span>
+<span class="line"><span>                "curl", "-X", "PUT",</span></span>
+<span class="line"><span>                "-T", file.toString(),</span></span>
+<span class="line"><span>                "-H", "Host: " + bucket + ".s3.amazonaws.com",</span></span>
+<span class="line"><span>                "-H", "Date: " + dateFormat,</span></span>
+<span class="line"><span>                "-H", "Content-Type: " + CONTENT_TYPE,</span></span>
+<span class="line"><span>                "-H", "Authorization: AWS " + accessKey + ":" + signature,</span></span>
+<span class="line"><span>                "http://" + bucket + ".s3.amazonaws.com/" + fileName)</span></span>
+<span class="line"><span>                .start();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private byte[] hmacSHA1(String data, String key) {</span></span>
+<span class="line"><span>        try {</span></span>
+<span class="line"><span>            Mac mac = Mac.getInstance(ALGORITHM);</span></span>
+<span class="line"><span>            mac.init(new SecretKeySpec(key.getBytes(ENCODING), ALGORITHM));</span></span>
+<span class="line"><span>            return mac.doFinal(data.getBytes(ENCODING));</span></span>
+<span class="line"><span>        } catch (NoSuchAlgorithmException | InvalidKeyException</span></span>
+<span class="line"><span>                | UnsupportedEncodingException e) {</span></span>
+<span class="line"><span>            return new byte[] {};</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Conclusion</h2>
-Upload to Amazon S3 with cURL from Java code is a rare case, which could be beneficial in the case where memory and CPU usage by JVM is crucial. Delegating file upload to cURL does not disturb JVM heap and Garbage Collection process.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Upload to Amazon S3 with cURL from Java code is a rare case, which could be beneficial in the case where memory and CPU usage by JVM is crucial. Delegating file upload to cURL does not disturb JVM heap and Garbage Collection process.  <hr data-astro-cid-bvzihdzo>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/aws-s3" data-astro-cid-bvzihdzo>AWS S3</a><a href="/tags/curl" data-astro-cid-bvzihdzo>cURL</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

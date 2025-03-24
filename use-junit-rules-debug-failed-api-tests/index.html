@@ -1,18 +1,17 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/use-junit-rules-debug-failed-api-tests/"><!-- Primary Meta Tags --><title>Use JUnit rules to debug failed API tests</title><meta name="title" content="Use JUnit rules to debug failed API tests"><meta name="description" content="What are JUnit rules and how to use them to improve debugging of failed API tests."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/use-junit-rules-debug-failed-api-tests/"><meta property="og:title" content="Use JUnit rules to debug failed API tests"><meta property="og:description" content="What are JUnit rules and how to use them to improve debugging of failed API tests."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/use-junit-rules-debug-failed-api-tests/"><meta property="twitter:title" content="Use JUnit rules to debug failed API tests"><meta property="twitter:description" content="What are JUnit rules and how to use them to improve debugging of failed API tests."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-06-02T00:00:00.000Z"> Jun 2, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Use JUnit rules to debug failed API tests</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>What are JUnit rules</h2>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/use-junit-rules-debug-failed-api-tests/"><!-- Primary Meta Tags --><title>Use JUnit rules to debug failed API tests</title><meta name="title" content="Use JUnit rules to debug failed API tests"><meta name="description" content="What are JUnit rules and how to use them to improve debugging of failed API tests."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/use-junit-rules-debug-failed-api-tests/"><meta property="og:title" content="Use JUnit rules to debug failed API tests"><meta property="og:description" content="What are JUnit rules and how to use them to improve debugging of failed API tests."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/use-junit-rules-debug-failed-api-tests/"><meta property="twitter:title" content="Use JUnit rules to debug failed API tests"><meta property="twitter:description" content="What are JUnit rules and how to use them to improve debugging of failed API tests."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Use JUnit rules to debug failed API tests</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-06-02T00:00:00.000Z"> Jun 2, 2016 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <h2>What are JUnit rules</h2>
 Rules are an easy way to separate tests from non-tests code. In many cases, some kind of setup is required before starting the tests. Rules provide a way to define this setup code externally and just access it from your tests.
 <h2>How to use JUnit rules</h2>
 Instantiate a public variable with rule class you want to use. Depending on the specific rule you can invoke methods on this public variable. The example below is the simplest that gives you the name of current test method being executed.
-<pre class="language-java"><code>@Rule
-public TestName name = new TestName();
-
-@Test
-public void testPrintMethodName() {
-	assertEquals("testPrintMethodName", name.getMethodName());
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Rule</span></span>
+<span class="line"><span>public TestName name = new TestName();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@Test</span></span>
+<span class="line"><span>public void testPrintMethodName() {</span></span>
+<span class="line"><span>    assertEquals("testPrintMethodName", name.getMethodName());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Types of JUnit rules</h2>
 Below are shown rules that JUnit provides:
 <ul>
@@ -31,74 +30,74 @@ Below are shown rules that JUnit provides:
 API tests generally are a sequence of requests. One request depends on previous as it takes some data out of it. If some of the requests in the chain fail you will need the whole chain to be able to debug and trace why exactly the whole scenario failed.
 <h2>Store API calls in a Queue</h2>
 It is a good idea to have one class that is sending API requests and returning responses. Below is a simple example of such class. In real life, <em><strong>makeRequest</strong></em> methods will accept some parameters or request object and result will be some response object, not String.
-<pre class="language-java"><code>public class RequestUtils {
-
-	private static final Queue&#x3C;String> MESSAGES_QUEUE = new LinkedList&#x3C;>();
-
-	public static String makeSomeRequest(String request) {
-		getMessages().add(request);
-		String response = "makeSomeRequestResponse";
-		getMessages().add(response);
-		return response;
-	}
-
-	public static String makeAnotherRequest(String request) {
-		getMessages().add(request);
-		String response = "makeAnotherRequestResponse";
-		getMessages().add(response);
-		return response;
-	}
-
-	public static void printMessages() {
-		for (String message : getMessages()) {
-			System.out.println(message);
-		}
-		clearMessages();
-	}
-
-	public static void clearMessages() {
-		getMessages().clear();
-	}
-
-	private static Queue&#x3C;String> getMessages() {
-		return MESSAGES_QUEUE;
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class RequestUtils {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private static final Queue&#x3C;String> MESSAGES_QUEUE = new LinkedList&#x3C;>();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static String makeSomeRequest(String request) {</span></span>
+<span class="line"><span>        getMessages().add(request);</span></span>
+<span class="line"><span>        String response = "makeSomeRequestResponse";</span></span>
+<span class="line"><span>        getMessages().add(response);</span></span>
+<span class="line"><span>        return response;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static String makeAnotherRequest(String request) {</span></span>
+<span class="line"><span>        getMessages().add(request);</span></span>
+<span class="line"><span>        String response = "makeAnotherRequestResponse";</span></span>
+<span class="line"><span>        getMessages().add(response);</span></span>
+<span class="line"><span>        return response;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static void printMessages() {</span></span>
+<span class="line"><span>        for (String message : getMessages()) {</span></span>
+<span class="line"><span>            System.out.println(message);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        clearMessages();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static void clearMessages() {</span></span>
+<span class="line"><span>        getMessages().clear();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private static Queue&#x3C;String> getMessages() {</span></span>
+<span class="line"><span>        return MESSAGES_QUEUE;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Class collects all requests and responses in a queue of Strings. It has <em><strong>printMessages()</strong></em> and <em><strong>clearMessages()</strong></em> methods. It also has a <em><strong>getMessages()</strong></em> method which just returns the queue. This method is not bringing real value to code but rather used to easily switch to different types of queues.</p>
 <h2>Extend TestWatcher to have access to test results</h2>
 As stated above TestWatcher provides access to tests output without the ability to modify it. Extending <em><strong>TestWatcher</strong></em> gives you access to those methods:
-<pre class="language-java"><code>public class MessagesQueueRule extends TestWatcher {
-
-	protected void succeeded(Description description) {
-		RequestUtils.clearMessages();
-	}
-
-	protected void failed(Throwable e, Description description) {
-		RequestUtils.printMessages();
-	}
-
-	protected void skipped(AssumptionViolatedException e, 
-			Description description) {
-		RequestUtils.printMessages();
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class MessagesQueueRule extends TestWatcher {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    protected void succeeded(Description description) {</span></span>
+<span class="line"><span>        RequestUtils.clearMessages();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    protected void failed(Throwable e, Description description) {</span></span>
+<span class="line"><span>        RequestUtils.printMessages();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    protected void skipped(AssumptionViolatedException e, </span></span>
+<span class="line"><span>            Description description) {</span></span>
+<span class="line"><span>        RequestUtils.printMessages();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>On success, messages queue get cleared, on skipped or failed it gets printed to enable you to debug.</p>
 <h2>Tests are a sequence of requests and responses</h2>
 Test below is just an example to show how an API test generally looks like. It is possible to do some method chaining, but this is out of the scope of the current post.
-<pre class="language-java"><code>@Test
-public void test1() {
-	String result1 = RequestUtils.makeSomeRequest("test1request1");
-	String result2 = RequestUtils.makeAnotherRequest(result1);
-	String actualResult = RequestUtils.makeAnotherRequest(result2);
-	assertEquals("makeAnotherRequestResponse", actualResult);
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test1() {</span></span>
+<span class="line"><span>    String result1 = RequestUtils.makeSomeRequest("test1request1");</span></span>
+<span class="line"><span>    String result2 = RequestUtils.makeAnotherRequest(result1);</span></span>
+<span class="line"><span>    String actualResult = RequestUtils.makeAnotherRequest(result2);</span></span>
+<span class="line"><span>    assertEquals("makeAnotherRequestResponse", actualResult);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>If assertEquals() fails all requests/response in the test method will get printed into the logs.</p>
 <h2>Multithreading</h2>
 You might have noticed that current solution is not thread-safe as Queue is one and the same and can be accessed from many threads which will lead to ConcurrentModification exception. In <a href="/avoid-multithreading-problems-java-using-threadlocal/">Avoid multithreading problems in Java using ThreadLocal</a> post, there is a solution using <em><strong>ThreadLocal</strong></em>.
 <h2>Conclusion</h2>
-Rules provide flexibility make whatever is needed for your tests. They are an easy way to extract code which is not a test logic to external classes. All the details about rules are available at <a href="https://github.com/junit-team/junit4/wiki/Rules" target="_blank" rel="noopener">JUnit Rules page</a>. In the current post, I showed you an easy way to store and output requests in case of API testing. The code shown above is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener">java-samples/junit</a> repository.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Rules provide flexibility make whatever is needed for your tests. They are an easy way to extract code which is not a test logic to external classes. All the details about rules are available at <a href="https://github.com/junit-team/junit4/wiki/Rules" target="_blank" rel="noopener">JUnit Rules page</a>. In the current post, I showed you an easy way to store and output requests in case of API testing. The code shown above is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener">java-samples/junit</a> repository.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/avoid-multithreading-problems-java-using-threadlocal/" data-astro-cid-bvzihdzo>Avoid multithreading problems in Java using ThreadLocal</a> </li><li data-astro-cid-bvzihdzo> <a href="/mock-stub-rest-api-wiremock-better-unit-testing/" data-astro-cid-bvzihdzo>Mock/Stub REST API with WireMock for better unit testing</a> </li><li data-astro-cid-bvzihdzo> <a href="/junit-methods-execution-sequence/" data-astro-cid-bvzihdzo>JUnit methods execution sequence</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/api-automation" data-astro-cid-bvzihdzo>API Automation</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/junit" data-astro-cid-bvzihdzo>JUnit</a><a href="/tags/unit-testing" data-astro-cid-bvzihdzo>Unit testing</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

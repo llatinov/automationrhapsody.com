@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/net-core-integration-testing-mock-dependencies/"><!-- Primary Meta Tags --><title>.NET Core integration testing and mock dependencies</title><meta name="title" content=".NET Core integration testing and mock dependencies"><meta name="description" content="How to do integration testing on .NET Core application and stub or mock some inconvenient dependencies."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/net-core-integration-testing-mock-dependencies/"><meta property="og:title" content=".NET Core integration testing and mock dependencies"><meta property="og:description" content="How to do integration testing on .NET Core application and stub or mock some inconvenient dependencies."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/net-core-integration-testing-mock-dependencies/"><meta property="twitter:title" content=".NET Core integration testing and mock dependencies"><meta property="twitter:description" content="How to do integration testing on .NET Core application and stub or mock some inconvenient dependencies."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2018-01-03T00:00:00.000Z"> Jan 3, 2018 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>.NET Core integration testing and mock dependencies</h1> <hr data-astro-cid-bvzihdzo> </div>  <p><span>Code below can be found in GitHub </span><a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/SampleDotNetCore2RestStub" target="_blank" rel="noopener noreferrer">SampleDotNetCore2RestStub</a><span> repository. In <a href="/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/">Build a REST API with .NET Core 2 and run it on Docker Linux container</a> post I have shown how to create .NET Core application. In the current post, I will show how to do integration testing on the same application. The post is for REST API, but principles here apply for web UI as well, the difference is that the response will be HTML, which is slightly harder to process compared to JSON.</span></p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/net-core-integration-testing-mock-dependencies/"><!-- Primary Meta Tags --><title>.NET Core integration testing and mock dependencies</title><meta name="title" content=".NET Core integration testing and mock dependencies"><meta name="description" content="How to do integration testing on .NET Core application and stub or mock some inconvenient dependencies."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/net-core-integration-testing-mock-dependencies/"><meta property="og:title" content=".NET Core integration testing and mock dependencies"><meta property="og:description" content="How to do integration testing on .NET Core application and stub or mock some inconvenient dependencies."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/net-core-integration-testing-mock-dependencies/"><meta property="twitter:title" content=".NET Core integration testing and mock dependencies"><meta property="twitter:description" content="How to do integration testing on .NET Core application and stub or mock some inconvenient dependencies."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>.NET Core integration testing and mock dependencies</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2018-01-03T00:00:00.000Z"> Jan 3, 2018 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p><span>Code below can be found in GitHub </span><a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/SampleDotNetCore2RestStub" target="_blank" rel="noopener noreferrer">SampleDotNetCore2RestStub</a><span> repository. In <a href="/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/">Build a REST API with .NET Core 2 and run it on Docker Linux container</a> post I have shown how to create .NET Core application. In the current post, I will show how to do integration testing on the same application. The post is for REST API, but principles here apply for web UI as well, the difference is that the response will be HTML, which is slightly harder to process compared to JSON.</span></p>
 <h2>Refactor project structure</h2>
 Currently, there is only one project created which contains .NET Core application. Since this is going to grow it has to be refactored and structured properly.
 <ul>
@@ -33,504 +32,658 @@ I would not like to focus on theory and terminology as this post is not intended
 One way to run the fully assembled application is by building and deploying it. Then, the application will use real resources to work. Functional testing should also be done during testing but is not part of the current post. A more interesting scenario is to run fully assembled or partially mocked application in memory, without deployment and run tests against it. This approach has benefits, e.g. since the application is run locally its response time is very low, which speeds up tests; some parts, like database connection, can be mocked and thus speed up tests. .NET Core Test Host is a tool that can host web or API .NET Core applications serving requests and responses. It eliminates the need for having a testing environment.
 <h2>Add dependencies</h2>
 In order to use test host dependency to its NuGet package should be added. Navigate to <em><strong>test/SampleDotNetCore2RestStub.Integration.Test</strong></em> and add a dependency:
-<pre class="language-bash"><code>dotnet add package Microsoft.AspNetCore.TestHost
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>dotnet add package Microsoft.AspNetCore.TestHost</span></span>
+<span class="line"><span></span></span></code></pre>
 <p><em><strong>SampleDotNetCore2RestStub.Integration.Test</strong></em> project should depend on <em><strong>SampleDotNetCore2RestStub</strong></em> in order to use its code. This is done with:</p>
-<pre class="language-bash"><code>dotnet add reference ../../src/SampleDotNetCore2RestStub/SampleDotNetCore2RestStub.csproj
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>dotnet add reference ../../src/SampleDotNetCore2RestStub/SampleDotNetCore2RestStub.csproj</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Create the first test</h2>
 Existing <em><strong>UnitTest1</strong></em> class will be changed to start application inside test host and make a request.
-<pre class="language-csharp"><code>using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
-using SampleDotNetCore2RestStub.Models;
-
-namespace SampleDotNetCore2RestStub.Integration.Test
-{
-	[TestClass]
-	public class PersonsTest
-	{
-		private TestServer _server;
-		private HttpClient _client;
-
-		[TestInitialize]
-		public void TestInitialize()
-		{
-			_server = new TestServer(new WebHostBuilder()
-				.UseStartup&#x3C;Startup>());
-			_client = _server.CreateClient();
-		}
-
-		[TestMethod]
-		public async Task GetPerson()
-		{
-			var response = await _client.GetAsync("/person/get/1");
-			response.EnsureSuccessStatusCode();
-
-			var result = await response.Content.ReadAsStringAsync();
-			var person = JsonConvert.DeserializeObject&#x3C;Person>(result);
-
-			Assert.AreEqual("LN1", person.LastName);
-		}
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Net.Http;</span></span>
+<span class="line"><span>using System.Threading.Tasks;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Hosting;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.TestHost;</span></span>
+<span class="line"><span>using Microsoft.VisualStudio.TestTools.UnitTesting;</span></span>
+<span class="line"><span>using Newtonsoft.Json;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    [TestClass]</span></span>
+<span class="line"><span>    public class PersonsTest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        private TestServer _server;</span></span>
+<span class="line"><span>        private HttpClient _client;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [TestInitialize]</span></span>
+<span class="line"><span>        public void TestInitialize()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            _server = new TestServer(new WebHostBuilder()</span></span>
+<span class="line"><span>                .UseStartup&#x3C;Startup>());</span></span>
+<span class="line"><span>            _client = _server.CreateClient();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [TestMethod]</span></span>
+<span class="line"><span>        public async Task GetPerson()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var response = await _client.GetAsync("/person/get/1");</span></span>
+<span class="line"><span>            response.EnsureSuccessStatusCode();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            var result = await response.Content.ReadAsStringAsync();</span></span>
+<span class="line"><span>            var person = JsonConvert.DeserializeObject&#x3C;Person>(result);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            Assert.AreEqual("LN1", person.LastName);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p><em><strong>TestServer</strong></em> uses an instance of <em><strong>IWebHostBuilder</strong></em>. <em><strong>Startup</strong></em> from <em><strong>UseStartup&#x3C;Startup></strong></em> is same class that is used to run the application, but here it is run inside <em><strong>TestServer</strong></em> instance. <em><strong>CreateClient()</strong></em> method returns instance of standard <em><strong>HttpClient</strong></em>, with which request to <em><strong>/person/get/1</strong></em> endpoint is made. <em><strong>EnsureSuccessStatusCode()</strong></em> throws exception if response code is not inside <em><strong>200-299</strong></em> range. The response is then taken as a string and deserialized to <em><strong>Person</strong></em> object with <em><strong>Newtonsoft.Json</strong></em>, which is now part of .NET Core.</p>
 <p>Test can be run from <em><strong>test\SampleDotNetCore2RestStub.Integration.Test</strong></em> folder with the command: <em><strong>dotnet test</strong></em>. If you type <em><strong>dotnet test</strong></em> from root folder it will search for tests inside all projects.</p>
 <h2>Debug tests in Visual Studio Code</h2>
 Before proceeding any further with the code it should be possible to debug unit tests inside VS Code. It is not as easy as with VS 2017, but still manageable. First, you need to run your test from the command prompt in debug mode:
-<pre class="language-bash"><code>set VSTEST_HOST_DEBUG=1
-dotnet test
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>set VSTEST_HOST_DEBUG=1</span></span>
+<span class="line"><span>dotnet test</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Once this is done there is a message with specific process ID:</p>
-<pre class="language-bash"><code>Starting test execution, please wait...
-Host debugging is enabled. Please attach debugger to testhost process to continue.
-Process Id: 16032, Name: dotnet
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Starting test execution, please wait...</span></span>
+<span class="line"><span>Host debugging is enabled. Please attach debugger to testhost process to continue.</span></span>
+<span class="line"><span>Process Id: 16032, Name: dotnet</span></span>
+<span class="line"><span></span></span></code></pre>
 <p><a href="/images/2018/01/NET-Core-integration-testing-debug-console.png"><img src="/images/2018/01/NET-Core-integration-testing-debug-console.png"></a></p>
 <p>Now from Visual Studio Code, you have to attach to given process, <em><strong>16032</strong></em> in the current example. This is done from <em><strong>Debug View</strong></em>, then select <em><strong>.Net Core Attach</strong></em> launch configuration. If such is not existing, add it. Running this configuration shows a list of all processes with name <em><strong>dotnet</strong></em>. Select the proper one, <em><strong>16032</strong></em> in the current example.</p>
 <p><a href="/images/2018/01/NET-Core-integration-testing-debug-VSCode.png"><img src="/images/2018/01/NET-Core-integration-testing-debug-VSCode.png"></a></p>
 <h2>Create PersonServiceClient and BaseTest</h2>
 Tests should be easy to write, read and maintain, thus <em><strong>PersonServiceClient</strong></em> class is created. It exposes methods that hit the endpoints and return the result. Since testing is not only happy path, it should be possible to have some negative scenarios. You may want to hit the API with invalid data and verify it returns <em><strong>BadRequest</strong></em> (400) HTTP response code, or <em><strong>Unauthorized</strong></em> (401) HTTP response code, etc. In order to fulfill this test requirement, a separate class <em><strong>ApiResponse&#x3C;T></strong></em> is created. It stores response code along with response content as a string. In case that response string can be deserialized to an object of given generic type <em><strong>T</strong></em> it is also stored in <em><strong>ApiResponse</strong></em> object.
 <p>Client is instantiated as a protected variable in <em><strong>BaseTest</strong></em> constructor. <em><strong>PersonsTest</strong></em> extends <em><strong>BaseTest</strong></em> and has access to <em><strong>PersonServiceClient</strong></em>.</p>
-<p>[tabby title=“ApiResponse”]</p>
-<pre class="language-csharp"><code>using System.Net;
-
-namespace SampleDotNetCore2RestStub.Integration.Test.Client
-{
-	public class ApiResponse&#x3C;T>
-	{
-		public HttpStatusCode StatusCode { get; set; }
-		public T Result { get; set; }
-		public string ResultAsString { get; set; }
-	}
-}
-</code></pre>
+<div class="tab"><button id="11747-ApiResponse" class="tablinks active" onclick="openTab(this, &#x27;content-11747-ApiResponse&#x27;, &#x27;11747&#x27;)">ApiResponse</button>
+<button id="11747-PersonServiceClient" class="tablinks" onclick="openTab(this, &#x27;content-11747-PersonServiceClient&#x27;, &#x27;11747&#x27;)">PersonServiceClient</button>
+<button id="11747-BaseTest" class="tablinks" onclick="openTab(this, &#x27;content-11747-BaseTest&#x27;, &#x27;11747&#x27;)">BaseTest</button>
+<button id="11747-PersonsTest" class="tablinks" onclick="openTab(this, &#x27;content-11747-PersonsTest&#x27;, &#x27;11747&#x27;)">PersonsTest</button></div>
+<div id="content-11747-ApiResponse" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Net;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test.Client</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class ApiResponse&#x3C;T></span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        public HttpStatusCode StatusCode { get; set; }</span></span>
+<span class="line"><span>        public T Result { get; set; }</span></span>
+<span class="line"><span>        public string ResultAsString { get; set; }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-11747-PersonServiceClient" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System;</span></span>
+<span class="line"><span>using System.Collections.Generic;</span></span>
+<span class="line"><span>using System.Net.Http;</span></span>
+<span class="line"><span>using System.Threading.Tasks;</span></span>
+<span class="line"><span>using Newtonsoft.Json;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test.Client</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class PersonServiceClient</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        private readonly HttpClient _httpClient;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public PersonServiceClient(HttpClient httpClient)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            _httpClient = httpClient;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public async Task&#x3C;ApiResponse&#x3C;Person>> GetPerson(string id)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var person = await GetAsync&#x3C;Person>([tabby title="ApiResponse"]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&#x3C;code>using System.Net;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test.Client</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class ApiResponse&#x3C;T></span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        public HttpStatusCode StatusCode { get; set; }</span></span>
+<span class="line"><span>        public T Result { get; set; }</span></span>
+<span class="line"><span>        public string ResultAsString { get; set; }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>[tabby title=“PersonServiceClient”]</p>
-<pre class="language-csharp"><code>using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using SampleDotNetCore2RestStub.Models;
-
-namespace SampleDotNetCore2RestStub.Integration.Test.Client
-{
-	public class PersonServiceClient
-	{
-		private readonly HttpClient _httpClient;
-
-		public PersonServiceClient(HttpClient httpClient)
-		{
-			_httpClient = httpClient;
-		}
-
-		public async Task&#x3C;ApiResponse&#x3C;Person>> GetPerson(string id)
-		{
-			var person = await GetAsync&#x3C;Person>($"/person/get/{id}");
-			return person;
-		}
-
-		public async Task&#x3C;ApiResponse&#x3C;List&#x3C;Person>>> GetPersons()
-		{
-			var persons = await GetAsync&#x3C;List&#x3C;Person>>("/person/all");
-			return persons;
-		}
-
-		public async Task&#x3C;ApiResponse&#x3C;string>> Version()
-		{
-			var version = await GetAsync&#x3C;string>("api/version");
-			return version;
-		}
-
-		private async Task&#x3C;ApiResponse&#x3C;T>> GetAsync&#x3C;T>(string path)
-		{
-			var response = await _httpClient.GetAsync(path);
-			var value = await response.Content.ReadAsStringAsync();
-			var result = new ApiResponse&#x3C;T>
-			{
-				StatusCode = response.StatusCode,
-				ResultAsString = value
-			};
-
-			try
-			{
-				result.Result = JsonConvert.DeserializeObject&#x3C;T>(value);
-			}
-			catch (Exception)
-			{
-				// Nothing to do
-			}
-
-			return result;
-		}
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System;</span></span>
+<span class="line"><span>using System.Collections.Generic;</span></span>
+<span class="line"><span>using System.Net.Http;</span></span>
+<span class="line"><span>using System.Threading.Tasks;</span></span>
+<span class="line"><span>using Newtonsoft.Json;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test.Client</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class PersonServiceClient</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        private readonly HttpClient _httpClient;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public PersonServiceClient(HttpClient httpClient)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            _httpClient = httpClient;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public async Task&#x3C;ApiResponse&#x3C;Person>> GetPerson(string id)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var person = await GetAsync&#x3C;Person>($"/person/get/{id}");</span></span>
+<span class="line"><span>            return person;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public async Task&#x3C;ApiResponse&#x3C;List&#x3C;Person>>> GetPersons()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var persons = await GetAsync&#x3C;List&#x3C;Person>>("/person/all");</span></span>
+<span class="line"><span>            return persons;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public async Task&#x3C;ApiResponse&#x3C;string>> Version()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var version = await GetAsync&#x3C;string>("api/version");</span></span>
+<span class="line"><span>            return version;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        private async Task&#x3C;ApiResponse&#x3C;T>> GetAsync&#x3C;T>(string path)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var response = await _httpClient.GetAsync(path);</span></span>
+<span class="line"><span>            var value = await response.Content.ReadAsStringAsync();</span></span>
+<span class="line"><span>            var result = new ApiResponse&#x3C;T></span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                StatusCode = response.StatusCode,</span></span>
+<span class="line"><span>                ResultAsString = value</span></span>
+<span class="line"><span>            };</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            try</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                result.Result = JsonConvert.DeserializeObject&#x3C;T>(value);</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>            catch (Exception)</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                // Nothing to do</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            return result;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>[tabby title=“BaseTest”]</p>
-<pre class="language-csharp"><code>using System.Net.Http;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SampleDotNetCore2RestStub.Integration.Test.Client;
-
-namespace SampleDotNetCore2RestStub.Integration.Test
-{
-	public abstract class BaseTest
-	{
-		protected PersonServiceClient PersonServiceClient;
-
-		public BaseTest()
-		{
-			var server = new TestServer(new WebHostBuilder()
-				.UseStartup&#x3C;Startup>());
-			var httpClient = server.CreateClient();
-			PersonServiceClient = new PersonServiceClient(httpClient);
-		}
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Net.Http;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Hosting;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.TestHost;</span></span>
+<span class="line"><span>using Microsoft.VisualStudio.TestTools.UnitTesting;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Integration.Test.Client;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public abstract class BaseTest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        protected PersonServiceClient PersonServiceClient;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public BaseTest()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var server = new TestServer(new WebHostBuilder()</span></span>
+<span class="line"><span>                .UseStartup&#x3C;Startup>());</span></span>
+<span class="line"><span>            var httpClient = server.CreateClient();</span></span>
+<span class="line"><span>            PersonServiceClient = new PersonServiceClient(httpClient);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>[tabby title=“PersonsTest”]</p>
-<pre class="language-csharp"><code>using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
-using SampleDotNetCore2RestStub.Models;
-
-namespace SampleDotNetCore2RestStub.Integration.Test
-{
-	[TestClass]
-	public class PersonsTest : BaseTest
-	{
-		[TestMethod]
-		public async Task GetPerson()
-		{
-			var response = await PersonServiceClient.GetPerson("1");
-
-			Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-			Assert.AreEqual("LN1", response.Result.LastName);
-		}
-
-		[TestMethod]
-		public async Task GetPersons()
-		{
-			var response = await PersonServiceClient.GetPersons();
-
-			Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-			Assert.AreEqual(4, response.Result.Count);
-			Assert.AreEqual("LN1", response.Result[0].LastName);
-		}
-    }
-}
-</code></pre>
-<p>[tabbyending]</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Net;</span></span>
+<span class="line"><span>using System.Net.Http;</span></span>
+<span class="line"><span>using System.Threading.Tasks;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Hosting;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.TestHost;</span></span>
+<span class="line"><span>using Microsoft.VisualStudio.TestTools.UnitTesting;</span></span>
+<span class="line"><span>using Newtonsoft.Json;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    [TestClass]</span></span>
+<span class="line"><span>    public class PersonsTest : BaseTest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        [TestMethod]</span></span>
+<span class="line"><span>        public async Task GetPerson()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var response = await PersonServiceClient.GetPerson("1");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);</span></span>
+<span class="line"><span>            Assert.AreEqual("LN1", response.Result.LastName);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [TestMethod]</span></span>
+<span class="line"><span>        public async Task GetPersons()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var response = await PersonServiceClient.GetPersons();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);</span></span>
+<span class="line"><span>            Assert.AreEqual(4, response.Result.Count);</span></span>
+<span class="line"><span>            Assert.AreEqual("LN1", response.Result[0].LastName);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>[tabbyending]quot;/person/get/{id}”);
+return person;
+}</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>	public async Task&#x26;lt;ApiResponse&#x26;lt;List&#x26;lt;Person&#x26;gt;&#x26;gt;&#x26;gt; GetPersons()</span></span>
+<span class="line"><span>	{</span></span>
+<span class="line"><span>		var persons = await GetAsync&#x26;lt;List&#x26;lt;Person&#x26;gt;&#x26;gt;(&#x26;quot;/person/all&#x26;quot;);</span></span>
+<span class="line"><span>		return persons;</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>	public async Task&#x26;lt;ApiResponse&#x26;lt;string&#x26;gt;&#x26;gt; Version()</span></span>
+<span class="line"><span>	{</span></span>
+<span class="line"><span>		var version = await GetAsync&#x26;lt;string&#x26;gt;(&#x26;quot;api/version&#x26;quot;);</span></span>
+<span class="line"><span>		return version;</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>	private async Task&#x26;lt;ApiResponse&#x26;lt;T&#x26;gt;&#x26;gt; GetAsync&#x26;lt;T&#x26;gt;(string path)</span></span>
+<span class="line"><span>	{</span></span>
+<span class="line"><span>		var response = await _httpClient.GetAsync(path);</span></span>
+<span class="line"><span>		var value = await response.Content.ReadAsStringAsync();</span></span>
+<span class="line"><span>		var result = new ApiResponse&#x26;lt;T&#x26;gt;</span></span>
+<span class="line"><span>		{</span></span>
+<span class="line"><span>			StatusCode = response.StatusCode,</span></span>
+<span class="line"><span>			ResultAsString = value</span></span>
+<span class="line"><span>		};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>		try</span></span>
+<span class="line"><span>		{</span></span>
+<span class="line"><span>			result.Result = JsonConvert.DeserializeObject&#x26;lt;T&#x26;gt;(value);</span></span>
+<span class="line"><span>		}</span></span>
+<span class="line"><span>		catch (Exception)</span></span>
+<span class="line"><span>		{</span></span>
+<span class="line"><span>			// Nothing to do</span></span>
+<span class="line"><span>		}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>		return result;</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>}
+</p>
+</div>
+<div id="content-11747-BaseTest" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Net.Http;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Hosting;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.TestHost;</span></span>
+<span class="line"><span>using Microsoft.VisualStudio.TestTools.UnitTesting;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Integration.Test.Client;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public abstract class BaseTest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        protected PersonServiceClient PersonServiceClient;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public BaseTest()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var server = new TestServer(new WebHostBuilder()</span></span>
+<span class="line"><span>                .UseStartup&#x3C;Startup>());</span></span>
+<span class="line"><span>            var httpClient = server.CreateClient();</span></span>
+<span class="line"><span>            PersonServiceClient = new PersonServiceClient(httpClient);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-11747-PersonsTest" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Net;</span></span>
+<span class="line"><span>using System.Net.Http;</span></span>
+<span class="line"><span>using System.Threading.Tasks;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Hosting;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.TestHost;</span></span>
+<span class="line"><span>using Microsoft.VisualStudio.TestTools.UnitTesting;</span></span>
+<span class="line"><span>using Newtonsoft.Json;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    [TestClass]</span></span>
+<span class="line"><span>    public class PersonsTest : BaseTest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        [TestMethod]</span></span>
+<span class="line"><span>        public async Task GetPerson()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var response = await PersonServiceClient.GetPerson("1");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);</span></span>
+<span class="line"><span>            Assert.AreEqual("LN1", response.Result.LastName);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [TestMethod]</span></span>
+<span class="line"><span>        public async Task GetPersons()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var response = await PersonServiceClient.GetPersons();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);</span></span>
+<span class="line"><span>            Assert.AreEqual(4, response.Result.Count);</span></span>
+<span class="line"><span>            Assert.AreEqual("LN1", response.Result[0].LastName);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Stub the database</h2>
 So far there is integration test that starts the application with its actual external dependencies and makes requests against it. Current API service does not connect to a real database, because this will make running the API harder. Instead, there is a fake <em><strong>PersonRepository</strong></em> which stores data in memory. In reality, the repository will connect to a database with a given connection string in <em><strong>appsettings.json</strong></em>, and will perform CRUD operations on it. Database operations might slow down the application response time, or test might not have full control over data in the database, which makes testing harder. In order to solve those two issues database can be stubbed to serve test data. Actually, anything that is not convenient can be stubbed with the examples given below.
 <p>In order to make stubbing possible and to keep application structure intact <em><strong>Startup</strong></em> has to be changed. Registering <em><strong>PersonRepository</strong></em> to .NET Core IoC container is extracted to separate <em><strong>virtual</strong></em> method that can be overridden later. All dependencies that are to be stubbed or mocked can be extracted to such methods. Then <em><strong>StartupStub</strong></em> overrides this method and registers stubbed repository <em><strong>PersonRepositoryStub</strong></em>. In it all database operations are substituted with an in-memory equivalence, hence skipping database calls. It might not be a full and accurate substitution, as long as it serves your testing purpose. After all this <em><strong>PersonRepositoryStub</strong></em> will be used only for testing. <em><strong>BaseTest</strong></em> should be changed to start the application with <em><strong>StartupStub</strong></em> instead of <em><strong>Statup</strong></em>. Finally, PersonsTest should be changed to assert on new data that is configured in <em><strong>PersonRepositoryStub</strong></em>.</p>
-<p>[tabby title=“Startup”]</p>
-<pre class="language-csharp"><code>public void ConfigureServices(IServiceCollection services)
-{
-	services.AddMvc();
-	services.Configure&#x3C;AppConfig>(Configuration);
-	services.AddScoped&#x3C;AuthenticationFilterAttribute>();
-
-	ConfigureRepositories(services);
-}
-
-public virtual void ConfigureRepositories(IServiceCollection services)
-{
-	services.AddSingleton&#x3C;IPersonRepository, PersonRepository>();
-}
-</code></pre>
-<p>[tabby title=“StartupStub”]</p>
-<pre class="language-csharp"><code>using Microsoft.Extensions.DependencyInjection;
-using SampleDotNetCore2RestStub.Repositories;
-
-namespace SampleDotNetCore2RestStub.Integration.Test.Mocks
-{
-	public class StartupStub : Startup
-	{
-		public override void ConfigureRepositories(IServiceCollection services)
-		{
-			services.AddSingleton&#x3C;IPersonRepository, PersonRepositoryStub>();
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“PersonRepositoryStub”]</p>
-<pre class="language-csharp"><code>using System.Collections.Generic;
-using System.Linq;
-using SampleDotNetCore2RestStub.Models;
-using SampleDotNetCore2RestStub.Repositories;
-
-namespace SampleDotNetCore2RestStub.Integration.Test.Mocks
-{
-	public class PersonRepositoryStub : IPersonRepository
-	{
-		private Dictionary&#x3C;int, Person> _persons 
-					= new Dictionary&#x3C;int, Person>();
-
-		public PersonRepositoryStub()
-		{
-			_persons.Add(1, new Person
-			{
-				Id = 1,
-				FirstName = "Stubed FN1",
-				LastName = "Stubed LN1",
-				Email = "stubed.email1@email.na"
-			});
-		}
-
-		public Person GetById(int id)
-		{
-			return _persons[id];
-		}
-
-		public List&#x3C;Person> GetAll()
-		{
-			return _persons.Values.ToList();
-		}
-
-		public int GetCount()
-		{
-			return _persons.Count();
-		}
-
-		public void Remove()
-		{
-			if (_persons.Keys.Any())
-			{
-				_persons.Remove(_persons.Keys.Last());
-			}
-		}
-
-		public string Save(Person person)
-		{
-			if (_persons.ContainsKey(person.Id))
-			{
-				_persons[person.Id] = person;
-				return "Updated Person with id=" + person.Id;
-			}
-			else
-			{
-				_persons.Add(person.Id, person);
-				return "Added Person with id=" + person.Id;
-			}
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“BaseTest”]</p>
-<pre class="language-csharp"><code>using System.Net.Http;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SampleDotNetCore2RestStub.Integration.Test.Client;
-using SampleDotNetCore2RestStub.Integration.Test.Mocks;
-
-namespace SampleDotNetCore2RestStub.Integration.Test
-{
-	public abstract class BaseTest
-	{
-		protected PersonServiceClient PersonServiceClient;
-
-		public BaseTest()
-		{
-			var server = new TestServer(new WebHostBuilder()
-				.UseStartup&#x3C;StartupStub>());
-			var httpClient = server.CreateClient();
-			PersonServiceClient = new PersonServiceClient(httpClient);
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“PersonsTest”]</p>
-<pre class="language-csharp"><code>using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
-using SampleDotNetCore2RestStub.Models;
-
-namespace SampleDotNetCore2RestStub.Integration.Test
-{
-	[TestClass]
-	public class PersonsTest : BaseTest
-	{
-		[TestMethod]
-		public async Task GetPerson()
-		{
-			var response = await PersonServiceClient.GetPerson("1");
-
-			Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-			Assert.AreEqual("Stubed LN1", response.Result.LastName);
-		}
-
-		[TestMethod]
-		public async Task GetPersons()
-		{
-			var response = await PersonServiceClient.GetPersons();
-
-			Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-			Assert.AreEqual(1, response.Result.Count);
-			Assert.AreEqual("Stubed LN1", response.Result[0].LastName);
-		}
-	}
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="17358-Startup" class="tablinks active" onclick="openTab(this, &#x27;content-17358-Startup&#x27;, &#x27;17358&#x27;)">Startup</button>
+<button id="17358-StartupStub" class="tablinks" onclick="openTab(this, &#x27;content-17358-StartupStub&#x27;, &#x27;17358&#x27;)">StartupStub</button>
+<button id="17358-PersonRepositoryStub" class="tablinks" onclick="openTab(this, &#x27;content-17358-PersonRepositoryStub&#x27;, &#x27;17358&#x27;)">PersonRepositoryStub</button>
+<button id="17358-BaseTest" class="tablinks" onclick="openTab(this, &#x27;content-17358-BaseTest&#x27;, &#x27;17358&#x27;)">BaseTest</button>
+<button id="17358-PersonsTest" class="tablinks" onclick="openTab(this, &#x27;content-17358-PersonsTest&#x27;, &#x27;17358&#x27;)">PersonsTest</button></div>
+<div id="content-17358-Startup" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public void ConfigureServices(IServiceCollection services)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    services.AddMvc();</span></span>
+<span class="line"><span>    services.Configure&#x3C;AppConfig>(Configuration);</span></span>
+<span class="line"><span>    services.AddScoped&#x3C;AuthenticationFilterAttribute>();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    ConfigureRepositories(services);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public virtual void ConfigureRepositories(IServiceCollection services)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    services.AddSingleton&#x3C;IPersonRepository, PersonRepository>();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-17358-StartupStub" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using Microsoft.Extensions.DependencyInjection;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Repositories;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test.Mocks</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class StartupStub : Startup</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        public override void ConfigureRepositories(IServiceCollection services)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            services.AddSingleton&#x3C;IPersonRepository, PersonRepositoryStub>();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-17358-PersonRepositoryStub" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Collections.Generic;</span></span>
+<span class="line"><span>using System.Linq;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Repositories;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test.Mocks</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class PersonRepositoryStub : IPersonRepository</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        private Dictionary&#x3C;int, Person> _persons </span></span>
+<span class="line"><span>                    = new Dictionary&#x3C;int, Person>();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public PersonRepositoryStub()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            _persons.Add(1, new Person</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                Id = 1,</span></span>
+<span class="line"><span>                FirstName = "Stubed FN1",</span></span>
+<span class="line"><span>                LastName = "Stubed LN1",</span></span>
+<span class="line"><span>                Email = "stubed.email1@email.na"</span></span>
+<span class="line"><span>            });</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public Person GetById(int id)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return _persons[id];</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public List&#x3C;Person> GetAll()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return _persons.Values.ToList();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public int GetCount()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return _persons.Count();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public void Remove()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            if (_persons.Keys.Any())</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                _persons.Remove(_persons.Keys.Last());</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public string Save(Person person)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            if (_persons.ContainsKey(person.Id))</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                _persons[person.Id] = person;</span></span>
+<span class="line"><span>                return "Updated Person with id=" + person.Id;</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>            else</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                _persons.Add(person.Id, person);</span></span>
+<span class="line"><span>                return "Added Person with id=" + person.Id;</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-17358-BaseTest" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Net.Http;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Hosting;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.TestHost;</span></span>
+<span class="line"><span>using Microsoft.VisualStudio.TestTools.UnitTesting;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Integration.Test.Client;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Integration.Test.Mocks;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public abstract class BaseTest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        protected PersonServiceClient PersonServiceClient;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public BaseTest()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var server = new TestServer(new WebHostBuilder()</span></span>
+<span class="line"><span>                .UseStartup&#x3C;StartupStub>());</span></span>
+<span class="line"><span>            var httpClient = server.CreateClient();</span></span>
+<span class="line"><span>            PersonServiceClient = new PersonServiceClient(httpClient);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-17358-PersonsTest" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Net;</span></span>
+<span class="line"><span>using System.Net.Http;</span></span>
+<span class="line"><span>using System.Threading.Tasks;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Hosting;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.TestHost;</span></span>
+<span class="line"><span>using Microsoft.VisualStudio.TestTools.UnitTesting;</span></span>
+<span class="line"><span>using Newtonsoft.Json;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    [TestClass]</span></span>
+<span class="line"><span>    public class PersonsTest : BaseTest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        [TestMethod]</span></span>
+<span class="line"><span>        public async Task GetPerson()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var response = await PersonServiceClient.GetPerson("1");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);</span></span>
+<span class="line"><span>            Assert.AreEqual("Stubed LN1", response.Result.LastName);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [TestMethod]</span></span>
+<span class="line"><span>        public async Task GetPersons()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var response = await PersonServiceClient.GetPersons();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);</span></span>
+<span class="line"><span>            Assert.AreEqual(1, response.Result.Count);</span></span>
+<span class="line"><span>            Assert.AreEqual("Stubed LN1", response.Result[0].LastName);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Mock the database</h2>
 Stubbing is an option, but mocking is much better as you have direct control over the mock itself. The most famous .NET mocking framework is <a href="https://github.com/Moq/moq4/wiki/Quickstart" target="_blank" rel="noopener">Moq</a>. It is added to the project with the command:
-<pre class="language-bash"><code>dotnet add package Moq
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>dotnet add package Moq</span></span>
+<span class="line"><span></span></span></code></pre>
 <p><em><strong>StartupMock</strong></em> extends <em><strong>Starup</strong></em> and overrides its <em><strong>ConfigureRepositories</strong></em>. It registers an instance of <em><strong>IPersonRepository</strong></em> which is injected by its constructor. BaseTest is changed to use StartupMock in UseStartup method. Repository mock is instantiated with <em><strong>PersonRepositoryMock = new Mock&#x3C;IPersonRepository>()</strong></em>. It is injected into <em><strong>StartupMock</strong></em> constructor with <strong><em>ConfigureServices(services =></em> services.AddSingleton(PersonRepositoryMock.Object))</strong>. This is how mock instance is registered into IoC container of .NET Core application that is being tested. Once the mock instance is registered it can be controlled. In <em><strong>BaseTest</strong></em> it is reset to defaults after each test with <em><strong>BaseTearDown</strong></em> method. It is run after each test because of <em><strong>[TestCleanup]</strong></em> MSTest attribute. Inside, the <em><strong>PersonRepositoryMock.Reset()</strong></em> resets mock state.</p>
 <p>Test specific setup can be done for each test. For e.g. <em><strong>GetPerson_ReturnsCorrectResult</strong></em> has following setup: <em><strong>PersonRepositoryMock.Setup(x => x.GetById(It.IsAny&#x3C;int>())).Returns(_person);</strong></em> That means when mock’s <em><strong>GetById</strong></em> method is called with whatever int value the <em><strong>_person</strong></em> object is returned. Another example is <em><strong>GetPerson_ThrowsException</strong></em> test. When mock’s <em><strong>GetById</strong></em> is called then <em><strong>InvalidOperationException</strong></em> is thrown. In this way, you can test exception handling, which in current demo application is missing. The exception is not that easy to reproduce if you are using repository stubbing.</p>
-<p>[tabby title=“StartupMock ”]</p>
-<pre class="language-csharp"><code>using Microsoft.Extensions.DependencyInjection;
-using SampleDotNetCore2RestStub.Repositories;
-
-namespace SampleDotNetCore2RestStub.Integration.Test.Mocks
-{
-	public class StartupMock : Startup
-	{
-		private IPersonRepository _personRepository;
-		
-		public StartupMock(IPersonRepository personRepository)
-		{
-			_personRepository = personRepository;
-		}
-
-		public override void ConfigureRepositories(IServiceCollection services)
-		{
-			services.AddSingleton(_personRepository);
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“BaseTest”]</p>
-<pre class="language-csharp"><code>using System.Net.Http;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Extensions.DependencyInjection;
-using Moq;
-using SampleDotNetCore2RestStub.Integration.Test.Client;
-using SampleDotNetCore2RestStub.Integration.Test.Mocks;
-using SampleDotNetCore2RestStub.Repositories;
-
-namespace SampleDotNetCore2RestStub.Integration.Test
-{
-	public abstract class BaseTest
-	{
-		protected PersonServiceClient PersonServiceClient;
-		protected Mock&#x3C;IPersonRepository> PersonRepositoryMock;
-
-		public BaseTest()
-		{
-			PersonRepositoryMock = new Mock&#x3C;IPersonRepository>();
-
-			var server = new TestServer(new WebHostBuilder()
-				.UseStartup&#x3C;StartupMock>()
-				.ConfigureServices(services =>
-				{
-					services.AddSingleton(PersonRepositoryMock.Object);
-				}));
-
-			var httpClient = server.CreateClient();
-			PersonServiceClient = new PersonServiceClient(httpClient);
-		}
-
-		[TestCleanup]
-		public void BaseTearDown()
-		{
-			PersonRepositoryMock.Reset();
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“PersonsTest”]</p>
-<pre class="language-csharp"><code>using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Newtonsoft.Json;
-using SampleDotNetCore2RestStub.Models;
-
-namespace SampleDotNetCore2RestStub.Integration.Test
-{
-	[TestClass]
-	public class PersonsTest : BaseTest
-	{
-		private readonly Person _person = new Person
-		{
-			Id = 1,
-			FirstName = "Mocked FN1",
-			LastName = "Mocked LN1",
-			Email = "mocked.email1@email.na"
-		};
-
-		[TestMethod]
-		public async Task GetPerson_ReturnsCorrectResult()
-		{
-			PersonRepositoryMock.Setup(x => x.GetById(It.IsAny&#x3C;int>()))
-				.Returns(_person);
-
-			var response = await PersonServiceClient.GetPerson("1");
-
-			Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-			Assert.AreEqual("Mocked LN1", response.Result.LastName);
-		}
-
-		[TestMethod]
-		[ExpectedException(typeof(InvalidOperationException))]
-		public async Task GetPerson_ThrowsException()
-		{
-			PersonRepositoryMock.Setup(x => x.GetById(It.IsAny&#x3C;int>()))
-				.Throws(new InvalidOperationException());
-
-			var result = await PersonServiceClient.GetPerson("1");
-		}
-
-		[TestMethod]
-		public async Task GetPersons()
-		{
-			PersonRepositoryMock.Setup(x => x.GetAll())
-				.Returns(new List&#x3C;Person> { _person });
-
-			var response = await PersonServiceClient.GetPersons();
-
-			Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-			Assert.AreEqual(1, response.Result.Count);
-			Assert.AreEqual("Mocked LN1", response.Result[0].LastName);
-		}
-	}
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="23699-StartupMock " class="tablinks active" onclick="openTab(this, &#x27;content-23699-StartupMock &#x27;, &#x27;23699&#x27;)">StartupMock </button>
+<button id="23699-BaseTest" class="tablinks" onclick="openTab(this, &#x27;content-23699-BaseTest&#x27;, &#x27;23699&#x27;)">BaseTest</button>
+<button id="23699-PersonsTest" class="tablinks" onclick="openTab(this, &#x27;content-23699-PersonsTest&#x27;, &#x27;23699&#x27;)">PersonsTest</button></div>
+<div id="content-23699-StartupMock " class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using Microsoft.Extensions.DependencyInjection;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Repositories;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test.Mocks</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class StartupMock : Startup</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        private IPersonRepository _personRepository;</span></span>
+<span class="line"><span>        </span></span>
+<span class="line"><span>        public StartupMock(IPersonRepository personRepository)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            _personRepository = personRepository;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public override void ConfigureRepositories(IServiceCollection services)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            services.AddSingleton(_personRepository);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-23699-BaseTest" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Net.Http;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Hosting;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.TestHost;</span></span>
+<span class="line"><span>using Microsoft.VisualStudio.TestTools.UnitTesting;</span></span>
+<span class="line"><span>using Microsoft.Extensions.DependencyInjection;</span></span>
+<span class="line"><span>using Moq;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Integration.Test.Client;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Integration.Test.Mocks;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Repositories;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public abstract class BaseTest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        protected PersonServiceClient PersonServiceClient;</span></span>
+<span class="line"><span>        protected Mock&#x3C;IPersonRepository> PersonRepositoryMock;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public BaseTest()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            PersonRepositoryMock = new Mock&#x3C;IPersonRepository>();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            var server = new TestServer(new WebHostBuilder()</span></span>
+<span class="line"><span>                .UseStartup&#x3C;StartupMock>()</span></span>
+<span class="line"><span>                .ConfigureServices(services =></span></span>
+<span class="line"><span>                {</span></span>
+<span class="line"><span>                    services.AddSingleton(PersonRepositoryMock.Object);</span></span>
+<span class="line"><span>                }));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            var httpClient = server.CreateClient();</span></span>
+<span class="line"><span>            PersonServiceClient = new PersonServiceClient(httpClient);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [TestCleanup]</span></span>
+<span class="line"><span>        public void BaseTearDown()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            PersonRepositoryMock.Reset();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-23699-PersonsTest" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System;</span></span>
+<span class="line"><span>using System.Collections.Generic;</span></span>
+<span class="line"><span>using System.Net;</span></span>
+<span class="line"><span>using System.Net.Http;</span></span>
+<span class="line"><span>using System.Threading.Tasks;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Hosting;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.TestHost;</span></span>
+<span class="line"><span>using Microsoft.VisualStudio.TestTools.UnitTesting;</span></span>
+<span class="line"><span>using Moq;</span></span>
+<span class="line"><span>using Newtonsoft.Json;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Integration.Test</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    [TestClass]</span></span>
+<span class="line"><span>    public class PersonsTest : BaseTest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        private readonly Person _person = new Person</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            Id = 1,</span></span>
+<span class="line"><span>            FirstName = "Mocked FN1",</span></span>
+<span class="line"><span>            LastName = "Mocked LN1",</span></span>
+<span class="line"><span>            Email = "mocked.email1@email.na"</span></span>
+<span class="line"><span>        };</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [TestMethod]</span></span>
+<span class="line"><span>        public async Task GetPerson_ReturnsCorrectResult()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            PersonRepositoryMock.Setup(x => x.GetById(It.IsAny&#x3C;int>()))</span></span>
+<span class="line"><span>                .Returns(_person);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            var response = await PersonServiceClient.GetPerson("1");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);</span></span>
+<span class="line"><span>            Assert.AreEqual("Mocked LN1", response.Result.LastName);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [TestMethod]</span></span>
+<span class="line"><span>        [ExpectedException(typeof(InvalidOperationException))]</span></span>
+<span class="line"><span>        public async Task GetPerson_ThrowsException()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            PersonRepositoryMock.Setup(x => x.GetById(It.IsAny&#x3C;int>()))</span></span>
+<span class="line"><span>                .Throws(new InvalidOperationException());</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            var result = await PersonServiceClient.GetPerson("1");</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [TestMethod]</span></span>
+<span class="line"><span>        public async Task GetPersons()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            PersonRepositoryMock.Setup(x => x.GetAll())</span></span>
+<span class="line"><span>                .Returns(new List&#x3C;Person> { _person });</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            var response = await PersonServiceClient.GetPersons();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);</span></span>
+<span class="line"><span>            Assert.AreEqual(1, response.Result.Count);</span></span>
+<span class="line"><span>            Assert.AreEqual("Mocked LN1", response.Result[0].LastName);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Nicer database mock</h2>
 As of version <em><strong>2.1.0</strong></em> of <em><strong>Microsoft.AspNetCore.TestHost</strong></em>, which is currently in pre-release, there is a method called <em><strong>ConfigureTestServices</strong></em>, which saves us from having separate <em><strong>StartupMock</strong></em> class. You can directly inject your mocks with following code:
-<pre class="language-csharp"><code>var server = new TestServer(new WebHostBuilder()
-	.UseStartup&#x3C;Startup>()
-	.ConfigureTestServices(services =>
-	{
-		services.AddSingleton(PersonRepositoryMock.Object);
-	}));
-
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>var server = new TestServer(new WebHostBuilder()</span></span>
+<span class="line"><span>    .UseStartup&#x3C;Startup>()</span></span>
+<span class="line"><span>    .ConfigureTestServices(services =></span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        services.AddSingleton(PersonRepositoryMock.Object);</span></span>
+<span class="line"><span>    }));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Conclusion</h2>
-In the current post, I have shown how to do integration testing on .NET Core applications. This is a very convenient approach which eliminates some of the disadvantages of stubbing or mocking all dependencies in unit testing. Because of using all dependencies, integration testing can be much slower. This can be improved by mocking some of them. Integration testing is not a substitute for unit testing, nor for functional testing, but it is a good approach in you testing portfolio that should be considered.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+In the current post, I have shown how to do integration testing on .NET Core applications. This is a very convenient approach which eliminates some of the disadvantages of stubbing or mocking all dependencies in unit testing. Because of using all dependencies, integration testing can be much slower. This can be improved by mocking some of them. Integration testing is not a substitute for unit testing, nor for functional testing, but it is a good approach in you testing portfolio that should be considered.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/" data-astro-cid-bvzihdzo>Build a REST API with .NET Core 2 and run it on Docker Linux container</a> </li><li data-astro-cid-bvzihdzo> <a href="/useful-net-core-sdk-cli-commands/" data-astro-cid-bvzihdzo>Useful .NET Core SDK CLI commands</a> </li><li data-astro-cid-bvzihdzo> <a href="/code-coverage-net-core-unit-tests-opencover/" data-astro-cid-bvzihdzo>Code coverage of .NET Core unit tests with OpenCover</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/dotnet-core" data-astro-cid-bvzihdzo>.NET Core</a><a href="/tags/api-automation" data-astro-cid-bvzihdzo>API Automation</a><a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a><a href="/tags/newtonsoft-json" data-astro-cid-bvzihdzo>Newtonsoft.Json</a><a href="/tags/rest" data-astro-cid-bvzihdzo>REST</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a><a href="/tags/unit-testing" data-astro-cid-bvzihdzo>Unit testing</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-create-a-service-working-with-sqs/"><!-- Primary Meta Tags --><title>AWS examples in C# - create a service working with SQS</title><meta name="title" content="AWS examples in C# - create a service working with SQS"><meta name="description" content="To give a basic overview of AWS SQS, how to write a message to it and how to make a consumer that constantly polls the queue for new messages."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-create-a-service-working-with-sqs/"><meta property="og:title" content="AWS examples in C# - create a service working with SQS"><meta property="og:description" content="To give a basic overview of AWS SQS, how to write a message to it and how to make a consumer that constantly polls the queue for new messages."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-create-a-service-working-with-sqs/"><meta property="twitter:title" content="AWS examples in C# - create a service working with SQS"><meta property="twitter:description" content="To give a basic overview of AWS SQS, how to write a message to it and how to make a consumer that constantly polls the queue for new messages."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-02-20T00:00:00.000Z"> Feb 20, 2020 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - create a service working with SQS</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-create-a-service-working-with-sqs/"><!-- Primary Meta Tags --><title>AWS examples in C# - create a service working with SQS</title><meta name="title" content="AWS examples in C# - create a service working with SQS"><meta name="description" content="To give a basic overview of AWS SQS, how to write a message to it and how to make a consumer that constantly polls the queue for new messages."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-create-a-service-working-with-sqs/"><meta property="og:title" content="AWS examples in C# - create a service working with SQS"><meta property="og:description" content="To give a basic overview of AWS SQS, how to write a message to it and how to make a consumer that constantly polls the queue for new messages."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-create-a-service-working-with-sqs/"><meta property="twitter:title" content="AWS examples in C# - create a service working with SQS"><meta property="twitter:description" content="To give a basic overview of AWS SQS, how to write a message to it and how to make a consumer that constantly polls the queue for new messages."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - create a service working with SQS</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-02-20T00:00:00.000Z"> Feb 20, 2020 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository.</p>
 <h2>Event-driven architecture</h2>
 I would like to briefly touch the topic of <a href="https://en.wikipedia.org/wiki/Event-driven_architecture" target="_blank" rel="noopener noreferrer">event-driven architecture</a> since message service providers, such as SQS or RabbitMQ are the basis of its implementation. This is a software architecture paradigm promoting the production, detection, consumption of, and reaction to events. An event is a significant change in the state of an object, to which someone might be interested in. All communication happens asynchronously and systems are loosely coupled. An event-driven system typically consists of event emitters, event consumers, and event channels. Emitters have the responsibility to detect, gather, and transfer events. Emitters do not know the consumers of the events, they do not even know if a consumer exists. Consumers have the responsibility of applying a reaction as soon as an event is presented in a dedicated channel. This leads to the pattern commonly known as eventual consistency, which pushes the complexity of consistency to the application tier, which is the biggest challenge to solve in an event-driven architecture.
 <p>Apart from SQS, there is even more sophisticated service from AWS called <em><strong>EventBridge</strong></em>, which makes it easy to build event-driven applications because it takes care of event ingestion and delivery, security, authorization, and error handling. It is basically a serverless event bus that makes it easy to connect applications together using data from its own applications, integrated Software-as-a-Service (SaaS) applications, and AWS services.</p>
@@ -39,88 +38,96 @@ In <a href="/aws-examples-in-c-basic-sqs-queue-operations/">AWS examples in C# 
 </ul>
 <h2>Creating SQS message consumer</h2>
 In order to read the messages, there should be a consumer that constantly polls the queue and processes the messages. <em><strong>ProcessMessageAsync</strong></em> uses the <em><strong>strategy design pattern</strong></em> to get the proper message processor based on <em><strong>MessageType</strong></em> attribute. Processors are stored in <em><strong>_messageProcessors</strong></em> which is <em><strong>IEnumerable&#x3C;IMessageProcessor></strong></em> and is injected by .NET Core dependency injection. If a processor is found, then the processor is invoked, if not an error is shown in the logs. This logic can be subject to change if unknown messages are tolerated in the queue. In <em><strong>ProcessAsync</strong></em> method there is a while loop, which constantly reads for messages by <em><strong>_sqsClient</strong></em> which <em><strong>SqsClient</strong></em> class described in previous sections. SQS returns the response if there are some messages or if <em><strong>WaitTimeSeconds</strong></em> time expired when reading the message or <em><strong>ReceiveMessageWaitTimeSeconds</strong></em> configured by <em><strong>AwsQueueLongPollTimeSeconds</strong></em> environment variable has expired. This while loop is a little tricky to unit test though as it consumes the main thread, and the mocked object should be instructed to wait. Everything is controlled by a <em><strong>CancellationTokenSource</strong></em>, when this is canceled, then consumption is stopped.
-<p>[tabby title=“ProcessMessageAsync”]</p>
-<pre class="language-csharp"><code>private async Task ProcessMessageAsync(Message message)
-{
-	try
-	{
-		var messageType = message.MessageAttributes.GetMessageTypeAttributeValue();
-		if (messageType == null)
-		{
-			throw new Exception($"No 'MessageType' attribute present in message {JsonConvert.SerializeObject(message)}");
-		}
-
-		var processor = _messageProcessors.SingleOrDefault(x => x.CanProcess(messageType));
-		if (processor == null)
-		{
-			throw new Exception($"No processor found for message type '{messageType}'");
-		}
-
-		await processor.ProcessAsync(message);
-		await _sqsClient.DeleteMessageAsync(message.ReceiptHandle);
-	}
-	catch (Exception ex)
-	{
-		_logger.LogError(ex, $"Cannot process message [id: {message.MessageId}, receiptHandle: {message.ReceiptHandle}, body: {message.Body}] from queue {_sqsClient.GetQueueName()}");
-	}
-}
-</code></pre>
-<p>[tabby title=“ProcessAsync”]</p>
-<pre class="language-csharp"><code>private async void ProcessAsync()
-{
-	try
-	{
-		while (!_tokenSource.Token.IsCancellationRequested)
-		{
-			var messages = await _sqsClient.GetMessagesAsync(_tokenSource.Token);
-			messages.ForEach(async x => await ProcessMessageAsync(x));
-		}
-	}
-	catch (OperationCanceledException)
-	{
-		//operation has been canceled but it shouldn't be propagated
-	}
-}
-</code></pre>
-<p>[tabby title=“StartConsuming”]</p>
-<pre class="language-csharp"><code>public void StartConsuming()
-{
-	if (!IsConsuming())
-	{
-		_tokenSource = new CancellationTokenSource();
-		ProcessAsync();
-	}
-}
-
-private bool IsConsuming()
-{
-	return _tokenSource != null &#x26;&#x26; !_tokenSource.Token.IsCancellationRequested;
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="9504-ProcessMessageAsync" class="tablinks active" onclick="openTab(this, &#x27;content-9504-ProcessMessageAsync&#x27;, &#x27;9504&#x27;)">ProcessMessageAsync</button>
+<button id="9504-ProcessAsync" class="tablinks" onclick="openTab(this, &#x27;content-9504-ProcessAsync&#x27;, &#x27;9504&#x27;)">ProcessAsync</button>
+<button id="9504-StartConsuming" class="tablinks" onclick="openTab(this, &#x27;content-9504-StartConsuming&#x27;, &#x27;9504&#x27;)">StartConsuming</button></div>
+<div id="content-9504-ProcessMessageAsync" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private async Task ProcessMessageAsync(Message message)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    try</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        var messageType = message.MessageAttributes.GetMessageTypeAttributeValue();</span></span>
+<span class="line"><span>        if (messageType == null)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            throw new Exception($"No 'MessageType' attribute present in message {JsonConvert.SerializeObject(message)}");</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        var processor = _messageProcessors.SingleOrDefault(x => x.CanProcess(messageType));</span></span>
+<span class="line"><span>        if (processor == null)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            throw new Exception($"No processor found for message type '{messageType}'");</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        await processor.ProcessAsync(message);</span></span>
+<span class="line"><span>        await _sqsClient.DeleteMessageAsync(message.ReceiptHandle);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    catch (Exception ex)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        _logger.LogError(ex, $"Cannot process message [id: {message.MessageId}, receiptHandle: {message.ReceiptHandle}, body: {message.Body}] from queue {_sqsClient.GetQueueName()}");</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-9504-ProcessAsync" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private async void ProcessAsync()</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    try</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        while (!_tokenSource.Token.IsCancellationRequested)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var messages = await _sqsClient.GetMessagesAsync(_tokenSource.Token);</span></span>
+<span class="line"><span>            messages.ForEach(async x => await ProcessMessageAsync(x));</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    catch (OperationCanceledException)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        //operation has been canceled but it shouldn't be propagated</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-9504-StartConsuming" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public void StartConsuming()</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    if (!IsConsuming())</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        _tokenSource = new CancellationTokenSource();</span></span>
+<span class="line"><span>        ProcessAsync();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>private bool IsConsuming()</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    return _tokenSource != null &#x26;&#x26; !_tokenSource.Token.IsCancellationRequested;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Message processors</h2>
 In the current example, I have taken the architectural design decision to have one queue and different messages into it. For each different type of message, there is a relevant processor. With the <a href="https://en.wikipedia.org/wiki/Strategy_pattern" target="_blank" rel="noopener noreferrer">strategy design pattern</a>, the appropriate message processor is picked based on <em><strong>MessageType</strong></em> attribute. Processors implement a very simple interface <em><strong>IMessageProcessor</strong></em>. In the current example, they take the message as a string, serialize it to an object and save this object to <em><strong>DynamoDB</strong></em>. A sample implementation is shown below:
-<p>[tabby title=“IMessageProcessor”]</p>
-<pre class="language-csharp"><code>public interface IMessageProcessor
-{
-	bool CanProcess(string messageType);
-	Task ProcessAsync(Message message);
-}
-</code></pre>
-<p>[tabby title=“ActorMessageProcessor”]</p>
-<pre class="language-csharp"><code>public bool CanProcess(string messageType)
-{
-	return messageType == typeof(Actor).Name;
-}
-
-public async Task ProcessAsync(Message message)
-{
-	var actor = JsonConvert.DeserializeObject&#x3C;Actor>(message.Body);
-	await _actorsRepository.SaveActorAsync(actor);
-	_logger.LogInformation($"ActorMessageProcessor invoked with: {message.Body}");
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="11961-IMessageProcessor" class="tablinks active" onclick="openTab(this, &#x27;content-11961-IMessageProcessor&#x27;, &#x27;11961&#x27;)">IMessageProcessor</button>
+<button id="11961-ActorMessageProcessor" class="tablinks" onclick="openTab(this, &#x27;content-11961-ActorMessageProcessor&#x27;, &#x27;11961&#x27;)">ActorMessageProcessor</button></div>
+<div id="content-11961-IMessageProcessor" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public interface IMessageProcessor</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    bool CanProcess(string messageType);</span></span>
+<span class="line"><span>    Task ProcessAsync(Message message);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-11961-ActorMessageProcessor" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public bool CanProcess(string messageType)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    return messageType == typeof(Actor).Name;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public async Task ProcessAsync(Message message)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    var actor = JsonConvert.DeserializeObject&#x3C;Actor>(message.Body);</span></span>
+<span class="line"><span>    await _actorsRepository.SaveActorAsync(actor);</span></span>
+<span class="line"><span>    _logger.LogInformation($"ActorMessageProcessor invoked with: {message.Body}");</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>AWS ECS and AWS ECR</h2>
 ECS stands for Elastic Container Service is a fully managed container orchestration service. Containers can be run in clusters using <em><strong>AWS Fargate</strong></em>, which is a serverless compute for containers. Fargate removes the need to provision and manage servers, lets you specify and pay for resources per application, and improves security through application isolation by design.
 <p>ECR stands for Elastic Container Registry is a fully-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images. ECR is integrated with ECS, eliminating the need to operate own container repositories or worry about scaling the underlying infrastructure.</p>
@@ -129,6 +136,6 @@ ECS stands for Elastic Container Service is a fully managed container orchestrat
 <p><a href="https://github.com/llatinov/aws.examples.csharp/tree/master/SqsReader" target="_blank" rel="noopener noreferrer">SqsReader</a> is a .NET Core 3.0 application, that is dockerized and run in AWS ECS with Fargate, and its container images are stored in ECR. It has a consumer that listens to the SQS queue and processes the messages by writing them into appropriate AQS DynamoDB tables. It also exposes API to stop or start processing, as long as reprocess the dead-letter queue or simply get the queue status.</p>
 <p>More information on how to run the solution can be found in <a href="/aws-examples-in-c-run-the-solution/">AWS examples in C# – run the solution</a> post.</p>
 <h2>Conclusion</h2>
-In the current post, I have given some concepts of event-driven architecture and how SQS fits in it. Also, I have described some architectural considerations when using SQS queues, such as dead-letter queues, one queue with different message type or several queues, etc. In the end, I have given practical code on how to make a consumer for the SQS queue.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+In the current post, I have given some concepts of event-driven architecture and how SQS fits in it. Also, I have described some architectural considerations when using SQS queues, such as dead-letter queues, one queue with different message type or several queues, etc. In the end, I have given practical code on how to make a consumer for the SQS queue.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/" data-astro-cid-bvzihdzo>AWS examples in C# - working with SQS, DynamoDB, Lambda, ECS</a> </li><li data-astro-cid-bvzihdzo> <a href="/aws-examples-in-c-basic-sqs-queue-operations/" data-astro-cid-bvzihdzo>AWS examples in C# - basic SQS queue operations</a> </li><li data-astro-cid-bvzihdzo> <a href="/aws-examples-in-c-run-the-solution/" data-astro-cid-bvzihdzo>AWS examples in C# - run the solution</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/aws" data-astro-cid-bvzihdzo>AWS</a><a href="/tags/aws-dynamodb" data-astro-cid-bvzihdzo>AWS DynamoDB</a><a href="/tags/aws-ecs" data-astro-cid-bvzihdzo>AWS ECS</a><a href="/tags/aws-sqs" data-astro-cid-bvzihdzo>AWS SQS</a><a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

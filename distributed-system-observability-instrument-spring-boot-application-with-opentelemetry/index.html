@@ -1,177 +1,190 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/distributed-system-observability-instrument-spring-boot-application-with-opentelemetry/"><!-- Primary Meta Tags --><title>Distributed system observability: Instrument Spring Boot application with OpenTelemetry</title><meta name="title" content="Distributed system observability: Instrument Spring Boot application with OpenTelemetry"><meta name="description" content="Instrumenting a Spring Boot Java application with OpenTelemetry."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/distributed-system-observability-instrument-spring-boot-application-with-opentelemetry/"><meta property="og:title" content="Distributed system observability: Instrument Spring Boot application with OpenTelemetry"><meta property="og:description" content="Instrumenting a Spring Boot Java application with OpenTelemetry."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/distributed-system-observability-instrument-spring-boot-application-with-opentelemetry/"><meta property="twitter:title" content="Distributed system observability: Instrument Spring Boot application with OpenTelemetry"><meta property="twitter:description" content="Instrumenting a Spring Boot Java application with OpenTelemetry."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2021-10-14T00:00:00.000Z"> Oct 14, 2021 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Distributed system observability: Instrument Spring Boot application with OpenTelemetry</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/distributed-system-observability-complete-end-to-end-example-with-opentracing-jaeger-prometheus-grafana-spring-boot-react-and-selenium/">Distributed system observability: complete end-to-end example</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/selenium-observability-java" target="_blank" rel="noopener noreferrer">selenium-observability-java</a> GitHub repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/distributed-system-observability-instrument-spring-boot-application-with-opentelemetry/"><!-- Primary Meta Tags --><title>Distributed system observability: Instrument Spring Boot application with OpenTelemetry</title><meta name="title" content="Distributed system observability: Instrument Spring Boot application with OpenTelemetry"><meta name="description" content="Instrumenting a Spring Boot Java application with OpenTelemetry."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/distributed-system-observability-instrument-spring-boot-application-with-opentelemetry/"><meta property="og:title" content="Distributed system observability: Instrument Spring Boot application with OpenTelemetry"><meta property="og:description" content="Instrumenting a Spring Boot Java application with OpenTelemetry."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/distributed-system-observability-instrument-spring-boot-application-with-opentelemetry/"><meta property="twitter:title" content="Distributed system observability: Instrument Spring Boot application with OpenTelemetry"><meta property="twitter:description" content="Instrumenting a Spring Boot Java application with OpenTelemetry."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Distributed system observability: Instrument Spring Boot application with OpenTelemetry</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2021-10-14T00:00:00.000Z"> Oct 14, 2021 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/distributed-system-observability-complete-end-to-end-example-with-opentracing-jaeger-prometheus-grafana-spring-boot-react-and-selenium/">Distributed system observability: complete end-to-end example</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/selenium-observability-java" target="_blank" rel="noopener noreferrer">selenium-observability-java</a> GitHub repository.</p>
 <h2>Spring Boot</h2>
 <a href="https://spring.io/projects/spring-boot" target="_blank" rel="noopener">Spring Boot</a> makes it easy to create stand-alone, production-grade Spring-based Applications that you can "just run". Most Spring Boot applications need minimal Spring configuration. Creating a basic Spring Boot application takes a few steps.
 <h3>Application</h3>
 The application class is the entry point. It should have <em><strong>@SpringBootApplication</strong></em> annotation. I have added additional <em><strong>@ServletComponentScan</strong></em> annotation in order to register a custom response filter. I want to output the TraceId as a response header.
-<p>[tabby title=“Application”]</p>
-<pre class="language-java"><code>import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-
-@ServletComponentScan
-@SpringBootApplication
-public class PersonServiceApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(PersonServiceApplication.class, args);
-    }
-}
-</code></pre>
-<p>[tabby title=“Filter”]</p>
-<pre class="language-java"><code>import io.opentelemetry.api.trace.Span;
-
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-@WebFilter("*")
-public class AddResponseHeaderFilter implements Filter {
-
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-        httpServletResponse.setHeader("x-trace-id", Span.current().getSpanContext().getTraceId());
-        chain.doFilter(request, response);
-    }
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="1252-Application" class="tablinks active" onclick="openTab(this, &#x27;content-1252-Application&#x27;, &#x27;1252&#x27;)">Application</button>
+<button id="1252-Filter" class="tablinks" onclick="openTab(this, &#x27;content-1252-Filter&#x27;, &#x27;1252&#x27;)">Filter</button></div>
+<div id="content-1252-Application" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import org.springframework.boot.SpringApplication;</span></span>
+<span class="line"><span>import org.springframework.boot.autoconfigure.SpringBootApplication;</span></span>
+<span class="line"><span>import org.springframework.boot.web.servlet.ServletComponentScan;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@ServletComponentScan</span></span>
+<span class="line"><span>@SpringBootApplication</span></span>
+<span class="line"><span>public class PersonServiceApplication {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static void main(String[] args) {</span></span>
+<span class="line"><span>        SpringApplication.run(PersonServiceApplication.class, args);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-1252-Filter" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import io.opentelemetry.api.trace.Span;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import javax.servlet.*;</span></span>
+<span class="line"><span>import javax.servlet.annotation.WebFilter;</span></span>
+<span class="line"><span>import javax.servlet.http.HttpServletResponse;</span></span>
+<span class="line"><span>import java.io.IOException;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@WebFilter("*")</span></span>
+<span class="line"><span>public class AddResponseHeaderFilter implements Filter {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Override</span></span>
+<span class="line"><span>    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {</span></span>
+<span class="line"><span>        HttpServletResponse httpServletResponse = (HttpServletResponse) response;</span></span>
+<span class="line"><span>        httpServletResponse.setHeader("x-trace-id", Span.current().getSpanContext().getTraceId());</span></span>
+<span class="line"><span>        chain.doFilter(request, response);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h3>Controller</h3>
 In the current example, there is only one controller with two APIs, a POST and GET endpoints with the same path. The class has to be annotated with <em><strong>@RestController.</strong></em> Each API endpoint is annotated with <em><strong>@RequestMapping</strong></em>, with more details about the path and the method. I have used <a href="https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/using-boot-spring-beans-and-dependency-injection.html" target="_blank" rel="noopener">Spring's constructor-based dependency injection</a>. I have omitted the <em><strong>@Autowired</strong></em> annotation because there is just one constructor.
-<pre class="language-java"><code>import com.automationrhapsody.observability.services.PersonService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-<p>import java.util.List;</p>
-<p>@RestController
-public class PersonController {</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private static final Logger LOGGER </span></span>
-<span class="line"><span>        = LoggerFactory.getLogger(PersonController.class);</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import com.automationrhapsody.observability.services.PersonService;</span></span>
+<span class="line"><span>import org.slf4j.Logger;</span></span>
+<span class="line"><span>import org.slf4j.LoggerFactory;</span></span>
+<span class="line"><span>import org.springframework.web.bind.annotation.RequestBody;</span></span>
+<span class="line"><span>import org.springframework.web.bind.annotation.RequestMapping;</span></span>
+<span class="line"><span>import org.springframework.web.bind.annotation.RequestMethod;</span></span>
+<span class="line"><span>import org.springframework.web.bind.annotation.RestController;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>private PersonService personService;</span></span>
+<span class="line"><span>import java.util.List;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>public PersonController(PersonService personService) {</span></span>
-<span class="line"><span>    this.personService = personService;</span></span>
+<span class="line"><span>@RestController</span></span>
+<span class="line"><span>public class PersonController {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private static final Logger LOGGER </span></span>
+<span class="line"><span>            = LoggerFactory.getLogger(PersonController.class);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private PersonService personService;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public PersonController(PersonService personService) {</span></span>
+<span class="line"><span>        this.personService = personService;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @RequestMapping(value = "/persons", method = RequestMethod.GET)</span></span>
+<span class="line"><span>    public List&#x3C;PersonDto> getPersons() {</span></span>
+<span class="line"><span>        LOGGER.info("Processing GET /persons request.");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        List&#x3C;PersonDto> persons = personService.getPersons();</span></span>
+<span class="line"><span>        return persons;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @RequestMapping(value = "/persons", method = RequestMethod.POST)</span></span>
+<span class="line"><span>    public Long savePersons(@RequestBody PersonDto person) {</span></span>
+<span class="line"><span>        LOGGER.info("Processing POST /persons request with {}", person);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        Long resultId = personService.savePerson(person);</span></span>
+<span class="line"><span>        return resultId;</span></span>
+<span class="line"><span>    }</span></span>
 <span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>@RequestMapping(value = "/persons", method = RequestMethod.GET)</span></span>
-<span class="line"><span>public List&#x26;lt;PersonDto&#x26;gt; getPersons() {</span></span>
-<span class="line"><span>    LOGGER.info("Processing GET /persons request.");</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>    List&#x26;lt;PersonDto&#x26;gt; persons = personService.getPersons();</span></span>
-<span class="line"><span>    return persons;</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>@RequestMapping(value = "/persons", method = RequestMethod.POST)</span></span>
-<span class="line"><span>public Long savePersons(@RequestBody PersonDto person) {</span></span>
-<span class="line"><span>    LOGGER.info("Processing POST /persons request with {}", person);</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>    Long resultId = personService.savePerson(person);</span></span>
-<span class="line"><span>    return resultId;</span></span>
-<span class="line"><span>}</span></span></code></pre>
-</code><p><code>}
-</code></p></pre><p></p>
+<span class="line"><span></span></span></code></pre>
 <h3>Repository</h3>
 Defining a very basic repository can be really easy with Spring, all needed is to extend the <em><strong>CrudRepository</strong></em> interface. If fine-tuning and custom methods are needed then it is needed to create an interface that extends the Spring's <em><strong>Repository</strong></em> interface and defines custom repository methods inside. Read more in <a href="https://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html" target="_blank" rel="noopener">Working with Spring Data Repositories</a>.
-<pre class="language-java"><code>import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-</code><p><code>@Repository
-public interface FlightRepository extends CrudRepository&#x3C;PersonEntity, Long> {
-}
-</code></p></pre><p></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import org.springframework.data.repository.CrudRepository;</span></span>
+<span class="line"><span>import org.springframework.stereotype.Repository;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@Repository</span></span>
+<span class="line"><span>public interface FlightRepository extends CrudRepository&#x3C;PersonEntity, Long> {</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h3>Service</h3>
 A service layer is a good idea to handle the business logic between the controller and the repository. In this case, dependency is injected with <em><strong>@Autowired</strong></em> annotation. <em><strong>findAll()</strong></em> is a method that comes from <em><strong>CrudRepository</strong></em> interface. It gets the data from the database. <em><strong>@WithSpan</strong></em> annotation creates a new span in the OpenTelemetry traces. This will be explained in more detail.
-<pre class="language-java"><code>import com.automationrhapsody.observability.controllers.PersonDto;
-import com.automationrhapsody.observability.repositories.person.FlightRepository;
-import com.automationrhapsody.observability.repositories.person.PersonEntity;
-import io.opentelemetry.api.common.AttributeKey;
-import io.opentelemetry.api.common.Attributes;
-import io.opentelemetry.api.trace.Span;
-import io.opentelemetry.extension.annotations.WithSpan;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-<p>import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;</p>
-<p>@Service
-public class PersonService {</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private static final Logger LOGGER =</span></span>
-<span class="line"><span>        LoggerFactory.getLogger(PersonService.class);</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import com.automationrhapsody.observability.controllers.PersonDto;</span></span>
+<span class="line"><span>import com.automationrhapsody.observability.repositories.person.FlightRepository;</span></span>
+<span class="line"><span>import com.automationrhapsody.observability.repositories.person.PersonEntity;</span></span>
+<span class="line"><span>import io.opentelemetry.api.common.AttributeKey;</span></span>
+<span class="line"><span>import io.opentelemetry.api.common.Attributes;</span></span>
+<span class="line"><span>import io.opentelemetry.api.trace.Span;</span></span>
+<span class="line"><span>import io.opentelemetry.extension.annotations.WithSpan;</span></span>
+<span class="line"><span>import org.slf4j.Logger;</span></span>
+<span class="line"><span>import org.slf4j.LoggerFactory;</span></span>
+<span class="line"><span>import org.springframework.beans.factory.annotation.Autowired;</span></span>
+<span class="line"><span>import org.springframework.stereotype.Service;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>@Autowired</span></span>
-<span class="line"><span>private FlightRepository flightRepository;</span></span>
+<span class="line"><span>import java.util.List;</span></span>
+<span class="line"><span>import java.util.stream.Collectors;</span></span>
+<span class="line"><span>import java.util.stream.StreamSupport;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>public List&#x26;lt;PersonDto&#x26;gt; getPersons() {</span></span>
-<span class="line"><span>    doSomeWorkNewChildSpan();</span></span>
-<span class="line"><span>    Iterable&#x26;lt;PersonEntity&#x26;gt; persons = flightRepository.findAll();</span></span>
-<span class="line"><span>    return StreamSupport.stream(persons.spliterator(), false)</span></span>
-<span class="line"><span>            .map(this::toPersonDto)</span></span>
-<span class="line"><span>            .collect(Collectors.toList());</span></span>
+<span class="line"><span>@Service</span></span>
+<span class="line"><span>public class PersonService {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private static final Logger LOGGER =</span></span>
+<span class="line"><span>            LoggerFactory.getLogger(PersonService.class);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Autowired</span></span>
+<span class="line"><span>    private FlightRepository flightRepository;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public List&#x3C;PersonDto> getPersons() {</span></span>
+<span class="line"><span>        doSomeWorkNewChildSpan();</span></span>
+<span class="line"><span>        Iterable&#x3C;PersonEntity> persons = flightRepository.findAll();</span></span>
+<span class="line"><span>        return StreamSupport.stream(persons.spliterator(), false)</span></span>
+<span class="line"><span>                .map(this::toPersonDto)</span></span>
+<span class="line"><span>                .collect(Collectors.toList());</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @WithSpan</span></span>
+<span class="line"><span>    public void doSomeWorkNewChildSpan() {</span></span>
+<span class="line"><span>        LOGGER.info("Doing some work In New child span");</span></span>
+<span class="line"><span>        Span span = Span.current();</span></span>
+<span class="line"><span>        span.setAttribute("template.a2", "some value");</span></span>
+<span class="line"><span>        span.addEvent("template.processing2.start", attributes("321"));</span></span>
+<span class="line"><span>        span.addEvent("template.processing2.end", attributes("321"));</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private Attributes attributes(String id) {</span></span>
+<span class="line"><span>        return Attributes.of(AttributeKey.stringKey("app.id"), id);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private PersonDto toPersonDto(PersonEntity person) {</span></span>
+<span class="line"><span>        PersonDto personDto = new PersonDto();</span></span>
+<span class="line"><span>        personDto.setFirstName(person.getFirstName());</span></span>
+<span class="line"><span>        personDto.setLastName(person.getLastName());</span></span>
+<span class="line"><span>        personDto.setEmail(person.getEmail());</span></span>
+<span class="line"><span>        return personDto;</span></span>
+<span class="line"><span>    }</span></span>
 <span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>@WithSpan</span></span>
-<span class="line"><span>public void doSomeWorkNewChildSpan() {</span></span>
-<span class="line"><span>    LOGGER.info("Doing some work In New child span");</span></span>
-<span class="line"><span>    Span span = Span.current();</span></span>
-<span class="line"><span>    span.setAttribute("template.a2", "some value");</span></span>
-<span class="line"><span>    span.addEvent("template.processing2.start", attributes("321"));</span></span>
-<span class="line"><span>    span.addEvent("template.processing2.end", attributes("321"));</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>private Attributes attributes(String id) {</span></span>
-<span class="line"><span>    return Attributes.of(AttributeKey.stringKey("app.id"), id);</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>private PersonDto toPersonDto(PersonEntity person) {</span></span>
-<span class="line"><span>    PersonDto personDto = new PersonDto();</span></span>
-<span class="line"><span>    personDto.setFirstName(person.getFirstName());</span></span>
-<span class="line"><span>    personDto.setLastName(person.getLastName());</span></span>
-<span class="line"><span>    personDto.setEmail(person.getEmail());</span></span>
-<span class="line"><span>    return personDto;</span></span>
-<span class="line"><span>}</span></span></code></pre>
-</code><p><code>}
-</code></p></pre><p></p>
+<span class="line"><span></span></span></code></pre>
 <h2>Instrumentation</h2>
 OpenTelemetry provides a way for manual instrumentation, which will be covered in the subsequent Selenium-based post. OpenTelemetry also provides a <a href="https://github.com/open-telemetry/opentelemetry-java-instrumentation" target="_blank" rel="noopener">Java agent JAR</a>, that can be attached to any Java 8+ application and dynamically injects bytecode to capture telemetry from a number of popular libraries and frameworks. This JAR agent is attached to the Spring Boot application described above. This is done in the Docker file. Jaeger exporter and Jaeger backend endpoint are configured with <em><strong>otel.traces.exporter</strong></em> and <em><strong>otel.exporter.jaeger.endpoint</strong></em> environment variables.
-<pre class="language-docker"><code>
-# ========= BUILD =========
-FROM maven:3-openjdk-11 as builder
-WORKDIR /build
-<p>COPY pom.xml pom.xml
-RUN mvn dependency:resolve</p>
-<p>COPY . .
-RUN mvn install</p>
-<h1 id="-run">========= RUN =========</h1>
-<p>FROM openjdk:11
-ENV APP_NAME person-service</p>
-<h1 id="httpsgithubcomopen-telemetryopentelemetry-java-instrumentation"><a href="https://github.com/open-telemetry/opentelemetry-java-instrumentation">https://github.com/open-telemetry/opentelemetry-java-instrumentation</a></h1>
-<p>ENV JAVA_OPTS “$JAVA_OPTS <br>
--Dotel.traces.exporter=jaeger <br>
--Dotel.exporter.jaeger.endpoint=<a href="http://jaeger:14250">http://jaeger:14250</a> <br>
--Dotel.metrics.exporter=none <br>
--Dotel.resource.attributes=“service.name=${APP_NAME}” <br>
--Dotel.javaagent.debug=false <br>
--javaagent:/app/opentelemetry-javaagent-all.jar”</p>
-<p>ADD <a href="https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.6.2/opentelemetry-javaagent-all.jar">https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.6.2/opentelemetry-javaagent-all.jar</a> /app/opentelemetry-javaagent-all.jar
-COPY —from=builder /build/target/$APP_NAME-*.jar /app/$APP_NAME.jar</p>
-</code><p><code>CMD java $JAVA_OPTS -jar /app/$APP_NAME.jar
-</code></p></pre>
-This is it. Just by attaching the Java agent application is instrumented and OpenTelemetry is ready to report traces. OpenTelemetry supports a large number of libraries and frameworks, the full list can be found in <a href="https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/supported-libraries.md#libraries--frameworks" target="_blank" rel="noopener">Supported libraries, frameworks, application servers, and JVMs</a>.<p></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># ========= BUILD =========</span></span>
+<span class="line"><span>FROM maven:3-openjdk-11 as builder</span></span>
+<span class="line"><span>WORKDIR /build</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>COPY pom.xml pom.xml</span></span>
+<span class="line"><span>RUN mvn dependency:resolve</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>COPY . .</span></span>
+<span class="line"><span>RUN mvn install</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># ========= RUN =========</span></span>
+<span class="line"><span>FROM openjdk:11</span></span>
+<span class="line"><span>ENV APP_NAME person-service</span></span>
+<span class="line"><span># https://github.com/open-telemetry/opentelemetry-java-instrumentation</span></span>
+<span class="line"><span>ENV JAVA_OPTS "$JAVA_OPTS \</span></span>
+<span class="line"><span>  -Dotel.traces.exporter=jaeger \</span></span>
+<span class="line"><span>  -Dotel.exporter.jaeger.endpoint=http://jaeger:14250 \</span></span>
+<span class="line"><span>  -Dotel.metrics.exporter=none \</span></span>
+<span class="line"><span>  -Dotel.resource.attributes="service.name=${APP_NAME}" \</span></span>
+<span class="line"><span>  -Dotel.javaagent.debug=false \</span></span>
+<span class="line"><span>  -javaagent:/app/opentelemetry-javaagent-all.jar"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.6.2/opentelemetry-javaagent-all.jar /app/opentelemetry-javaagent-all.jar</span></span>
+<span class="line"><span>COPY --from=builder /build/target/$APP_NAME-*.jar /app/$APP_NAME.jar</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>CMD java $JAVA_OPTS -jar /app/$APP_NAME.jar</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This is it. Just by attaching the Java agent application is instrumented and OpenTelemetry is ready to report traces. OpenTelemetry supports a large number of libraries and frameworks, the full list can be found in <a href="https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/supported-libraries.md#libraries--frameworks" target="_blank" rel="noopener">Supported libraries, frameworks, application servers, and JVMs</a>.</p>
 <h2>Custom tracking</h2>
 In many cases, apart from the standard tracing, the application has to report additional traces. This can be very easily done with the <em><strong>@WithSpan</strong></em> annotation. This annotation marks that the execution of this method or constructor should result in a new Span. It can be used to signal OpenTelemetry auto-instrumentation that a new span should be created whenever a marked method is executed. In the example above, a custom attribute has been added to the new Span. This is not mandatory though, just adding the annotation will record the method invocation as a new span in the trace output.
 <h2>Traces output</h2>
 In order to monitor a trace, run the examples as described in <a href="/distributed-system-observability-complete-end-to-end-example-with-opentracing-jaeger-prometheus-grafana-spring-boot-react-and-selenium/">Distributed system observability: complete end-to-end example with OpenTracing, Jaeger, Prometheus, Grafana, Spring Boot, React and Selenium</a>. Accessing <a href="http://localhost:8090/persons" target="_blank" rel="noopener">http://localhost:8090/persons</a> generates a trace in Jaeger:
 <p><a href="/images/2021/10/Selenium-Observability-Spring-Boot-trace.png"><img src="/images/2021/10/Selenium-Observability-Spring-Boot-trace.png"></a></p>
 <h2>Conclusion</h2>
-With the steps described above, create a basic Spring Boot application is fairly easy. It is even easier instrumenting the application with OpenTelemetry tracing, just by adding the Java agent JAR. Custom tracing is also made easy with @WithSpan annotation. Traces give very valuable information about the performance of the different parts of the application.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+With the steps described above, create a basic Spring Boot application is fairly easy. It is even easier instrumenting the application with OpenTelemetry tracing, just by adding the Java agent JAR. Custom tracing is also made easy with @WithSpan annotation. Traces give very valuable information about the performance of the different parts of the application.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/distributed-system-observability-complete-end-to-end-example-with-opentracing-jaeger-prometheus-grafana-spring-boot-react-and-selenium/" data-astro-cid-bvzihdzo>Distributed system observability: complete end-to-end example with OpenTracing, Jaeger, Prometheus, Grafana, Spring Boot, React and Selenium</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/opentelemetry" data-astro-cid-bvzihdzo>OpenTelemetry</a><a href="/tags/spring-boot" data-astro-cid-bvzihdzo>Spring Boot</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

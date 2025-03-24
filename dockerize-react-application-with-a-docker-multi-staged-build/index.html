@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/dockerize-react-application-with-a-docker-multi-staged-build/"><!-- Primary Meta Tags --><title>Dockerize React application with a Docker multi-staged build</title><meta name="title" content="Dockerize React application with a Docker multi-staged build"><meta name="description" content="How to build React application inside a Docker container, with a multi-staged build and then run it with NGINX or Caddy."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/dockerize-react-application-with-a-docker-multi-staged-build/"><meta property="og:title" content="Dockerize React application with a Docker multi-staged build"><meta property="og:description" content="How to build React application inside a Docker container, with a multi-staged build and then run it with NGINX or Caddy."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/dockerize-react-application-with-a-docker-multi-staged-build/"><meta property="twitter:title" content="Dockerize React application with a Docker multi-staged build"><meta property="twitter:description" content="How to build React application inside a Docker container, with a multi-staged build and then run it with NGINX or Caddy."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2019-12-11T00:00:00.000Z"> Dec 11, 2019 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Dockerize React application with a Docker multi-staged build</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>In the current post, I am not going to compare NGINX vs. Caddy. I will show how to build a React application and package it into a Docker container with both of them. Examples code is located <span>in </span><a href="https://github.com/llatinov/cypress-testing-framework" target="_blank" rel="noopener noreferrer">cypress-testing-framework</a><span> GitHub repository.</span></p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/dockerize-react-application-with-a-docker-multi-staged-build/"><!-- Primary Meta Tags --><title>Dockerize React application with a Docker multi-staged build</title><meta name="title" content="Dockerize React application with a Docker multi-staged build"><meta name="description" content="How to build React application inside a Docker container, with a multi-staged build and then run it with NGINX or Caddy."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/dockerize-react-application-with-a-docker-multi-staged-build/"><meta property="og:title" content="Dockerize React application with a Docker multi-staged build"><meta property="og:description" content="How to build React application inside a Docker container, with a multi-staged build and then run it with NGINX or Caddy."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/dockerize-react-application-with-a-docker-multi-staged-build/"><meta property="twitter:title" content="Dockerize React application with a Docker multi-staged build"><meta property="twitter:description" content="How to build React application inside a Docker container, with a multi-staged build and then run it with NGINX or Caddy."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Dockerize React application with a Docker multi-staged build</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2019-12-11T00:00:00.000Z"> Dec 11, 2019 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>In the current post, I am not going to compare NGINX vs. Caddy. I will show how to build a React application and package it into a Docker container with both of them. Examples code is located <span>in </span><a href="https://github.com/llatinov/cypress-testing-framework" target="_blank" rel="noopener noreferrer">cypress-testing-framework</a><span> GitHub repository.</span></p>
 <h2>NGINX</h2>
 <a href="https://www.nginx.com/" target="_blank" rel="noopener noreferrer">NGINX</a> is open-source software for web serving, reverse proxying, caching, load balancing, media streaming, and more. It started out as a web server designed for maximum performance and stability. In addition to its HTTP server capabilities, NGINX can also function as a proxy server for email (IMAP, POP3, and SMTP) and a reverse proxy and load balancer for HTTP, TCP, and UDP servers.
 <h2>Caddy</h2>
@@ -11,108 +10,108 @@ Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> 
 <p>The other is with <a href="https://yarnpkg.com/lang/en/" target="_blank" rel="noopener noreferrer">Yarn</a> package manager and is described in <em><strong>Build and run with Caddy</strong></em> section. Current examples are configured to use Yarn. I personally prefer Yarn as for local development it has very effective caching and also it has a reliable dependency locking mechanism.</p>
 <h2>Build and run with NGINX</h2>
 Following Dockerfile is describing the building of the React application with NPM package manager and packaging it into NGINX image.
-<pre class="language-docker"><code># ========= BUILD =========
-FROM node:8.16.0-alpine as builder
-
-WORKDIR /app
-
-COPY package.json .
-COPY package-lock.json .
-RUN npm install --production
-
-COPY . .
-
-RUN npm run build
-
-# ========= RUN =========
-FROM nginx:1.17
-
-COPY conf/nginx.conf /etc/nginx/nginx.conf
-COPY --from=builder /app/build /usr/share/nginx/html
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># ========= BUILD =========</span></span>
+<span class="line"><span>FROM node:8.16.0-alpine as builder</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>WORKDIR /app</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>COPY package.json .</span></span>
+<span class="line"><span>COPY package-lock.json .</span></span>
+<span class="line"><span>RUN npm install --production</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>COPY . .</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>RUN npm run build</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># ========= RUN =========</span></span>
+<span class="line"><span>FROM nginx:1.17</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>COPY conf/nginx.conf /etc/nginx/nginx.conf</span></span>
+<span class="line"><span>COPY --from=builder /app/build /usr/share/nginx/html</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>The keyword <strong></strong><em><strong>as builder</strong></em> is used to put the name to the image. Both <em><strong>package.json</strong></em> and <em><strong>package-lock.json</strong></em> are copied to the already configured work directory <em><strong>/app</strong></em>. Installation of the packages is done with <em><strong>npm install —production</strong></em>, where the <em><strong>—production</strong></em> switch is used to skip the <em><strong>devDependencies</strong></em>. In the current example, Cypress takes a lot of time to install, and it is not needed for a production build. Afterward, all project files are copied to the image. The files configured in <em><strong>.dockerignore</strong></em> are skipped. All source code files are intentionally copied to the image only after the NPM packages installation. Packages installation takes time, and they need to be installed only if the <em><strong>package.json</strong></em> file has been changed. In case of code changes only, Docker cache is used for the packages layer, this speeds up the build. The build is initiated with <em><strong>npm run build</strong></em> and takes quite a time. Now there the build artifacts are ready. Next stage is to copy the artifacts to <em><strong>nginx:1.17</strong></em> image into <em><strong>/usr/share/nginx/html</strong></em> folder from <em><strong>builder</strong></em> image’s <em><strong>/app/build</strong></em> folder. Also, NGINX configuration file is copied.</p>
-<pre class="language-text"><code>worker_processes auto;
-worker_rlimit_nofile 8192;
-
-events {
-  worker_connections 1024;
-}
-
-http {
-  include /etc/nginx/mime.types;
-  sendfile on;
-  tcp_nopush on;
-
-  gzip on;
-  gzip_static on;
-  gzip_types
-    text/plain
-    text/css
-    text/javascript
-    application/json
-    application/x-javascript
-    application/xml+rss;
-  gzip_proxied any;
-  gzip_vary on;
-  gzip_comp_level 6;
-  gzip_buffers 16 8k;
-  gzip_http_version 1.1;
-
-  server {
-    listen 3000;
-    server_name localhost;
-    root /usr/share/nginx/html;
-    auth_basic off;
-
-    location / {
-      try_files $uri $uri/ /index.html;
-    }
-
-    # 404 if a file is requested (so the main app isn't served)
-    location ~ ^.+\..+$ {
-      try_files $uri =404;
-    }
-  }
-}
-
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>worker_processes auto;</span></span>
+<span class="line"><span>worker_rlimit_nofile 8192;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>events {</span></span>
+<span class="line"><span>  worker_connections 1024;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>http {</span></span>
+<span class="line"><span>  include /etc/nginx/mime.types;</span></span>
+<span class="line"><span>  sendfile on;</span></span>
+<span class="line"><span>  tcp_nopush on;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  gzip on;</span></span>
+<span class="line"><span>  gzip_static on;</span></span>
+<span class="line"><span>  gzip_types</span></span>
+<span class="line"><span>    text/plain</span></span>
+<span class="line"><span>    text/css</span></span>
+<span class="line"><span>    text/javascript</span></span>
+<span class="line"><span>    application/json</span></span>
+<span class="line"><span>    application/x-javascript</span></span>
+<span class="line"><span>    application/xml+rss;</span></span>
+<span class="line"><span>  gzip_proxied any;</span></span>
+<span class="line"><span>  gzip_vary on;</span></span>
+<span class="line"><span>  gzip_comp_level 6;</span></span>
+<span class="line"><span>  gzip_buffers 16 8k;</span></span>
+<span class="line"><span>  gzip_http_version 1.1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  server {</span></span>
+<span class="line"><span>    listen 3000;</span></span>
+<span class="line"><span>    server_name localhost;</span></span>
+<span class="line"><span>    root /usr/share/nginx/html;</span></span>
+<span class="line"><span>    auth_basic off;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    location / {</span></span>
+<span class="line"><span>      try_files $uri $uri/ /index.html;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    # 404 if a file is requested (so the main app isn't served)</span></span>
+<span class="line"><span>    location ~ ^.+\..+$ {</span></span>
+<span class="line"><span>      try_files $uri =404;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span></code></pre>
 <p>I will not go into NGINX configuration details, the configuration can be checked in details in NGINX documentation. Important in the configuration above is that <em><strong>gzip</strong></em> compression is enabled and NGINX listens to port <em><strong>3000</strong></em>. Then with <em><strong>try_files</strong></em> unknown routes are redirected to <em><strong>index.html</strong></em>, so React can bootstrap the routes.</p>
 <h2>Build and run with Caddy</h2>
 Following Dockerfile is describing the building of the React application with Yarn package manager and packaging it into Caddy image.
-<pre class="language-docker"><code># ========= BUILD =========
-FROM node:8.16.0-alpine as builder
-
-WORKDIR /app
-
-RUN npm install yarn -g
-
-COPY package.json .
-COPY yarn.lock .
-RUN yarn install --production=true
-
-COPY . .
-
-RUN yarn build
-
-# ========= RUN =========
-FROM abiosoft/caddy:1.0.3
-
-COPY conf/Caddyfile /etc/Caddyfile
-COPY --from=builder /app/build /usr/share/caddy/html
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># ========= BUILD =========</span></span>
+<span class="line"><span>FROM node:8.16.0-alpine as builder</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>WORKDIR /app</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>RUN npm install yarn -g</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>COPY package.json .</span></span>
+<span class="line"><span>COPY yarn.lock .</span></span>
+<span class="line"><span>RUN yarn install --production=true</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>COPY . .</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>RUN yarn build</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># ========= RUN =========</span></span>
+<span class="line"><span>FROM abiosoft/caddy:1.0.3</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>COPY conf/Caddyfile /etc/Caddyfile</span></span>
+<span class="line"><span>COPY --from=builder /app/build /usr/share/caddy/html</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Absolutely the same logic applies here as above. <em><strong>Yarn</strong></em> is installed as an additional Linux package, then <em><strong>package.json</strong></em> and <em><strong>yarn.lock</strong></em> files are copied. It is very important to copy the <em><strong>yarn.lock</strong></em>, otherwise every run lates dependencies will be fetched, and there might be inconsistent behavior. Only production dependencies are installed with <em><strong>yarn install —production=true</strong></em>. After the application is built with <em><strong>yarn build</strong></em> it is being copied to <em><strong>abiosoft/caddy:1.0.3</strong></em> image in <em><strong>/usr/share/caddy/html</strong></em> folder from <em><strong>builder</strong></em> image. <em><strong>Caddyfile</strong></em> is copied as well to configure Caddy.</p>
-<pre class="language-text"><code>0.0.0.0:3000 {
-	gzip
-	log / stdout "{method} {path} {status}"
-	root /usr/share/caddy/html
-	rewrite {
-		regexp .*
-		to {path} /
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>0.0.0.0:3000 {</span></span>
+<span class="line"><span>    gzip</span></span>
+<span class="line"><span>    log / stdout "{method} {path} {status}"</span></span>
+<span class="line"><span>    root /usr/share/caddy/html</span></span>
+<span class="line"><span>    rewrite {</span></span>
+<span class="line"><span>        regexp .*</span></span>
+<span class="line"><span>        to {path} /</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Caddy is configured to listen to port <em><strong>3000</strong></em>, <em><strong>gzip</strong></em> compression is enabled and there is <em><strong>rewrite</strong></em> rule which redirects unknown paths to the main path, so React can bootstrap the router.</p>
 <h2>Conclusion</h2>
-In the current post, I have shown how to build React application inside a Docker image with both NPM and Yarn and then pack the build artifacts to NGINX or Caddy Docker image, which later can be run as a container. This process optimizes the Docker image size and also it does not put extra requirements to the build machine to have Node JS installed, as Node JS is inside the builder image.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+In the current post, I have shown how to build React application inside a Docker image with both NPM and Yarn and then pack the build artifacts to NGINX or Caddy Docker image, which later can be run as a container. This process optimizes the Docker image size and also it does not put extra requirements to the build machine to have Node JS installed, as Node JS is inside the builder image.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/optimize-the-size-of-docker-images/" data-astro-cid-bvzihdzo>Optimize the size of Docker images</a> </li><li data-astro-cid-bvzihdzo> <a href="/distributed-system-observability-instrument-react-application-with-opentelemetry/" data-astro-cid-bvzihdzo>Distributed system observability: Instrument React application with OpenTelemetry</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/docker" data-astro-cid-bvzihdzo>Docker</a><a href="/tags/javascript" data-astro-cid-bvzihdzo>JavaScript</a><a href="/tags/react" data-astro-cid-bvzihdzo>React</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

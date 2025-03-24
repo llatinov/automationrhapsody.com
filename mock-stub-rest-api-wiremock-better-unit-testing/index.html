@@ -1,64 +1,63 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/mock-stub-rest-api-wiremock-better-unit-testing/"><!-- Primary Meta Tags --><title>Mock/Stub REST API with WireMock for better unit testing</title><meta name="title" content="Mock/Stub REST API with WireMock for better unit testing"><meta name="description" content="Examples how to use WireMock to stub (mock also is possible as a term) REST API in order make better unit testing."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/mock-stub-rest-api-wiremock-better-unit-testing/"><meta property="og:title" content="Mock/Stub REST API with WireMock for better unit testing"><meta property="og:description" content="Examples how to use WireMock to stub (mock also is possible as a term) REST API in order make better unit testing."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/mock-stub-rest-api-wiremock-better-unit-testing/"><meta property="twitter:title" content="Mock/Stub REST API with WireMock for better unit testing"><meta property="twitter:description" content="Examples how to use WireMock to stub (mock also is possible as a term) REST API in order make better unit testing."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-11-14T00:00:00.000Z"> Nov 14, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Mock/Stub REST API with WireMock for better unit testing</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>The code shown in examples below is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener">java-samples/wiremock</a> repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/mock-stub-rest-api-wiremock-better-unit-testing/"><!-- Primary Meta Tags --><title>Mock/Stub REST API with WireMock for better unit testing</title><meta name="title" content="Mock/Stub REST API with WireMock for better unit testing"><meta name="description" content="Examples how to use WireMock to stub (mock also is possible as a term) REST API in order make better unit testing."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/mock-stub-rest-api-wiremock-better-unit-testing/"><meta property="og:title" content="Mock/Stub REST API with WireMock for better unit testing"><meta property="og:description" content="Examples how to use WireMock to stub (mock also is possible as a term) REST API in order make better unit testing."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/mock-stub-rest-api-wiremock-better-unit-testing/"><meta property="twitter:title" content="Mock/Stub REST API with WireMock for better unit testing"><meta property="twitter:description" content="Examples how to use WireMock to stub (mock also is possible as a term) REST API in order make better unit testing."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Mock/Stub REST API with WireMock for better unit testing</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-11-14T00:00:00.000Z"> Nov 14, 2016 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>The code shown in examples below is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener">java-samples/wiremock</a> repository.</p>
 <h2>WireMock</h2>
 <a href="http://wiremock.org/" target="_blank" rel="noopener">WireMock</a> is a simulator for HTTP-based APIs. Some might consider it a service virtualization tool or a mock server. It enables you to stay productive when an API you depend on doesn't exist or isn't complete. It supports testing of edge cases and failure modes that the real API won't reliably produce. And because it's fast it can reduce your build time from hours down to minutes.
 <h2>When to use it</h2>
 One case where WireMock is very helpful is when building a REST API client. <a href="/create-simple-rest-api-client-using-jersey/">Create simple REST API client using Jersey</a> post describes a way to achieve this with Jersey. In most of the cases REST API might not be forced to fail with certain errors, so WireMock is an excellent addition to standard functional tests to verify that client is working correctly in corner cases. Also, it is mandatory for unit testing because it eliminates dependencies to external services. The mock server is extremely fast and under complete control. Another case where WireMock helps is if you need to create API tests, but API is not ready yet or not working. WireMock can be used to stub the service in order to make testing framework and structure. Once the real server is ready tests will just be elaborated and details cleared up.
 <h2>How to use it</h2>
 WireMock is used in JUnit as a rule. More info on JUnit rules can be found in <a href="/use-junit-rules-debug-failed-api-tests/">Use JUnit rules to debug failed API tests</a> post. There are <em><strong>WireMockClassRule</strong></em> and <em><strong>WireMockRule</strong></em>. The most appropriate is the class rule, there is no need to create a mock server for each and every test, also additional logic is needed for port collision avoidance. In case you use other unit testing framework there is <em><strong>WireMockServer</strong></em> which can be started before tests and stopped afterward. The code given below is used to REST API client from <a href="/create-simple-rest-api-client-using-jersey/">Create simple REST API client using Jersey</a> post. First JUnit class rule is created.
-<pre class="language-java"><code>public class JerseyPersonRestClientTest {
-
-	private static final int WIREMOCK_PORT = 9999;
-
-	@ClassRule
-	public static final WireMockClassRule WIREMOCK_RULE
-		= new WireMockClassRule(WIREMOCK_PORT);
-
-	private JerseyPersonRestClient clientUnderTest;
-
-	@Before
-	public void setUp() throws Exception {
-		clientUnderTest
-			= new JerseyPersonRestClient("http://localhost:" + WIREMOCK_PORT);
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class JerseyPersonRestClientTest {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private static final int WIREMOCK_PORT = 9999;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @ClassRule</span></span>
+<span class="line"><span>    public static final WireMockClassRule WIREMOCK_RULE</span></span>
+<span class="line"><span>        = new WireMockClassRule(WIREMOCK_PORT);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private JerseyPersonRestClient clientUnderTest;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Before</span></span>
+<span class="line"><span>    public void setUp() throws Exception {</span></span>
+<span class="line"><span>        clientUnderTest</span></span>
+<span class="line"><span>            = new JerseyPersonRestClient("http://localhost:" + WIREMOCK_PORT);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Port should be free, otherwise there is <em><strong>com.github.tomakehurst.wiremock.common.FatalStartupException: java.lang.RuntimeException: java.net.BindException: Address already in use: bind</strong></em> exception thrown.</p>
 <p>Usage is very simple. There are several methods which are important. Method <em><strong>stubFor()</strong></em> is initializing the stub. Method <em><strong>get()</strong></em> notifies that stub is called with HTTP GET request. Method <em><strong>urlMatching()</strong></em> uses regular expression to match which API path is invoked, then <em><strong>willReturn()</strong></em> returns <em><strong>aResponse()</strong></em> <em><strong>withBody()</strong></em>. There are several <em><strong>with()</strong></em> methods which gives a variety of options for testing. Complete test is below:</p>
-<pre class="language-java"><code>@Test
-public void testGet_WithBody_PersonJson() {
-	String personString = "{\"firstName\":\"FN1\",\"lastName\":\"LN1\"}";
-	stubFor(get(urlMatching(".*/person/get/.*"))
-		.willReturn(aResponse().withBody(personString)));
-
-	Person actual = clientUnderTest.get(1);
-
-	assertEquals("FN1", actual.getFirstName());
-	assertEquals("LN1", actual.getLastName());
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void testGet_WithBody_PersonJson() {</span></span>
+<span class="line"><span>    String personString = "{\"firstName\":\"FN1\",\"lastName\":\"LN1\"}";</span></span>
+<span class="line"><span>    stubFor(get(urlMatching(".*/person/get/.*"))</span></span>
+<span class="line"><span>        .willReturn(aResponse().withBody(personString)));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Person actual = clientUnderTest.get(1);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals("FN1", actual.getFirstName());</span></span>
+<span class="line"><span>    assertEquals("LN1", actual.getLastName());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>This is the very straightforward case, where the client should work, but when you start to elaborate on <em><strong>with()</strong></em> scenarios you can sometimes catch an issue with the code being tested. See test below is working correctly in a case where API returns HTTP response code 500 - Internal Server Error. The client might need to add some verification on response codes as well:</p>
-<pre class="language-java"><code>@Test
-public void testGet_WithStatus() {
-	String personString = "{\"firstName\":\"FN1\",\"lastName\":\"LN1\"}";
-	stubFor(get(GET_URL)
-		.willReturn(aResponse()
-		.withStatus(500)
-		.withBody(personString)));
-
-	Person actual = clientUnderTest.get(1);
-
-	assertEquals("FN1", actual.getFirstName());
-	assertEquals("LN1", actual.getLastName());
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void testGet_WithStatus() {</span></span>
+<span class="line"><span>    String personString = "{\"firstName\":\"FN1\",\"lastName\":\"LN1\"}";</span></span>
+<span class="line"><span>    stubFor(get(GET_URL)</span></span>
+<span class="line"><span>        .willReturn(aResponse()</span></span>
+<span class="line"><span>        .withStatus(500)</span></span>
+<span class="line"><span>        .withBody(personString)));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Person actual = clientUnderTest.get(1);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals("FN1", actual.getFirstName());</span></span>
+<span class="line"><span>    assertEquals("LN1", actual.getLastName());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Wiremock stateful behavior</h2>
 You can configure Wiremock to respond with series of different responses, hence keeping an internal state. This might happen when you want to perform tests with more steps or some end-to-end scenario. On the first request, Wiremock can respond with one response, on the second request it can respond with a totally different response. See more in <a href="http://wiremock.org/docs/stateful-behaviour/" target="_blank" rel="noopener">Wiremock stateful behaviour</a>.
 <h2>Difference between stub and mock</h2>
 In <a href="/mock-junit-tests-mockito-example/">Mock JUnit tests with Mockito example</a> post, I've shown how to use Mockito to mock given classes and control their behavior in order to control and eliminate dependencies. Mockito is not suitable for this particular case because if you mock <em><strong>JerseyPersonRestClient</strong></em>'s <em><strong>get()</strong></em> method it will just return an object, there is no testing whatsoever. Stubbing with WireMock on other hand tests all code for invoking the service, getting a response (controlled by you) and deserializing this response from network stream to Java object. It is much more adequate and close to reality testing.
 <h2>Conclusion</h2>
-WireMock is a very powerful framework for API stubbing in order to make your test better and it is a must for unit testing some REST API client.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+WireMock is a very powerful framework for API stubbing in order to make your test better and it is a must for unit testing some REST API client.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/create-simple-rest-api-client-using-jersey/" data-astro-cid-bvzihdzo>Create simple REST API client using Jersey</a> </li><li data-astro-cid-bvzihdzo> <a href="/use-junit-rules-debug-failed-api-tests/" data-astro-cid-bvzihdzo>Use JUnit rules to debug failed API tests</a> </li><li data-astro-cid-bvzihdzo> <a href="/mock-junit-tests-mockito-example/" data-astro-cid-bvzihdzo>Mock JUnit tests with Mockito example</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/api-automation" data-astro-cid-bvzihdzo>API Automation</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/junit" data-astro-cid-bvzihdzo>JUnit</a><a href="/tags/rest" data-astro-cid-bvzihdzo>REST</a><a href="/tags/wiremock" data-astro-cid-bvzihdzo>WireMock</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

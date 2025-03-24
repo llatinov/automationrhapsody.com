@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/distributed-system-observability-instrument-selenium-tests-with-opentelemetry/"><!-- Primary Meta Tags --><title>Distributed system observability: Instrument Selenium tests with OpenTelemetry</title><meta name="title" content="Distributed system observability: Instrument Selenium tests with OpenTelemetry"><meta name="description" content="Instrument Selenium tests with OpenTelemetry and be able to custom trace the tests themselves."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/distributed-system-observability-instrument-selenium-tests-with-opentelemetry/"><meta property="og:title" content="Distributed system observability: Instrument Selenium tests with OpenTelemetry"><meta property="og:description" content="Instrument Selenium tests with OpenTelemetry and be able to custom trace the tests themselves."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/distributed-system-observability-instrument-selenium-tests-with-opentelemetry/"><meta property="twitter:title" content="Distributed system observability: Instrument Selenium tests with OpenTelemetry"><meta property="twitter:description" content="Instrument Selenium tests with OpenTelemetry and be able to custom trace the tests themselves."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2021-10-16T00:00:00.000Z"> Oct 16, 2021 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Distributed system observability: Instrument Selenium tests with OpenTelemetry</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/distributed-system-observability-complete-end-to-end-example-with-opentracing-jaeger-prometheus-grafana-spring-boot-react-and-selenium/">Distributed system observability: complete end-to-end example</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/selenium-observability-java" target="_blank" rel="noopener noreferrer">selenium-observability-java</a> GitHub repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/distributed-system-observability-instrument-selenium-tests-with-opentelemetry/"><!-- Primary Meta Tags --><title>Distributed system observability: Instrument Selenium tests with OpenTelemetry</title><meta name="title" content="Distributed system observability: Instrument Selenium tests with OpenTelemetry"><meta name="description" content="Instrument Selenium tests with OpenTelemetry and be able to custom trace the tests themselves."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/distributed-system-observability-instrument-selenium-tests-with-opentelemetry/"><meta property="og:title" content="Distributed system observability: Instrument Selenium tests with OpenTelemetry"><meta property="og:description" content="Instrument Selenium tests with OpenTelemetry and be able to custom trace the tests themselves."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/distributed-system-observability-instrument-selenium-tests-with-opentelemetry/"><meta property="twitter:title" content="Distributed system observability: Instrument Selenium tests with OpenTelemetry"><meta property="twitter:description" content="Instrument Selenium tests with OpenTelemetry and be able to custom trace the tests themselves."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Distributed system observability: Instrument Selenium tests with OpenTelemetry</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2021-10-16T00:00:00.000Z"> Oct 16, 2021 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/distributed-system-observability-complete-end-to-end-example-with-opentracing-jaeger-prometheus-grafana-spring-boot-react-and-selenium/">Distributed system observability: complete end-to-end example</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/selenium-observability-java" target="_blank" rel="noopener noreferrer">selenium-observability-java</a> GitHub repository.</p>
 <h2>Selenium</h2>
 <a href="https://www.selenium.dev/" target="_blank" rel="noopener">Selenium</a> is browser automation software. It's been around for many years and is de-facto the tool for web automation testing. It has bindings in all popular programming languages, which means people can write web automation tests in those languages.
 <h2>Selenium observability</h2>
@@ -11,41 +10,45 @@ Selenium consist of a client, those are the bindings and server, these are the e
 <img src="https://image.slidesharecdn.com/qa-challenge-accepted-4-cypress-180423063611/95/qa-challenge-accepted-40-cypress-vs-selenium-3-638.jpg">
 <h3>Selenium client instrumentation</h3>
 Enabling the default selenium observability is very easy. A Jar dependency has to be added in <em><strong>pom.xml</strong></em>, environment variables to be set, and of course running Jaeger instance to collect the traces. Note that this works only for the <em><strong>RemoteWebDriver</strong></em>. It is described in detail in <a href="https://www.selenium.dev/documentation/webdriver/remote_webdriver/#tracing-client-requests" target="_blank" rel="noopener">Remote WebDriver</a>.
-<pre class="language-xml"><code>&#x3C;dependency>
-    &#x3C;groupId>io.opentelemetry&#x3C;/groupId>
-    &#x3C;artifactId>opentelemetry-exporter-jaeger&#x3C;/artifactId>
-    &#x3C;version>1.6.0&#x3C;/version>
-&#x3C;/dependency>
-&#x3C;dependency>
-    &#x3C;groupId>io.grpc&#x3C;/groupId>
-    &#x3C;artifactId>grpc-netty&#x3C;/artifactId>
-    &#x3C;version>1.41.0&#x3C;/version>
-&#x3C;/dependency>
-</code></pre>
-This goes along with the WebDriver instantiation code.
-<pre class="language-java"><code>System.setProperty("otel.traces.exporter", "jaeger");
-System.setProperty("otel.exporter.jaeger.endpoint", "http://localhost:14250");
-System.setProperty("otel.resource.attributes", "service.name=selenium-java-client");
-System.setProperty("otel.metrics.exporter", "none");
-WebDriver driver = new RemoteWebDriver(
-                new URL("http://localhost:4444"),
-                new ImmutableCapabilities("browserName", "chrome"));
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;dependency></span></span>
+<span class="line"><span>    &#x3C;groupId>io.opentelemetry&#x3C;/groupId></span></span>
+<span class="line"><span>    &#x3C;artifactId>opentelemetry-exporter-jaeger&#x3C;/artifactId></span></span>
+<span class="line"><span>    &#x3C;version>1.6.0&#x3C;/version></span></span>
+<span class="line"><span>&#x3C;/dependency></span></span>
+<span class="line"><span>&#x3C;dependency></span></span>
+<span class="line"><span>    &#x3C;groupId>io.grpc&#x3C;/groupId></span></span>
+<span class="line"><span>    &#x3C;artifactId>grpc-netty&#x3C;/artifactId></span></span>
+<span class="line"><span>    &#x3C;version>1.41.0&#x3C;/version></span></span>
+<span class="line"><span>&#x3C;/dependency></span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This goes along with the WebDriver instantiation code.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>System.setProperty("otel.traces.exporter", "jaeger");</span></span>
+<span class="line"><span>System.setProperty("otel.exporter.jaeger.endpoint", "http://localhost:14250");</span></span>
+<span class="line"><span>System.setProperty("otel.resource.attributes", "service.name=selenium-java-client");</span></span>
+<span class="line"><span>System.setProperty("otel.metrics.exporter", "none");</span></span>
+<span class="line"><span>WebDriver driver = new RemoteWebDriver(</span></span>
+<span class="line"><span>                new URL("http://localhost:4444"),</span></span>
+<span class="line"><span>                new ImmutableCapabilities("browserName", "chrome"));</span></span>
+<span class="line"><span></span></span></code></pre>
 <h3>Selenium server instrumentation</h3>
 Server instrumentation examples are shown in <a href="https://github.com/manoj9788/tracing-selenium-grid" target="_blank" rel="noopener">manoj9788/tracing-selenium-grid</a>. Both the standalone server and Selenium grid can be instrumented. In the current examples, I am working only with the standalone server. Unlike the examples, I used Docker to do the instrumentation. I take the default <em><strong>selenium/standalone-chrome:4.0.0</strong></em> image and install <a href="https://get-coursier.io/docs/cli-overview" target="_blank" rel="noopener">Coursier</a>, a dependency resolver tool, on top of it. Then I run the dependency fetch, so this build sted gets cached for a faster rebuild. Selenium provides <em><strong>--ext</strong></em> flag, which can be set after the <em><strong>standalone</strong></em> command option. I could not make this work only by changing the <em><strong>SE_OPTS</strong></em> environment variable, so I made this rewrite of the startup command in <em><strong>/opt/bin/start-selenium-standalone.sh</strong></em> file. What I did was to change from <em><strong>java -jar</strong></em> to <em><strong>java -cp</strong></em> command, as <em><strong>-cp</strong></em> flag is ignored in case <em><strong>-jar</strong></em> flag is used.
-<pre class="language-docker"><code>FROM selenium/standalone-chrome:4.0.0
-<h1 id="install-coursier-in-order-to-fetch-the-dependencies">Install coursier in order to fetch the dependencies</h1>
-<p>RUN cd /tmp &#x26;&#x26; curl -k -fLo cs <a href="https://git.io/coursier-cli-%22$(uname">https://git.io/coursier-cli-”$(uname</a> | tr LD ld)” &#x26;&#x26; chmod +x cs &#x26;&#x26; ./cs install cs &#x26;&#x26; rm cs</p>
-<h1 id="download-dependencies-so-they-are-availble-during-run">Download dependencies, so they are availble during run</h1>
-<p>RUN /home/seluser/.local/share/coursier/bin/cs fetch -p io.opentelemetry:opentelemetry-exporter-jaeger:1.6.0 io.grpc:grpc-netty:1.41.0</p>
-<h1 id="modify-the-run-command-to-include-dependent-jars-in-it">Modify the run command to include dependent JARs in it</h1>
-<p>RUN sudo sed -i ‘s~-jar /opt/selenium/selenium-server.jar~-cp “/opt/selenium/selenium-server.jar:$(/home/seluser/.local/share/coursier/bin/cs fetch -p io.opentelemetry:opentelemetry-exporter-jaeger:1.6.0 io.grpc:grpc-netty:1.41.0)” org.openqa.selenium.grid.Main~g’ /opt/bin/start-selenium-standalone.sh</p>
-<h1 id="enable-opentelemetry">Enable OpenTelemetry</h1>
-</code><p><code>ENV JAVA_OPTS “$JAVA_OPTS <br>
--Dotel.traces.exporter=jaeger <br>
--Dotel.exporter.jaeger.endpoint=<a href="http://jaeger:14250">http://jaeger:14250</a> <br>
--Dotel.resource.attributes=service.name=selenium-java-server”
-</code></p></pre><p></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>FROM selenium/standalone-chrome:4.0.0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Install coursier in order to fetch the dependencies</span></span>
+<span class="line"><span>RUN cd /tmp &#x26;&#x26; curl -k -fLo cs https://git.io/coursier-cli-"$(uname | tr LD ld)" &#x26;&#x26; chmod +x cs &#x26;&#x26; ./cs install cs &#x26;&#x26; rm cs</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Download dependencies, so they are availble during run</span></span>
+<span class="line"><span>RUN /home/seluser/.local/share/coursier/bin/cs fetch -p io.opentelemetry:opentelemetry-exporter-jaeger:1.6.0 io.grpc:grpc-netty:1.41.0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Modify the run command to include dependent JARs in it</span></span>
+<span class="line"><span>RUN sudo sed -i 's~-jar /opt/selenium/selenium-server.jar~-cp "/opt/selenium/selenium-server.jar:$(/home/seluser/.local/share/coursier/bin/cs fetch -p io.opentelemetry:opentelemetry-exporter-jaeger:1.6.0 io.grpc:grpc-netty:1.41.0)" org.openqa.selenium.grid.Main~g' /opt/bin/start-selenium-standalone.sh</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Enable OpenTelemetry</span></span>
+<span class="line"><span>ENV JAVA_OPTS "$JAVA_OPTS \</span></span>
+<span class="line"><span>  -Dotel.traces.exporter=jaeger \</span></span>
+<span class="line"><span>  -Dotel.exporter.jaeger.endpoint=http://jaeger:14250 \</span></span>
+<span class="line"><span>  -Dotel.resource.attributes=service.name=selenium-java-server"</span></span>
+<span class="line"><span></span></span></code></pre>
 <h3>Selenium default traces in Jaeger</h3>
 <em><strong>RemoteWebDriver</strong></em> client is passing down the <em><strong>traceparent</strong></em> header when making the request to the server, this is why both client and server traces are connected.
 <p><a href="/images/2021/10/Selenium-Observability-Selenium-trace.png"><img src="/images/2021/10/Selenium-Observability-Selenium-trace.png"></a></p>
@@ -54,189 +57,193 @@ As stated before, in the case of HTTP calls, the OpenTelemetry binding between b
 <h3>Instrument the frontend</h3>
 In order to achieve linking, a JavaScript function is exposed in the frontend, which creates a parent Span. Then this JS function is called from the tests when needed. This function is named <em><strong>startBindingSpan()</strong></em> and is registered with the <em><strong>window</strong></em> global object. It creates a binding span with the same attributes (<em><strong>traceId, spanId, traceFlags</strong></em>) as the span used in the Selenium tests. This span never ends, so is not recorded in the traces. In order to enable this span, the <em><strong>traceSpan()</strong></em> function has to be manually used in the frontend code, because it links the current frontend context with the binding span. I have added another function, called <em><strong>flushTraces()</strong></em>. It forces the OpenTelemetry library to report the traces to Jaeger. Reporting is done with an HTTP call and the browser should not exit before all reporting requests are sent.
 <p><strong>Note:</strong> some people consider exposing such a <em><strong>window</strong></em>-bound function in the frontend to modify React state as an anti-pattern. Frontend code is in <a href="https://github.com/llatinov/selenium-observability-java/blob/main/frontend/src/helpers/tracing/index.ts" target="_blank" rel="noopener">src/helpers/tracing/index.ts</a>:</p>
-<pre class="language-javascript"><code>declare const window: any
-var bindingSpan: Span | undefined
-
-window.startBindingSpan = (traceId: string, spanId: string, traceFlags: number) => {
-  bindingSpan = webTracerWithZone.startSpan('')
-  bindingSpan.spanContext().traceId = traceId
-  bindingSpan.spanContext().spanId = spanId
-  bindingSpan.spanContext().traceFlags = traceFlags
-}
-
-window.flushTraces = () => {
-  provider.activeSpanProcessor.forceFlush().then(() => console.log('flushed'))
-}
-
-export function traceSpan&#x3C;F extends (...args: any)
-    => ReturnType&#x3C;F>>(name: string, func: F): ReturnType&#x3C;F> {
-  var singleSpan: Span
-  if (bindingSpan) {
-    const ctx = trace.setSpan(context.active(), bindingSpan)
-    singleSpan = webTracerWithZone.startSpan(name, undefined, ctx)
-    bindingSpan = undefined
-  } else {
-    singleSpan = webTracerWithZone.startSpan(name)
-  }
-  return context.with(trace.setSpan(context.active(), singleSpan), () => {
-    try {
-      const result = func()
-      singleSpan.end()
-      return result
-    } catch (error) {
-      singleSpan.setStatus({ code: SpanStatusCode.ERROR })
-      singleSpan.end()
-      throw error
-    }
-  })
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>declare const window: any</span></span>
+<span class="line"><span>var bindingSpan: Span | undefined</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>window.startBindingSpan = (traceId: string, spanId: string, traceFlags: number) => {</span></span>
+<span class="line"><span>  bindingSpan = webTracerWithZone.startSpan('')</span></span>
+<span class="line"><span>  bindingSpan.spanContext().traceId = traceId</span></span>
+<span class="line"><span>  bindingSpan.spanContext().spanId = spanId</span></span>
+<span class="line"><span>  bindingSpan.spanContext().traceFlags = traceFlags</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>window.flushTraces = () => {</span></span>
+<span class="line"><span>  provider.activeSpanProcessor.forceFlush().then(() => console.log('flushed'))</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>export function traceSpan&#x3C;F extends (...args: any)</span></span>
+<span class="line"><span>    => ReturnType&#x3C;F>>(name: string, func: F): ReturnType&#x3C;F> {</span></span>
+<span class="line"><span>  var singleSpan: Span</span></span>
+<span class="line"><span>  if (bindingSpan) {</span></span>
+<span class="line"><span>    const ctx = trace.setSpan(context.active(), bindingSpan)</span></span>
+<span class="line"><span>    singleSpan = webTracerWithZone.startSpan(name, undefined, ctx)</span></span>
+<span class="line"><span>    bindingSpan = undefined</span></span>
+<span class="line"><span>  } else {</span></span>
+<span class="line"><span>    singleSpan = webTracerWithZone.startSpan(name)</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  return context.with(trace.setSpan(context.active(), singleSpan), () => {</span></span>
+<span class="line"><span>    try {</span></span>
+<span class="line"><span>      const result = func()</span></span>
+<span class="line"><span>      singleSpan.end()</span></span>
+<span class="line"><span>      return result</span></span>
+<span class="line"><span>    } catch (error) {</span></span>
+<span class="line"><span>      singleSpan.setStatus({ code: SpanStatusCode.ERROR })</span></span>
+<span class="line"><span>      singleSpan.end()</span></span>
+<span class="line"><span>      throw error</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  })</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h3>Instrument the Selenium tests</h3>
 I have created a custom <em><strong>TracingWebDriver</strong></em> wrapper over the WebDriver. It instantiates the OpenTracing client with <em><strong>initializeTracer()</strong></em> method. It has a built-in custom logic when to generate a tracking span, which is the parent of this span, and when to link the tests' span with the frontend span. Finding an element is done with the custom <em><strong>findElement()</strong></em> method. It creates a child span, linking it to the previously defined <em><strong>currentSpan</strong></em>. Then the <em><strong>window.startBindingSpan()</strong></em> function is being called in the browser in order to create the binding span in the frontend. This is the way to link tests and the frontend. In case of error, Span is recorded as an error and this can be tracked in Jaeger. On driver quit, or on URL change, or maybe on page change via a button, or whenever needed, <em><strong>window.flushTraces()</strong></em> function can be called by invoking <em><strong>forceFlushTraces()</strong></em> method in the tests. This has 1 second of <em><strong>Thread.sleep()</strong></em>, which waits for the tracing request to be fired from the frontend to the Jaeger. Sleeping like this is an anti-pattern for test automation, but I could not find a better way to wait for the traces. If the browser is prematurely closed or the page is navigated, then tracing is incorrect.
-<pre class="language-java"><code>package com.automationrhapsody.observability;
-<p>import io.opentelemetry.api.trace.Span;
-import io.opentelemetry.api.trace.StatusCode;
-import io.opentelemetry.api.trace.Tracer;
-import io.opentelemetry.context.Context;
-import io.opentelemetry.exporter.jaeger.JaegerGrpcSpanExporter;
-import io.opentelemetry.sdk.OpenTelemetrySdk;
-import io.opentelemetry.sdk.resources.Resource;
-import io.opentelemetry.sdk.trace.SdkTracerProvider;
-import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor;
-import org.openqa.selenium.*;
-import org.openqa.selenium.remote.tracing.opentelemetry.OpenTelemetryTracer;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;</p>
-<p>import java.io.File;
-import java.time.Duration;
-import java.util.List;</p>
-<p>public class TracingWebDriver {</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private static final Duration WAIT_SECONDS = Duration.ofSeconds(5);</span></span>
-<span class="line"><span>private static final String JAEGER_GRPC_URL = "http://localhost:14250";</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>package com.automationrhapsody.observability;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>private WebDriver driver;</span></span>
-<span class="line"><span>private Tracer tracer;</span></span>
-<span class="line"><span>private Span mainSpan;</span></span>
-<span class="line"><span>private Span currentSpan;</span></span>
+<span class="line"><span>import io.opentelemetry.api.trace.Span;</span></span>
+<span class="line"><span>import io.opentelemetry.api.trace.StatusCode;</span></span>
+<span class="line"><span>import io.opentelemetry.api.trace.Tracer;</span></span>
+<span class="line"><span>import io.opentelemetry.context.Context;</span></span>
+<span class="line"><span>import io.opentelemetry.exporter.jaeger.JaegerGrpcSpanExporter;</span></span>
+<span class="line"><span>import io.opentelemetry.sdk.OpenTelemetrySdk;</span></span>
+<span class="line"><span>import io.opentelemetry.sdk.resources.Resource;</span></span>
+<span class="line"><span>import io.opentelemetry.sdk.trace.SdkTracerProvider;</span></span>
+<span class="line"><span>import io.opentelemetry.sdk.trace.export.SimpleSpanProcessor;</span></span>
+<span class="line"><span>import org.openqa.selenium.*;</span></span>
+<span class="line"><span>import org.openqa.selenium.remote.tracing.opentelemetry.OpenTelemetryTracer;</span></span>
+<span class="line"><span>import org.openqa.selenium.support.ui.ExpectedConditions;</span></span>
+<span class="line"><span>import org.openqa.selenium.support.ui.WebDriverWait;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>public TracingWebDriver(boolean isRemote, String className, String methodName) {</span></span>
-<span class="line"><span>    System.setProperty("otel.traces.exporter", "jaeger");</span></span>
-<span class="line"><span>    System.setProperty("otel.exporter.jaeger.endpoint", JAEGER_GRPC_URL);</span></span>
-<span class="line"><span>    System.setProperty("otel.resource.attributes", "service.name=selenium-java-client");</span></span>
-<span class="line"><span>    System.setProperty("otel.metrics.exporter", "none");</span></span>
+<span class="line"><span>import java.io.File;</span></span>
+<span class="line"><span>import java.time.Duration;</span></span>
+<span class="line"><span>import java.util.List;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>    initializeTracer();</span></span>
+<span class="line"><span>public class TracingWebDriver {</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>    mainSpan = tracer.spanBuilder("webdriver-create").startSpan();</span></span>
-<span class="line"><span>    mainSpan.setAttribute("test.class.name", className);</span></span>
-<span class="line"><span>    mainSpan.setAttribute("test.method.name", methodName);</span></span>
-<span class="line"><span>    setCurrentSpan(mainSpan);</span></span>
-<span class="line"><span>    driver = WebDriverFactory.createDriver(isRemote);</span></span>
-<span class="line"><span>    mainSpan.end();</span></span>
-<span class="line"><span>}</span></span>
+<span class="line"><span>    private static final Duration WAIT_SECONDS = Duration.ofSeconds(5);</span></span>
+<span class="line"><span>    private static final String JAEGER_GRPC_URL = "http://localhost:14250";</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>public void get(String url) {</span></span>
-<span class="line"><span>    waitToLoad();</span></span>
-<span class="line"><span>    setCurrentSpan(mainSpan);</span></span>
-<span class="line"><span>    Span span = createChildSpan("get: " + url);</span></span>
-<span class="line"><span>    try {</span></span>
+<span class="line"><span>    private WebDriver driver;</span></span>
+<span class="line"><span>    private Tracer tracer;</span></span>
+<span class="line"><span>    private Span mainSpan;</span></span>
+<span class="line"><span>    private Span currentSpan;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public TracingWebDriver(boolean isRemote, String className, String methodName) {</span></span>
+<span class="line"><span>        System.setProperty("otel.traces.exporter", "jaeger");</span></span>
+<span class="line"><span>        System.setProperty("otel.exporter.jaeger.endpoint", JAEGER_GRPC_URL);</span></span>
+<span class="line"><span>        System.setProperty("otel.resource.attributes", "service.name=selenium-java-client");</span></span>
+<span class="line"><span>        System.setProperty("otel.metrics.exporter", "none");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        initializeTracer();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        mainSpan = tracer.spanBuilder("webdriver-create").startSpan();</span></span>
+<span class="line"><span>        mainSpan.setAttribute("test.class.name", className);</span></span>
+<span class="line"><span>        mainSpan.setAttribute("test.method.name", methodName);</span></span>
+<span class="line"><span>        setCurrentSpan(mainSpan);</span></span>
+<span class="line"><span>        driver = WebDriverFactory.createDriver(isRemote);</span></span>
+<span class="line"><span>        mainSpan.end();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void get(String url) {</span></span>
+<span class="line"><span>        waitToLoad();</span></span>
+<span class="line"><span>        setCurrentSpan(mainSpan);</span></span>
+<span class="line"><span>        Span span = createChildSpan("get: " + url);</span></span>
+<span class="line"><span>        try {</span></span>
+<span class="line"><span>            forceFlushTraces();</span></span>
+<span class="line"><span>            driver.get(url);</span></span>
+<span class="line"><span>            createBrowserBindingSpan(span);</span></span>
+<span class="line"><span>        } catch (Exception ex) {</span></span>
+<span class="line"><span>            span.setStatus(StatusCode.ERROR, ex.getMessage());</span></span>
+<span class="line"><span>            captureScreenshot();</span></span>
+<span class="line"><span>        } finally {</span></span>
+<span class="line"><span>            span.end();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public WebElement findElement(By by) {</span></span>
+<span class="line"><span>        waitToLoad();</span></span>
+<span class="line"><span>        Span span = createChildSpan("findElement: " + by.toString());</span></span>
+<span class="line"><span>        try {</span></span>
+<span class="line"><span>            createBrowserBindingSpan(span);</span></span>
+<span class="line"><span>            WebDriverWait wait = new WebDriverWait(driver, WAIT_SECONDS);</span></span>
+<span class="line"><span>            return wait.until(ExpectedConditions.visibilityOfElementLocated(by));</span></span>
+<span class="line"><span>        } catch (Exception ex) {</span></span>
+<span class="line"><span>            span.setStatus(StatusCode.ERROR, ex.getMessage());</span></span>
+<span class="line"><span>            captureScreenshot();</span></span>
+<span class="line"><span>            return null;</span></span>
+<span class="line"><span>        } finally {</span></span>
+<span class="line"><span>            span.end();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void quit() {</span></span>
+<span class="line"><span>        waitToLoad();</span></span>
 <span class="line"><span>        forceFlushTraces();</span></span>
-<span class="line"><span>        driver.get(url);</span></span>
-<span class="line"><span>        createBrowserBindingSpan(span);</span></span>
-<span class="line"><span>    } catch (Exception ex) {</span></span>
-<span class="line"><span>        span.setStatus(StatusCode.ERROR, ex.getMessage());</span></span>
-<span class="line"><span>        captureScreenshot();</span></span>
-<span class="line"><span>    } finally {</span></span>
+<span class="line"><span>        setCurrentSpan(mainSpan);</span></span>
+<span class="line"><span>        Span span = createChildSpan("quit");</span></span>
+<span class="line"><span>        driver.quit();</span></span>
 <span class="line"><span>        span.end();</span></span>
 <span class="line"><span>    }</span></span>
-<span class="line"><span>}</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>public WebElement findElement(By by) {</span></span>
-<span class="line"><span>    waitToLoad();</span></span>
-<span class="line"><span>    Span span = createChildSpan("findElement: " + by.toString());</span></span>
-<span class="line"><span>    try {</span></span>
-<span class="line"><span>        createBrowserBindingSpan(span);</span></span>
+<span class="line"><span>    public Object executeJavaScript(String script) {</span></span>
+<span class="line"><span>        return ((JavascriptExecutor) driver).executeScript(script);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public String captureScreenshot() {</span></span>
+<span class="line"><span>        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);</span></span>
+<span class="line"><span>        String output = screenshotFile.getAbsolutePath();</span></span>
+<span class="line"><span>        System.out.println(output);</span></span>
+<span class="line"><span>        return output;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private void waitToLoad() {</span></span>
 <span class="line"><span>        WebDriverWait wait = new WebDriverWait(driver, WAIT_SECONDS);</span></span>
-<span class="line"><span>        return wait.until(ExpectedConditions.visibilityOfElementLocated(by));</span></span>
-<span class="line"><span>    } catch (Exception ex) {</span></span>
-<span class="line"><span>        span.setStatus(StatusCode.ERROR, ex.getMessage());</span></span>
-<span class="line"><span>        captureScreenshot();</span></span>
-<span class="line"><span>        return null;</span></span>
-<span class="line"><span>    } finally {</span></span>
-<span class="line"><span>        span.end();</span></span>
+<span class="line"><span>        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("test-progress-indicator")));</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private void initializeTracer() {</span></span>
+<span class="line"><span>        JaegerGrpcSpanExporter exporter = JaegerGrpcSpanExporter.builder().setEndpoint(JAEGER_GRPC_URL).build();</span></span>
+<span class="line"><span>        Resource resource = Resource.builder()</span></span>
+<span class="line"><span>                .put("service.name", "selenium-tests")</span></span>
+<span class="line"><span>                .build();</span></span>
+<span class="line"><span>        SdkTracerProvider provider = SdkTracerProvider.builder()</span></span>
+<span class="line"><span>                .addSpanProcessor(SimpleSpanProcessor.create(exporter))</span></span>
+<span class="line"><span>                .setResource(resource)</span></span>
+<span class="line"><span>                .build();</span></span>
+<span class="line"><span>        OpenTelemetrySdk openTelemetrySdk = OpenTelemetrySdk.builder()</span></span>
+<span class="line"><span>                .setTracerProvider(provider)</span></span>
+<span class="line"><span>                .build();</span></span>
+<span class="line"><span>        tracer = openTelemetrySdk.getTracer("io.opentelemetry.jaeger.exporter");</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private Span createChildSpan(String name) {</span></span>
+<span class="line"><span>        Span span = tracer.spanBuilder(name)</span></span>
+<span class="line"><span>                .setParent(Context.current().with(currentSpan))</span></span>
+<span class="line"><span>                .startSpan();</span></span>
+<span class="line"><span>        setCurrentSpan(span);</span></span>
+<span class="line"><span>        return span;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private void setCurrentSpan(Span span) {</span></span>
+<span class="line"><span>        currentSpan = span;</span></span>
+<span class="line"><span>        OpenTelemetryTracer.getInstance().setOpenTelemetryContext(Context.current().with(span));</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private void createBrowserBindingSpan(Span span) {</span></span>
+<span class="line"><span>        executeJavaScript("window.startBindingSpan('"</span></span>
+<span class="line"><span>                + span.getSpanContext().getTraceId() + "', '"</span></span>
+<span class="line"><span>                + span.getSpanContext().getSpanId() + "', '"</span></span>
+<span class="line"><span>                + span.getSpanContext().getTraceFlags().asHex() + "')");</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private void forceFlushTraces() {</span></span>
+<span class="line"><span>        executeJavaScript("if (window.flushTraces) window.flushTraces()");</span></span>
+<span class="line"><span>        try {</span></span>
+<span class="line"><span>            Thread.sleep(1000);</span></span>
+<span class="line"><span>        } catch (InterruptedException e) {</span></span>
+<span class="line"><span>            // Do nothing</span></span>
+<span class="line"><span>        }</span></span>
 <span class="line"><span>    }</span></span>
 <span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>public void quit() {</span></span>
-<span class="line"><span>    waitToLoad();</span></span>
-<span class="line"><span>    forceFlushTraces();</span></span>
-<span class="line"><span>    setCurrentSpan(mainSpan);</span></span>
-<span class="line"><span>    Span span = createChildSpan("quit");</span></span>
-<span class="line"><span>    driver.quit();</span></span>
-<span class="line"><span>    span.end();</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>public Object executeJavaScript(String script) {</span></span>
-<span class="line"><span>    return ((JavascriptExecutor) driver).executeScript(script);</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>public String captureScreenshot() {</span></span>
-<span class="line"><span>    File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);</span></span>
-<span class="line"><span>    String output = screenshotFile.getAbsolutePath();</span></span>
-<span class="line"><span>    System.out.println(output);</span></span>
-<span class="line"><span>    return output;</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>private void waitToLoad() {</span></span>
-<span class="line"><span>    WebDriverWait wait = new WebDriverWait(driver, WAIT_SECONDS);</span></span>
-<span class="line"><span>    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("test-progress-indicator")));</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>private void initializeTracer() {</span></span>
-<span class="line"><span>    JaegerGrpcSpanExporter exporter = JaegerGrpcSpanExporter.builder().setEndpoint(JAEGER_GRPC_URL).build();</span></span>
-<span class="line"><span>    Resource resource = Resource.builder()</span></span>
-<span class="line"><span>            .put("service.name", "selenium-tests")</span></span>
-<span class="line"><span>            .build();</span></span>
-<span class="line"><span>    SdkTracerProvider provider = SdkTracerProvider.builder()</span></span>
-<span class="line"><span>            .addSpanProcessor(SimpleSpanProcessor.create(exporter))</span></span>
-<span class="line"><span>            .setResource(resource)</span></span>
-<span class="line"><span>            .build();</span></span>
-<span class="line"><span>    OpenTelemetrySdk openTelemetrySdk = OpenTelemetrySdk.builder()</span></span>
-<span class="line"><span>            .setTracerProvider(provider)</span></span>
-<span class="line"><span>            .build();</span></span>
-<span class="line"><span>    tracer = openTelemetrySdk.getTracer("io.opentelemetry.jaeger.exporter");</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>private Span createChildSpan(String name) {</span></span>
-<span class="line"><span>    Span span = tracer.spanBuilder(name)</span></span>
-<span class="line"><span>            .setParent(Context.current().with(currentSpan))</span></span>
-<span class="line"><span>            .startSpan();</span></span>
-<span class="line"><span>    setCurrentSpan(span);</span></span>
-<span class="line"><span>    return span;</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>private void setCurrentSpan(Span span) {</span></span>
-<span class="line"><span>    currentSpan = span;</span></span>
-<span class="line"><span>    OpenTelemetryTracer.getInstance().setOpenTelemetryContext(Context.current().with(span));</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>private void createBrowserBindingSpan(Span span) {</span></span>
-<span class="line"><span>    executeJavaScript("window.startBindingSpan('"</span></span>
-<span class="line"><span>            + span.getSpanContext().getTraceId() + "', '"</span></span>
-<span class="line"><span>            + span.getSpanContext().getSpanId() + "', '"</span></span>
-<span class="line"><span>            + span.getSpanContext().getTraceFlags().asHex() + "')");</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>private void forceFlushTraces() {</span></span>
-<span class="line"><span>    executeJavaScript("if (window.flushTraces) window.flushTraces()");</span></span>
-<span class="line"><span>    try {</span></span>
-<span class="line"><span>        Thread.sleep(1000);</span></span>
-<span class="line"><span>    } catch (InterruptedException e) {</span></span>
-<span class="line"><span>        // Do nothing</span></span>
-<span class="line"><span>    }</span></span>
-<span class="line"><span>}</span></span></code></pre>
-</code><p><code>}
-</code></p></pre><p></p>
+<span class="line"><span></span></span></code></pre>
 <h3>End-to-end traces in Jaeger</h3>
 <a href="/images/2021/10/Selenium-Observability-Jaeger-trace.png"><img src="/images/2021/10/Selenium-Observability-Jaeger-trace.png"></a>
 <p>In case of error, this is also recorded.</p>
@@ -245,6 +252,6 @@ import java.util.List;</p>
 In an ideal world, I would like to make my custom Span parent of the default Selenium tracing spans, so I can attach the debug information to the custom tracing information. I was not able to do this. I have raised an issue with Selenium, <a href="https://github.com/SeleniumHQ/selenium/issues/9943" target="_blank" rel="noopener">OpenTelementry tracing: be able to link the default tracing with a custom tracing</a>. I contributed to Selenium by adding this possibility to link Selenium traces to the custom traces. This is done with the following code <em><strong>OpenTelemetryTracer.getInstance().setOpenTelemetryContext(Context.current().with(span))</strong></em>. Finally, the full tracing looks as shown on the image:
 <p><a href="/images/2021/10/Selenium-Observability-Selenium-trace-webdriver.png"><img src="/images/2021/10/Selenium-Observability-Selenium-trace-webdriver.png"></a></p>
 <h2>Conclusion</h2>
-The out-of-the-box Selenium observability is useful to trace what is happening in a complex grid. It does not give the possibility to trace tests performance and how test steps are affecting the application itself. In the current post, I have described a way to create a custom tracing, which provides end-to-end traceability from the tests down to the database calls. This approach gives the flexibility to be customized for different needs. It involves changes in the application's frontend code though, which involves the application architecture topic in the discussions.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+The out-of-the-box Selenium observability is useful to trace what is happening in a complex grid. It does not give the possibility to trace tests performance and how test steps are affecting the application itself. In the current post, I have described a way to create a custom tracing, which provides end-to-end traceability from the tests down to the database calls. This approach gives the flexibility to be customized for different needs. It involves changes in the application's frontend code though, which involves the application architecture topic in the discussions.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/distributed-system-observability-complete-end-to-end-example-with-opentracing-jaeger-prometheus-grafana-spring-boot-react-and-selenium/" data-astro-cid-bvzihdzo>Distributed system observability: complete end-to-end example with OpenTracing, Jaeger, Prometheus, Grafana, Spring Boot, React and Selenium</a> </li><li data-astro-cid-bvzihdzo> <a href="/distributed-system-observability-instrument-cypress-tests-with-opentelemetry/" data-astro-cid-bvzihdzo>Distributed system observability: Instrument Cypress tests with OpenTelemetry</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/opentelemetry" data-astro-cid-bvzihdzo>OpenTelemetry</a><a href="/tags/selenium-webdriver" data-astro-cid-bvzihdzo>Selenium WebDriver</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a><a href="/tags/web-automation" data-astro-cid-bvzihdzo>Web Automation</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

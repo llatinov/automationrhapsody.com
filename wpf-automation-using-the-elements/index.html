@@ -1,197 +1,196 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/wpf-automation-using-the-elements/"><!-- Primary Meta Tags --><title>WPF automation - using the elements</title><meta name="title" content="WPF automation - using the elements"><meta name="description" content="Use already created Page Objects and build up test framework."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/wpf-automation-using-the-elements/"><meta property="og:title" content="WPF automation - using the elements"><meta property="og:description" content="Use already created Page Objects and build up test framework."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/wpf-automation-using-the-elements/"><meta property="twitter:title" content="WPF automation - using the elements"><meta property="twitter:description" content="Use already created Page Objects and build up test framework."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-02-17T00:00:00.000Z"> Feb 17, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>WPF automation - using the elements</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>References</h2>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/wpf-automation-using-the-elements/"><!-- Primary Meta Tags --><title>WPF automation - using the elements</title><meta name="title" content="WPF automation - using the elements"><meta name="description" content="Use already created Page Objects and build up test framework."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/wpf-automation-using-the-elements/"><meta property="og:title" content="WPF automation - using the elements"><meta property="og:description" content="Use already created Page Objects and build up test framework."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/wpf-automation-using-the-elements/"><meta property="twitter:title" content="WPF automation - using the elements"><meta property="twitter:description" content="Use already created Page Objects and build up test framework."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>WPF automation - using the elements</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-02-17T00:00:00.000Z"> Feb 17, 2015 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <h2>References</h2>
 This post is part of <a title="Automation of WPF applications" href="/automation-of-wpf-applications/">Automation of WPF applications</a> with Telerik Testing Framework and TestStack White series. The sample application can be found in GitHub <a href="https://github.com/llatinov/SampleApp" target="_blank" rel="noopener noreferrer">SampleApp</a> repository.
 <h2>Page Objects holder</h2>
 Below is App.cs which is a representation of application under test.
-<pre class="language-csharp"><code>using ArtOfTest.WebAii.Wpf;
-using White.Core;
-using White.Core.UIItems.WindowItems;
-
-namespace SampleApp.Tests.Framework.Elements
-{
-	public class App
-	{
-		public WpfApplication ApplicationWebAii { get; private set; }
-		public Application ApplicationWhite { get; private set; }
-
-		public App(WpfApplication webAiiApp, Application whiteApp)
-		{
-			ApplicationWebAii = webAiiApp;
-			ApplicationWhite = whiteApp;
-		}
-
-		public MainWindow MainWindow
-		{
-			get
-			{
-				return new MainWindow(ApplicationWebAii
-					.WaitForWindow(MainWindow.WINDOW_NAME).Find);
-			}
-		}
-
-		public OpenFile OpenFile
-		{
-			get
-			{
-				return new OpenFile(GetWindowByName("Open"));
-			}
-		}
-
-		public MessageBox MessageBox
-		{
-			get
-			{
-				return new MessageBox(GetWindowByName(""));
-			}
-		}
-
-		private Window GetWindowByName(string windowName)
-		{
-			// Workaround as method GetWindow(string title) is not working
-			foreach (Window window in ApplicationWhite.GetWindows())
-			{
-				if (windowName.Equals(window.Name))
-				{
-					return window;
-				}
-			}
-			return null;
-		}
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using ArtOfTest.WebAii.Wpf;</span></span>
+<span class="line"><span>using White.Core;</span></span>
+<span class="line"><span>using White.Core.UIItems.WindowItems;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleApp.Tests.Framework.Elements</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class App</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        public WpfApplication ApplicationWebAii { get; private set; }</span></span>
+<span class="line"><span>        public Application ApplicationWhite { get; private set; }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public App(WpfApplication webAiiApp, Application whiteApp)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            ApplicationWebAii = webAiiApp;</span></span>
+<span class="line"><span>            ApplicationWhite = whiteApp;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public MainWindow MainWindow</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            get</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                return new MainWindow(ApplicationWebAii</span></span>
+<span class="line"><span>                    .WaitForWindow(MainWindow.WINDOW_NAME).Find);</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public OpenFile OpenFile</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            get</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                return new OpenFile(GetWindowByName("Open"));</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public MessageBox MessageBox</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            get</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                return new MessageBox(GetWindowByName(""));</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        private Window GetWindowByName(string windowName)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            // Workaround as method GetWindow(string title) is not working</span></span>
+<span class="line"><span>            foreach (Window window in ApplicationWhite.GetWindows())</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                if (windowName.Equals(window.Name))</span></span>
+<span class="line"><span>                {</span></span>
+<span class="line"><span>                    return window;</span></span>
+<span class="line"><span>                }</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>            return null;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>The constructor takes an instance of Telerik Testing Framework’s application (WpfApplication) and TestStack White’s application (Application). Those are stored in the App instance.</p>
 <h2>Access the Page Objects</h2>
 Each window in a real application is represented by a property in the App class. When accessed a new object of this page object class is created and its elements can be accessed.
 <p>WPF page objects require VisualFind in order to be instantiated. It is obtained by first locating the window with Telerik’s</p>
-<pre class="language-csharp"><code>public WpfWindow WaitForWindow(string caption);
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public WpfWindow WaitForWindow(string caption);</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>From the located window we need only the VisualFind which is used internally to locate elements on that particular window.</p>
 <p>WinForms page objects require White’s Window instance in order to be instantiated. The window is located by</p>
-<pre class="language-csharp"><code>public virtual Window GetWindow(string title);
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public virtual Window GetWindow(string title);</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>I found this method not always working so I’ve made a workaround method</p>
-<pre class="language-csharp"><code>private Window GetWindowByName(string windowName);
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private Window GetWindowByName(string windowName);</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>New Page Objects vs. Cached Page Objects</h2>
 In the example above every time, an action is required a new page object is instantiated. In some cases instantiating the object may require longer time or you might need some properties in this object preserved during tests. In such cases, you may use <a title="Singleton pattern" href="/singleton-and-null-object-patterns/">Singleton design</a> pattern and instantiate only one object.
-<pre class="language-csharp"><code>private MessageBox messageBox = null;
-public MessageBox MessageBox
-{
-	get
-	{
-		if (messageBox == null)
-		{
-			messageBox = new MessageBox(GetWindowByName(""));
-		}
-		return messageBox;
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private MessageBox messageBox = null;</span></span>
+<span class="line"><span>public MessageBox MessageBox</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    get</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        if (messageBox == null)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            messageBox = new MessageBox(GetWindowByName(""));</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        return messageBox;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Both approaches have pros and cons. In case of new page object, you always work with a fresh instance without any previous state saved. This might require more time to instantiate the objects and you are not able to save previous states. Cached objects may be much faster as a performance but having internal state may lead to unexpected bugs in your automation.</p>
 <h2>Base test</h2>
 Finally to make all work we need an instance of App. The instance is created in BaseTest.cs class.
-<pre class="language-csharp"><code>using ArtOfTest.WebAii.Core;
-using SampleApp.Tests.Framework.Elements;
-using White.Core;
-
-namespace SampleApp.Tests.Framework.Tests
-{
-	public class BaseTest
-	{
-		protected App App { get; set; }
-		private string applicationPath =
-			"C:\\SampleApp\\SampleApp\\bin\\Debug\\SampleApp.exe";
-
-		protected void Start()
-		{
-			if (App == null)
-			{
-				Application appWhite = Application.Launch(applicationPath);
-				Manager manager = new Manager(false);
-				manager.Start();
-				App = new App(
-					manager.ConnectToApplication(appWhite.Process), appWhite);
-			}
-		}
-
-		protected void Stop()
-		{
-			if (App != null &#x26;&#x26; App.ApplicationWhite != null)
-			{
-				App.ApplicationWhite.Kill();
-			}
-			App = null;
-		}
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using ArtOfTest.WebAii.Core;</span></span>
+<span class="line"><span>using SampleApp.Tests.Framework.Elements;</span></span>
+<span class="line"><span>using White.Core;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleApp.Tests.Framework.Tests</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class BaseTest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        protected App App { get; set; }</span></span>
+<span class="line"><span>        private string applicationPath =</span></span>
+<span class="line"><span>            "C:\\SampleApp\\SampleApp\\bin\\Debug\\SampleApp.exe";</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        protected void Start()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            if (App == null)</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                Application appWhite = Application.Launch(applicationPath);</span></span>
+<span class="line"><span>                Manager manager = new Manager(false);</span></span>
+<span class="line"><span>                manager.Start();</span></span>
+<span class="line"><span>                App = new App(</span></span>
+<span class="line"><span>                    manager.ConnectToApplication(appWhite.Process), appWhite);</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        protected void Stop()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            if (App != null &#x26;&#x26; App.ApplicationWhite != null)</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                App.ApplicationWhite.Kill();</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>            App = null;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>All tests inherit from the base test class. Initialise and clean up code is added in the base test. In our case Start() method is the initializer. It must be called in order to instantiate App class. App property is protected so every extending class has access to it.</p>
 <h2>Initialise the frameworks</h2>
 In order to start the application under test, we need the full path to the exe file. In this example, this is hardcoded but in real life, it will be configurable. Start the application with White:
-<pre class="language-csharp"><code>public static Application Launch(string executable);
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static Application Launch(string executable);</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Once started then connect to it with Telerik framework by creating a Manager and use its</p>
-<pre class="language-csharp"><code>public WpfApplication ConnectToApplication(Process proc, string pid = null);
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public WpfApplication ConnectToApplication(Process proc, string pid = null);</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>The process is obtained out of <em><strong>White Application.Process</strong></em> property. Opposite launch order is not working. White is not able to Attach to running process.</p>
 <h2>Use page objects</h2>
 Once <em><strong>Start()</strong></em> method is called, the application under test is started and both frameworks are connected to it you can simply do in your test:
-<pre class="language-csharp"><code>App.MainWindow.ClickBrowseButton();
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>App.MainWindow.ClickBrowseButton();</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>This will find and create a new instance of <em><strong>MainWindow</strong></em> and then it will find and click Browse button. Your framework defines the actions on elements which are later used in actual tests. Once all the work on framework has been done it is that simple to build your tests.</p>
 <h2>Clean up</h2>
 <em><strong>Stop()</strong></em> method is called at the end of the test in order to close the application under test by killing the underlying process.
 <h2>The tests</h2>
 This is unit test created with MS <a title="MS Unit Testing Framework" href="https://docs.microsoft.com/en-us/visualstudio/test/unit-test-your-code?view=vs-2019" target="_blank" rel="noopener noreferrer">Unit Testing Framework</a> in order to demonstrate real testing on the application.
-<pre class="language-csharp"><code>using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SampleApp.Tests.Framework.Tests;
-
-namespace SampleApp.Tests
-{
-    [TestClass]
-    public class UnitTest1 : BaseTest
-    {
-		[TestInitialize]
-		public void Initialise()
-		{
-			Start();
-		}
-
-		[TestMethod]
-		public void OpenFile_OnCancel_GivesMessage()
-		{
-			App.MainWindow.ClickBrowseButton();
-			App.OpenFile.ClickCancelButton();
-			Assert.AreEqual("Problem occured, try again later",
-				App.MessageBox.GetText());
-			App.MessageBox.ClickOkButton();
-		}
-
-		[TestMethod]
-		public void OpenFile_OnAttachFile_GivesMessageAndFileIsShown()
-		{
-			string filePath = @"C:\SampleApp\SampleApp\bin\Debug\HappyFace.jpg";
-			App.MainWindow.ClickBrowseButton();
-			App.OpenFile.EnterFileName(filePath);
-			App.OpenFile.ClickOpenButton();
-			Assert.AreEqual("Successfully done", App.MessageBox.GetText());
-			App.MessageBox.ClickOkButton();
-			Assert.AreEqual(filePath, App.MainWindow.GetFilePathAtIndex(1));
-		}
-
-		[TestCleanup]
-		public void CleanUp()
-		{
-			Stop();
-		}
-    }
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using Microsoft.VisualStudio.TestTools.UnitTesting;</span></span>
+<span class="line"><span>using SampleApp.Tests.Framework.Tests;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleApp.Tests</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    [TestClass]</span></span>
+<span class="line"><span>    public class UnitTest1 : BaseTest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        [TestInitialize]</span></span>
+<span class="line"><span>        public void Initialise()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            Start();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [TestMethod]</span></span>
+<span class="line"><span>        public void OpenFile_OnCancel_GivesMessage()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            App.MainWindow.ClickBrowseButton();</span></span>
+<span class="line"><span>            App.OpenFile.ClickCancelButton();</span></span>
+<span class="line"><span>            Assert.AreEqual("Problem occured, try again later",</span></span>
+<span class="line"><span>                App.MessageBox.GetText());</span></span>
+<span class="line"><span>            App.MessageBox.ClickOkButton();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [TestMethod]</span></span>
+<span class="line"><span>        public void OpenFile_OnAttachFile_GivesMessageAndFileIsShown()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            string filePath = @"C:\SampleApp\SampleApp\bin\Debug\HappyFace.jpg";</span></span>
+<span class="line"><span>            App.MainWindow.ClickBrowseButton();</span></span>
+<span class="line"><span>            App.OpenFile.EnterFileName(filePath);</span></span>
+<span class="line"><span>            App.OpenFile.ClickOpenButton();</span></span>
+<span class="line"><span>            Assert.AreEqual("Successfully done", App.MessageBox.GetText());</span></span>
+<span class="line"><span>            App.MessageBox.ClickOkButton();</span></span>
+<span class="line"><span>            Assert.AreEqual(filePath, App.MainWindow.GetFilePathAtIndex(1));</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [TestCleanup]</span></span>
+<span class="line"><span>        public void CleanUp()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            Stop();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Unit testing frameworks</h2>
 Unit testing frameworks are designed to run tests in random order. Before each test method annotated with [TestInitialize] is run. In our case application is started. After each test method annotated with [TestCleanup] is run. In our case application is stopped. For this simple application running tests with a unit testing framework is OK. We are not doing unit tests but functional once. So for bigger and more complex tests unit testing frameworks are not very convenient. I've created very simple tests runner. This post <a title="Running functional automated tests" href="/running-functional-automation-tests/">describing the need of such tests runner</a>.
-<p>This post shows how to build up the framework based on page objects. Next post is <a title="WPF automation - running the tests" href="/wpf-automation-running-the-tests/">WPF automation – running the tests</a>.</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+<p>This post shows how to build up the framework based on page objects. Next post is <a title="WPF automation - running the tests" href="/wpf-automation-running-the-tests/">WPF automation – running the tests</a>.</p>  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/automation-of-wpf-applications/" data-astro-cid-bvzihdzo>Automation of WPF applications</a> </li><li data-astro-cid-bvzihdzo> <a href="/singleton-and-null-object-patterns/" data-astro-cid-bvzihdzo>Singleton and Null object patterns</a> </li><li data-astro-cid-bvzihdzo> <a href="/running-functional-automation-tests/" data-astro-cid-bvzihdzo>Running functional automation tests</a> </li><li data-astro-cid-bvzihdzo> <a href="/wpf-automation-running-the-tests/" data-astro-cid-bvzihdzo>WPF automation - running the tests</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a><a href="/tags/desktop-automation" data-astro-cid-bvzihdzo>Desktop Automation</a><a href="/tags/telerik-testing-framework" data-astro-cid-bvzihdzo>Telerik Testing Framework</a><a href="/tags/teststack-white" data-astro-cid-bvzihdzo>TestStack White</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

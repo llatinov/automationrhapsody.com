@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/intellij-idea-tostring-templates-for-json-output/"><!-- Primary Meta Tags --><title>IntelliJ IDEA toString templates for JSON output</title><meta name="title" content="IntelliJ IDEA toString templates for JSON output"><meta name="description" content="Templates to be applied to IntelliJ IDEA for automatic generation of toString() method that outputs the object in JSON format."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/intellij-idea-tostring-templates-for-json-output/"><meta property="og:title" content="IntelliJ IDEA toString templates for JSON output"><meta property="og:description" content="Templates to be applied to IntelliJ IDEA for automatic generation of toString() method that outputs the object in JSON format."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/intellij-idea-tostring-templates-for-json-output/"><meta property="twitter:title" content="IntelliJ IDEA toString templates for JSON output"><meta property="twitter:description" content="Templates to be applied to IntelliJ IDEA for automatic generation of toString() method that outputs the object in JSON format."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-11-18T00:00:00.000Z"> Nov 18, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>IntelliJ IDEA toString templates for JSON output</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>In some situations like APIs testing, it is good to be able to output requests and responses into log files for easy debugging. In some cases you might work with some framework that receives an object and sends it to the wire, receives the response and give you back object without having the possibility to output the data being sent or received. What you can do is print your request/response objects to logs.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/intellij-idea-tostring-templates-for-json-output/"><!-- Primary Meta Tags --><title>IntelliJ IDEA toString templates for JSON output</title><meta name="title" content="IntelliJ IDEA toString templates for JSON output"><meta name="description" content="Templates to be applied to IntelliJ IDEA for automatic generation of toString() method that outputs the object in JSON format."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/intellij-idea-tostring-templates-for-json-output/"><meta property="og:title" content="IntelliJ IDEA toString templates for JSON output"><meta property="og:description" content="Templates to be applied to IntelliJ IDEA for automatic generation of toString() method that outputs the object in JSON format."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/intellij-idea-tostring-templates-for-json-output/"><meta property="twitter:title" content="IntelliJ IDEA toString templates for JSON output"><meta property="twitter:description" content="Templates to be applied to IntelliJ IDEA for automatic generation of toString() method that outputs the object in JSON format."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>IntelliJ IDEA toString templates for JSON output</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-11-18T00:00:00.000Z"> Nov 18, 2015 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>In some situations like APIs testing, it is good to be able to output requests and responses into log files for easy debugging. In some cases you might work with some framework that receives an object and sends it to the wire, receives the response and give you back object without having the possibility to output the data being sent or received. What you can do is print your request/response objects to logs.</p>
 <h2>Override toString() method</h2>
 In order to print essential information from your object, it should properly override toString() method. Default Object.toString() prints full class name with memory address. This gives no information whatsoever. Overriding toString() by hand is not a really good idea as in case of API you have lots of objects.
 <h2>IntelliJ IDEA toString() automatic generation</h2>
@@ -15,71 +14,71 @@ IntelliJ IDEA comes with several predefined templates but none of them can print
 <a href="https://checkstyle.sourceforge.io/" target="_blank" rel="noopener noreferrer">Checkstyle</a> does static code analysis to verify Java code conforms to specific rules. It has <a href="https://checkstyle.sourceforge.io/apidocs/com/puppycrawl/tools/checkstyle/checks/whitespace/OperatorWrapCheck.html" target="_blank" rel="noopener noreferrer">OperatorWrapCheck</a> which requires all operators to be at the beginning of the line. Templates below are created according to this rule. In case plus sign is required to be at the end of the line this can be very easily changed in templates.
 <h2>JSON toString() template</h2>
 Below is a toString() template that print object to a valid JSON. It doesn't include super.toString() method if current class has superclass.
-<pre class="language-text"><code>public java.lang.String toString() {
-#if ( $members.size() > 0 )
-#set ( $i = 0 )
-return "{\"$classname\":{"
-#foreach( $member in $members )
-#if ( $i == 0 )
-+ "##
-#else
-+ ", ##
-#end
-#if ( $member.array )
-\"$member.name\":" + java.util.Arrays.toString($member.accessor)
-#elseif ( $member.string || $member.primitive || $member.numeric || $member.boolean || $member.enum )
-\"$member.name\":\"" + $member.accessor + "\""
-#else
-\"$member.name\":" + $member.accessor
-#end
-#set ( $i = $i + 1 )
-#end
-+ "}}";
-#else
-return "{$classname}";
-#end
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public java.lang.String toString() {</span></span>
+<span class="line"><span>#if ( $members.size() > 0 )</span></span>
+<span class="line"><span>#set ( $i = 0 )</span></span>
+<span class="line"><span>return "{\"$classname\":{"</span></span>
+<span class="line"><span>#foreach( $member in $members )</span></span>
+<span class="line"><span>#if ( $i == 0 )</span></span>
+<span class="line"><span>+ "##</span></span>
+<span class="line"><span>#else</span></span>
+<span class="line"><span>+ ", ##</span></span>
+<span class="line"><span>#end</span></span>
+<span class="line"><span>#if ( $member.array )</span></span>
+<span class="line"><span>\"$member.name\":" + java.util.Arrays.toString($member.accessor)</span></span>
+<span class="line"><span>#elseif ( $member.string || $member.primitive || $member.numeric || $member.boolean || $member.enum )</span></span>
+<span class="line"><span>\"$member.name\":\"" + $member.accessor + "\""</span></span>
+<span class="line"><span>#else</span></span>
+<span class="line"><span>\"$member.name\":" + $member.accessor</span></span>
+<span class="line"><span>#end</span></span>
+<span class="line"><span>#set ( $i = $i + 1 )</span></span>
+<span class="line"><span>#end</span></span>
+<span class="line"><span>+ "}}";</span></span>
+<span class="line"><span>#else</span></span>
+<span class="line"><span>return "{$classname}";</span></span>
+<span class="line"><span>#end</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>JSON toString() template with super.toString() included</h2>
 Below is a toString() template that print object to a valid JSON. It includes super.toString() method only if current class has super class.
-<pre class="language-text"><code>public java.lang.String toString() {
-#if ( $members.size() > 0 )
-#set ( $i = 0 )
-#if ( $class.hasSuper )
-#set ( $i = $i + 1 )
-return "{\"$classname\":"
-+ super.toString()
-#else
-return "{\"$classname\":{"
-#end
-#foreach( $member in $members )
-#if ( $i == 0 )
-+ "##
-#else
-+ ", ##
-#end
-#if ( $member.array )
-\"$member.name\":" + java.util.Arrays.toString($member.accessor)
-#elseif ( $member.string || $member.primitive || $member.numeric || $member.boolean || $member.enum )
-\"$member.name\":\"" + $member.accessor + "\""
-#else
-\"$member.name\":" + $member.accessor
-#end
-#set ( $i = $i + 1 )
-#end
-#if ( $class.hasSuper )
-+ "}";
-#else
-+ "}}";
-#end
-#else
-return "{$classname}";
-#end
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public java.lang.String toString() {</span></span>
+<span class="line"><span>#if ( $members.size() > 0 )</span></span>
+<span class="line"><span>#set ( $i = 0 )</span></span>
+<span class="line"><span>#if ( $class.hasSuper )</span></span>
+<span class="line"><span>#set ( $i = $i + 1 )</span></span>
+<span class="line"><span>return "{\"$classname\":"</span></span>
+<span class="line"><span>+ super.toString()</span></span>
+<span class="line"><span>#else</span></span>
+<span class="line"><span>return "{\"$classname\":{"</span></span>
+<span class="line"><span>#end</span></span>
+<span class="line"><span>#foreach( $member in $members )</span></span>
+<span class="line"><span>#if ( $i == 0 )</span></span>
+<span class="line"><span>+ "##</span></span>
+<span class="line"><span>#else</span></span>
+<span class="line"><span>+ ", ##</span></span>
+<span class="line"><span>#end</span></span>
+<span class="line"><span>#if ( $member.array )</span></span>
+<span class="line"><span>\"$member.name\":" + java.util.Arrays.toString($member.accessor)</span></span>
+<span class="line"><span>#elseif ( $member.string || $member.primitive || $member.numeric || $member.boolean || $member.enum )</span></span>
+<span class="line"><span>\"$member.name\":\"" + $member.accessor + "\""</span></span>
+<span class="line"><span>#else</span></span>
+<span class="line"><span>\"$member.name\":" + $member.accessor</span></span>
+<span class="line"><span>#end</span></span>
+<span class="line"><span>#set ( $i = $i + 1 )</span></span>
+<span class="line"><span>#end</span></span>
+<span class="line"><span>#if ( $class.hasSuper )</span></span>
+<span class="line"><span>+ "}";</span></span>
+<span class="line"><span>#else</span></span>
+<span class="line"><span>+ "}}";</span></span>
+<span class="line"><span>#end</span></span>
+<span class="line"><span>#else</span></span>
+<span class="line"><span>return "{$classname}";</span></span>
+<span class="line"><span>#end</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Template notation</h2>
 Template engine uses Apache Velocity. There are a lot of variables that you can use. List of these is shown on <a href="https://www.jetbrains.com/help/idea/generate-tostring-settings-dialog.html" target="_blank" rel="noopener noreferrer">Generate toString Setting Dialog page</a>.
 <h2>Conclusion</h2>
-This is a handy feature that IntelliJ IDEA provides. Hope you can make use of it.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+This is a handy feature that IntelliJ IDEA provides. Hope you can make use of it.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/intellij-idea-keyboard-combinations/" data-astro-cid-bvzihdzo>IntelliJ IDEA keyboard combinations</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/intellij-idea" data-astro-cid-bvzihdzo>IntelliJ IDEA</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

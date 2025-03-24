@@ -1,319 +1,330 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-basic-dynamodb-operations/"><!-- Primary Meta Tags --><title>AWS examples in C# - basic DynamoDB operations</title><meta name="title" content="AWS examples in C# - basic DynamoDB operations"><meta name="description" content="Code examples with DynamoDB write and read operations."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-basic-dynamodb-operations/"><meta property="og:title" content="AWS examples in C# - basic DynamoDB operations"><meta property="og:description" content="Code examples with DynamoDB write and read operations."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-basic-dynamodb-operations/"><meta property="twitter:title" content="AWS examples in C# - basic DynamoDB operations"><meta property="twitter:description" content="Code examples with DynamoDB write and read operations."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-03-07T00:00:00.000Z"> Mar 7, 2020 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - basic DynamoDB operations</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository. In the current post, I give practical code examples of how to work with DynamoDB.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-basic-dynamodb-operations/"><!-- Primary Meta Tags --><title>AWS examples in C# - basic DynamoDB operations</title><meta name="title" content="AWS examples in C# - basic DynamoDB operations"><meta name="description" content="Code examples with DynamoDB write and read operations."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-basic-dynamodb-operations/"><meta property="og:title" content="AWS examples in C# - basic DynamoDB operations"><meta property="og:description" content="Code examples with DynamoDB write and read operations."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-basic-dynamodb-operations/"><meta property="twitter:title" content="AWS examples in C# - basic DynamoDB operations"><meta property="twitter:description" content="Code examples with DynamoDB write and read operations."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - basic DynamoDB operations</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-03-07T00:00:00.000Z"> Mar 7, 2020 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository. In the current post, I give practical code examples of how to work with DynamoDB.</p>
 <h2>Instantiate Amazon DynamoDB client</h2>
-In the current examples, in <a href="https://github.com/llatinov/aws.examples.csharp/tree/master/SqsReader" target="_blank" rel="noopener noreferrer">SqsReader project</a>, a configuration class called <em><strong>AppConfig</strong></em> is used. Its values are injected from the environment variables by .NET Core framework in <em><strong>Startup</strong></em> class. In order to work with DynamoDB, a client is needed. The DynamoDB client interface is called <em><strong>IAmazonDynamoDB</strong></em> and comes from <em><strong>AWS C# SDK</strong></em>. The NuGet package is called <em><strong>AWSSDK.DynamoDBv2</strong></em>. The concrete AWS client implementation is <em><strong>AmazonDynamoDBClient</strong></em> and an object is instantiated in <em><strong>DynamoDbClientFactory</strong></em> class and used as a singleton. <em><strong>RegionEndpoint</strong></em> is used to instantiate <em><strong>AmazonDynamoDBConfig</strong></em>. <em><strong>AwsCredentials</strong></em> class extends the AWS’ abstract <em><strong>AWSCredentials</strong></em> and is used in order to manage the credentials. [tabby title="DynamoDbClientFactory.cs"]
-<pre class="language-csharp"><code>public static AmazonDynamoDBClient CreateClient(AppConfig appConfig)
-{
-	var dynamoDbConfig = new AmazonDynamoDBConfig
-	{
-		RegionEndpoint = RegionEndpoint.GetBySystemName(appConfig.AwsRegion)
-	};
-	var awsCredentials = new AwsCredentials(appConfig);
-	return new AmazonDynamoDBClient(awsCredentials, dynamoDbConfig);
-}
-</code></pre>
-[tabby title="AwsCredentials.cs"]
-<pre class="language-csharp"><code>public class AwsCredentials : AWSCredentials
-{
-	private readonly AppConfig _appConfig;
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public AwsCredentials(AppConfig appConfig)</span></span>
+In the current examples, in <a href="https://github.com/llatinov/aws.examples.csharp/tree/master/SqsReader" target="_blank" rel="noopener noreferrer">SqsReader project</a>, a configuration class called <em><strong>AppConfig</strong></em> is used. Its values are injected from the environment variables by .NET Core framework in <em><strong>Startup</strong></em> class. In order to work with DynamoDB, a client is needed. The DynamoDB client interface is called <em><strong>IAmazonDynamoDB</strong></em> and comes from <em><strong>AWS C# SDK</strong></em>. The NuGet package is called <em><strong>AWSSDK.DynamoDBv2</strong></em>. The concrete AWS client implementation is <em><strong>AmazonDynamoDBClient</strong></em> and an object is instantiated in <em><strong>DynamoDbClientFactory</strong></em> class and used as a singleton. <em><strong>RegionEndpoint</strong></em> is used to instantiate <em><strong>AmazonDynamoDBConfig</strong></em>. <em><strong>AwsCredentials</strong></em> class extends the AWS’ abstract <em><strong>AWSCredentials</strong></em> and is used in order to manage the credentials. <div class="tab"><button id="1703-DynamoDbClientFactory.cs" class="tablinks active" onclick="openTab(this, &#x27;content-1703-DynamoDbClientFactory.cs&#x27;, &#x27;1703&#x27;)">DynamoDbClientFactory.cs</button>
+<button id="1703-AwsCredentials.cs" class="tablinks" onclick="openTab(this, &#x27;content-1703-AwsCredentials.cs&#x27;, &#x27;1703&#x27;)">AwsCredentials.cs</button>
+<button id="1703-AppConfig.cs" class="tablinks" onclick="openTab(this, &#x27;content-1703-AppConfig.cs&#x27;, &#x27;1703&#x27;)">AppConfig.cs</button></div>
+<div id="content-1703-DynamoDbClientFactory.cs" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static AmazonDynamoDBClient CreateClient(AppConfig appConfig)</span></span>
 <span class="line"><span>{</span></span>
-<span class="line"><span>	_appConfig = appConfig;</span></span>
+<span class="line"><span>    var dynamoDbConfig = new AmazonDynamoDBConfig</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        RegionEndpoint = RegionEndpoint.GetBySystemName(appConfig.AwsRegion)</span></span>
+<span class="line"><span>    };</span></span>
+<span class="line"><span>    var awsCredentials = new AwsCredentials(appConfig);</span></span>
+<span class="line"><span>    return new AmazonDynamoDBClient(awsCredentials, dynamoDbConfig);</span></span>
 <span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>public override ImmutableCredentials GetCredentials()</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-1703-AwsCredentials.cs" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class AwsCredentials : AWSCredentials</span></span>
 <span class="line"><span>{</span></span>
-<span class="line"><span>	return new ImmutableCredentials(_appConfig.AwsAccessKey,</span></span>
-<span class="line"><span>					_appConfig.AwsSecretKey, null);</span></span>
-<span class="line"><span>}</span></span></code></pre>
-</code><p><code>}
-</code></p></pre>
-[tabby title=“AppConfig.cs”]<p></p>
-<pre class="language-csharp"><code>public class AppConfig
-{
-	public string AwsRegion { get; set; }
-	public string AwsAccessKey { get; set; }
-	public string AwsSecretKey { get; set; }
-}
-</code></pre>
-<p>[tabbyending]</p>
+<span class="line"><span>    private readonly AppConfig _appConfig;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public AwsCredentials(AppConfig appConfig)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        _appConfig = appConfig;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public override ImmutableCredentials GetCredentials()</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        return new ImmutableCredentials(_appConfig.AwsAccessKey,</span></span>
+<span class="line"><span>                        _appConfig.AwsSecretKey, null);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-1703-AppConfig.cs" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class AppConfig</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public string AwsRegion { get; set; }</span></span>
+<span class="line"><span>    public string AwsAccessKey { get; set; }</span></span>
+<span class="line"><span>    public string AwsSecretKey { get; set; }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Creating tables</h2>
 <em><strong>DatabaseClient</strong></em> class that uses and exposes just a few methods of <em><strong>IAmazonDynamoDB</strong></em> is custom created. It checks if the table is created and if it is not, then it creates the table. Afterward, it waits for the table to become in status <em><strong>ACTIVE</strong></em>. <em><strong>Movies</strong></em> and <em><strong>Actors</strong></em> tables creation is done in separate classes with <em><strong>CreateTableRequest</strong></em>, which needs the table name. <em><strong>KeySchema</strong></em> specifies the attributes that build the primary key for a table or an index. The attributes must also be defined in the <em><strong>AttributeDefinitions</strong></em> list. <em><strong>KeyType</strong></em> has two possible values - <em><strong>HASH</strong></em> and <em><strong>RANGE</strong></em>. In the case of the Movies table, there is only a HASH key, which is always mandatory and unique, this means no two items can have the same partition key value, the second insert overwrites the first one. In the case of the Actors table, along with the <em><strong>partition key</strong></em>, there is also a <em><strong>sort key</strong></em> with <em><strong>KeyType</strong></em> of <em><strong>RANGE</strong></em> which is complimentary to the <em><strong>HASH</strong></em>. I have not used <em><strong>secondary indexes</strong></em> in the current example, but DynamoDB provides this functionality. They can be defined with <em><strong>GlobalSecondaryIndexes</strong></em> and <em><strong>LocalSecondaryIndexes</strong></em> elements of the CreateTableRequest. A stream is defined with <em><strong>StreamSpecification</strong></em> element in the CreateTableRequest, its <em><strong>StreamViewType</strong></em> is <em><strong>NEW_AND_OLD_IMAGES</strong></em>. This means that in case of add, update or delete, the <em><strong>DynamoDBEvent</strong></em>, which is later used in a lambda, holds both the new values and the old values of the item. <em><strong>ProvisionedThroughput</strong></em> is used to set the read and write capacity mode. In the current example, it is 5 capacity units for reading and the same for writing. The ProvisionedThroughput is needed because the default <em><strong>BillingMode</strong></em> is <em><strong>PROVISIONED</strong></em>. It can be changed to <em><strong>PAY_PER_REQUEST</strong></em> and then ProvisionedThroughput should not be specified. A more detailed explanation of each parameter can be found in <a href="/aws-examples-in-c-create-a-service-working-with-dynamodb/">AWS examples in C# – create a service working with DynamoDB</a> post.
-<p>[tabby title=“MoviesRepository.cs”]</p>
-<pre class="language-csharp"><code>public async Task CreateTableAsync()
-{
-	var request = new CreateTableRequest
-	{
-		TableName = TableName,
-		KeySchema = new List&#x3C;KeySchemaElement>
-		{
-			new KeySchemaElement
-			{
-				AttributeName = "Title",
-				KeyType = "HASH"
-			}
-		},
-		AttributeDefinitions = new List&#x3C;AttributeDefinition>
-		{
-			new AttributeDefinition
-			{
-				AttributeName = "Title",
-				AttributeType = "S"
-			}
-		},
-		ProvisionedThroughput = new ProvisionedThroughput
-		{
-			ReadCapacityUnits = 5,
-			WriteCapacityUnits = 5
-		},
-		StreamSpecification = new StreamSpecification
-		{
-			StreamEnabled = true,
-			StreamViewType = StreamViewType.NEW_AND_OLD_IMAGES
-		}
-	};
-
-	await _client.CreateTableAsync(request);
-}
-</code></pre>
-<p>[tabby title=“ActorsRepository.cs”]</p>
-<pre class="language-csharp"><code>public async Task CreateTableAsync()
-{
-	var request = new CreateTableRequest
-	{
-		TableName = TableName,
-		KeySchema = new List&#x3C;KeySchemaElement>
-		{
-			new KeySchemaElement
-			{
-				AttributeName = "FirstName",
-				KeyType = "HASH"
-			},
-			new KeySchemaElement
-			{
-				AttributeName = "LastName",
-				KeyType = "RANGE"
-			}
-		},
-		AttributeDefinitions = new List&#x3C;AttributeDefinition>
-		{
-		   new AttributeDefinition
-			{
-				AttributeName = "FirstName",
-				AttributeType = "S"
-			},
-			new AttributeDefinition
-			{
-				AttributeName = "LastName",
-				AttributeType = "S"
-			}
-		},
-		ProvisionedThroughput = new ProvisionedThroughput
-		{
-			ReadCapacityUnits = 5,
-			WriteCapacityUnits = 5
-		},
-		StreamSpecification = new StreamSpecification
-		{
-			StreamEnabled = true,
-			StreamViewType = StreamViewType.NEW_AND_OLD_IMAGES
-		}
-	};
-
-	await _client.CreateTableAsync(request);
-}
-</code></pre>
-<p>[tabby title=“DatabaseClient.cs”]</p>
-<pre class="language-csharp"><code>private const string StatusUnknown = "UNKNOWN";
-private const string StatusActive = "ACTIVE";
-
-private readonly IAmazonDynamoDB _client;
-
-public DatabaseClient(IAmazonDynamoDB client)
-{
-	_client = client;
-}
-
-public async Task CreateTableAsync(CreateTableRequest createTableRequest)
-{
-	var status = await GetTableStatusAsync(createTableRequest.TableName);
-	if (status != StatusUnknown)
-	{
-		return;
-	}
-
-	await _client.CreateTableAsync(createTableRequest);
-
-	await WaitUntilTableReady(createTableRequest.TableName);
-}
-
-public async Task PutItemAsync(PutItemRequest putItemRequest)
-{
-	await _client.PutItemAsync(putItemRequest);
-}
-
-private async Task&#x3C;string> GetTableStatusAsync(string tableName)
-{
-	try
-	{
-		var response = await _client.DescribeTableAsync(new DescribeTableRequest
-		{
-			TableName = tableName
-		});
-		return response?.Table.TableStatus;
-	}
-	catch (ResourceNotFoundException)
-	{
-		return StatusUnknown;
-	}
-}
-
-private async Task WaitUntilTableReady(string tableName)
-{
-	var status = await GetTableStatusAsync(tableName);
-	for (var i = 0; i &#x3C; 10 &#x26;&#x26; status != StatusActive; ++i)
-	{
-		await Task.Delay(500);
-		status = await GetTableStatusAsync(tableName);
-	}
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="5497-MoviesRepository.cs" class="tablinks active" onclick="openTab(this, &#x27;content-5497-MoviesRepository.cs&#x27;, &#x27;5497&#x27;)">MoviesRepository.cs</button>
+<button id="5497-ActorsRepository.cs" class="tablinks" onclick="openTab(this, &#x27;content-5497-ActorsRepository.cs&#x27;, &#x27;5497&#x27;)">ActorsRepository.cs</button>
+<button id="5497-DatabaseClient.cs" class="tablinks" onclick="openTab(this, &#x27;content-5497-DatabaseClient.cs&#x27;, &#x27;5497&#x27;)">DatabaseClient.cs</button></div>
+<div id="content-5497-MoviesRepository.cs" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public async Task CreateTableAsync()</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    var request = new CreateTableRequest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        TableName = TableName,</span></span>
+<span class="line"><span>        KeySchema = new List&#x3C;KeySchemaElement></span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            new KeySchemaElement</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                AttributeName = "Title",</span></span>
+<span class="line"><span>                KeyType = "HASH"</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        },</span></span>
+<span class="line"><span>        AttributeDefinitions = new List&#x3C;AttributeDefinition></span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            new AttributeDefinition</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                AttributeName = "Title",</span></span>
+<span class="line"><span>                AttributeType = "S"</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        },</span></span>
+<span class="line"><span>        ProvisionedThroughput = new ProvisionedThroughput</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            ReadCapacityUnits = 5,</span></span>
+<span class="line"><span>            WriteCapacityUnits = 5</span></span>
+<span class="line"><span>        },</span></span>
+<span class="line"><span>        StreamSpecification = new StreamSpecification</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            StreamEnabled = true,</span></span>
+<span class="line"><span>            StreamViewType = StreamViewType.NEW_AND_OLD_IMAGES</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    };</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    await _client.CreateTableAsync(request);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-5497-ActorsRepository.cs" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public async Task CreateTableAsync()</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    var request = new CreateTableRequest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        TableName = TableName,</span></span>
+<span class="line"><span>        KeySchema = new List&#x3C;KeySchemaElement></span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            new KeySchemaElement</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                AttributeName = "FirstName",</span></span>
+<span class="line"><span>                KeyType = "HASH"</span></span>
+<span class="line"><span>            },</span></span>
+<span class="line"><span>            new KeySchemaElement</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                AttributeName = "LastName",</span></span>
+<span class="line"><span>                KeyType = "RANGE"</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        },</span></span>
+<span class="line"><span>        AttributeDefinitions = new List&#x3C;AttributeDefinition></span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>           new AttributeDefinition</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                AttributeName = "FirstName",</span></span>
+<span class="line"><span>                AttributeType = "S"</span></span>
+<span class="line"><span>            },</span></span>
+<span class="line"><span>            new AttributeDefinition</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                AttributeName = "LastName",</span></span>
+<span class="line"><span>                AttributeType = "S"</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        },</span></span>
+<span class="line"><span>        ProvisionedThroughput = new ProvisionedThroughput</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            ReadCapacityUnits = 5,</span></span>
+<span class="line"><span>            WriteCapacityUnits = 5</span></span>
+<span class="line"><span>        },</span></span>
+<span class="line"><span>        StreamSpecification = new StreamSpecification</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            StreamEnabled = true,</span></span>
+<span class="line"><span>            StreamViewType = StreamViewType.NEW_AND_OLD_IMAGES</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    };</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    await _client.CreateTableAsync(request);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-5497-DatabaseClient.cs" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private const string StatusUnknown = "UNKNOWN";</span></span>
+<span class="line"><span>private const string StatusActive = "ACTIVE";</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>private readonly IAmazonDynamoDB _client;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public DatabaseClient(IAmazonDynamoDB client)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    _client = client;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public async Task CreateTableAsync(CreateTableRequest createTableRequest)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    var status = await GetTableStatusAsync(createTableRequest.TableName);</span></span>
+<span class="line"><span>    if (status != StatusUnknown)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        return;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    await _client.CreateTableAsync(createTableRequest);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    await WaitUntilTableReady(createTableRequest.TableName);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public async Task PutItemAsync(PutItemRequest putItemRequest)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    await _client.PutItemAsync(putItemRequest);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>private async Task&#x3C;string> GetTableStatusAsync(string tableName)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    try</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        var response = await _client.DescribeTableAsync(new DescribeTableRequest</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            TableName = tableName</span></span>
+<span class="line"><span>        });</span></span>
+<span class="line"><span>        return response?.Table.TableStatus;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    catch (ResourceNotFoundException)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        return StatusUnknown;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>private async Task WaitUntilTableReady(string tableName)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    var status = await GetTableStatusAsync(tableName);</span></span>
+<span class="line"><span>    for (var i = 0; i &#x3C; 10 &#x26;&#x26; status != StatusActive; ++i)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        await Task.Delay(500);</span></span>
+<span class="line"><span>        status = await GetTableStatusAsync(tableName);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Different programmatic interfaces</h2>
 In <a href="/aws-examples-in-c-create-a-service-working-with-dynamodb/">AWS examples in C# – create a service working with DynamoDB</a> post, I have explained more details about the three different programmatic interfaces, that DynamoDB offers, a <em><strong>low-level</strong></em> interface, <em><strong>document</strong></em> interface, and <em><strong>object persistence</strong></em> interface.
 <h2>Writing using the low-level interface</h2>
 The low-level interface lets the consumer manage all the details and do the data mapping. Here is an example of how to create an Actor using the low-level interface. Data is mapped manually to its proper data type. In this case, the <em><strong>actor.FirstName</strong></em> and <em><strong>actor.LastName</strong></em> is assigned to the <em><strong>S</strong></em> property of the <em><strong>AttributeValue</strong></em>, which is a string type.
-<pre class="language-csharp"><code>private readonly IDatabaseClient _client;
-public async Task SaveActorAsync(Actor actor)
-{
-	var request = new PutItemRequest
-	{
-		TableName = TableName,
-		Item = new Dictionary&#x3C;string, AttributeValue>
-		{
-			{"FirstName", new AttributeValue {S = actor.FirstName}},
-			{"LastName", new AttributeValue {S = actor.LastName}}
-		}
-	};
-	await _client.PutItemAsync(request);
-}
-</code></pre>
-The full code is in <a href="https://github.com/llatinov/aws.examples.csharp/blob/master/SqsReader/src/SqsReader/Dynamo/ActorsRepository.cs" target="_blank" rel="noopener noreferrer">ActorsRepository.cs</a>.
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private readonly IDatabaseClient _client;</span></span>
+<span class="line"><span>public async Task SaveActorAsync(Actor actor)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    var request = new PutItemRequest</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        TableName = TableName,</span></span>
+<span class="line"><span>        Item = new Dictionary&#x3C;string, AttributeValue></span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            {"FirstName", new AttributeValue {S = actor.FirstName}},</span></span>
+<span class="line"><span>            {"LastName", new AttributeValue {S = actor.LastName}}</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    };</span></span>
+<span class="line"><span>    await _client.PutItemAsync(request);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>The full code is in <a href="https://github.com/llatinov/aws.examples.csharp/blob/master/SqsReader/src/SqsReader/Dynamo/ActorsRepository.cs" target="_blank" rel="noopener noreferrer">ActorsRepository.cs</a>.</p>
 <h2>Writing using the object persistence interface</h2>
 With the object persistency interface, client classes are mapped to DynamoDB tables. The example given below comes from the original AWS documentation and shows <em><strong>explicit mapping</strong></em>. With <em><strong>DynamoDBTable</strong></em> the mapping to the table is created, then <em><strong>DynamoDBHashKey</strong></em> and <em><strong>DynamoDBRangeKey</strong></em> annotate the keys. With <strong>DynamoDBProperty</strong> a specific name can be given, so it is different from the table field name. <em><strong>Title</strong></em> is directly mapped to <em><strong>Title</strong></em> field in the database table. <em><strong>DynamoDBIgnore</strong></em> attribute ignores writing and reading this particular property to and from the table.
-<pre class="language-csharp"><code>
-[DynamoDBTable("ProductCatalog")]
-public class Book
-{
-	[DynamoDBHashKey]
-	public int Id { get; set; }
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public string Title { get; set; }</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[DynamoDBTable("ProductCatalog")]</span></span>
+<span class="line"><span>public class Book</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    [DynamoDBHashKey]</span></span>
+<span class="line"><span>    public int Id { get; set; }</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>[DynamoDBRangeKey]</span></span>
-<span class="line"><span>public int ISBN { get; set; }</span></span>
+<span class="line"><span>    public string Title { get; set; }</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>[DynamoDBProperty("Authors")]</span></span>
-<span class="line"><span>public List&#x26;lt;string&#x26;gt; BookAuthors { get; set; }</span></span>
+<span class="line"><span>    [DynamoDBRangeKey]</span></span>
+<span class="line"><span>    public int ISBN { get; set; }</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>[DynamoDBIgnore]</span></span>
-<span class="line"><span>public string CoverPage { get; set; }</span></span></code></pre>
-</code><p><code>}
-</code></p></pre>
-To save the client-side objects to the tables, the object persistence model provides the <em><strong>DynamoDBContext</strong></em> class, an entry point to DynamoDB. This class provides a connection to DynamoDB and enables you to access tables and perform various <em><strong>CRUD</strong></em> operations. The current examples are slightly different since <em><strong>Movie</strong></em> model is very simple, there are no DynamoDB attributes on it, so DynamoDBContext uses its <em><strong>default mapping</strong></em> features to map them. The movie has two properties, <em><strong>Title</strong></em>, which is a string and is the <em><strong>HASH</strong></em> key in the table and <em><strong>Genre</strong></em>, which is an enum, practically an integer.<p></p>
-<pre class="language-csharp"><code>
-public enum MovieGenre
-{
-	[EnumMember(Value = "Action Movie")]
-	Action,
-	[EnumMember(Value = "Drama Movie")]
-	Drama
-}
-
-public class Movie
-{
-	public string Title { get; set; }
-
-	[JsonConverter(typeof(StringEnumConverter))]
-	public MovieGenre Genre { get; set; }
-}
-
-</code></pre>
+<span class="line"><span>    [DynamoDBProperty("Authors")]</span></span>
+<span class="line"><span>    public List&#x3C;string> BookAuthors { get; set; }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    [DynamoDBIgnore]</span></span>
+<span class="line"><span>    public string CoverPage { get; set; }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>To save the client-side objects to the tables, the object persistence model provides the <em><strong>DynamoDBContext</strong></em> class, an entry point to DynamoDB. This class provides a connection to DynamoDB and enables you to access tables and perform various <em><strong>CRUD</strong></em> operations. The current examples are slightly different since <em><strong>Movie</strong></em> model is very simple, there are no DynamoDB attributes on it, so DynamoDBContext uses its <em><strong>default mapping</strong></em> features to map them. The movie has two properties, <em><strong>Title</strong></em>, which is a string and is the <em><strong>HASH</strong></em> key in the table and <em><strong>Genre</strong></em>, which is an enum, practically an integer.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public enum MovieGenre</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    [EnumMember(Value = "Action Movie")]</span></span>
+<span class="line"><span>    Action,</span></span>
+<span class="line"><span>    [EnumMember(Value = "Drama Movie")]</span></span>
+<span class="line"><span>    Drama</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class Movie</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public string Title { get; set; }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    [JsonConverter(typeof(StringEnumConverter))]</span></span>
+<span class="line"><span>    public MovieGenre Genre { get; set; }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Since there is no <em><strong>DynamoDBTable</strong></em> attribute of the model, then DynamoDBContext is trying to map it by default to a table with the name <em><strong>Movie</strong></em>, but such a table does not exist. This is why <em><strong>DynamoDBOperationConfig</strong></em> is needed to map to the correct table name.</p>
-<pre class="language-csharp"><code>
-private readonly IDynamoDBContext _context;
-
-public async Task SaveMovieAsync(Movie movie)
-{
-	var operationConfig = new DynamoDBOperationConfig
-	{
-		OverrideTableName = "Movies"
-	};
-	await _context.SaveAsync(movie, operationConfig);
-}
-
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private readonly IDynamoDBContext _context;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public async Task SaveMovieAsync(Movie movie)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    var operationConfig = new DynamoDBOperationConfig</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        OverrideTableName = "Movies"</span></span>
+<span class="line"><span>    };</span></span>
+<span class="line"><span>    await _context.SaveAsync(movie, operationConfig);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span></code></pre>
 <p>The full code is in <a href="https://github.com/llatinov/aws.examples.csharp/blob/master/SqsReader/src/SqsReader/Dynamo/MoviesRepository.cs" target="_blank" rel="noopener noreferrer">MoviesRepository.cs</a>. Object persistence interface is a wide topic, full details can be found in <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DotNetSDKHighLevel.html" target="_blank" rel="noopener noreferrer">.NET: Object Persistence Model</a> page.</p>
 <h2>Querying using the low-level interface</h2>
 An example is given for query request for Actors table that has <em><strong>FirstName</strong></em> as a HASH key and <em><strong>LastName</strong></em> as RANGE key. Important here is <em><strong>KeyConditionExpression</strong></em>, it holds the actual query. It is called a query, but it not actually a query in terms of RDBMS way of thinking, as the HASH key should be only used with an equality operator. For the RANGE key, there is a variety of operators to be used, in the example given equality operator is used as well. To add value to the value placeholder, <em><strong>:FirstName</strong></em> in the example, <em><strong>ExpressionAttributeValues</strong></em> is used. The dictionary key is the placeholder value, and <em><strong>AttributeValue</strong></em> is the value mapped to a specific value type, in the example, it is <em><strong>S</strong></em>, for a string. It is also possible to give placeholder value for the table field name as well, which is then replaced with the actual value in <em><strong>ExpressionAttributeNames</strong></em> dictionary, such as <em><strong>#LastName</strong></em>.
-<pre class="language-csharp"><code>private static QueryRequest BuildQueryRequest(string firstName, string lastName)
-{
-	var request = new QueryRequest("Actors")
-	{
-		KeyConditionExpression = "FirstName = :FirstName"
-	};
-	request.ExpressionAttributeValues.Add(":FirstName", new AttributeValue
-	{
-		S = firstName
-	});
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>if (!string.IsNullOrEmpty(lastName))</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private static QueryRequest BuildQueryRequest(string firstName, string lastName)</span></span>
 <span class="line"><span>{</span></span>
-<span class="line"><span>	request.KeyConditionExpression += " AND #LastName = :LastName";</span></span>
-<span class="line"><span>	request.ExpressionAttributeNames.Add("#LastName", "LastName");</span></span>
-<span class="line"><span>	request.ExpressionAttributeValues.Add(":LastName", new AttributeValue</span></span>
-<span class="line"><span>	{</span></span>
-<span class="line"><span>		S = lastName</span></span>
-<span class="line"><span>	});</span></span>
-<span class="line"><span>}</span></span>
+<span class="line"><span>    var request = new QueryRequest("Actors")</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        KeyConditionExpression = "FirstName = :FirstName"</span></span>
+<span class="line"><span>    };</span></span>
+<span class="line"><span>    request.ExpressionAttributeValues.Add(":FirstName", new AttributeValue</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        S = firstName</span></span>
+<span class="line"><span>    });</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>return request;</span></span></code></pre>
-</code><p><code>}
-</code></p></pre>
-The full code is in <a href="https://github.com/llatinov/aws.examples.csharp/blob/master/DynamoDbServerless/Handlers/ActorsHandler.cs" target="_blank" rel="noopener noreferrer">ActorsHandler.cs</a>. More about DynamoDB queries can be found in <a href="https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Query.html" target="_blank" rel="noopener noreferrer">DynamoDB API_Query</a> page.<p></p>
+<span class="line"><span>    if (!string.IsNullOrEmpty(lastName))</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        request.KeyConditionExpression += " AND #LastName = :LastName";</span></span>
+<span class="line"><span>        request.ExpressionAttributeNames.Add("#LastName", "LastName");</span></span>
+<span class="line"><span>        request.ExpressionAttributeValues.Add(":LastName", new AttributeValue</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            S = lastName</span></span>
+<span class="line"><span>        });</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    return request;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>The full code is in <a href="https://github.com/llatinov/aws.examples.csharp/blob/master/DynamoDbServerless/Handlers/ActorsHandler.cs" target="_blank" rel="noopener noreferrer">ActorsHandler.cs</a>. More about DynamoDB queries can be found in <a href="https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Query.html" target="_blank" rel="noopener noreferrer">DynamoDB API_Query</a> page.</p>
 <h2>Get item using document interface</h2>
 The document programming interface returns the full document by its unique HASH key. The table is accessed with <em><strong>public static Table LoadTable(IAmazonDynamoDB ddbClient, TableConfig config)</strong></em> and then the document is loaded with <em><strong>public Task&#x3C;Document> GetItemAsync(Primitive hashKey)</strong></em>. In current examples, a proxy class is defined, which isolates the <em><strong>IAmazonDynamoDB</strong></em> operations:
-<p>[tabby title=“GetDocumentAsync”]</p>
-<pre class="language-csharp"><code>
-public async Task&#x3C;Document> GetDocumentAsync(string tableName, string documentKey)
-{
-	var table = Table.LoadTable(_dynamoDbClient, new TableConfig(tableName));
-	return await table.GetItemAsync(new Primitive(documentKey));
-}
-</code></pre>
-<p>[tabby title=“GetDocumentAsync”]</p>
-<pre class="language-csharp"><code>var document = await _dynamoDbReader.GetDocumentAsync(TableName, title);
-
-var movie = new Movie
-{
-	Title = document["Title"],
-	Genre = (MovieGenre)int.Parse(document["Genre"])
-};
-</code></pre>
-<p>[tabbyending] The document is actually a JSON.</p>
-<pre class="language-json"><code>{
-	"Title": {
-		"Value": "Die Hard",
-		"Type": 0
-	},
-	"Genre": {
-		"Value": "0",
-		"Type": 1
-	}
-}
-</code></pre>
+<div class="tab"><button id="16447-GetDocumentAsync" class="tablinks active" onclick="openTab(this, &#x27;content-16447-GetDocumentAsync&#x27;, &#x27;16447&#x27;)">GetDocumentAsync</button>
+<button id="16447-GetDocumentAsync" class="tablinks" onclick="openTab(this, &#x27;content-16447-GetDocumentAsync&#x27;, &#x27;16447&#x27;)">GetDocumentAsync</button></div>
+<div id="content-16447-GetDocumentAsync" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public async Task&#x3C;Document> GetDocumentAsync(string tableName, string documentKey)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    var table = Table.LoadTable(_dynamoDbClient, new TableConfig(tableName));</span></span>
+<span class="line"><span>    return await table.GetItemAsync(new Primitive(documentKey));</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-16447-GetDocumentAsync" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>var document = await _dynamoDbReader.GetDocumentAsync(TableName, title);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>var movie = new Movie</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    Title = document["Title"],</span></span>
+<span class="line"><span>    Genre = (MovieGenre)int.Parse(document["Genre"])</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span></code></pre>
+</div> The document is actually a JSON.
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<span class="line"><span>    "Title": {</span></span>
+<span class="line"><span>        "Value": "Die Hard",</span></span>
+<span class="line"><span>        "Type": 0</span></span>
+<span class="line"><span>    },</span></span>
+<span class="line"><span>    "Genre": {</span></span>
+<span class="line"><span>        "Value": "0",</span></span>
+<span class="line"><span>        "Type": 1</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>The full code is in <a href="https://github.com/llatinov/aws.examples.csharp/blob/master/DynamoDbServerless/Handlers/MoviesHandler.cs" target="_blank" rel="noopener noreferrer">MoviesHandler.cs</a>.</p>
 <h2>Conclusion</h2>
-In the current post, I have given practical code examples of how to do the basic DynamoDB operations in C#. This post is complimentary to <a href="/aws-examples-in-c-create-a-service-working-with-dynamodb/">AWS examples in C# – create a service working with DynamoDB</a> post.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+In the current post, I have given practical code examples of how to do the basic DynamoDB operations in C#. This post is complimentary to <a href="/aws-examples-in-c-create-a-service-working-with-dynamodb/">AWS examples in C# – create a service working with DynamoDB</a> post.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/" data-astro-cid-bvzihdzo>AWS examples in C# - working with SQS, DynamoDB, Lambda, ECS</a> </li><li data-astro-cid-bvzihdzo> <a href="/aws-examples-in-c-create-a-service-working-with-dynamodb/" data-astro-cid-bvzihdzo>AWS examples in C# - create a service working with DynamoDB</a> </li><li data-astro-cid-bvzihdzo> <a href="/aws-examples-in-c-introduction-to-serverless-framework/" data-astro-cid-bvzihdzo>AWS examples in C# - introduction to Serverless framework</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/aws" data-astro-cid-bvzihdzo>AWS</a><a href="/tags/aws-dynamodb" data-astro-cid-bvzihdzo>AWS DynamoDB</a><a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

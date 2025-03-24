@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/introduction-postman-examples/"><!-- Primary Meta Tags --><title>Introduction to Postman with examples</title><meta name="title" content="Introduction to Postman with examples"><meta name="description" content="This post is demonstrating different Postman features with examples."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/introduction-postman-examples/"><meta property="og:title" content="Introduction to Postman with examples"><meta property="og:description" content="This post is demonstrating different Postman features with examples."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/introduction-postman-examples/"><meta property="twitter:title" content="Introduction to Postman with examples"><meta property="twitter:description" content="This post is demonstrating different Postman features with examples."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-10-26T00:00:00.000Z"> Oct 26, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Introduction to Postman with examples</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>All examples shown in this post are available at <a href="/examples/Postman/PostmanExamples.postman_collection.json" target="_blank" rel="noopener noreferrer">Postman Examples link</a> and can be imported in Postman. Environments are also used in attached examples and are available in <a href="/examples/Postman/PostmanExamplesAdminEnv.postman_environment.json" target="_blank" rel="noopener noreferrer">Admin environment</a> and <a href="/examples/Postman/PostmanExamplesUserEnv.postman_environment.json" target="_blank" rel="noopener noreferrer">User environment</a>. In order to run all the examples you need to download and run Dropwizard stub described in <a href="/build-a-rest-stub-server-with-dropwizard/">Build a RESTful stub server with Dropwizard</a> post and available in <a href="https://github.com/llatinov/sample-dropwizard-rest-stub" target="_blank" rel="noopener noreferrer">sample-dropwizard-rest-stub GitHub repo</a>, otherwise, you can just see the Postman code and screenshots.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/introduction-postman-examples/"><!-- Primary Meta Tags --><title>Introduction to Postman with examples</title><meta name="title" content="Introduction to Postman with examples"><meta name="description" content="This post is demonstrating different Postman features with examples."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/introduction-postman-examples/"><meta property="og:title" content="Introduction to Postman with examples"><meta property="og:description" content="This post is demonstrating different Postman features with examples."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/introduction-postman-examples/"><meta property="twitter:title" content="Introduction to Postman with examples"><meta property="twitter:description" content="This post is demonstrating different Postman features with examples."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Introduction to Postman with examples</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-10-26T00:00:00.000Z"> Oct 26, 2016 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>All examples shown in this post are available at <a href="/examples/Postman/PostmanExamples.postman_collection.json" target="_blank" rel="noopener noreferrer">Postman Examples link</a> and can be imported in Postman. Environments are also used in attached examples and are available in <a href="/examples/Postman/PostmanExamplesAdminEnv.postman_environment.json" target="_blank" rel="noopener noreferrer">Admin environment</a> and <a href="/examples/Postman/PostmanExamplesUserEnv.postman_environment.json" target="_blank" rel="noopener noreferrer">User environment</a>. In order to run all the examples you need to download and run Dropwizard stub described in <a href="/build-a-rest-stub-server-with-dropwizard/">Build a RESTful stub server with Dropwizard</a> post and available in <a href="https://github.com/llatinov/sample-dropwizard-rest-stub" target="_blank" rel="noopener noreferrer">sample-dropwizard-rest-stub GitHub repo</a>, otherwise, you can just see the Postman code and screenshots.</p>
 <h2>Postman</h2>
 <a href="https://www.getpostman.com/" target="_blank" rel="noopener noreferrer">Postman</a> is a Chrome add-on and Mac application which is used to fire requests to an API. It is very lightweight and fast. Requests can be organized in groups, also tests can be created with verifications for certain conditions on the response. With its features, it is very good and convenient API tool. It is possible to make different kinds of HTTP requests - GET, POST, PUT, PATCH and DELETE. It is possible to add headers to the requests. In current post I will write about more interesting features it has Variables, Pre-Request Script, Environments, and Tests.
 <p><a href="/images/2016/10/Postman-main.png"><img src="/images/2016/10/Postman-main.png" alt="postman-main"></a></p>
@@ -10,12 +9,12 @@ There are two types of variables - global and environment. Global variables are 
 <p><a href="/images/2016/10/Postman-globals.png"><img src="/images/2016/10/Postman-globals.png" alt="postman-globals"></a></p>
 <h2>Pre-Request Script</h2>
 Postman allows users to do some JavaScript coding with which to manipulate the data being sent with the request. One such example is when testing and API with security as explained in <a href="/implement-secure-rest-api-authentication-http/">How to implement secure REST API authentication over HTTP</a> post - SHA256 hash (build from apiKey + secretKey + timestamp in seconds) is sent as a request parameter with the request. Calculating SHA256 hash is done with the following pre-request script and then stored as a global variable <em><strong>token</strong></em>.
-<pre class="language-javascript"><code>var timeInSeconds = parseInt((new Date()).getTime() / 1000);
-var sigString = postman.getGlobalVariable("apiKey") + 
-	postman.getGlobalVariable("secretKey") + timeInSeconds
-var token = CryptoJS.SHA256(sigString);
-postman.setGlobalVariable("token", token);
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>var timeInSeconds = parseInt((new Date()).getTime() / 1000);</span></span>
+<span class="line"><span>var sigString = postman.getGlobalVariable("apiKey") + </span></span>
+<span class="line"><span>    postman.getGlobalVariable("secretKey") + timeInSeconds</span></span>
+<span class="line"><span>var token = CryptoJS.SHA256(sigString);</span></span>
+<span class="line"><span>postman.setGlobalVariable("token", token);</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Here CryptoJS library is used to create a SHA256 hash. All available libraries in Postman are described in <a href="https://learning.getpostman.com/docs/postman/scripts/postman-sandbox/" target="_blank" rel="noopener noreferrer">Postman Sandbox</a> page. Global variable <em><strong>{{token}}</strong></em> is then sent as <em><strong>token</strong></em> request parameter.</p>
 <p><a href="/images/2016/10/Postman-pre-request-script.png"><img src="/images/2016/10/Postman-pre-request-script.png" alt="postman-pre-request-script"></a></p>
 <h2>Environments</h2>
@@ -23,39 +22,39 @@ The code shown above is working fine with just one set of credentials because th
 <p><a href="/images/2016/10/Postman-environments.png"><img src="/images/2016/10/Postman-environments.png" alt="postman-environments"></a></p>
 <p>Postman supports so-called shared environments, which means the whole team can use one and the same credentials managed centrally. It requires sign in and some plan though but might be a good investment in the long run.</p>
 <p>In order to use environments, pre-request script has to be changed to:</p>
-<pre class="language-javascript"><code>var timeInSeconds = parseInt((new Date()).getTime() / 1000);
-var sigString = environment.apiKey + environment.secretKey + timeInSeconds
-var token = CryptoJS.SHA256(sigString);
-postman.setEnvironmentVariable("token", token);
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>var timeInSeconds = parseInt((new Date()).getTime() / 1000);</span></span>
+<span class="line"><span>var sigString = environment.apiKey + environment.secretKey + timeInSeconds</span></span>
+<span class="line"><span>var token = CryptoJS.SHA256(sigString);</span></span>
+<span class="line"><span>postman.setEnvironmentVariable("token", token);</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Both apiKey and secretKey are read from the environment. An environment can be changed from the top right corner.</p>
 <p><em><strong>Nota bene:</strong></em> There is specific behavior (I would not call it bug as it makes sense) in Postman. If select “No Environment” and fire request above Postman will automatically create an environment with the name “No Environment”. This is because it actually needs an environment to store a variable into. This might be very confusing the first time.</p>
 <h2>Post-Request Script</h2>
 There is no such term defined in Postman. The idea is that in many cases you will need to do something with the response and extract a variable from it in order to use it at a later stage. This can be done in "Tests" tab. The example given below is to take all persons with API call and then to process the response and at random select one id which is stored as a global variable and then used in next request. You can put whatever JavaScript code you like in order to fulfill your logic.
-<pre class="language-javascript"><code>var jsonData = JSON.parse(responseBody)
-var size = jsonData.length
-var index = parseInt(Math.random() * size)
-postman.setGlobalVariable("userId", index);
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>var jsonData = JSON.parse(responseBody)</span></span>
+<span class="line"><span>var size = jsonData.length</span></span>
+<span class="line"><span>var index = parseInt(Math.random() * size)</span></span>
+<span class="line"><span>postman.setGlobalVariable("userId", index);</span></span>
+<span class="line"><span></span></span></code></pre>
 <p><a href="/images/2016/10/Postman-post-request.png"><img src="/images/2016/10/Postman-post-request.png" alt="postman-post-request"></a></p>
 <p>Then in the subsequent request you can use GET call to URL: <em><strong><a href="http://localhost:9000/person/get/%7B%7BuserId%7D%7D">http://localhost:9000/person/get/{{userId}}</a></strong></em></p>
 <h2>Tests</h2>
 After a response is received Postman has a functionality to make verifications on it. This is done in "Tests" tab. Below is an example of different verifications. Most interesting part is in case of JSON response it can be parsed to an array and then elements accessed by index and value <em><strong>jsonData[0].id</strong></em> or even iterated as shown below. Format is: <em><strong>tests["TEST_NAME"] = BOOLEAN_CONDITION</strong></em>.
-<pre class="language-javascript"><code>tests["Status code is 200"] = responseCode.code === 200;
-
-tests["Response time is less than 200ms"] = responseTime &#x3C; 200;
-
-var expected = "email1@email.na"
-tests["Body cointains string: " + expected] = responseBody.has(expected);
-
-var jsonData = JSON.parse(responseBody);
-var expectedCount = 4
-tests["Response count is: " + expectedCount] = jsonData.length === expectedCount;
-
-for(var i=1; i&#x3C;=expectedCount; i++) {
-	tests["Verify id is: " + i] = jsonData[i-1].id === i;
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>tests["Status code is 200"] = responseCode.code === 200;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>tests["Response time is less than 200ms"] = responseTime &#x3C; 200;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>var expected = "email1@email.na"</span></span>
+<span class="line"><span>tests["Body cointains string: " + expected] = responseBody.has(expected);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>var jsonData = JSON.parse(responseBody);</span></span>
+<span class="line"><span>var expectedCount = 4</span></span>
+<span class="line"><span>tests["Response count is: " + expectedCount] = jsonData.length === expectedCount;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>for(var i=1; i&#x3C;=expectedCount; i++) {</span></span>
+<span class="line"><span>    tests["Verify id is: " + i] = jsonData[i-1].id === i;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p><a href="/images/2016/10/Postman-test-response.png"><img src="/images/2016/10/Postman-test-response.png" alt="postman-test-response"></a></p>
 <p><a href="/images/2016/10/Postman-test-results.png"><img src="/images/2016/10/Postman-test-results.png" alt="postman-test-results"></a></p>
 <p><em><strong>Nota bene:</strong></em> if you use responseTime verification you have to know that it measures just the TTFB (time to the first bite) it does not measure the time needed to transfer the data. If you have API with big responses or network is slow you may fire the request, wait a lot and then Postman shows very small response time which might be confusing.</p>
@@ -63,26 +62,26 @@ for(var i=1; i&#x3C;=expectedCount; i++) {
 In order to run Postman tests in the command line as part of some CI process, there is a separate tool called Newman. It requires NodeJS to be installed and runs on NodeJS environment. It is very well described in <a href="https://blog.getpostman.com/2015/09/03/how-to-write-powerful-automated-api-tests-with-postman-newman-and-jenkins/" target="_blank" rel="noopener noreferrer">How to write powerful automated API tests with Postman, Newman and Jenkins</a>.
 <h2>Code reuse between requests</h2>
 It is very convenient some piece of code to be re-used between a request to prevent copy/paste it. Postman does not support yet code re-use between requests. Good thing is that there is a workaround for this. It is possible to do it by defining a helper function with verifications which are saved as a global variable in the first request from your test scenario:
-<pre class="language-javascript"><code>postman.setGlobalVariable("loadHelpers", function loadHelpers() {
-	let helpers = {};
-
-	helpers.verifyCount = function verifyCount(expectedCount) {
-		var jsonData = JSON.parse(responseBody);
-		tests["Response count is: " + expectedCount] 
-			= jsonData.length === expectedCount;
-	}
-
-	// ...additional helpers
-
-	return helpers;
-} + '; loadHelpers();');
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>postman.setGlobalVariable("loadHelpers", function loadHelpers() {</span></span>
+<span class="line"><span>    let helpers = {};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    helpers.verifyCount = function verifyCount(expectedCount) {</span></span>
+<span class="line"><span>        var jsonData = JSON.parse(responseBody);</span></span>
+<span class="line"><span>        tests["Response count is: " + expectedCount] </span></span>
+<span class="line"><span>            = jsonData.length === expectedCount;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // ...additional helpers</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    return helpers;</span></span>
+<span class="line"><span>} + '; loadHelpers();');</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Then from other requests helpers are taken from global variables and verification functions can be used:</p>
-<pre class="language-javascript"><code>var helpers = eval(globals.loadHelpers);
-helpers.verifyCount(4);
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>var helpers = eval(globals.loadHelpers);</span></span>
+<span class="line"><span>helpers.verifyCount(4);</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>See more in <a href="https://github.com/postmanlabs/postman-app-support/issues/882" target="_blank" rel="noopener noreferrer">Reusing pre-request scripts across requests in a collection</a> issue thread.</p>
 <h2>Conclusion</h2>
-Postman is a very nice tool to use when developing your API or manual test it. I would definitely recommend Postman, I use it on daily basis for probing the API. For serious API functional tests automation, I would say Postman is not ready yet and you'd better go for another approach. Good thing is that there is a big community around it which is growing and new features are added.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Postman is a very nice tool to use when developing your API or manual test it. I would definitely recommend Postman, I use it on daily basis for probing the API. For serious API functional tests automation, I would say Postman is not ready yet and you'd better go for another approach. Good thing is that there is a big community around it which is growing and new features are added.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/build-a-rest-stub-server-with-dropwizard/" data-astro-cid-bvzihdzo>Build a RESTful stub server with Dropwizard</a> </li><li data-astro-cid-bvzihdzo> <a href="/implement-secure-rest-api-authentication-http/" data-astro-cid-bvzihdzo>How to implement secure REST API authentication over HTTP</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/api-automation" data-astro-cid-bvzihdzo>API Automation</a><a href="/tags/postman" data-astro-cid-bvzihdzo>Postman</a><a href="/tags/rest" data-astro-cid-bvzihdzo>REST</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

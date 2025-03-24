@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/retry-junit-failed-tests-immediatelly/"><!-- Primary Meta Tags --><title>Retry JUnit failed tests immediately</title><meta name="title" content="Retry JUnit failed tests immediately"><meta name="description" content="How to retry failed JUnit tests immediately and if a retry is OK then report test as passed."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/retry-junit-failed-tests-immediatelly/"><meta property="og:title" content="Retry JUnit failed tests immediately"><meta property="og:description" content="How to retry failed JUnit tests immediately and if a retry is OK then report test as passed."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/retry-junit-failed-tests-immediatelly/"><meta property="twitter:title" content="Retry JUnit failed tests immediately"><meta property="twitter:description" content="How to retry failed JUnit tests immediately and if a retry is OK then report test as passed."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-06-03T00:00:00.000Z"> Jun 3, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Retry JUnit failed tests immediately</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>Approaches</h2>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/retry-junit-failed-tests-immediatelly/"><!-- Primary Meta Tags --><title>Retry JUnit failed tests immediately</title><meta name="title" content="Retry JUnit failed tests immediately"><meta name="description" content="How to retry failed JUnit tests immediately and if a retry is OK then report test as passed."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/retry-junit-failed-tests-immediatelly/"><meta property="og:title" content="Retry JUnit failed tests immediately"><meta property="og:description" content="How to retry failed JUnit tests immediately and if a retry is OK then report test as passed."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/retry-junit-failed-tests-immediatelly/"><meta property="twitter:title" content="Retry JUnit failed tests immediately"><meta property="twitter:description" content="How to retry failed JUnit tests immediately and if a retry is OK then report test as passed."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Retry JUnit failed tests immediately</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-06-03T00:00:00.000Z"> Jun 3, 2016 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <h2>Approaches</h2>
 There are mainly three approaches to make JUnit retry failed tests.
 <ul>
  	<li>Maven <a href="http://maven.apache.org/surefire/maven-surefire-plugin/examples/rerun-failing-tests.html" target="_blank" rel="noopener">Surefire</a> or <a href="http://maven.apache.org/surefire/maven-failsafe-plugin/examples/rerun-failing-tests.html" target="_blank" rel="noopener">Failsafe</a> plugins - follow plugin name links for more details how to use and configure plugins</li>
@@ -10,97 +9,97 @@ There are mainly three approaches to make JUnit retry failed tests.
 </ul>
 <h2>Custom JUnit retry runner</h2>
 A custom runner can be created by extending <em><strong>org.junit.runners.BlockJUnit4ClassRunner</strong></em> class and override <em><strong>public void run(final RunNotifier notifier)</strong></em> and <em><strong>protected void runChild(final FrameworkMethod method, RunNotifier notifier)</strong></em> methods. run() is accessed when test class is instantiated, runChild() is accessed when test method is run. Below is the code for custom JUnit retry runner class:
-<pre class="language-java"><code>package com.automationrhapsody.junit.runners;
-
-import org.junit.Ignore;
-import org.junit.internal.AssumptionViolatedException;
-import org.junit.internal.runners.model.EachTestNotifier;
-import org.junit.runner.Description;
-import org.junit.runner.notification.RunNotifier;
-import org.junit.runner.notification.StoppedByUserException;
-import org.junit.runners.BlockJUnit4ClassRunner;
-import org.junit.runners.model.FrameworkMethod;
-import org.junit.runners.model.InitializationError;
-import org.junit.runners.model.Statement;
-
-public class RetryRunner extends BlockJUnit4ClassRunner {
-
-	private static final int RETRY_COUNT = 2;
-
-	public RetryRunner(Class&#x3C;?> clazz) throws InitializationError {
-		super(clazz);
-	}
-
-	@Override
-	public void run(final RunNotifier notifier) {
-		EachTestNotifier testNotifier = new EachTestNotifier(notifier, getDescription());
-		Statement statement = classBlock(notifier);
-		try {
-			statement.evaluate();
-		} catch (AssumptionViolatedException ave) {
-			testNotifier.fireTestIgnored();
-		} catch (StoppedByUserException sbue) {
-			throw sbue;
-		} catch (Throwable t) {
-			System.out.println("Retry class: " + getDescription().getDisplayName());
-			retry(testNotifier, statement, t, getDescription());
-		}
-	}
-
-	@Override
-	protected void runChild(final FrameworkMethod method, RunNotifier notifier) {
-		Description description = describeChild(method);
-		if (method.getAnnotation(Ignore.class) != null) {
-			notifier.fireTestIgnored(description);
-		} else {
-			runTest(methodBlock(method), description, notifier);
-		}
-	}
-
-	private void runTest(Statement statement, Description description, RunNotifier notifier) {
-		EachTestNotifier eachNotifier = new EachTestNotifier(notifier, description);
-		eachNotifier.fireTestStarted();
-		try {
-			statement.evaluate();
-		} catch (AssumptionViolatedException e) {
-			eachNotifier.addFailedAssumption(e);
-		} catch (Throwable e) {
-			System.out.println("Retry test: " + description.getDisplayName());
-			retry(eachNotifier, statement, e, description);
-		} finally {
-			eachNotifier.fireTestFinished();
-		}
-	}
-
-	private void retry(EachTestNotifier notifier, Statement statement, Throwable currentThrowable, Description info) {
-		int failedAttempts = 0;
-		Throwable caughtThrowable = currentThrowable;
-		while (RETRY_COUNT > failedAttempts) {
-			try {
-				System.out.println("Retry attempt " + (failedAttempts + 1) + " for " + info.getDisplayName());
-				statement.evaluate();
-				return;
-			} catch (Throwable t) {
-				failedAttempts++;
-				caughtThrowable = t;
-			}
-		}
-		notifier.addFailure(caughtThrowable);
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>package com.automationrhapsody.junit.runners;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import org.junit.Ignore;</span></span>
+<span class="line"><span>import org.junit.internal.AssumptionViolatedException;</span></span>
+<span class="line"><span>import org.junit.internal.runners.model.EachTestNotifier;</span></span>
+<span class="line"><span>import org.junit.runner.Description;</span></span>
+<span class="line"><span>import org.junit.runner.notification.RunNotifier;</span></span>
+<span class="line"><span>import org.junit.runner.notification.StoppedByUserException;</span></span>
+<span class="line"><span>import org.junit.runners.BlockJUnit4ClassRunner;</span></span>
+<span class="line"><span>import org.junit.runners.model.FrameworkMethod;</span></span>
+<span class="line"><span>import org.junit.runners.model.InitializationError;</span></span>
+<span class="line"><span>import org.junit.runners.model.Statement;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class RetryRunner extends BlockJUnit4ClassRunner {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private static final int RETRY_COUNT = 2;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public RetryRunner(Class&#x3C;?> clazz) throws InitializationError {</span></span>
+<span class="line"><span>        super(clazz);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Override</span></span>
+<span class="line"><span>    public void run(final RunNotifier notifier) {</span></span>
+<span class="line"><span>        EachTestNotifier testNotifier = new EachTestNotifier(notifier, getDescription());</span></span>
+<span class="line"><span>        Statement statement = classBlock(notifier);</span></span>
+<span class="line"><span>        try {</span></span>
+<span class="line"><span>            statement.evaluate();</span></span>
+<span class="line"><span>        } catch (AssumptionViolatedException ave) {</span></span>
+<span class="line"><span>            testNotifier.fireTestIgnored();</span></span>
+<span class="line"><span>        } catch (StoppedByUserException sbue) {</span></span>
+<span class="line"><span>            throw sbue;</span></span>
+<span class="line"><span>        } catch (Throwable t) {</span></span>
+<span class="line"><span>            System.out.println("Retry class: " + getDescription().getDisplayName());</span></span>
+<span class="line"><span>            retry(testNotifier, statement, t, getDescription());</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Override</span></span>
+<span class="line"><span>    protected void runChild(final FrameworkMethod method, RunNotifier notifier) {</span></span>
+<span class="line"><span>        Description description = describeChild(method);</span></span>
+<span class="line"><span>        if (method.getAnnotation(Ignore.class) != null) {</span></span>
+<span class="line"><span>            notifier.fireTestIgnored(description);</span></span>
+<span class="line"><span>        } else {</span></span>
+<span class="line"><span>            runTest(methodBlock(method), description, notifier);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private void runTest(Statement statement, Description description, RunNotifier notifier) {</span></span>
+<span class="line"><span>        EachTestNotifier eachNotifier = new EachTestNotifier(notifier, description);</span></span>
+<span class="line"><span>        eachNotifier.fireTestStarted();</span></span>
+<span class="line"><span>        try {</span></span>
+<span class="line"><span>            statement.evaluate();</span></span>
+<span class="line"><span>        } catch (AssumptionViolatedException e) {</span></span>
+<span class="line"><span>            eachNotifier.addFailedAssumption(e);</span></span>
+<span class="line"><span>        } catch (Throwable e) {</span></span>
+<span class="line"><span>            System.out.println("Retry test: " + description.getDisplayName());</span></span>
+<span class="line"><span>            retry(eachNotifier, statement, e, description);</span></span>
+<span class="line"><span>        } finally {</span></span>
+<span class="line"><span>            eachNotifier.fireTestFinished();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private void retry(EachTestNotifier notifier, Statement statement, Throwable currentThrowable, Description info) {</span></span>
+<span class="line"><span>        int failedAttempts = 0;</span></span>
+<span class="line"><span>        Throwable caughtThrowable = currentThrowable;</span></span>
+<span class="line"><span>        while (RETRY_COUNT > failedAttempts) {</span></span>
+<span class="line"><span>            try {</span></span>
+<span class="line"><span>                System.out.println("Retry attempt " + (failedAttempts + 1) + " for " + info.getDisplayName());</span></span>
+<span class="line"><span>                statement.evaluate();</span></span>
+<span class="line"><span>                return;</span></span>
+<span class="line"><span>            } catch (Throwable t) {</span></span>
+<span class="line"><span>                failedAttempts++;</span></span>
+<span class="line"><span>                caughtThrowable = t;</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        notifier.addFailure(caughtThrowable);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>The code shown above is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener">java-samples/junit</a> repository.</p>
 <h2>Using JUnit RetryRunner</h2>
 In order to configure JUnit test to use the runner, class holding tests should be annotated with @RunWith:
-<pre class="language-java"><code>@RunWith(RetryRunner.class)
-public class RetryRunnerTests {
-	@Test
-	public void testRetrySuccessFirstTime() {
-		assertTrue(true);
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@RunWith(RetryRunner.class)</span></span>
+<span class="line"><span>public class RetryRunnerTests {</span></span>
+<span class="line"><span>    @Test</span></span>
+<span class="line"><span>    public void testRetrySuccessFirstTime() {</span></span>
+<span class="line"><span>        assertTrue(true);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Conclusion</h2>
-Making JUnit to rerun is easy, the harder thing to do is to fix your tests so they pass from the first time. Generally, it is not good to have tests that are flaky.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Making JUnit to rerun is easy, the harder thing to do is to fix your tests so they pass from the first time. Generally, it is not good to have tests that are flaky.  <hr data-astro-cid-bvzihdzo>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/api-automation" data-astro-cid-bvzihdzo>API Automation</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/junit" data-astro-cid-bvzihdzo>JUnit</a><a href="/tags/unit-testing" data-astro-cid-bvzihdzo>Unit testing</a><a href="/tags/web-automation" data-astro-cid-bvzihdzo>Web Automation</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

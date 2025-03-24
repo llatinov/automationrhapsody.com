@@ -1,95 +1,94 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/create-simple-rest-api-client-using-jersey/"><!-- Primary Meta Tags --><title>Create simple REST API client using Jersey</title><meta name="title" content="Create simple REST API client using Jersey"><meta name="description" content="Code examples how to create REST API client using Jersey."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/create-simple-rest-api-client-using-jersey/"><meta property="og:title" content="Create simple REST API client using Jersey"><meta property="og:description" content="Code examples how to create REST API client using Jersey."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/create-simple-rest-api-client-using-jersey/"><meta property="twitter:title" content="Create simple REST API client using Jersey"><meta property="twitter:description" content="Code examples how to create REST API client using Jersey."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-11-11T00:00:00.000Z"> Nov 11, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Create simple REST API client using Jersey</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>In the current post, I will give code examples how to build REST API client using Jersey. The code shown in examples below is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener">java-samples/wiremock</a> repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/create-simple-rest-api-client-using-jersey/"><!-- Primary Meta Tags --><title>Create simple REST API client using Jersey</title><meta name="title" content="Create simple REST API client using Jersey"><meta name="description" content="Code examples how to create REST API client using Jersey."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/create-simple-rest-api-client-using-jersey/"><meta property="og:title" content="Create simple REST API client using Jersey"><meta property="og:description" content="Code examples how to create REST API client using Jersey."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/create-simple-rest-api-client-using-jersey/"><meta property="twitter:title" content="Create simple REST API client using Jersey"><meta property="twitter:description" content="Code examples how to create REST API client using Jersey."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Create simple REST API client using Jersey</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-11-11T00:00:00.000Z"> Nov 11, 2016 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>In the current post, I will give code examples how to build REST API client using Jersey. The code shown in examples below is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener">java-samples/wiremock</a> repository.</p>
 <h2>REST API client</h2>
 REST API client is needed when you want to consume given REST API, either for production usage or for testing this API. In the latter case, the client does not need to be very sophisticated since it is used just for testing the API with Java code. In the current post, I will show how to create REST API client for Persons functionality of Dropwizard Rest Stub described in <a href="/build-a-rest-stub-server-with-dropwizard/">Build a RESTful stub server with Dropwizard</a> post.
 <h2>Jersey 2 and Jackson</h2>
 <a href="https://jersey.github.io/" target="_blank" rel="noopener">Jersey</a> is a framework which allows an easier building of RESTful services. It is one of the most used such frameworks nowadays. <a href="https://github.com/FasterXML/jackson" target="_blank" rel="noopener">Jackson</a> is JSON parser for Java. It is also one of the most used ones. The first step is to import libraries you are going to use:
-<pre class="language-xml"><code>&#x3C;dependency>
-	&#x3C;groupId>org.glassfish.jersey.core&#x3C;/groupId>
-	&#x3C;artifactId>jersey-client&#x3C;/artifactId>
-	&#x3C;version>2.25.1&#x3C;/version>
-&#x3C;/dependency>
-&#x3C;dependency>
-	&#x3C;groupId>org.glassfish.jersey.media&#x3C;/groupId>
-	&#x3C;artifactId>jersey-media-json-jackson&#x3C;/artifactId>
-	&#x3C;version>2.25.1&#x3C;/version>
-&#x3C;/dependency>
-&#x3C;dependency>
-	&#x3C;groupId>com.fasterxml.jackson.core&#x3C;/groupId>
-	&#x3C;artifactId>jackson-databind&#x3C;/artifactId>
-	&#x3C;version>2.8.7&#x3C;/version>
-&#x3C;/dependency>
-&#x3C;dependency>
-	&#x3C;groupId>com.fasterxml.jackson.core&#x3C;/groupId>
-	&#x3C;artifactId>jackson-annotations&#x3C;/artifactId>
-	&#x3C;version>2.8.7&#x3C;/version>
-&#x3C;/dependency>
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;dependency></span></span>
+<span class="line"><span>    &#x3C;groupId>org.glassfish.jersey.core&#x3C;/groupId></span></span>
+<span class="line"><span>    &#x3C;artifactId>jersey-client&#x3C;/artifactId></span></span>
+<span class="line"><span>    &#x3C;version>2.25.1&#x3C;/version></span></span>
+<span class="line"><span>&#x3C;/dependency></span></span>
+<span class="line"><span>&#x3C;dependency></span></span>
+<span class="line"><span>    &#x3C;groupId>org.glassfish.jersey.media&#x3C;/groupId></span></span>
+<span class="line"><span>    &#x3C;artifactId>jersey-media-json-jackson&#x3C;/artifactId></span></span>
+<span class="line"><span>    &#x3C;version>2.25.1&#x3C;/version></span></span>
+<span class="line"><span>&#x3C;/dependency></span></span>
+<span class="line"><span>&#x3C;dependency></span></span>
+<span class="line"><span>    &#x3C;groupId>com.fasterxml.jackson.core&#x3C;/groupId></span></span>
+<span class="line"><span>    &#x3C;artifactId>jackson-databind&#x3C;/artifactId></span></span>
+<span class="line"><span>    &#x3C;version>2.8.7&#x3C;/version></span></span>
+<span class="line"><span>&#x3C;/dependency></span></span>
+<span class="line"><span>&#x3C;dependency></span></span>
+<span class="line"><span>    &#x3C;groupId>com.fasterxml.jackson.core&#x3C;/groupId></span></span>
+<span class="line"><span>    &#x3C;artifactId>jackson-annotations&#x3C;/artifactId></span></span>
+<span class="line"><span>    &#x3C;version>2.8.7&#x3C;/version></span></span>
+<span class="line"><span>&#x3C;/dependency></span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Not mandatory but it is good practice to create an interface for this client and then do implementations. The idea is you may have different implementations and switch between them.</p>
-<pre class="language-java"><code>import com.automationrhapsody.wiremock.model.Person;
-
-import java.util.List;
-
-public interface PersonRestClient {
-
-	List&#x3C;Person> getAll();
-
-	Person get(int id);
-
-	String save(Person person);
-
-	String remove();
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import com.automationrhapsody.wiremock.model.Person;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import java.util.List;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public interface PersonRestClient {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    List&#x3C;Person> getAll();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Person get(int id);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    String save(Person person);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    String remove();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Now you can start with implementation. In given example constructor take the host which also includes port and scheme. Then it creates <em><strong>ClientConfig</strong></em> object with specific properties. The full list is shown in ClientProperties Javadoc. In the example, I set up timeouts only. Next is to create <em><strong>WebTarget</strong></em> object to query different API endpoints. It could not be simpler than that:</p>
-<pre class="language-java"><code>import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-
-import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.client.ClientProperties;
-import org.glassfish.jersey.filter.LoggingFilter;
-
-public class JerseyPersonRestClient implements PersonRestClient {
-
-	private final WebTarget webTarget;
-
-	public JerseyPersonRestClient(String host) {
-		ClientConfig clientConfig = new ClientConfig()
-				.property(ClientProperties.READ_TIMEOUT, 30000)
-				.property(ClientProperties.CONNECT_TIMEOUT, 5000);
-
-		webTarget = ClientBuilder
-				.newClient(clientConfig)
-				.register(new LoggingFilter())
-				.target(host);
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import javax.ws.rs.client.ClientBuilder;</span></span>
+<span class="line"><span>import javax.ws.rs.client.WebTarget;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import org.glassfish.jersey.client.ClientConfig;</span></span>
+<span class="line"><span>import org.glassfish.jersey.client.ClientProperties;</span></span>
+<span class="line"><span>import org.glassfish.jersey.filter.LoggingFilter;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class JerseyPersonRestClient implements PersonRestClient {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private final WebTarget webTarget;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public JerseyPersonRestClient(String host) {</span></span>
+<span class="line"><span>        ClientConfig clientConfig = new ClientConfig()</span></span>
+<span class="line"><span>                .property(ClientProperties.READ_TIMEOUT, 30000)</span></span>
+<span class="line"><span>                .property(ClientProperties.CONNECT_TIMEOUT, 5000);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        webTarget = ClientBuilder</span></span>
+<span class="line"><span>                .newClient(clientConfig)</span></span>
+<span class="line"><span>                .register(new LoggingFilter())</span></span>
+<span class="line"><span>                .target(host);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Once WebTarget is instantiated it will be used to query all the endpoints. I will show an implementation of one GET and one POST endpoints consumption:</p>
-<pre class="language-java"><code>@Override
-public List&#x3C;Person> getAll() {
-	Person[] persons = webTarget
-		.path(ENDPOINT_GET_ALL)
-		.request()
-		.get()
-		.readEntity(Person[].class);
-	return Arrays.stream(persons).collect(Collectors.toList());
-}
-
-@Override
-public String save(Person person) {
-	if (person == null) {
-		throw new RuntimeException("Person entity should not be null");
-	}
-	return webTarget
-		.path(ENDPOINT_SAVE)
-		.request()
-		.post(Entity.json(person))
-		.readEntity(String.class);
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Override</span></span>
+<span class="line"><span>public List&#x3C;Person> getAll() {</span></span>
+<span class="line"><span>    Person[] persons = webTarget</span></span>
+<span class="line"><span>        .path(ENDPOINT_GET_ALL)</span></span>
+<span class="line"><span>        .request()</span></span>
+<span class="line"><span>        .get()</span></span>
+<span class="line"><span>        .readEntity(Person[].class);</span></span>
+<span class="line"><span>    return Arrays.stream(persons).collect(Collectors.toList());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@Override</span></span>
+<span class="line"><span>public String save(Person person) {</span></span>
+<span class="line"><span>    if (person == null) {</span></span>
+<span class="line"><span>        throw new RuntimeException("Person entity should not be null");</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    return webTarget</span></span>
+<span class="line"><span>        .path(ENDPOINT_SAVE)</span></span>
+<span class="line"><span>        .request()</span></span>
+<span class="line"><span>        .post(Entity.json(person))</span></span>
+<span class="line"><span>        .readEntity(String.class);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>The full code can be seen in GitHub repo: <a href="https://github.com/llatinov/java-samples/blob/master/wiremock/src/main/java/com/automationrhapsody/wiremock/JerseyPersonRestClient.java" target="_blank" rel="noopener">JerseyPersonRestClient full code</a>.</p>
 <h2>jersey-media-json-jackson</h2>
 This is the bonding between Jersey and Jackson. It should be used otherwise Jersey's <em><strong>readEntity(Class var1)</strong></em> method throws:
@@ -98,23 +97,23 @@ This is the bonding between Jersey and Jackson. It should be used otherwise Jer
 <p><em><strong>Exception in thread “main” org.glassfish.jersey.message.internal.MessageBodyProviderNotFoundException: MessageBodyWriter not found for media type=application/json, type=class …</strong></em></p>
 <h2>Client builder</h2>
 In the code, there is a class called <em><strong>PersonRestClientBuilder</strong></em>. In the current case it does not do many things, but in reality, it might turn out that a lot of configurations or input is provided to build a REST API client instance. This is where such builder becomes very useful:
-<pre class="language-java"><code>public class PersonRestClientBuilder {
-
-	private String host;
-
-	public PersonRestClientBuilder setHost(String host) {
-		this.host = host;
-		return this;
-	}
-
-	public PersonRestClient build() {
-		return new JerseyPersonRestClient(host);
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class PersonRestClientBuilder {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private String host;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public PersonRestClientBuilder setHost(String host) {</span></span>
+<span class="line"><span>        this.host = host;</span></span>
+<span class="line"><span>        return this;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public PersonRestClient build() {</span></span>
+<span class="line"><span>        return new JerseyPersonRestClient(host);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Unit testing</h2>
 It is common and best practice that each piece of code is covered by unit tests. In <a href="/mock-junit-tests-mockito-example/">Mock JUnit tests with Mockito example</a> post, I've described how Mockito can be used. The problem in the current example is if we use Mockito we have to mock <em><strong>readEntity()</strong></em> method to return some response objects. This is way too much mocking and will not do adequate testing, actually, it does not test at all. We want to test that out REST API client successfully communicates over the wire. In order to do proper testing, we need to use a library called WireMock. In <a href="/mock-stub-rest-api-wiremock-better-unit-testing/">Mock/Stub REST API with WireMock for better unit testing</a> post, I will add more details how to use it.
 <h2>Conclusion</h2>
-REST API consuming or testing requires building a client. Jersey is a perfect candidate to be used as an underlying framework. WireMock can be used for unit testing the REST API client you have created.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+REST API consuming or testing requires building a client. Jersey is a perfect candidate to be used as an underlying framework. WireMock can be used for unit testing the REST API client you have created.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/build-a-rest-stub-server-with-dropwizard/" data-astro-cid-bvzihdzo>Build a RESTful stub server with Dropwizard</a> </li><li data-astro-cid-bvzihdzo> <a href="/mock-junit-tests-mockito-example/" data-astro-cid-bvzihdzo>Mock JUnit tests with Mockito example</a> </li><li data-astro-cid-bvzihdzo> <a href="/mock-stub-rest-api-wiremock-better-unit-testing/" data-astro-cid-bvzihdzo>Mock/Stub REST API with WireMock for better unit testing</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/api-automation" data-astro-cid-bvzihdzo>API Automation</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/jersey" data-astro-cid-bvzihdzo>Jersey</a><a href="/tags/rest" data-astro-cid-bvzihdzo>REST</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a><a href="/tags/wiremock" data-astro-cid-bvzihdzo>WireMock</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

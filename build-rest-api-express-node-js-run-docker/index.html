@@ -1,60 +1,59 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/build-rest-api-express-node-js-run-docker/"><!-- Primary Meta Tags --><title>Build a REST API with Express on Node.js and run it on Docker</title><meta name="title" content="Build a REST API with Express on Node.js and run it on Docker"><meta name="description" content="Code examples how to create RESTful API with Node.js using Express web framework and then run it on Docker."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/build-rest-api-express-node-js-run-docker/"><meta property="og:title" content="Build a REST API with Express on Node.js and run it on Docker"><meta property="og:description" content="Code examples how to create RESTful API with Node.js using Express web framework and then run it on Docker."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/build-rest-api-express-node-js-run-docker/"><meta property="twitter:title" content="Build a REST API with Express on Node.js and run it on Docker"><meta property="twitter:description" content="Code examples how to create RESTful API with Node.js using Express web framework and then run it on Docker."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2018-01-19T00:00:00.000Z"> Jan 19, 2018 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Build a REST API with Express on Node.js and run it on Docker</h1> <hr data-astro-cid-bvzihdzo> </div>  <p><span>Code below can be found in GitHub </span><a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/sample-nodejs-rest-stub" target="_blank" rel="noopener noreferrer">sample-nodejs-rest-stub</a><span> repository. This is my first JavaScript post, so bare with me if something is not as perfect as it should be.</span></p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/build-rest-api-express-node-js-run-docker/"><!-- Primary Meta Tags --><title>Build a REST API with Express on Node.js and run it on Docker</title><meta name="title" content="Build a REST API with Express on Node.js and run it on Docker"><meta name="description" content="Code examples how to create RESTful API with Node.js using Express web framework and then run it on Docker."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/build-rest-api-express-node-js-run-docker/"><meta property="og:title" content="Build a REST API with Express on Node.js and run it on Docker"><meta property="og:description" content="Code examples how to create RESTful API with Node.js using Express web framework and then run it on Docker."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/build-rest-api-express-node-js-run-docker/"><meta property="twitter:title" content="Build a REST API with Express on Node.js and run it on Docker"><meta property="twitter:description" content="Code examples how to create RESTful API with Node.js using Express web framework and then run it on Docker."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Build a REST API with Express on Node.js and run it on Docker</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2018-01-19T00:00:00.000Z"> Jan 19, 2018 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p><span>Code below can be found in GitHub </span><a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/sample-nodejs-rest-stub" target="_blank" rel="noopener noreferrer">sample-nodejs-rest-stub</a><span> repository. This is my first JavaScript post, so bare with me if something is not as perfect as it should be.</span></p>
 <h2>Node.js</h2>
 <span><a href="https://nodejs.org/en/" target="_blank" rel="noopener noreferrer">Node.js</a> is a JavaScript runtime built on </span><em><strong>Chrome's V8 JavaScript</strong></em> engine<span>. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js' package ecosystem, </span><em><strong>npm</strong></em><span>, is the largest ecosystem of open source libraries in the world.</span>
 <h2>Create Node.js project</h2>
 Node.js project is created with <em><strong>npm init</strong></em>, which guides you through a wizard with several questions.
 <p><a href="/images/2018/01/NodeJS-REST-init.png"><img src="/images/2018/01/NodeJS-REST-init.png"></a></p>
 <p>In the end <em><strong>package.json</strong></em> file is created. This is the file with all your project’s configuration.</p>
-<pre class="language-json"><code>{
-  "name": "sample-nodejs-rest-stub",
-  "version": "1.0.0",
-  "description": "Sample Node.js REST API",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" &#x26;&#x26; exit 1"
-  },
-  "author": "Lyudmil Latinov",
-  "license": "ISC"
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<span class="line"><span>  "name": "sample-nodejs-rest-stub",</span></span>
+<span class="line"><span>  "version": "1.0.0",</span></span>
+<span class="line"><span>  "description": "Sample Node.js REST API",</span></span>
+<span class="line"><span>  "main": "app.js",</span></span>
+<span class="line"><span>  "scripts": {</span></span>
+<span class="line"><span>    "test": "echo \"Error: no test specified\" &#x26;&#x26; exit 1"</span></span>
+<span class="line"><span>  },</span></span>
+<span class="line"><span>  "author": "Lyudmil Latinov",</span></span>
+<span class="line"><span>  "license": "ISC"</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Once created it is good to add some JavaScript code to test that project is working. I called the file <em><strong>app.js</strong></em> and it will be later extended. It does nothing, but writing <em><strong>Hello world!</strong></em> to the console.</p>
-<pre class="language-javascript"><code>'use strict';
-
-console.log('Hello world!');
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>'use strict';</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>console.log('Hello world!');</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>File with JavaScript code can be run with <em><strong>node app.js</strong></em> command. You can change <em><strong>package.json</strong></em> file by adding <strong>start</strong> script and then run the application with <em><strong>npm start</strong></em>:</p>
-<pre class="language-json"><code>"scripts": {
-  "start": "node app.js",
-  "test": "echo \"Error: no test specified\" &#x26;&#x26; exit 1"
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>"scripts": {</span></span>
+<span class="line"><span>  "start": "node app.js",</span></span>
+<span class="line"><span>  "test": "echo \"Error: no test specified\" &#x26;&#x26; exit 1"</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Express</h2>
 <a href="https://expressjs.com/" target="_blank" rel="noopener noreferrer">Express</a> is a web framework for Node.js. It is the most used one. In order to use express it has to be added as a dependency and saved to <em><strong>package.json</strong></em> file.
-<pre class="language-bash"><code>npm install express --save
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm install express --save</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Change <em><strong>app.js</strong></em> in order to verify <em><strong>Express</strong></em> is working correctly. The <em><strong>‘use strict’</strong></em> literal is used for enabling ECMAScript 5 strict mode, which has several restrictions, like warnings are thrown as errors, usage of undeclared variables is prohibited, etc. I would prefer using constants declared with <em><strong>const</strong></em> whenever possible. Express module is assigned to <em><strong>express</strong></em> variable with <em><strong>require(‘express’)</strong></em> directive. Then new <em><strong>express</strong></em> object is created and assigned to <em><strong>app</strong></em> variable. HTTP <em><strong>GET</strong></em> endpoint that listens to <em><strong>’/’</strong></em> is configured with <em><strong>app.get(path, callback)</strong></em> function. <em><strong>Callback</strong></em> is a <em><strong>function</strong></em> that is called inside another function, in our case inside <em><strong>get()</strong></em> function. In the current example, callback has arguments <em><strong>req</strong></em> and <em><strong>res</strong></em> which gives you access to Express’ <em><strong>Request</strong></em> and <em><strong>Response</strong></em> objects. What is done below is that <em><strong>send([body])</strong></em> function on the response is called, which returns the result. Socket that listens for incoming connections is started with <em><strong>app.listen(path, [callback])</strong></em> function. More details can be found in <a href="http://expressjs.com/en/api.html" target="_blank" rel="noopener noreferrer">Express API reference</a> documentation.</p>
-<pre class="language-javascript"><code>'use strict';
-
-const express = require('express');
-const app = new express();
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
-app.listen(3000, () => {
-    console.log('Server up!');
-});
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>'use strict';</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>const express = require('express');</span></span>
+<span class="line"><span>const app = new express();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>app.get('/', (req, res) => {</span></span>
+<span class="line"><span>    res.send('Hello World!');</span></span>
+<span class="line"><span>});</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>app.listen(3000, () => {</span></span>
+<span class="line"><span>    console.log('Server up!');</span></span>
+<span class="line"><span>});</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>If you run with <em><strong>npm start</strong></em> you should see <em><strong>Server is up!</strong></em> text. Firing <em><strong>GET</strong></em> request to <em><strong><a href="http://localhost:3000">http://localhost:3000</a></strong></em> should return <em><strong>Hello World!</strong></em> response.</p>
 <h2>Add REST API</h2>
 Functionality is a sample Person service that is used also in <a href="/build-a-rest-stub-server-with-dropwizard/">Build a RESTful stub server with Dropwizard</a> and <a href="/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/">Build a REST API with .NET Core 2 and run it on Docker Linux container</a> posts.
 <p>The first step is to include <em><strong>body-parser</strong></em>, an Express middleware which parses request body and makes it available as an object in <em><strong>req.body</strong></em> property.</p>
-<pre class="language-bash"><code>npm install body-parser --save
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm install body-parser --save</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Express middleware is series of function calls that have access to <em><strong>req</strong></em> and <em><strong>res</strong></em> objects. Middleware is used in our application. I will explain as much as possible, if you are interested in more details you can read in <a href="http://expressjs.com/en/guide/using-middleware.html" target="_blank" rel="noopener noreferrer">Express using middleware</a> documentation.</p>
 <h3>Person class</h3>
 A standard model class or POJO is needed in order to transfer and process JSON data. It is standard <em><strong>ECMAScript 6</strong></em> Person class with <em><strong>constructor</strong></em> which is then exported as a module with <em><strong>module.exports = Person</strong></em>.
@@ -64,253 +63,272 @@ Again there will be no real database layer, but a functionality that acts as suc
 In initial example routes and their handling was done with app.get(), here <em><strong>express.Router</strong></em> is used. It is complete middleware routing system. See more in <a href="http://expressjs.com/en/guide/routing.html" target="_blank" rel="noopener noreferrer">Express routing</a> documentation. Router class is imported <em><strong>const Router = require('express')</strong></em> and new instance is created <em><strong>const router = new Router()</strong></em>. Registering path handlers is same as in application. There are <em><strong>get()</strong></em>, <em><strong>post()</strong></em>, etc., functions resp. for <em><strong>GET</strong></em> and <em><strong>POST</strong></em> requests. Specific when using the router is that it should be registered as application middleware with <em><strong>app.use('/person', router)</strong></em>. This makes router handle all defined in it paths which are now under <em><strong>/person</strong></em> base path. Current route configuration is defined as a function with name <em><strong>getPersonRoutes</strong></em> which takes <em><strong>app</strong></em> as an argument. This function is exported as a module.
 <h3>Application</h3>
 Important bit here is <em><strong>require('./routes/personRoutes')(app)</strong></em> which uses <em><strong>getPersonRoutes</strong></em> function and registers person routes.
-<p>[tabby title=“person.js”]</p>
-<pre class="language-javascript"><code>'use strict';
-
-class Person {
-    constructor(id, firstName, lastName, email) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
-}
-
-module.exports = Person;
-</code></pre>
-<p>[tabby title=“personRepository.js”]</p>
-<pre class="language-javascript"><code>'use strict';
-
-const Person = require('../json/person');
-
-class PersonRepository {
-    constructor() {
-        this.persons = new Map([
-            [1, new Person(1, 'FN1', 'LN1', 'email1@email.na')],
-            [2, new Person(2, 'FN2', 'LN2', 'email2@email.na')],
-            [3, new Person(3, 'FN3', 'LN3', 'email3@email.na')],
-            [4, new Person(4, 'FN4', 'LN4', 'email4@email.na')]
-        ]);
-    }
-
-    getById(id) {
-        return this.persons.get(id);
-    }
-
-    getAll() {
-        return Array.from(this.persons.values());
-    }
-
-    remove() {
-        const keys = Array.from(this.persons.keys());
-        this.persons.delete(keys[keys.length - 1]);
-    }
-
-    save(person) {
-        if (this.getById(person.id) !== undefined) {
-            this.persons[person.id] = person;
-            return "Updated Person with id=" + person.id;
-        }
-        else {
-            this.persons.set(person.id, person);
-            return "Added Person with id=" + person.id;
-        }
-    }
-}
-
-const personRepository = new PersonRepository();
-
-module.exports = personRepository;
-</code></pre>
-<p>[tabby title=“personRoutes.js”]</p>
-<pre class="language-javascript"><code>'use strict';
-
-const Router = require('express');
-const personRepo = require('../repo/personRepository');
-
-const getPersonRoutes = (app) => {
-    const router = new Router();
-
-    router
-        .get('/get/:id', (req, res) => {
-            const id = parseInt(req.params.id);
-            const result = personRepo.getById(id);
-            res.send(result);
-        })
-        .get('/all', (req, res) => {
-            const result = personRepo.getAll();
-            res.send(result);
-        })
-        .get('/remove', (req, res) => {
-            personRepo.remove();
-            const result = 'Last person remove. Total count: '
-                + personRepo.persons.size;
-            res.send(result);
-        })
-        .post('/save', (req, res) => {
-            const person = req.body;
-            const result = personRepo.save(person);
-            res.send(result);
-        });
-
-    app.use('/person', router);
-};
-
-module.exports = getPersonRoutes;
-</code></pre>
-<p>[tabby title=“app.js”]</p>
-<pre class="language-javascript"><code>'use strict';
-
-const express = require('express');
-const app = new express();
-const bodyParser = require('body-parser');
-
-// register JSON parser middlewear
-app.use(bodyParser.json());
-
-require('./routes/personRoutes')(app);
-
-app.listen(3000, () => {
-    console.log("Server is up!");
-});
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="9203-person.js" class="tablinks active" onclick="openTab(this, &#x27;content-9203-person.js&#x27;, &#x27;9203&#x27;)">person.js</button>
+<button id="9203-personRepository.js" class="tablinks" onclick="openTab(this, &#x27;content-9203-personRepository.js&#x27;, &#x27;9203&#x27;)">personRepository.js</button>
+<button id="9203-personRoutes.js" class="tablinks" onclick="openTab(this, &#x27;content-9203-personRoutes.js&#x27;, &#x27;9203&#x27;)">personRoutes.js</button>
+<button id="9203-app.js" class="tablinks" onclick="openTab(this, &#x27;content-9203-app.js&#x27;, &#x27;9203&#x27;)">app.js</button></div>
+<div id="content-9203-person.js" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>'use strict';</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>class Person {</span></span>
+<span class="line"><span>    constructor(id, firstName, lastName, email) {</span></span>
+<span class="line"><span>        this.id = id;</span></span>
+<span class="line"><span>        this.firstName = firstName;</span></span>
+<span class="line"><span>        this.lastName = lastName;</span></span>
+<span class="line"><span>        this.email = email;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>module.exports = Person;</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-9203-personRepository.js" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>'use strict';</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>const Person = require('../json/person');</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>class PersonRepository {</span></span>
+<span class="line"><span>    constructor() {</span></span>
+<span class="line"><span>        this.persons = new Map([</span></span>
+<span class="line"><span>            [1, new Person(1, 'FN1', 'LN1', 'email1@email.na')],</span></span>
+<span class="line"><span>            [2, new Person(2, 'FN2', 'LN2', 'email2@email.na')],</span></span>
+<span class="line"><span>            [3, new Person(3, 'FN3', 'LN3', 'email3@email.na')],</span></span>
+<span class="line"><span>            [4, new Person(4, 'FN4', 'LN4', 'email4@email.na')]</span></span>
+<span class="line"><span>        ]);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    getById(id) {</span></span>
+<span class="line"><span>        return this.persons.get(id);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    getAll() {</span></span>
+<span class="line"><span>        return Array.from(this.persons.values());</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    remove() {</span></span>
+<span class="line"><span>        const keys = Array.from(this.persons.keys());</span></span>
+<span class="line"><span>        this.persons.delete(keys[keys.length - 1]);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    save(person) {</span></span>
+<span class="line"><span>        if (this.getById(person.id) !== undefined) {</span></span>
+<span class="line"><span>            this.persons[person.id] = person;</span></span>
+<span class="line"><span>            return "Updated Person with id=" + person.id;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        else {</span></span>
+<span class="line"><span>            this.persons.set(person.id, person);</span></span>
+<span class="line"><span>            return "Added Person with id=" + person.id;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>const personRepository = new PersonRepository();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>module.exports = personRepository;</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-9203-personRoutes.js" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>'use strict';</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>const Router = require('express');</span></span>
+<span class="line"><span>const personRepo = require('../repo/personRepository');</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>const getPersonRoutes = (app) => {</span></span>
+<span class="line"><span>    const router = new Router();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    router</span></span>
+<span class="line"><span>        .get('/get/:id', (req, res) => {</span></span>
+<span class="line"><span>            const id = parseInt(req.params.id);</span></span>
+<span class="line"><span>            const result = personRepo.getById(id);</span></span>
+<span class="line"><span>            res.send(result);</span></span>
+<span class="line"><span>        })</span></span>
+<span class="line"><span>        .get('/all', (req, res) => {</span></span>
+<span class="line"><span>            const result = personRepo.getAll();</span></span>
+<span class="line"><span>            res.send(result);</span></span>
+<span class="line"><span>        })</span></span>
+<span class="line"><span>        .get('/remove', (req, res) => {</span></span>
+<span class="line"><span>            personRepo.remove();</span></span>
+<span class="line"><span>            const result = 'Last person remove. Total count: '</span></span>
+<span class="line"><span>                + personRepo.persons.size;</span></span>
+<span class="line"><span>            res.send(result);</span></span>
+<span class="line"><span>        })</span></span>
+<span class="line"><span>        .post('/save', (req, res) => {</span></span>
+<span class="line"><span>            const person = req.body;</span></span>
+<span class="line"><span>            const result = personRepo.save(person);</span></span>
+<span class="line"><span>            res.send(result);</span></span>
+<span class="line"><span>        });</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    app.use('/person', router);</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>module.exports = getPersonRoutes;</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-9203-app.js" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>'use strict';</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>const express = require('express');</span></span>
+<span class="line"><span>const app = new express();</span></span>
+<span class="line"><span>const bodyParser = require('body-parser');</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// register JSON parser middlewear</span></span>
+<span class="line"><span>app.use(bodyParser.json());</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>require('./routes/personRoutes')(app);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>app.listen(3000, () => {</span></span>
+<span class="line"><span>    console.log("Server is up!");</span></span>
+<span class="line"><span>});</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Debug with Visual Studio Code</h2>
 I started to like<span> </span><a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual Studio Code</a><span> </span>– an open source multi-platform editor maintained by Microsoft. Once project folder is imported, hitting <em><strong>F5</strong></em> starts to debug on the project.
 <p><a href="/images/2018/01/NodeJS-REST-debug.png"><img src="/images/2018/01/NodeJS-REST-debug.png"></a></p>
 <h2>External configuration</h2>
 External configuration from a file is a must for every serious application, so this also has to be handled. A separate <em><strong>config.js</strong></em> file is keeping the configuration and exposing it as a module. There is <em><strong>versionRoutes.js</strong></em> file added which is reading configuration value and exposing it to the API. It follows the same pattern as <em><strong>personRoutes.js</strong></em>, but it has config as function argument as well. Also, <em><strong>app.js</strong></em> has to be changed, import <em><strong>config</strong></em> and pass it to <em><strong>getVersionRoutes</strong></em> function.
-<p>[tabby title=“config.js”]</p>
-<pre class="language-javascript"><code>'use strict';
-
-const config = {
-    version: '1.0'
-};
-
-module.exports = config;
-</code></pre>
-<p>[tabby title=“versionRoutes.js”]</p>
-<pre class="language-javascript"><code>'use strict';
-
-const getVersionRoutes = (app, config) => {
-    app.get('/api/version', (req, res) => {
-        res.send(config.version);
-    });
-};
-
-module.exports = getVersionRoutes;
-</code></pre>
-<p>[tabby title=“app.js”]</p>
-<pre class="language-javascript"><code>'use strict';
-
-const express = require('express');
-const bodyParser = require('body-parser');
-const config = require('./config/config');
-const app = new express();
-
-// register JSON parser middlewear
-app.use(bodyParser.json());
-
-require('./routes/personRoutes')(app);
-require('./routes/versionRoutes')(app, config);
-
-app.listen(3000, () => {
-    console.log("Server is up!");
-});
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="13503-config.js" class="tablinks active" onclick="openTab(this, &#x27;content-13503-config.js&#x27;, &#x27;13503&#x27;)">config.js</button>
+<button id="13503-versionRoutes.js" class="tablinks" onclick="openTab(this, &#x27;content-13503-versionRoutes.js&#x27;, &#x27;13503&#x27;)">versionRoutes.js</button>
+<button id="13503-app.js" class="tablinks" onclick="openTab(this, &#x27;content-13503-app.js&#x27;, &#x27;13503&#x27;)">app.js</button></div>
+<div id="content-13503-config.js" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>'use strict';</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>const config = {</span></span>
+<span class="line"><span>    version: '1.0'</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>module.exports = config;</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-13503-versionRoutes.js" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>'use strict';</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>const getVersionRoutes = (app, config) => {</span></span>
+<span class="line"><span>    app.get('/api/version', (req, res) => {</span></span>
+<span class="line"><span>        res.send(config.version);</span></span>
+<span class="line"><span>    });</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>module.exports = getVersionRoutes;</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-13503-app.js" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>'use strict';</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>const express = require('express');</span></span>
+<span class="line"><span>const bodyParser = require('body-parser');</span></span>
+<span class="line"><span>const config = require('./config/config');</span></span>
+<span class="line"><span>const app = new express();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// register JSON parser middlewear</span></span>
+<span class="line"><span>app.use(bodyParser.json());</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>require('./routes/personRoutes')(app);</span></span>
+<span class="line"><span>require('./routes/versionRoutes')(app, config);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>app.listen(3000, () => {</span></span>
+<span class="line"><span>    console.log("Server is up!");</span></span>
+<span class="line"><span>});</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Code style checker</h2>
 It is very good practice to have consistency over projects code. The more important benefit of using it is that it can catch bugs that otherwise will be caught later in when the application is run. This is why using a code style checker is recommended. Most popular for JavaScript is <a href="https://eslint.org/" target="_blank" rel="noopener noreferrer">ESLint</a>. In order to have it has to be added as a dependency to the project:
-<pre class="language-bash"><code>npm install eslint --save-dev
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm install eslint --save-dev</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Notice the <em><strong>—save-dev</strong></em> option, this creates a new <em><strong>devDependencies</strong></em> node in <em><strong>package.json</strong></em>. This means that project needs this packages, but just for development. Those dependencies will not be available if someone is importing your project. Entry in <em><strong>scripts</strong></em> node in <em><strong>package.json</strong></em> file can be added: <em><strong>“lint”: “eslint .”</strong></em>. This will allow you to run ESLint with <em><strong>npm run lint</strong></em>. ESLint configuration is present in <em><strong>.eslintrc</strong></em> file. In <em><strong>.eslintignore</strong></em> are listed folders to be skipped during the check.</p>
-<p>[tabby title=“.eslintrc”]</p>
-<pre class="language-text"><code>{
-  "extends": "eslint:recommended",
-  "parserOptions": {
-    "ecmaVersion": 6
-  },
-  "env": {
-    "es6": true,
-    "node": true
-  },
-  "globals": {
-  },
-  "rules": {
-    "quotes": [2, "single"]
-  }
-}
-</code></pre>
-<p>[tabby title=“.eslintignore”]</p>
-<pre class="language-text"><code>node_modules
-</code></pre>
-<p>[tabby title=“package.json”]</p>
-<pre class="language-json"><code>"scripts": {
-  "start": "node app.js",
-  "test": "echo \"Error: no test specified\" &#x26;&#x26; exit 1",
-  "lint": "eslint ."
-},
-...
-"devDependencies": {
-  "eslint": "^4.15.0"
-}
-</code></pre>
-<p>[tabby title=“app.js”]</p>
-<pre class="language-javascript"><code>'use strict';
-
-const express = require('express');
-const bodyParser = require('body-parser');
-const config = require('./config/config');
-const app = new express();
-
-// register JSON parser middlewear
-app.use(bodyParser.json());
-
-require('./routes/personRoutes')(app);
-require('./routes/versionRoutes')(app, config);
-
-app.listen(3000, () => {
-    /* eslint-disable */
-    console.log('Server is up!');
-});
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="15744-.eslintrc" class="tablinks active" onclick="openTab(this, &#x27;content-15744-.eslintrc&#x27;, &#x27;15744&#x27;)">.eslintrc</button>
+<button id="15744-.eslintignore" class="tablinks" onclick="openTab(this, &#x27;content-15744-.eslintignore&#x27;, &#x27;15744&#x27;)">.eslintignore</button>
+<button id="15744-package.json" class="tablinks" onclick="openTab(this, &#x27;content-15744-package.json&#x27;, &#x27;15744&#x27;)">package.json</button>
+<button id="15744-app.js" class="tablinks" onclick="openTab(this, &#x27;content-15744-app.js&#x27;, &#x27;15744&#x27;)">app.js</button></div>
+<div id="content-15744-.eslintrc" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<span class="line"><span>  "extends": "eslint:recommended",</span></span>
+<span class="line"><span>  "parserOptions": {</span></span>
+<span class="line"><span>    "ecmaVersion": 6</span></span>
+<span class="line"><span>  },</span></span>
+<span class="line"><span>  "env": {</span></span>
+<span class="line"><span>    "es6": true,</span></span>
+<span class="line"><span>    "node": true</span></span>
+<span class="line"><span>  },</span></span>
+<span class="line"><span>  "globals": {</span></span>
+<span class="line"><span>  },</span></span>
+<span class="line"><span>  "rules": {</span></span>
+<span class="line"><span>    "quotes": [2, "single"]</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-15744-.eslintignore" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>node_modules</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-15744-package.json" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>"scripts": {</span></span>
+<span class="line"><span>  "start": "node app.js",</span></span>
+<span class="line"><span>  "test": "echo \"Error: no test specified\" &#x26;&#x26; exit 1",</span></span>
+<span class="line"><span>  "lint": "eslint ."</span></span>
+<span class="line"><span>},</span></span>
+<span class="line"><span>...</span></span>
+<span class="line"><span>"devDependencies": {</span></span>
+<span class="line"><span>  "eslint": "^4.15.0"</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-15744-app.js" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>'use strict';</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>const express = require('express');</span></span>
+<span class="line"><span>const bodyParser = require('body-parser');</span></span>
+<span class="line"><span>const config = require('./config/config');</span></span>
+<span class="line"><span>const app = new express();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// register JSON parser middlewear</span></span>
+<span class="line"><span>app.use(bodyParser.json());</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>require('./routes/personRoutes')(app);</span></span>
+<span class="line"><span>require('./routes/versionRoutes')(app, config);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>app.listen(3000, () => {</span></span>
+<span class="line"><span>    /* eslint-disable */</span></span>
+<span class="line"><span>    console.log('Server is up!');</span></span>
+<span class="line"><span>});</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <p><a href="/images/2018/01/NodeJS-REST-eslint.png"><img src="/images/2018/01/NodeJS-REST-eslint.png"></a></p>
 <p>During the check, some issues were found. One of the issues is that <em><strong>console.log()</strong></em> is not allowed. This is a pretty good rule as all logging should be done to some specific logger, but in our case, we need <em><strong>app.js</strong></em> to have text showing that server is up. In order to ignore this error <em><strong>/* eslint-disable */</strong></em> comment can be used, see <em><strong>app.js</strong></em> above.</p>
 <h2>Dockerfile</h2>
 Dockerfile that packs application is shown below:
-<pre class="language-docker"><code>FROM node:8.6-alpine
-
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-COPY package.json ./
-RUN npm install
-
-COPY . .
-
-EXPOSE 3000
-CMD ["npm", "start"]
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>FROM node:8.6-alpine</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>RUN mkdir -p /usr/src/app</span></span>
+<span class="line"><span>WORKDIR /usr/src/app</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>COPY package.json ./</span></span>
+<span class="line"><span>RUN npm install</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>COPY . .</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>EXPOSE 3000</span></span>
+<span class="line"><span>CMD ["npm", "start"]</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Docker container that is used is <em><strong>node:8.6-alpine</strong></em>. Folder <em><strong>/usr/src/app</strong></em> and is made current working directory. Then <em><strong>package.json</strong></em> file is copied into container and <em><strong>npm install</strong></em> is run, this will download all dependencies. All files from the current folder are copied on docker image with: <em><strong>COPY . .</strong></em>. Port <em><strong>3000</strong></em> is exposed so it is, later on, available from the container. With <em><strong>CMD</strong></em> is configured the command that is run when the container is started.</p>
 <h2>Build and run Docker container</h2>
 Docker container is packaged with tag <em><strong>nodejs-rest</strong></em> with the following command:
-<pre class="language-bash"><code>docker build . -t nodejs-rest
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>docker build . -t nodejs-rest</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Docker container is run with exposing port <em><strong>3000</strong></em> from the container to port <em><strong>9000</strong></em> on the host with the following command:</p>
-<pre class="language-bash"><code>docker run -e VERSION=1.1 -p 9000:3000 nodejs-rest
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>docker run -e VERSION=1.1 -p 9000:3000 nodejs-rest</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Notice the <em><strong>-e VERSION=1.1</strong></em> which sets an environment variable to be used inside the container. The intention is to use this variable in the application. This can be enabled with modifying <em><strong>config.js</strong></em> file by changing to: <em><strong>version: process.env.VERSION || ‘1.0’</strong></em>. If environment variable <em><strong>VERSION</strong></em> is available then save it in <em><strong>version</strong></em>, if not use <em><strong>1.0</strong></em>.</p>
-<pre class="language-javascript"><code>'use strict';
-
-const config = {
-    version: process.env.VERSION || '1.0'
-};
-
-module.exports = config;
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>'use strict';</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>const config = {</span></span>
+<span class="line"><span>    version: process.env.VERSION || '1.0'</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>module.exports = config;</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>If invoked now <em><strong>/api/version</strong></em> returns <em><strong>1.1</strong></em>.</p>
 <h2>Conclusion</h2>
-In the current post, I have shown how to make very basic REST API with Node.js and Express. It can be very easily run into a Docker container.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+In the current post, I have shown how to make very basic REST API with Node.js and Express. It can be very easily run into a Docker container.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/run-dropwizard-application-docker-templated-configuration-using-environment-variables/" data-astro-cid-bvzihdzo>Run Dropwizard application in Docker with templated configuration using environment variables</a> </li><li data-astro-cid-bvzihdzo> <a href="/build-a-rest-stub-server-with-dropwizard/" data-astro-cid-bvzihdzo>Build a RESTful stub server with Dropwizard</a> </li><li data-astro-cid-bvzihdzo> <a href="/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/" data-astro-cid-bvzihdzo>Build a REST API with .NET Core 2 and run it on Docker Linux container</a> </li><li data-astro-cid-bvzihdzo> <a href="/testing-with-cypress-build-a-react-application-with-node-js-backend/" data-astro-cid-bvzihdzo>Testing with Cypress - Build a React application with Node.js backend</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/javascript" data-astro-cid-bvzihdzo>JavaScript</a><a href="/tags/nodejs" data-astro-cid-bvzihdzo>Node.js</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

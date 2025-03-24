@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/"><!-- Primary Meta Tags --><title>Build a REST API with .NET Core 2 and run it on Docker Linux container</title><meta name="title" content="Build a REST API with .NET Core 2 and run it on Docker Linux container"><meta name="description" content="Code examples how to create RESTful API with .NET Core 2.0 and then run it on Docker Linux container."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/"><meta property="og:title" content="Build a REST API with .NET Core 2 and run it on Docker Linux container"><meta property="og:description" content="Code examples how to create RESTful API with .NET Core 2.0 and then run it on Docker Linux container."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/"><meta property="twitter:title" content="Build a REST API with .NET Core 2 and run it on Docker Linux container"><meta property="twitter:description" content="Code examples how to create RESTful API with .NET Core 2.0 and then run it on Docker Linux container."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-12-19T00:00:00.000Z"> Dec 19, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Build a REST API with .NET Core 2 and run it on Docker Linux container</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Code below can be found in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/SampleDotNetCore2RestStub" target="_blank" rel="noopener noreferrer">SampleDotNetCore2RestStub</a> repository. In the current post is shown a sample application that can be a very good foundation for a real production application. This project can be easily used as a template for real API service.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/"><!-- Primary Meta Tags --><title>Build a REST API with .NET Core 2 and run it on Docker Linux container</title><meta name="title" content="Build a REST API with .NET Core 2 and run it on Docker Linux container"><meta name="description" content="Code examples how to create RESTful API with .NET Core 2.0 and then run it on Docker Linux container."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/"><meta property="og:title" content="Build a REST API with .NET Core 2 and run it on Docker Linux container"><meta property="og:description" content="Code examples how to create RESTful API with .NET Core 2.0 and then run it on Docker Linux container."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/"><meta property="twitter:title" content="Build a REST API with .NET Core 2 and run it on Docker Linux container"><meta property="twitter:description" content="Code examples how to create RESTful API with .NET Core 2.0 and then run it on Docker Linux container."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Build a REST API with .NET Core 2 and run it on Docker Linux container</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-12-19T00:00:00.000Z"> Dec 19, 2017 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>Code below can be found in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/SampleDotNetCore2RestStub" target="_blank" rel="noopener noreferrer">SampleDotNetCore2RestStub</a> repository. In the current post is shown a sample application that can be a very good foundation for a real production application. This project can be easily used as a template for real API service.</p>
 <h2>Microsoft and open source</h2>
 I was doing Java for about 2 years and got back to .NET six months ago. Recently we had to do a project in .NET Core 2.0, a technology I haven't heard of before. I was truly amazed how much open source Microsoft had begun. .NET now can be developed and even run on Linux. This definitely makes it really competitive to Java which advantage was multi-platform ability. Another benefit is that documentation is very extensive and there is a huge community out there that makes solving issues really fast and easy.
 <h2>.NET Core</h2>
@@ -21,9 +20,9 @@ Once the project is created it can be developed in any text editor. Most conveni
 <p><a href="/images/2017/12/NET-Core-Rest-API-VS-Code.png"><img src="/images/2017/12/NET-Core-Rest-API-VS-Code.png"></a></p>
 <h2>ASP.NET Core MVC</h2>
 ASP.NET Core MVC provides features to build web APIs or web UIs. It has to be used in order to continue with the current example. Dependency to its NuGet package is added with the following command:
-<pre class="language-bash"><code>dotnet add package Microsoft.AspNetCore
-dotnet add package Microsoft.AspNetCore.All
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>dotnet add package Microsoft.AspNetCore</span></span>
+<span class="line"><span>dotnet add package Microsoft.AspNetCore.All</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Create REST API</h2>
 After project structure is done it is time to add classes needed to make the REST API. Functionality is very similar to one described in <a href="/build-a-rest-stub-server-with-dropwizard/">Build a RESTful stub server with Dropwizard</a> post. There is a Person API which can retrieve, save or delete persons. They are kept in an in-memory data structure which mimics DB layer. Following classes are needed:
 <ul>
@@ -33,179 +32,188 @@ After project structure is done it is time to add classes needed to make the RES
  	<li><em><strong>Startup</strong></em> - class with services configuration. Both <em><strong>ConfigureServices</strong></em> and <em><strong>Configure</strong></em> methods are called behind the scenes from the runtime. Any configurations needed goes to those two methods. Current configuration adds MVC to services and instructs the application to use it. This is not really Model View Controller pattern, but this is what is needed to enable controllers and get API running.</li>
  	<li><em><strong>Program</strong></em> - main program entry point where web host is built and started. It uses <em><strong>Startup.cs</strong></em> to run the configurations. More details on WebHost can be found in <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/index?tabs=windows&#x26;view=aspnetcore-2.1#host" target="_blank" rel="noopener noreferrer">Hosting in ASP.NET Core</a>. This article also shows how the external configuration is managed, something that will be presented later in the current post.</li>
 </ul>
-[tabby title="PersonController"]
-<pre class="language-csharp"><code>using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using SampleDotNetCore2RestStub.Models;
-using SampleDotNetCore2RestStub.Repositories;
-
-namespace SampleDotNetCore2RestStub.Controllers
-{
-	public class PersonController : Controller
-	{
-		[HttpGet("person/get/{id}")]
-		public Person GetPerson(int id)
-		{
-			return PersonRepository.GetById(id);
-		}
-
-		[HttpGet("person/remove")]
-		public string RemovePerson()
-		{
-			PersonRepository.Remove();
-			return "Last person remove. Total count: " 
-						+ PersonRepository.GetCount();
-		}
-
-		[HttpGet("person/all")]
-		public List&#x3C;Person> GetPersons()
-		{
-			return PersonRepository.GetAll();
-		}
-
-		[HttpPost("person/save")]
-		public string AddPerson([FromBody]Person person)
-		{
-			return PersonRepository.Save(person);
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“Person”]</p>
-<pre class="language-csharp"><code>namespace SampleDotNetCore2RestStub.Models
-{
-	public class Person
-	{
-		public int Id { get; set; }
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
-		public string Email { get; set; }
-	}
-}
-</code></pre>
-<p>[tabby title=“PersonRepository”]</p>
-<pre class="language-csharp"><code>using System.Collections.Generic;
-using System.Linq;
-using SampleDotNetCore2RestStub.Models;
-
-namespace SampleDotNetCore2RestStub.Repositories
-{
-	public class PersonRepository
-	{
-		private static Dictionary&#x3C;int, Person> PERSONS 
-								= new Dictionary&#x3C;int, Person>();
-
-		static PersonRepository()
-		{
-			PERSONS.Add(1, new Person
-			{
-				Id = 1,
-				FirstName = "FN1",
-				LastName = "LN1",
-				Email = "email1@email.na"
-			});
-			PERSONS.Add(2, new Person
-			{
-				Id = 2,
-				FirstName = "FN2",
-				LastName = "LN2",
-				Email = "email2@email.na"
-			});
-		}
-
-		public static Person GetById(int id)
-		{
-			return PERSONS[id];
-		}
-
-		public static List&#x3C;Person> GetAll()
-		{
-			return PERSONS.Values.ToList();
-		}
-
-		public static int GetCount()
-		{
-			return PERSONS.Count();
-		}
-
-		public static void Remove()
-		{
-			if (PERSONS.Keys.Any())
-			{
-				PERSONS.Remove(PERSONS.Keys.Last());
-			}
-		}
-
-		public static string Save(Person person)
-		{
-			var result = "";
-			if (PERSONS.ContainsKey(person.Id))
-			{
-				result = "Updated Person with id=" + person.Id;
-			}
-			else
-			{
-				result = "Added Person with id=" + person.Id;
-			}
-			PERSONS.Add(person.Id, person);
-			return result;
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“Startup”]</p>
-<pre class="language-csharp"><code>using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Builder;
-
-namespace SampleDotNetCore2RestStub
-{
-	public class Startup
-	{
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
-
-		public IConfiguration Configuration { get; }
-
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.AddMvc();
-		}
-
-		public void Configure(IApplicationBuilder app,
-					IHostingEnvironment env)
-		{
-			app.UseMvc();
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“Program”]</p>
-<pre class="language-csharp"><code>using System;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-
-namespace SampleDotNetCore2RestStub
-{
-	public class Program
-	{
-		public static void Main(string[] args)
-		{
-			BuildWebHost(args).Run();
-		}
-
-		public static IWebHost BuildWebHost(string[] args) =>
-			WebHost.CreateDefaultBuilder(args)
-				.UseStartup&#x3C;Startup>()
-				.Build();
-	}
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="6801-PersonController" class="tablinks active" onclick="openTab(this, &#x27;content-6801-PersonController&#x27;, &#x27;6801&#x27;)">PersonController</button>
+<button id="6801-Person" class="tablinks" onclick="openTab(this, &#x27;content-6801-Person&#x27;, &#x27;6801&#x27;)">Person</button>
+<button id="6801-PersonRepository" class="tablinks" onclick="openTab(this, &#x27;content-6801-PersonRepository&#x27;, &#x27;6801&#x27;)">PersonRepository</button>
+<button id="6801-Startup" class="tablinks" onclick="openTab(this, &#x27;content-6801-Startup&#x27;, &#x27;6801&#x27;)">Startup</button>
+<button id="6801-Program" class="tablinks" onclick="openTab(this, &#x27;content-6801-Program&#x27;, &#x27;6801&#x27;)">Program</button></div>
+<div id="content-6801-PersonController" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Collections.Generic;</span></span>
+<span class="line"><span>using System.Linq;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Mvc;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Repositories;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Controllers</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class PersonController : Controller</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        [HttpGet("person/get/{id}")]</span></span>
+<span class="line"><span>        public Person GetPerson(int id)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return PersonRepository.GetById(id);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [HttpGet("person/remove")]</span></span>
+<span class="line"><span>        public string RemovePerson()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            PersonRepository.Remove();</span></span>
+<span class="line"><span>            return "Last person remove. Total count: " </span></span>
+<span class="line"><span>                        + PersonRepository.GetCount();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [HttpGet("person/all")]</span></span>
+<span class="line"><span>        public List&#x3C;Person> GetPersons()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return PersonRepository.GetAll();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [HttpPost("person/save")]</span></span>
+<span class="line"><span>        public string AddPerson([FromBody]Person person)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return PersonRepository.Save(person);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-6801-Person" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>namespace SampleDotNetCore2RestStub.Models</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class Person</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        public int Id { get; set; }</span></span>
+<span class="line"><span>        public string FirstName { get; set; }</span></span>
+<span class="line"><span>        public string LastName { get; set; }</span></span>
+<span class="line"><span>        public string Email { get; set; }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-6801-PersonRepository" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Collections.Generic;</span></span>
+<span class="line"><span>using System.Linq;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Repositories</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class PersonRepository</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        private static Dictionary&#x3C;int, Person> PERSONS </span></span>
+<span class="line"><span>                                = new Dictionary&#x3C;int, Person>();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        static PersonRepository()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            PERSONS.Add(1, new Person</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                Id = 1,</span></span>
+<span class="line"><span>                FirstName = "FN1",</span></span>
+<span class="line"><span>                LastName = "LN1",</span></span>
+<span class="line"><span>                Email = "email1@email.na"</span></span>
+<span class="line"><span>            });</span></span>
+<span class="line"><span>            PERSONS.Add(2, new Person</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                Id = 2,</span></span>
+<span class="line"><span>                FirstName = "FN2",</span></span>
+<span class="line"><span>                LastName = "LN2",</span></span>
+<span class="line"><span>                Email = "email2@email.na"</span></span>
+<span class="line"><span>            });</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public static Person GetById(int id)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return PERSONS[id];</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public static List&#x3C;Person> GetAll()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return PERSONS.Values.ToList();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public static int GetCount()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return PERSONS.Count();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public static void Remove()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            if (PERSONS.Keys.Any())</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                PERSONS.Remove(PERSONS.Keys.Last());</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public static string Save(Person person)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var result = "";</span></span>
+<span class="line"><span>            if (PERSONS.ContainsKey(person.Id))</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                result = "Updated Person with id=" + person.Id;</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>            else</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                result = "Added Person with id=" + person.Id;</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>            PERSONS.Add(person.Id, person);</span></span>
+<span class="line"><span>            return result;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-6801-Startup" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using Microsoft.Extensions.Configuration;</span></span>
+<span class="line"><span>using Microsoft.Extensions.DependencyInjection;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Hosting;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Builder;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class Startup</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        public Startup(IConfiguration configuration)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            Configuration = configuration;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public IConfiguration Configuration { get; }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public void ConfigureServices(IServiceCollection services)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            services.AddMvc();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public void Configure(IApplicationBuilder app,</span></span>
+<span class="line"><span>                    IHostingEnvironment env)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            app.UseMvc();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-6801-Program" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Hosting;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class Program</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        public static void Main(string[] args)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            BuildWebHost(args).Run();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public static IWebHost BuildWebHost(string[] args) =></span></span>
+<span class="line"><span>            WebHost.CreateDefaultBuilder(args)</span></span>
+<span class="line"><span>                .UseStartup&#x3C;Startup>()</span></span>
+<span class="line"><span>                .Build();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>External configuration</h2>
 Service so far is pretty much useless as it does not give an opportunity for external configurations. Adding external configuration consist of adding and changing following files:
 <ul>
@@ -219,84 +227,93 @@ Service so far is pretty much useless as it does not give an opportunity for ext
 </ul>
 </li>
 </ul>
-[tabby title="VersionController"]
-<pre class="language-csharp"><code>using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-
-namespace SampleDotNetCore2RestStub.Controllers
-{
-	[Route("api/[controller]")]
-	public class VersionController : Controller
-	{
-		private readonly AppConfig _config;
-
-		public VersionController(IOptions&#x3C;AppConfig> options)
-		{
-			_config = options.Value;
-		}
-
-		[HttpGet]
-		public string Version()
-		{
-			return _config.Version;
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“appsettings.json”]</p>
-<pre class="language-text"><code>{
-	"Version": "1.0"
-}
-</code></pre>
-<p>[tabby title=“AppConfig”]</p>
-<pre class="language-csharp"><code>namespace SampleDotNetCore2RestStub
-{
-	public class AppConfig
-	{
-		public string Version { get; set; }
-	}
-}
-</code></pre>
-<p>[tabby title=“Startup”]</p>
-<pre class="language-csharp"><code>using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Builder;
-
-namespace SampleDotNetCore2RestStub
-{
-	public class Startup
-	{
-		public Startup()
-		{
-			var configurationBuilder = new ConfigurationBuilder()
-				.AddJsonFile("appsettings.json", false, true);
-
-			Configuration = configurationBuilder.Build();
-		}
-
-		public IConfiguration Configuration { get; }
-
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.AddMvc();
-			services.Configure&#x3C;AppConfig>(Configuration);
-		}
-
-		public void Configure(IApplicationBuilder app, 
-					IHostingEnvironment env)
-		{
-			app.UseMvc();
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“csproj”]</p>
-<pre class="language-csharp"><code>&#x3C;ItemGroup>
-	&#x3C;None Include="appsettings.json" CopyToOutputDirectory="Always" />
-&#x3C;/ItemGroup>
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="12732-VersionController" class="tablinks active" onclick="openTab(this, &#x27;content-12732-VersionController&#x27;, &#x27;12732&#x27;)">VersionController</button>
+<button id="12732-appsettings.json" class="tablinks" onclick="openTab(this, &#x27;content-12732-appsettings.json&#x27;, &#x27;12732&#x27;)">appsettings.json</button>
+<button id="12732-AppConfig" class="tablinks" onclick="openTab(this, &#x27;content-12732-AppConfig&#x27;, &#x27;12732&#x27;)">AppConfig</button>
+<button id="12732-Startup" class="tablinks" onclick="openTab(this, &#x27;content-12732-Startup&#x27;, &#x27;12732&#x27;)">Startup</button>
+<button id="12732-csproj" class="tablinks" onclick="openTab(this, &#x27;content-12732-csproj&#x27;, &#x27;12732&#x27;)">csproj</button></div>
+<div id="content-12732-VersionController" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using Microsoft.AspNetCore.Mvc;</span></span>
+<span class="line"><span>using Microsoft.Extensions.Options;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Controllers</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    [Route("api/[controller]")]</span></span>
+<span class="line"><span>    public class VersionController : Controller</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        private readonly AppConfig _config;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public VersionController(IOptions&#x3C;AppConfig> options)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            _config = options.Value;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [HttpGet]</span></span>
+<span class="line"><span>        public string Version()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return _config.Version;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-12732-appsettings.json" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<span class="line"><span>    "Version": "1.0"</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-12732-AppConfig" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>namespace SampleDotNetCore2RestStub</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class AppConfig</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        public string Version { get; set; }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-12732-Startup" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using Microsoft.Extensions.Configuration;</span></span>
+<span class="line"><span>using Microsoft.Extensions.DependencyInjection;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Hosting;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Builder;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class Startup</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        public Startup()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var configurationBuilder = new ConfigurationBuilder()</span></span>
+<span class="line"><span>                .AddJsonFile("appsettings.json", false, true);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            Configuration = configurationBuilder.Build();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public IConfiguration Configuration { get; }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public void ConfigureServices(IServiceCollection services)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            services.AddMvc();</span></span>
+<span class="line"><span>            services.Configure&#x3C;AppConfig>(Configuration);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public void Configure(IApplicationBuilder app, </span></span>
+<span class="line"><span>                    IHostingEnvironment env)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            app.UseMvc();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-12732-csproj" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;ItemGroup></span></span>
+<span class="line"><span>    &#x3C;None Include="appsettings.json" CopyToOutputDirectory="Always" /></span></span>
+<span class="line"><span>&#x3C;/ItemGroup></span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Request filtering</h2>
 An almost mandatory feature is to have some kind of filtering on the request. The current example will provide a very basic implementation of authentication filter achieved with an attribute. Following files are needed:
 <ul>
@@ -304,55 +321,60 @@ An almost mandatory feature is to have some kind of filtering on the request. Th
  	<li><em><strong>AuthenticationFilterAttribute</strong></em> - very basic implementation to illustrate how it works. Request headers are extracted from <em><strong>HttpContext</strong></em> and are checked for the existence of <em><strong>Authorization</strong></em>. If not found <em><strong>Exception</strong></em> is thrown. In next section, I will show how to handle this exception more gracefully.</li>
  	<li><em><strong>Startup</strong></em> - <em><strong>AuthenticationFilterAttribute</strong></em> is registered to runtime with: <em><strong>services.AddScoped&#x3C;AuthenticationFilterAttribute>()</strong></em>. .NET Core dependency injection mechanism is used here, which I have described it in more details in separate section below.</li>
 </ul>
-[tabby title="SecurePersonController"]
-<pre class="language-csharp"><code>using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using SampleDotNetCore2RestStub.Attributes;
-using SampleDotNetCore2RestStub.Models;
-using SampleDotNetCore2RestStub.Repositories;
-
-namespace SampleDotNetCore2RestStub.Controllers
-{
-	[ServiceFilter(typeof(AuthenticationFilterAttribute))]
-	public class SecurePersonController : Controller
-	{
-		[HttpGet("secure/person/all")]
-		public List&#x3C;Person> GetPersons()
-		{
-			return PersonRepository.GetAll();
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“AuthenticationFilterAttribute”]</p>
-<pre class="language-csharp"><code>using System;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc.Filters;
-
-namespace SampleDotNetCore2RestStub.Attributes
-{
-	public class AuthenticationFilterAttribute : ActionFilterAttribute
-	{
-		public override void OnActionExecuting(ActionExecutingContext ctx)
-		{
-			string authKey = ctx.HttpContext.Request
-					.Headers["Authorization"].SingleOrDefault();
-
-			if (string.IsNullOrWhiteSpace(authKey))
-				throw new Exception();
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“Startup”]</p>
-<pre class="language-csharp"><code>public void ConfigureServices(IServiceCollection services)
-{
-	services.AddMvc();
-	services.Configure&#x3C;AppConfig>(Configuration);
-	services.AddScoped&#x3C;AuthenticationFilterAttribute>();
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="16031-SecurePersonController" class="tablinks active" onclick="openTab(this, &#x27;content-16031-SecurePersonController&#x27;, &#x27;16031&#x27;)">SecurePersonController</button>
+<button id="16031-AuthenticationFilterAttribute" class="tablinks" onclick="openTab(this, &#x27;content-16031-AuthenticationFilterAttribute&#x27;, &#x27;16031&#x27;)">AuthenticationFilterAttribute</button>
+<button id="16031-Startup" class="tablinks" onclick="openTab(this, &#x27;content-16031-Startup&#x27;, &#x27;16031&#x27;)">Startup</button></div>
+<div id="content-16031-SecurePersonController" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Collections.Generic;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Mvc;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Attributes;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Repositories;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Controllers</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    [ServiceFilter(typeof(AuthenticationFilterAttribute))]</span></span>
+<span class="line"><span>    public class SecurePersonController : Controller</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        [HttpGet("secure/person/all")]</span></span>
+<span class="line"><span>        public List&#x3C;Person> GetPersons()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return PersonRepository.GetAll();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-16031-AuthenticationFilterAttribute" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System;</span></span>
+<span class="line"><span>using System.Linq;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Mvc.Filters;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Attributes</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class AuthenticationFilterAttribute : ActionFilterAttribute</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        public override void OnActionExecuting(ActionExecutingContext ctx)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            string authKey = ctx.HttpContext.Request</span></span>
+<span class="line"><span>                    .Headers["Authorization"].SingleOrDefault();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            if (string.IsNullOrWhiteSpace(authKey))</span></span>
+<span class="line"><span>                throw new Exception();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-16031-Startup" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public void ConfigureServices(IServiceCollection services)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    services.AddMvc();</span></span>
+<span class="line"><span>    services.Configure&#x3C;AppConfig>(Configuration);</span></span>
+<span class="line"><span>    services.AddScoped&#x3C;AuthenticationFilterAttribute>();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <p>If endpoint <em><strong>/secure/person/all</strong></em> is queried without <em><strong>Authorization</strong></em> header there is <em><strong>500 Internal Server Error</strong></em> response from the application. If <em><strong>Authorization</strong></em> header is present with any value all persons are retrieved.</p>
 <h2>Middleware</h2>
 <p class="lf-text-block lf-block" data-lf-anchor-id="b1b45126054eb4f9ac4448c69b39ce68:0">Middleware is a software that is assembled into an application pipeline to handle requests and responses. Each component chooses whether to pass the request to the next component in the pipeline or perform work before that. More on middleware can be found in <a href="https://docs.microsoft.com/en-gb/aspnet/core/fundamentals/middleware/index?tabs=aspnetcore2x&#x26;view=aspnetcore-2.1" target="_blank" rel="noopener noreferrer">ASP.NET Core Middleware Fundamentals</a>. In current example middleware is used to handle better exceptions. In the previous point, <em><strong>AuthenticationFilterAttribute</strong></em> was throwing an exception which was transformed to <em><strong>500 Internal Server Error</strong></em> which is not pretty. In case of not authorized application should return <em><strong>401 Unauthorized</strong></em>. In order to do this following files are needed:</p>
@@ -365,75 +387,82 @@ namespace SampleDotNetCore2RestStub.Attributes
 </div></li>
  	<li data-lf-anchor-id="b1b45126054eb4f9ac4448c69b39ce68:0"><em><strong>Startup</strong></em> - middleware get registered here with <em><strong>app.UseMiddleware&#x3C;HttpExceptionMiddleware>()</strong></em>. It is extremely important that this stands before <em><strong>app.UseMvc()</strong></em> otherwise it will <em><strong>not</strong></em> work.</li>
 </ul>
-[tabby title="HttpException"]
-<pre class="language-csharp"><code>using System;
-using System.Net;
-
-namespace SampleDotNetCore2RestStub.Exceptions
-{
-	public class HttpException : Exception
-	{
-		public int StatusCode { get; }
-
-		public HttpException(HttpStatusCode httpStatusCode)
-			: base(httpStatusCode.ToString())
-		{
-			this.StatusCode = (int)httpStatusCode;
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“HttpExceptionMiddleware”]</p>
-<pre class="language-csharp"><code>using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
-using SampleDotNetCore2RestStub.Exceptions;
-
-namespace SampleDotNetCore2RestStub.Middleware
-{
-	public class HttpExceptionMiddleware
-	{
-		private readonly RequestDelegate _next;
-
-		public HttpExceptionMiddleware(RequestDelegate next)
-		{
-			_next = next;
-		}
-
-		public async Task Invoke(HttpContext context)
-		{
-			try
-			{
-				await _next.Invoke(context);
-			}
-			catch (HttpException httpException)
-			{
-				context.Response.StatusCode = httpException.StatusCode;
-				var feature = context.Features.Get&#x3C;IHttpResponseFeature>();
-				feature.ReasonPhrase = httpException.Message;
-			}
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“AuthenticationFilterAttribute”]</p>
-<pre class="language-csharp"><code>public override void OnActionExecuting(ActionExecutingContext context)
-{
-	string authKey = context.HttpContext.Request
-			.Headers["Authorization"].SingleOrDefault();
-
-	if (string.IsNullOrWhiteSpace(authKey))
-		throw new HttpException(HttpStatusCode.Unauthorized);
-}
-</code></pre>
-<p>[tabby title=“Startup”]</p>
-<pre class="language-csharp"><code>public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-{
-	app.UseMiddleware&#x3C;HttpExceptionMiddleware>();
-	app.UseMvc();
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="20048-HttpException" class="tablinks active" onclick="openTab(this, &#x27;content-20048-HttpException&#x27;, &#x27;20048&#x27;)">HttpException</button>
+<button id="20048-HttpExceptionMiddleware" class="tablinks" onclick="openTab(this, &#x27;content-20048-HttpExceptionMiddleware&#x27;, &#x27;20048&#x27;)">HttpExceptionMiddleware</button>
+<button id="20048-AuthenticationFilterAttribute" class="tablinks" onclick="openTab(this, &#x27;content-20048-AuthenticationFilterAttribute&#x27;, &#x27;20048&#x27;)">AuthenticationFilterAttribute</button>
+<button id="20048-Startup" class="tablinks" onclick="openTab(this, &#x27;content-20048-Startup&#x27;, &#x27;20048&#x27;)">Startup</button></div>
+<div id="content-20048-HttpException" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System;</span></span>
+<span class="line"><span>using System.Net;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Exceptions</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class HttpException : Exception</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        public int StatusCode { get; }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public HttpException(HttpStatusCode httpStatusCode)</span></span>
+<span class="line"><span>            : base(httpStatusCode.ToString())</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            this.StatusCode = (int)httpStatusCode;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-20048-HttpExceptionMiddleware" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Threading.Tasks;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Http;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Http.Features;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Exceptions;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Middleware</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class HttpExceptionMiddleware</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        private readonly RequestDelegate _next;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public HttpExceptionMiddleware(RequestDelegate next)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            _next = next;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public async Task Invoke(HttpContext context)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            try</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                await _next.Invoke(context);</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>            catch (HttpException httpException)</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                context.Response.StatusCode = httpException.StatusCode;</span></span>
+<span class="line"><span>                var feature = context.Features.Get&#x3C;IHttpResponseFeature>();</span></span>
+<span class="line"><span>                feature.ReasonPhrase = httpException.Message;</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-20048-AuthenticationFilterAttribute" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public override void OnActionExecuting(ActionExecutingContext context)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    string authKey = context.HttpContext.Request</span></span>
+<span class="line"><span>            .Headers["Authorization"].SingleOrDefault();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    if (string.IsNullOrWhiteSpace(authKey))</span></span>
+<span class="line"><span>        throw new HttpException(HttpStatusCode.Unauthorized);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-20048-Startup" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public void Configure(IApplicationBuilder app, IHostingEnvironment env)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    app.UseMiddleware&#x3C;HttpExceptionMiddleware>();</span></span>
+<span class="line"><span>    app.UseMvc();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Dependency Injection</h2>
 So far there is running service with basic functionality. It is missing very important bit though, something that should have been considered and added earlier. Actually, it was added but only when registering <em><strong>AuthenticationFilterAttribute</strong></em>, but here I will go into more details. Dependency injection (DI) is a technique for achieving loose coupling between objects and their dependencies. Rather than directly instantiating an object or using static references, the objects a class needs are provided to the class in some fashion. ASP.NET Core provides its own dependency injection mechanisms, read more on <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-2.1" target="_blank" rel="noopener noreferrer">Introduction to Dependency Injection in ASP.NET Core</a>. The code will now get refactored to match this pattern.
 <ul>
@@ -449,172 +478,179 @@ Three different object life scopes are available in .NET Core DI. It is importan
  	<li><span><em><strong>AddScoped</strong></em> - one instance is created per HTTP request scope. </span></li>
  	<li><span><em><strong>AddTransient</strong></em> - instance is created every time it is needed. Let us say there are 3 places where an object is needed and an HTTP request is coming to the application. <em><strong>AddTransient</strong></em> will create 3 different objects, while <em><strong>AddScoped</strong></em> will create just one that will be used for current HTTP request scope.</span></li>
 </ul>
-[tabby title="IPersonRepository"]
-<pre class="language-csharp"><code>using System.Collections.Generic;
-using SampleDotNetCore2RestStub.Models;
-
-namespace SampleDotNetCore2RestStub.Repositories
-{
-	public interface IPersonRepository
-	{
-		Person GetById(int id);
-		List&#x3C;Person> GetAll();
-		int GetCount();
-		void Remove();
-		string Save(Person person);
-	}
-}
-</code></pre>
-<p>[tabby title=“PersonRepository”]</p>
-<pre class="language-csharp"><code>using System.Collections.Generic;
-using System.Linq;
-using SampleDotNetCore2RestStub.Models;
-
-namespace SampleDotNetCore2RestStub.Repositories
-{
-	public class PersonRepository : IPersonRepository
-	{
-		private Dictionary&#x3C;int, Person> _persons 
-						= new Dictionary&#x3C;int, Person>();
-
-		public PersonRepository()
-		{
-			_persons .Add(1, new Person
-			{
-				Id = 1,
-				FirstName = "FN1",
-				LastName = "LN1",
-				Email = "email1@email.na"
-			});
-			_persons .Add(2, new Person
-			{
-				Id = 2,
-				FirstName = "FN2",
-				LastName = "LN2",
-				Email = "email2@email.na"
-			});
-		}
-
-		public Person GetById(int id)
-		{
-			return _persons[id];
-		}
-
-		public List&#x3C;Person> GetAll()
-		{
-			return _persons.Values.ToList();
-		}
-
-		public int GetCount()
-		{
-			return _persons.Count();
-		}
-
-		public void Remove()
-		{
-			if (_persons.Keys.Any())
-			{
-				_persons.Remove(_persons.Keys.Last());
-			}
-		}
-
-		public string Save(Person person)
-		{
-			if (_persons.ContainsKey(person.Id))
-			{
-				_persons[person.Id] = person;
-				return "Updated Person with id=" + person.Id;
-			}
-			else
-			{
-				_persons.Add(person.Id, person);
-				return "Added Person with id=" + person.Id;
-			}
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“SecurePersonController”]</p>
-<pre class="language-csharp"><code>using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using SampleDotNetCore2RestStub.Attributes;
-using SampleDotNetCore2RestStub.Models;
-using SampleDotNetCore2RestStub.Repositories;
-
-namespace SampleDotNetCore2RestStub.Controllers
-{
-	[ServiceFilter(typeof(AuthenticationFilterAttribute))]
-	public class SecurePersonController : Controller
-	{
-		private readonly IPersonRepository _personRepository;
-
-		public SecurePersonController(IPersonRepository personRepository)
-		{
-			_personRepository = personRepository;
-		}
-
-		[HttpGet("secure/person/all")]
-		public List&#x3C;Person> GetPersons()
-		{
-			return _personRepository.GetAll();
-		}
-	}
-}
-</code></pre>
-<p>[tabby title=“Startup”]</p>
-<pre class="language-csharp"><code>public void ConfigureServices(IServiceCollection services)
-{
-	services.AddMvc();
-	services.Configure&#x3C;AppConfig>(Configuration);
-	services.AddScoped&#x3C;AuthenticationFilterAttribute>();
-	services.AddSingleton&#x3C;IPersonRepository, PersonRepository>();
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="25107-IPersonRepository" class="tablinks active" onclick="openTab(this, &#x27;content-25107-IPersonRepository&#x27;, &#x27;25107&#x27;)">IPersonRepository</button>
+<button id="25107-PersonRepository" class="tablinks" onclick="openTab(this, &#x27;content-25107-PersonRepository&#x27;, &#x27;25107&#x27;)">PersonRepository</button>
+<button id="25107-SecurePersonController" class="tablinks" onclick="openTab(this, &#x27;content-25107-SecurePersonController&#x27;, &#x27;25107&#x27;)">SecurePersonController</button>
+<button id="25107-Startup" class="tablinks" onclick="openTab(this, &#x27;content-25107-Startup&#x27;, &#x27;25107&#x27;)">Startup</button></div>
+<div id="content-25107-IPersonRepository" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Collections.Generic;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Repositories</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public interface IPersonRepository</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        Person GetById(int id);</span></span>
+<span class="line"><span>        List&#x3C;Person> GetAll();</span></span>
+<span class="line"><span>        int GetCount();</span></span>
+<span class="line"><span>        void Remove();</span></span>
+<span class="line"><span>        string Save(Person person);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-25107-PersonRepository" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Collections.Generic;</span></span>
+<span class="line"><span>using System.Linq;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Repositories</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public class PersonRepository : IPersonRepository</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        private Dictionary&#x3C;int, Person> _persons </span></span>
+<span class="line"><span>                        = new Dictionary&#x3C;int, Person>();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public PersonRepository()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            _persons .Add(1, new Person</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                Id = 1,</span></span>
+<span class="line"><span>                FirstName = "FN1",</span></span>
+<span class="line"><span>                LastName = "LN1",</span></span>
+<span class="line"><span>                Email = "email1@email.na"</span></span>
+<span class="line"><span>            });</span></span>
+<span class="line"><span>            _persons .Add(2, new Person</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                Id = 2,</span></span>
+<span class="line"><span>                FirstName = "FN2",</span></span>
+<span class="line"><span>                LastName = "LN2",</span></span>
+<span class="line"><span>                Email = "email2@email.na"</span></span>
+<span class="line"><span>            });</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public Person GetById(int id)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return _persons[id];</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public List&#x3C;Person> GetAll()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return _persons.Values.ToList();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public int GetCount()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return _persons.Count();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public void Remove()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            if (_persons.Keys.Any())</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                _persons.Remove(_persons.Keys.Last());</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public string Save(Person person)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            if (_persons.ContainsKey(person.Id))</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                _persons[person.Id] = person;</span></span>
+<span class="line"><span>                return "Updated Person with id=" + person.Id;</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>            else</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                _persons.Add(person.Id, person);</span></span>
+<span class="line"><span>                return "Added Person with id=" + person.Id;</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-25107-SecurePersonController" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Collections.Generic;</span></span>
+<span class="line"><span>using Microsoft.AspNetCore.Mvc;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Attributes;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Models;</span></span>
+<span class="line"><span>using SampleDotNetCore2RestStub.Repositories;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace SampleDotNetCore2RestStub.Controllers</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    [ServiceFilter(typeof(AuthenticationFilterAttribute))]</span></span>
+<span class="line"><span>    public class SecurePersonController : Controller</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        private readonly IPersonRepository _personRepository;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public SecurePersonController(IPersonRepository personRepository)</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            _personRepository = personRepository;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [HttpGet("secure/person/all")]</span></span>
+<span class="line"><span>        public List&#x3C;Person> GetPersons()</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return _personRepository.GetAll();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-25107-Startup" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public void ConfigureServices(IServiceCollection services)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    services.AddMvc();</span></span>
+<span class="line"><span>    services.Configure&#x3C;AppConfig>(Configuration);</span></span>
+<span class="line"><span>    services.AddScoped&#x3C;AuthenticationFilterAttribute>();</span></span>
+<span class="line"><span>    services.AddSingleton&#x3C;IPersonRepository, PersonRepository>();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Docker file</h2>
 Docker file that packs application is shown below:
-<pre class="language-docker"><code>FROM microsoft/dotnet:2.0-sdk
-COPY pub/ /root/
-WORKDIR /root/
-ENV ASPNETCORE_URLS="http://*:80"
-EXPOSE 80/tcp
-ENTRYPOINT ["dotnet", "SampleDotNetCore2RestStub.dll"]
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>FROM microsoft/dotnet:2.0-sdk</span></span>
+<span class="line"><span>COPY pub/ /root/</span></span>
+<span class="line"><span>WORKDIR /root/</span></span>
+<span class="line"><span>ENV ASPNETCORE_URLS="http://*:80"</span></span>
+<span class="line"><span>EXPOSE 80/tcp</span></span>
+<span class="line"><span>ENTRYPOINT ["dotnet", "SampleDotNetCore2RestStub.dll"]</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Docker container that is used is <em><strong>microsoft/dotnet:2.0-sdk</strong></em>. Everything from <em><strong>pub</strong></em> folder is copied to container <em><strong>root</strong></em> folder. <em><strong>ASPNETCORE_URLS</strong></em> is used to set the URLs that the server listens on by default. Current config runs and exposes application at port 80 in the container. With <em><strong>ENTRYPOINT</strong></em> is configured the command that is run when the container is started.</p>
 <h2>Build, package and run Docker</h2>
 The application is built and published in <em><strong>Release</strong></em> mode into <em><strong>pub</strong></em> folder with the following command:
-<pre class="language-bash"><code>dotnet publish --configuration=Release -o pub
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>dotnet publish --configuration=Release -o pub</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Docker container is packaged with tag <em><strong>netcore-rest</strong></em> with the following command:</p>
-<pre class="language-bash"><code>docker build . -t netcore-rest
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>docker build . -t netcore-rest</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Docker container is run with exposing port <em><strong>80</strong></em> from the container to port <em><strong>9000</strong></em> on the host with the following command:</p>
-<pre class="language-bash"><code>docker run -e Version=1.1 -p 9000:80 netcore-rest
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>docker run -e Version=1.1 -p 9000:80 netcore-rest</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Notice the <em><strong>-e Version=1.1</strong></em> which sets an environment variable to be used inside the container. The intention is to use this variable in application. This can be enabled by modifying <em><strong>Startup.cs</strong></em> file by adding <em><strong>AddEnvironmentVariables()</strong></em>:</p>
-<pre class="language-csharp"><code>public Startup()
-{
-	var configurationBuilder = new ConfigurationBuilder()
-		.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-		.AddEnvironmentVariables();
-
-	Configuration = configurationBuilder.Build();
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public Startup()</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    var configurationBuilder = new ConfigurationBuilder()</span></span>
+<span class="line"><span>        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)</span></span>
+<span class="line"><span>        .AddEnvironmentVariables();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Configuration = configurationBuilder.Build();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>If invoked now <em><strong>/api/version</strong></em> returns <em><strong>1.1</strong></em>.</p>
 <h2>Docker optimisation</h2>
 When the container with <em><strong>microsoft/dotnet:2.0-sdk</strong></em> is packed it gets to a size of <em><strong>1.7GB</strong></em> which is quite a lot. There is much leaner container image: <em><strong>microsoft/dotnet:2.0-runtime</strong></em>, but it requires all runtime assemblies to be present in <em><strong>pub</strong></em> folder. This can be done by changing the <em><strong>csproj</strong></em> file by adding <em><strong>PublishWithAspNetCoreTargetManifest</strong></em> = false:
-<pre class="language-xml"><code>&#x3C;PropertyGroup>
-	&#x3C;OutputType>Exe&#x3C;/OutputType>
-	&#x3C;TargetFramework>netcoreapp2.0&#x3C;/TargetFramework>
-	&#x3C;PublishWithAspNetCoreTargetManifest>false&#x3C;/PublishWithAspNetCoreTargetManifest> 
-&#x3C;/PropertyGroup>
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;PropertyGroup></span></span>
+<span class="line"><span>    &#x3C;OutputType>Exe&#x3C;/OutputType></span></span>
+<span class="line"><span>    &#x3C;TargetFramework>netcoreapp2.0&#x3C;/TargetFramework></span></span>
+<span class="line"><span>    &#x3C;PublishWithAspNetCoreTargetManifest>false&#x3C;/PublishWithAspNetCoreTargetManifest> </span></span>
+<span class="line"><span>&#x3C;/PropertyGroup></span></span>
+<span class="line"><span></span></span></code></pre>
 <p>This makes <em><strong>pub</strong></em> folder about <em><strong>37MB</strong></em>, but container size is <em><strong>258MB</strong></em>. Problem with this proposal is that it might not be very reliable as some assemblies might not be copied or might not be the correct version.</p>
 <p>Since Docker is keeping layers in the repository, proposed optimization might turn out not to be actual optimization. It will consume much more space in the repository since layer that changes and is always saved is <em><strong>258MB</strong></em>. Layers with OS might not change often if it changes at all.</p>
 <h2>Testing</h2>
 How to given application can be integration tested is described in <a href="/net-core-integration-testing-mock-dependencies/">.NET Core integration testing and mock dependencies</a> post.
 <h2>Conclusion</h2>
-In the current tutorial, I have shown how to create API from scratch with .NET Core 2.0 SDK on any platform. It is very easy to run .NET Core app and even run it Docker with Linux container.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+In the current tutorial, I have shown how to create API from scratch with .NET Core 2.0 SDK on any platform. It is very easy to run .NET Core app and even run it Docker with Linux container.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/run-dropwizard-application-docker-templated-configuration-using-environment-variables/" data-astro-cid-bvzihdzo>Run Dropwizard application in Docker with templated configuration using environment variables</a> </li><li data-astro-cid-bvzihdzo> <a href="/build-a-rest-stub-server-with-dropwizard/" data-astro-cid-bvzihdzo>Build a RESTful stub server with Dropwizard</a> </li><li data-astro-cid-bvzihdzo> <a href="/net-core-integration-testing-mock-dependencies/" data-astro-cid-bvzihdzo>.NET Core integration testing and mock dependencies</a> </li><li data-astro-cid-bvzihdzo> <a href="/useful-net-core-sdk-cli-commands/" data-astro-cid-bvzihdzo>Useful .NET Core SDK CLI commands</a> </li><li data-astro-cid-bvzihdzo> <a href="/build-rest-api-express-node-js-run-docker/" data-astro-cid-bvzihdzo>Build a REST API with Express on Node.js and run it on Docker</a> </li><li data-astro-cid-bvzihdzo> <a href="/create-project-for-net-core-custom-template/" data-astro-cid-bvzihdzo>Create project for .NET Core custom template</a> </li><li data-astro-cid-bvzihdzo> <a href="/create-net-core-health-checks-with-custom-response-payload/" data-astro-cid-bvzihdzo>Create .NET Core health checks with custom response payload</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/dotnet-core" data-astro-cid-bvzihdzo>.NET Core</a><a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a><a href="/tags/docker" data-astro-cid-bvzihdzo>Docker</a><a href="/tags/rest" data-astro-cid-bvzihdzo>REST</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

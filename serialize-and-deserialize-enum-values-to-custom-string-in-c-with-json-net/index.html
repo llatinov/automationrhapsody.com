@@ -1,46 +1,45 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/serialize-and-deserialize-enum-values-to-custom-string-in-c-with-json-net/"><!-- Primary Meta Tags --><title>Serialize and deserialize enum values to custom string in C# with Json.NET</title><meta name="title" content="Serialize and deserialize enum values to custom string in C# with Json.NET"><meta name="description" content="How to serialize and deserialize C# enum values to customs strings."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/serialize-and-deserialize-enum-values-to-custom-string-in-c-with-json-net/"><meta property="og:title" content="Serialize and deserialize enum values to custom string in C# with Json.NET"><meta property="og:description" content="How to serialize and deserialize C# enum values to customs strings."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/serialize-and-deserialize-enum-values-to-custom-string-in-c-with-json-net/"><meta property="twitter:title" content="Serialize and deserialize enum values to custom string in C# with Json.NET"><meta property="twitter:description" content="How to serialize and deserialize C# enum values to customs strings."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2019-12-15T00:00:00.000Z"> Dec 15, 2019 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Serialize and deserialize enum values to custom string in C# with Json.NET</h1> <hr data-astro-cid-bvzihdzo> </div>  <p><span>The code used for this blog post is located </span><span>in </span><a href="https://github.com/llatinov/dotnet.core.templates" target="_blank" rel="noopener noreferrer">dotnet.core.templates</a><span> GitHub repository.</span></p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/serialize-and-deserialize-enum-values-to-custom-string-in-c-with-json-net/"><!-- Primary Meta Tags --><title>Serialize and deserialize enum values to custom string in C# with Json.NET</title><meta name="title" content="Serialize and deserialize enum values to custom string in C# with Json.NET"><meta name="description" content="How to serialize and deserialize C# enum values to customs strings."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/serialize-and-deserialize-enum-values-to-custom-string-in-c-with-json-net/"><meta property="og:title" content="Serialize and deserialize enum values to custom string in C# with Json.NET"><meta property="og:description" content="How to serialize and deserialize C# enum values to customs strings."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/serialize-and-deserialize-enum-values-to-custom-string-in-c-with-json-net/"><meta property="twitter:title" content="Serialize and deserialize enum values to custom string in C# with Json.NET"><meta property="twitter:description" content="How to serialize and deserialize C# enum values to customs strings."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Serialize and deserialize enum values to custom string in C# with Json.NET</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2019-12-15T00:00:00.000Z"> Dec 15, 2019 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p><span>The code used for this blog post is located </span><span>in </span><a href="https://github.com/llatinov/dotnet.core.templates" target="_blank" rel="noopener noreferrer">dotnet.core.templates</a><span> GitHub repository.</span></p>
 <h2>Use case description</h2>
 <span>Enums provide an efficient way to define a set of named integral constants that may be assigned to a variable. They are strongly typed values and are preferred choice over the string constants. In the given example there is an API that provides functionality to save or get movies with title and genre. Although not the best example, as the genre can have lots of values, but it still can be presented as an enum. In the same setup, there is a user interface that consumes the get API. In the UI it is more convenient to directly display the genre as text, so control over naming convention happens in the backend and there is no mapping in the frontend, and localization is ignored in the current example.</span>
 <h2>Serialize and deserialize</h2>
 Serialization and deserialization to a custom string can be done with two steps. The first is to add an attribute to all enum values which gives the preferred string mapping.
-<pre class="language-csharp"><code>using System.Runtime.Serialization;
-
-public enum MovieGenre
-{
-	[EnumMember(Value = "Action Movie")]
-	Action,
-	[EnumMember(Value = "Drama Movie")]
-	Drama
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Runtime.Serialization;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public enum MovieGenre</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    [EnumMember(Value = "Action Movie")]</span></span>
+<span class="line"><span>    Action,</span></span>
+<span class="line"><span>    [EnumMember(Value = "Drama Movie")]</span></span>
+<span class="line"><span>    Drama</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Then Json.NET is instructed to serialize/deserialize the enum value as a string with <em><strong>[JsonConverter(typeof(StringEnumConverter))]</strong></em> attribute.</p>
-<pre class="language-csharp"><code>using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
-public class Movie
-{
-	public string Title { get; set; }
-
-	[JsonConverter(typeof(StringEnumConverter))]
-	public MovieGenre Genre { get; set; }
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using Newtonsoft.Json;</span></span>
+<span class="line"><span>using Newtonsoft.Json.Converters;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class Movie</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public string Title { get; set; }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    [JsonConverter(typeof(StringEnumConverter))]</span></span>
+<span class="line"><span>    public MovieGenre Genre { get; set; }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>This results in the following JSON:</p>
-<pre class="language-json"><code>{
-	"Title": "Die Hard",
-	"Genre": "Action Movie"
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<span class="line"><span>    "Title": "Die Hard",</span></span>
+<span class="line"><span>    "Genre": "Action Movie"</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>In the example above, if <em><strong>[EnumMember(Value = “<span>Action Movie</span>”)]</strong></em> is not provided in the enum declaration, then the string representation of the enum value is taken:</p>
-<pre class="language-json"><code>{
-	"Title": "Die Hard",
-	"Genre": "Action"
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<span class="line"><span>    "Title": "Die Hard",</span></span>
+<span class="line"><span>    "Genre": "Action"</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Conclusion</h2>
-Although the current example is not ideal from a use-case point of view, it shows technically how Newtonsoft Json.NET can be instructed to serialize/deserialize enum values to custom strings or just string representation of the enum value.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Although the current example is not ideal from a use-case point of view, it shows technically how Newtonsoft Json.NET can be instructed to serialize/deserialize enum values to custom strings or just string representation of the enum value.  <hr data-astro-cid-bvzihdzo>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/dotnet-core" data-astro-cid-bvzihdzo>.NET Core</a><a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a><a href="/tags/newtonsoft-json" data-astro-cid-bvzihdzo>Newtonsoft.Json</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

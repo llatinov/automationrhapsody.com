@@ -1,74 +1,73 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/efficient-waiting-for-ajax-call-data-loading-with-selenium-webdriver/"><!-- Primary Meta Tags --><title>Efficient waiting for Ajax call data loading with Selenium WebDriver</title><meta name="title" content="Efficient waiting for Ajax call data loading with Selenium WebDriver"><meta name="description" content="This post is about implementing an efficient mechanism for Selenium WebDriver to wait for elements by execution of jQuery code."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/efficient-waiting-for-ajax-call-data-loading-with-selenium-webdriver/"><meta property="og:title" content="Efficient waiting for Ajax call data loading with Selenium WebDriver"><meta property="og:description" content="This post is about implementing an efficient mechanism for Selenium WebDriver to wait for elements by execution of jQuery code."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/efficient-waiting-for-ajax-call-data-loading-with-selenium-webdriver/"><meta property="twitter:title" content="Efficient waiting for Ajax call data loading with Selenium WebDriver"><meta property="twitter:description" content="This post is about implementing an efficient mechanism for Selenium WebDriver to wait for elements by execution of jQuery code."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-01-21T00:00:00.000Z"> Jan 21, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Efficient waiting for Ajax call data loading with Selenium WebDriver</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Automating single page application with Selenium WebDriver could be sometimes a tricky task. You can get into the trap of timing issues. Although you set explicit waits you still can try to use an element that is not yet loaded by the Ajax call. Remember Thread.Sleep() is never an option! You can use very tiny sleep (100-200ms) in order to wait for initiation of given process, but never use sleep to wait for the end of the process.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/efficient-waiting-for-ajax-call-data-loading-with-selenium-webdriver/"><!-- Primary Meta Tags --><title>Efficient waiting for Ajax call data loading with Selenium WebDriver</title><meta name="title" content="Efficient waiting for Ajax call data loading with Selenium WebDriver"><meta name="description" content="This post is about implementing an efficient mechanism for Selenium WebDriver to wait for elements by execution of jQuery code."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/efficient-waiting-for-ajax-call-data-loading-with-selenium-webdriver/"><meta property="og:title" content="Efficient waiting for Ajax call data loading with Selenium WebDriver"><meta property="og:description" content="This post is about implementing an efficient mechanism for Selenium WebDriver to wait for elements by execution of jQuery code."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/efficient-waiting-for-ajax-call-data-loading-with-selenium-webdriver/"><meta property="twitter:title" content="Efficient waiting for Ajax call data loading with Selenium WebDriver"><meta property="twitter:description" content="This post is about implementing an efficient mechanism for Selenium WebDriver to wait for elements by execution of jQuery code."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Efficient waiting for Ajax call data loading with Selenium WebDriver</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-01-21T00:00:00.000Z"> Jan 21, 2015 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>Automating single page application with Selenium WebDriver could be sometimes a tricky task. You can get into the trap of timing issues. Although you set explicit waits you still can try to use an element that is not yet loaded by the Ajax call. Remember Thread.Sleep() is never an option! You can use very tiny sleep (100-200ms) in order to wait for initiation of given process, but never use sleep to wait for the end of the process.</p>
 <h2>Implement Selenium wrapper (Facade)</h2>
 I good approach I like is to implement your own FindElement method which is basically a wrapper for Selenium's methods (<a href="/facade-design-pattern/">Facade design pattern</a>). With this approach, you are hiding unneeded Selenium functionality and have centralized control over locating of elements and explicit waits. Locate behaviour of your entire framework is controlled in just one method.
-<pre class="language-csharp"><code>private static TimeSpan waitForElement = TimeSpan.FromSeconds(10);
-
-public static IWebElement FindElement(By by)
-{
-	try
-	{
-		WaitForReady();
-		WebDriverWait wait = new WebDriverWait(webDriver, waitForElement);
-		return wait.Until(ExpectedConditions.ElementIsVisible(by));
-	}
-	catch
-	{
-		return null;
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private static TimeSpan waitForElement = TimeSpan.FromSeconds(10);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public static IWebElement FindElement(By by)</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    try</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        WaitForReady();</span></span>
+<span class="line"><span>        WebDriverWait wait = new WebDriverWait(webDriver, waitForElement);</span></span>
+<span class="line"><span>        return wait.Until(ExpectedConditions.ElementIsVisible(by));</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    catch</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        return null;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Code above is C# one and is implementation of explicit wait with WebDriverWait class from OpenQA.Selenium.Support.UI. You can see an unknown (so far) method WaitForReady(). Note that ElementIsVisible is used instead of ElementExists because element might be on the page but yet not ready to work with.</p>
 <h2>Wait for Ajax call to finish</h2>
 Initially, WaitForReady() was supposed to check that Ajax has finished loading by using <strong>jQuery.active</strong> property. This is in case jQuery is used in the application under test. If this property is <strong>0</strong> then there are no active Ajax request to the server.
-<pre class="language-csharp"><code>private static void WaitForReady()
-{
-	WebDriverWait wait = new WebDriverWait(webDriver, waitForElement);
-	wait.Until(driver => (bool)((IJavaScriptExecutor)driver).
-			ExecuteScript("return jQuery.active == 0"));
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private static void WaitForReady()</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    WebDriverWait wait = new WebDriverWait(webDriver, waitForElement);</span></span>
+<span class="line"><span>    wait.Until(driver => (bool)((IJavaScriptExecutor)driver).</span></span>
+<span class="line"><span>            ExecuteScript("return jQuery.active == 0"));</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Wait for Ajax call to finish and data to load</h2>
 You can realize that sometimes it is not enough to wait for Ajax to finish rather than to wait for data to be rendered. There is fancy loader in my application under which is a DIV shown when some action is being performed. If there is one on your application then you'd better wait not only for Ajax to finish but the loader to hide.
-<pre class="language-csharp"><code>private static void WaitForReady()
-{
-	WebDriverWait wait = new WebDriverWait(webDriver, waitForElement);
-	wait.Until(driver =>
-	{
-		bool isAjaxFinished = (bool)((IJavaScriptExecutor)driver).
-			ExecuteScript("return jQuery.active == 0");
-		try
-		{
-			driver.FindElement(By.ClassName("spinner"));
-			return false;
-		}
-		catch
-		{
-			return isAjaxFinished;
-		}
-	});
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private static void WaitForReady()</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    WebDriverWait wait = new WebDriverWait(webDriver, waitForElement);</span></span>
+<span class="line"><span>    wait.Until(driver =></span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        bool isAjaxFinished = (bool)((IJavaScriptExecutor)driver).</span></span>
+<span class="line"><span>            ExecuteScript("return jQuery.active == 0");</span></span>
+<span class="line"><span>        try</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            driver.FindElement(By.ClassName("spinner"));</span></span>
+<span class="line"><span>            return false;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        catch</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return isAjaxFinished;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    });</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>If “spinner” location gives exception then loader is not present and we can stop waiting. Good!</p>
 <h2>Improve the wait for data load</h2>
 What about performance? When putting a timer the result was ~300ms for each Selenium search for the loader. Not so good... Is 300ms long? Sure not, but taking into consideration this is called every time an element is located then this could make a huge difference in test execution times.
 <p>Why not make the same check for a hidden loader, but this time with a JavaScript call to the browser? I’m familiar with jQuery, then why not.</p>
-<pre class="language-csharp"><code>private static void WaitForReady()
-{
-	WebDriverWait wait = new WebDriverWait(webDriver, waitForElement);
-	wait.Until(driver =>
-	{
-		bool isAjaxFinished = (bool)((IJavaScriptExecutor)driver).
-			ExecuteScript("return jQuery.active == 0");
-		bool isLoaderHidden = (bool)((IJavaScriptExecutor)driver).
-			ExecuteScript("return $('.spinner').is(':visible') == false");
-		return isAjaxFinished &#x26; isLoaderHidden;
-	});
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private static void WaitForReady()</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    WebDriverWait wait = new WebDriverWait(webDriver, waitForElement);</span></span>
+<span class="line"><span>    wait.Until(driver =></span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        bool isAjaxFinished = (bool)((IJavaScriptExecutor)driver).</span></span>
+<span class="line"><span>            ExecuteScript("return jQuery.active == 0");</span></span>
+<span class="line"><span>        bool isLoaderHidden = (bool)((IJavaScriptExecutor)driver).</span></span>
+<span class="line"><span>            ExecuteScript("return $('.spinner').is(':visible') == false");</span></span>
+<span class="line"><span>        return isAjaxFinished &#x26; isLoaderHidden;</span></span>
+<span class="line"><span>    });</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Conclusion</h2>
-Same logic to check that element with class="spinner" is not visible on the page but this time at a cost of ~30ms. I like it much better this way!  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Same logic to check that element with class="spinner" is not visible on the page but this time at a cost of ~30ms. I like it much better this way!  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/facade-design-pattern/" data-astro-cid-bvzihdzo>Facade design pattern</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a><a href="/tags/jquery" data-astro-cid-bvzihdzo>jQuery</a><a href="/tags/selenium-webdriver" data-astro-cid-bvzihdzo>Selenium WebDriver</a><a href="/tags/web-automation" data-astro-cid-bvzihdzo>Web Automation</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

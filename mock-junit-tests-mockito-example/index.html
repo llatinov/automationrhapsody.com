@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/mock-junit-tests-mockito-example/"><!-- Primary Meta Tags --><title>Mock JUnit tests with Mockito example</title><meta name="title" content="Mock JUnit tests with Mockito example"><meta name="description" content="Why mocking is needed in unit testing and how to do it with Mockito."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/mock-junit-tests-mockito-example/"><meta property="og:title" content="Mock JUnit tests with Mockito example"><meta property="og:description" content="Why mocking is needed in unit testing and how to do it with Mockito."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/mock-junit-tests-mockito-example/"><meta property="twitter:title" content="Mock JUnit tests with Mockito example"><meta property="twitter:description" content="Why mocking is needed in unit testing and how to do it with Mockito."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-06-14T00:00:00.000Z"> Jun 14, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Mock JUnit tests with Mockito example</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>Unit testing</h2>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/mock-junit-tests-mockito-example/"><!-- Primary Meta Tags --><title>Mock JUnit tests with Mockito example</title><meta name="title" content="Mock JUnit tests with Mockito example"><meta name="description" content="Why mocking is needed in unit testing and how to do it with Mockito."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/mock-junit-tests-mockito-example/"><meta property="og:title" content="Mock JUnit tests with Mockito example"><meta property="og:description" content="Why mocking is needed in unit testing and how to do it with Mockito."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/mock-junit-tests-mockito-example/"><meta property="twitter:title" content="Mock JUnit tests with Mockito example"><meta property="twitter:description" content="Why mocking is needed in unit testing and how to do it with Mockito."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Mock JUnit tests with Mockito example</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-06-14T00:00:00.000Z"> Jun 14, 2016 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <h2>Unit testing</h2>
 By definition, unit testing is a process in which the smallest testable parts of an application, called units, are individually and independently tested for proper operation. Smallest testable unit in Java is a method. Public methods are the only one exposed to outside world, so only they are subject to unit testing.
 <h2>Mocking</h2>
 Unit tests focus on a particular piece of code that needs to be exercised. In most of the cases, this code relies on external dependencies. Those dependencies have to be controlled, so only code under test is exercised. Removing dependencies is done with a test double. Test doubles are objects that look and behave like their release-intended counterparts but are actually simplified versions of them which reduce the complexity and facilitate testing. Test doubles are <strong>fakes</strong>, <strong>stubs</strong>, and <strong>mocks</strong>.
@@ -9,124 +8,124 @@ Unit tests focus on a particular piece of code that needs to be exercised. In mo
 <a href="https://site.mockito.org/" target="_blank" rel="noopener noreferrer">Mockito</a> is the most famous mocking framework for Java. It provides all mocking features needed for proper unit testing, except mocking of static methods. Static methods can be mocked with <a href="https://github.com/powermock/powermock" target="_blank" rel="noopener noreferrer">PowerMock</a>. It is a Mockito's wrapper that provides same API plus static method mocking and other features. In <a href="/powermock-examples-better-not-use/">PowerMock examples and why better not to use them</a> post, I have shown how to use PowerMock and its features.
 <h2>Example class for unit test</h2>
 Code shown in examples below is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener noreferrer">java-samples/junit</a> repository. We are going to unit test a class called <em><strong>Locator</strong></em> that internally uses another class <em><strong>LocatorService</strong></em>:
-<pre class="language-java"><code>public class Locator {
-
-	private final LocatorService locatorService;
-
-	public Locator(LocatorService locatorService) {
-		this.locatorService = locatorService;
-	}
-
-	public Point locate(int x, int y) {
-		if (x &#x3C; 0 || y &#x3C; 0) {
-			return new Point(Math.abs(x), Math.abs(y));
-		} else {
-			return locatorService.geoLocate(new Point(x, y));
-		}
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class Locator {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private final LocatorService locatorService;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public Locator(LocatorService locatorService) {</span></span>
+<span class="line"><span>        this.locatorService = locatorService;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public Point locate(int x, int y) {</span></span>
+<span class="line"><span>        if (x &#x3C; 0 || y &#x3C; 0) {</span></span>
+<span class="line"><span>            return new Point(Math.abs(x), Math.abs(y));</span></span>
+<span class="line"><span>        } else {</span></span>
+<span class="line"><span>            return locatorService.geoLocate(new Point(x, y));</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>The example above is pretty simple. If we pass point with some negative coordinates method <em><strong>locate()</strong></em> returns point with positive coordinates. If coordinates are positive then search via LocatorService is done. This class represents some external API that our code is calling. Since there is no control over this API and internal structure is not know it should be mocked in the unit tests. As stated above unit tests are focused on a specific piece of code, a unit.</p>
 <h2>Initialising a mock</h2>
 As described in Mockito's documentation a way to mock some object is: <em><strong>List mockedList = mock(List.class);</strong></em> Another way, that is used in current examples is to annotate the filed that is going to be mocked with <em><strong>@Mock</strong></em> and annotate JUnit test class with <em><strong>@RunWith(MockitoJUnitRunner.class)</strong></em>. In this way Mockito runner does the initialization behind the scenes:
-<pre class="language-java"><code>@RunWith(MockitoJUnitRunner.class)
-public class LocatorTest {
-
-	@Mock
-	private LocatorService locatorServiceMock;
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@RunWith(MockitoJUnitRunner.class)</span></span>
+<span class="line"><span>public class LocatorTest {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Mock</span></span>
+<span class="line"><span>    private LocatorService locatorServiceMock;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Control mock's behavior</h2>
 The whole idea of having a mock is to be able to control its behavior. If mock is called it should respond in a predictable manner. This is done with <em><strong>when()</strong></em> method:
-<pre class="language-java"><code>when(locatorServiceMock.geoLocate(any(Point.class)))
-	.thenReturn(new Point(11, 11)); 
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>when(locatorServiceMock.geoLocate(any(Point.class)))</span></span>
+<span class="line"><span>    .thenReturn(new Point(11, 11)); </span></span>
+<span class="line"><span></span></span></code></pre>
 <p>When mock’s <em><strong>geoLocate()</strong></em> method is being called with any given point object it always returns new Point with coordinates X=11 and Y=11. If this is not enough, more elaborate scenarios can be used:</p>
-<pre class="language-java"><code>when(locatorServiceMock.geoLocate(new Point(5, 5))).thenReturn(new Point(50, 50));
-when(locatorServiceMock.geoLocate(new Point(1, 1))).thenReturn(new Point(11, 11));
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>when(locatorServiceMock.geoLocate(new Point(5, 5))).thenReturn(new Point(50, 50));</span></span>
+<span class="line"><span>when(locatorServiceMock.geoLocate(new Point(1, 1))).thenReturn(new Point(11, 11));</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>If locator class is called with a point with coordinates (5, 5) then new point with coordinates (50, 50) is returned. If mock is called with a point with coordinates (1, 1) then point with (11, 11) is returned. In any other cases, <em><strong>null</strong></em> is returned by default.</p>
 <p><strong>Nota bene:</strong> in order to work properly object used to call the mocked method (Point is the current example) should have properly implemented <em><strong>equals()</strong></em> method otherwise <em><strong>java.lang.Object</strong></em>’s equals() method is used, which just compared the references. Examples above will not work, as Point doesn’t have <em><strong>equals()</strong></em> method properly overridden.</p>
 <p>Depending on tests that have to be conducted more precise control over mock’s response could be needed. This is done with <em><strong>thenAnswer()</strong></em> mock’s method:</p>
-<pre class="language-java"><code>when(locatorServiceMock.geoLocate(any(Point.class)))
-	.thenAnswer(new Answer&#x3C;Point>() {
-		@Override
-		public Point answer(InvocationOnMock invocationOnMock) throws Throwable {
-			Object[] args = invocationOnMock.getArguments();
-			Point caller = (Point) args[0];
-			
-			if (caller.getX() == 5 &#x26;&#x26; caller.getY() == 5) {
-				return new Point(50, 50);
-			} else if (caller.getX() == 1 &#x26;&#x26; caller.getY() == 1) {
-				return new Point(11, 11);
-			} else {
-				return null;
-			}
-		}
-	});
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>when(locatorServiceMock.geoLocate(any(Point.class)))</span></span>
+<span class="line"><span>    .thenAnswer(new Answer&#x3C;Point>() {</span></span>
+<span class="line"><span>        @Override</span></span>
+<span class="line"><span>        public Point answer(InvocationOnMock invocationOnMock) throws Throwable {</span></span>
+<span class="line"><span>            Object[] args = invocationOnMock.getArguments();</span></span>
+<span class="line"><span>            Point caller = (Point) args[0];</span></span>
+<span class="line"><span>            </span></span>
+<span class="line"><span>            if (caller.getX() == 5 &#x26;&#x26; caller.getY() == 5) {</span></span>
+<span class="line"><span>                return new Point(50, 50);</span></span>
+<span class="line"><span>            } else if (caller.getX() == 1 &#x26;&#x26; caller.getY() == 1) {</span></span>
+<span class="line"><span>                return new Point(11, 11);</span></span>
+<span class="line"><span>            } else {</span></span>
+<span class="line"><span>                return null;</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    });</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Call to <em><strong>invocationOnMock.getArguments()</strong></em> returns array with arguments that mock’s <em><strong>geoLocate()</strong></em> method was called with. In the current example, it is only one argument from type Point, so it is cast and saved to new Point object inside <em><strong>caller</strong></em> variable. If coordinates are (5, 5) then new point with coordinates (50, 50) are returned. If coordinates on input are (1, 1) then new point (11, 11) is returned. In all other cases, <em><strong>null</strong></em> is returned.</p>
 <h2>Verify mock was interacted with</h2>
 In order to verify execution path is correct, Mockito provides a way to check if a certain method on the mock has been called and how many times. This is done with <em><strong>verify()</strong></em> method. To confirm no more methods are called on this specific mock instance then <em><strong>verifyNoMoreInteractions()</strong></em> is used:
-<pre class="language-java"><code>verify(locatorServiceMock, times(1)).geoLocate(new Point(1, 1));
-
-verifyNoMoreInteractions(locatorServiceMock);
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>verify(locatorServiceMock, times(1)).geoLocate(new Point(1, 1));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>verifyNoMoreInteractions(locatorServiceMock);</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>The example above verifies that mock’s <em><strong>geoLocate()</strong></em> method was called with a specific point with coordinates (1, 1). If it is not important which object is passed to the method then <em><strong>any(Point.class)</strong></em> can be used.</p>
 <p><strong>Nota bene:</strong> the example above will not work as there is no <em><strong>equals()</strong></em> method implemented on point class, so Mockito is using <em><strong>java.lang.Object’s equals()</strong></em> method by default that compares only the references. Point class is intentionally left without equals method to demonstrate how such situations can be solved. How to solve this obstacle is shown in Assert Mockito mock method arguments if no equals() method implemented post.</p>
 <h2>Putting it all together</h2>
 All snippets above are put together is one simple unit test that covers all the possible paths for Locator's locate() method, but obviously not all the test conditions:
-<pre class="language-java"><code>import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.when;
-
-@RunWith(MockitoJUnitRunner.class)
-public class LocatorTest {
-
-	private static final Point TEST_POINT = new Point(11, 11);
-
-	@Mock
-	private LocatorService locatorServiceMock;
-
-	private Locator locatorUnderTest;
-
-	@Before
-	public void setUp() {
-		when(locatorServiceMock.geoLocate(any(Point.class)))
-			.thenReturn(TEST_POINT);
-
-		locatorUnderTest = new Locator(locatorServiceMock);
-	}
-
-	@Test
-	public void testLocateWithServiceResult() {
-		assertEquals(TEST_POINT, locatorUnderTest.locate(1, 1));
-	}
-
-	@Test
-	public void testLocateLocalResult() {
-		Point expected = new Point(1, 1);
-		assertTrue(arePointsEqual(expected, locatorUnderTest.locate(-1, -1)));
-	}
-
-	private boolean arePointsEqual(Point p1, Point p2) {
-		return p1.getX() == p2.getX()
-			&#x26;&#x26; p1.getY() == p2.getY();
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import org.junit.Before;</span></span>
+<span class="line"><span>import org.junit.Test;</span></span>
+<span class="line"><span>import org.junit.runner.RunWith;</span></span>
+<span class="line"><span>import org.mockito.Mock;</span></span>
+<span class="line"><span>import org.mockito.runners.MockitoJUnitRunner;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import static org.junit.Assert.assertEquals;</span></span>
+<span class="line"><span>import static org.junit.Assert.assertTrue;</span></span>
+<span class="line"><span>import static org.mockito.Matchers.any;</span></span>
+<span class="line"><span>import static org.mockito.Mockito.when;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@RunWith(MockitoJUnitRunner.class)</span></span>
+<span class="line"><span>public class LocatorTest {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private static final Point TEST_POINT = new Point(11, 11);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Mock</span></span>
+<span class="line"><span>    private LocatorService locatorServiceMock;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private Locator locatorUnderTest;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Before</span></span>
+<span class="line"><span>    public void setUp() {</span></span>
+<span class="line"><span>        when(locatorServiceMock.geoLocate(any(Point.class)))</span></span>
+<span class="line"><span>            .thenReturn(TEST_POINT);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        locatorUnderTest = new Locator(locatorServiceMock);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Test</span></span>
+<span class="line"><span>    public void testLocateWithServiceResult() {</span></span>
+<span class="line"><span>        assertEquals(TEST_POINT, locatorUnderTest.locate(1, 1));</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Test</span></span>
+<span class="line"><span>    public void testLocateLocalResult() {</span></span>
+<span class="line"><span>        Point expected = new Point(1, 1);</span></span>
+<span class="line"><span>        assertTrue(arePointsEqual(expected, locatorUnderTest.locate(-1, -1)));</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private boolean arePointsEqual(Point p1, Point p2) {</span></span>
+<span class="line"><span>        return p1.getX() == p2.getX()</span></span>
+<span class="line"><span>            &#x26;&#x26; p1.getY() == p2.getY();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>When <em><strong>locatorServiceMock</strong></em> is called with any then <em><strong>TEST_POINT</strong></em> is returned. No matter that Point has no <em><strong>equals()</strong></em> method defined, <em><strong>assertEquals()</strong></em> in <em><strong>testLocateWithServiceResult()</strong></em> passes because code refers one and the same object. Helper method <em><strong>arePointsEqual()</strong></em> is needed in <em><strong>testLocateLocalResult()</strong></em> though. Code coverage report in IntelliJ IDEA is:</p>
 <p><a href="/images/2016/06/Mockito-JUnit-results.png"><img src="/images/2016/06/Mockito-JUnit-results.png" alt="Mockito-JUnit-results"></a></p>
 <h2>Optimise</h2>
 Next step is to improve test coverage by adding more unit tests. Copy/paste is not an option, so in post <a href="/data-driven-testing-junit-parameterized-tests/">Data driven testing with JUnit parameterized tests</a> I have described how to make data-driven tests in JUnit.
 <h2>Conclusion</h2>
-Mocking is mandatory when developing unit tests. Mockito is a convenient mocking library for Java. It is possible to control what mock returns if called with whatever value or if called with a specific value. Mockito allows verification on which of mock's methods has been called and how many times.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Mocking is mandatory when developing unit tests. Mockito is a convenient mocking library for Java. It is possible to control what mock returns if called with whatever value or if called with a specific value. Mockito allows verification on which of mock's methods has been called and how many times.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/powermock-examples-better-not-use/" data-astro-cid-bvzihdzo>PowerMock examples and why better not to use them</a> </li><li data-astro-cid-bvzihdzo> <a href="/data-driven-testing-junit-parameterized-tests/" data-astro-cid-bvzihdzo>Data driven testing with JUnit parameterized tests</a> </li><li data-astro-cid-bvzihdzo> <a href="/assert-mockito-mock-method-arguments-no-equals-method-implemented/" data-astro-cid-bvzihdzo>Assert Mockito mock method arguments if no equals() method implemented</a> </li><li data-astro-cid-bvzihdzo> <a href="/mock-static-methods-junit-powermock-example/" data-astro-cid-bvzihdzo>Mock static methods in JUnit with PowerMock example</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/junit" data-astro-cid-bvzihdzo>JUnit</a><a href="/tags/mockito" data-astro-cid-bvzihdzo>Mockito</a><a href="/tags/powermock" data-astro-cid-bvzihdzo>PowerMock</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a><a href="/tags/unit-testing" data-astro-cid-bvzihdzo>Unit testing</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

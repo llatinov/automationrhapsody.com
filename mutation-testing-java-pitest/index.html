@@ -1,27 +1,26 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/mutation-testing-java-pitest/"><!-- Primary Meta Tags --><title>Mutation testing for Java with PITest</title><meta name="title" content="Mutation testing for Java with PITest"><meta name="description" content="Introduction to mutation testing and examples with PITest tool for Java."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/mutation-testing-java-pitest/"><meta property="og:title" content="Mutation testing for Java with PITest"><meta property="og:description" content="Introduction to mutation testing and examples with PITest tool for Java."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/mutation-testing-java-pitest/"><meta property="twitter:title" content="Mutation testing for Java with PITest"><meta property="twitter:description" content="Introduction to mutation testing and examples with PITest tool for Java."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-11-24T00:00:00.000Z"> Nov 24, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Mutation testing for Java with PITest</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>Mutation testing</h2>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/mutation-testing-java-pitest/"><!-- Primary Meta Tags --><title>Mutation testing for Java with PITest</title><meta name="title" content="Mutation testing for Java with PITest"><meta name="description" content="Introduction to mutation testing and examples with PITest tool for Java."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/mutation-testing-java-pitest/"><meta property="og:title" content="Mutation testing for Java with PITest"><meta property="og:description" content="Introduction to mutation testing and examples with PITest tool for Java."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/mutation-testing-java-pitest/"><meta property="twitter:title" content="Mutation testing for Java with PITest"><meta property="twitter:description" content="Introduction to mutation testing and examples with PITest tool for Java."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Mutation testing for Java with PITest</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-11-24T00:00:00.000Z"> Nov 24, 2016 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <h2>Mutation testing</h2>
 Mutation testing is a form of white-box testing. It is used to design new unit tests and evaluate the quality of the existing ones. Mutation testing involves modifying a program code in small ways, based on well-defined mutation operators that either mimic typical programming errors (such as using the wrong operator or variable name) or force the creation of valuable tests (such as dividing each expression by zero). Each mutated version is called a mutant. Existing unit tests are run against this mutant. If some unit test fails then mutant is killed. If no unit test fails then mutant survived. Test suites are measured by the percentage of mutants that they kill. New tests can be designed to kill additional mutants. The purpose of mutation testing is to help the tester develop effective tests or locate weaknesses in the test data used in the existing tests.
 <p>It is not very often when I get surprised by discovering new testing technique I’ve never heard about, so I must give credits to <a href="http://atodorov.org/" target="_blank" rel="noopener">Alexander Todorov</a> since I learned this one from his presentation.</p>
 <h2>PITest</h2>
 Mutation testing can be done manually by changing program code and running the tests, but this is not really effective and can lead to serious problems where you commit mutated code by mistake. Most effective and recommended way of doing mutation testing is by using tools. <a href="http://pitest.org/" target="_blank" rel="noopener">PITest</a> is a tool for mutation testing in Java. It seems to be fast growing and has a big community.
 <h2>Integrate PITest</h2>
 Examples given in current post can be found in GitHub <a href="https://github.com/llatinov/sample-dropwizard-rest-stub" target="_blank" rel="noopener">sample-dropwizard-rest-stub</a> repository. It is very easy to use PITest. The first step is to add it to pom.xml file:
-<pre class="language-xml"><code>&#x3C;plugin>
-	&#x3C;groupId>org.pitest&#x3C;/groupId>
-	&#x3C;artifactId>pitest-maven&#x3C;/artifactId>
-	&#x3C;version>1.1.10&#x3C;/version>
-	&#x3C;configuration>
-		&#x3C;targetClasses>
-			&#x3C;param>com.automationrhapsody.reststub.persistence*&#x3C;/param>
-		&#x3C;/targetClasses>
-		&#x3C;targetTests>
-			&#x3C;param>com.automationrhapsody.reststub.persistence*&#x3C;/param>
-		&#x3C;/targetTests>
-	&#x3C;/configuration>
-&#x3C;/plugin>
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;plugin></span></span>
+<span class="line"><span>    &#x3C;groupId>org.pitest&#x3C;/groupId></span></span>
+<span class="line"><span>    &#x3C;artifactId>pitest-maven&#x3C;/artifactId></span></span>
+<span class="line"><span>    &#x3C;version>1.1.10&#x3C;/version></span></span>
+<span class="line"><span>    &#x3C;configuration></span></span>
+<span class="line"><span>        &#x3C;targetClasses></span></span>
+<span class="line"><span>            &#x3C;param>com.automationrhapsody.reststub.persistence*&#x3C;/param></span></span>
+<span class="line"><span>        &#x3C;/targetClasses></span></span>
+<span class="line"><span>        &#x3C;targetTests></span></span>
+<span class="line"><span>            &#x3C;param>com.automationrhapsody.reststub.persistence*&#x3C;/param></span></span>
+<span class="line"><span>        &#x3C;/targetTests></span></span>
+<span class="line"><span>    &#x3C;/configuration></span></span>
+<span class="line"><span>&#x3C;/plugin></span></span>
+<span class="line"><span></span></span></code></pre>
 <p>The example given above is the most simple one. PITest provides various configurations very well described into <a href="http://pitest.org/quickstart/maven/" target="_blank" rel="noopener">PITest Maven Quick Start</a> page.</p>
 <h2>Run PITest</h2>
 Once configured it can be run with: <em><strong>mvn org.pitest:pitest-maven:mutationCoverage</strong></em> or if you want to ensure clean build every time: <em><strong>mvn clean test org.pitest:pitest-maven:mutationCoverage</strong></em>
@@ -37,63 +36,63 @@ Current results indicate that unit tests are not good enough because of the surv
 <p>Still, there is one line of code not covered. This will require adding a new unit test to cover the update person functionality.</p>
 <h2>PITest performance</h2>
 Doing a mutation testing requires significant resources to run a large amount of unit tests. Examples given above work very fast, but they are far away from the reality. I was curious how this works on a real project so I run it on one which is relatively small one. It has very good unit tests though with 95% line coverage - 2291 out of 2402 lines. Still, PITest found only 90% mutation coverage (849/940). 51 out of 940 mutations that survived and 40 with no unit test coverage which gives a room for improvement. The total run took 3 mins 11 secs. See results below:
-<pre class="language-text"><code>PIT >> INFO : Found  464 tests
-PIT >> INFO : Calculated coverage in 22 seconds.
-PIT >> INFO : Created  132 mutation test units
-
-- Timings
-==================================================================
-> scan classpath : &#x3C; 1 second
-> coverage and dependency analysis : 22 seconds
-> build mutation tests : &#x3C; 1 second
-> run mutation analysis : 2 minutes and 48 seconds
---------------------------------------------------------------------------------
-> Total : 3 minutes and 11 seconds
---------------------------------------------------------------------------------
-==================================================================
-- Statistics
-==================================================================
->> Generated 940 mutations Killed 849 (90%)
->> Ran 2992 tests (3.18 tests per mutation)
-==================================================================
-- Mutators
-==================================================================
-> org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator
->> Generated 18 Killed 9 (50%)
-> KILLED 7 SURVIVED 7 TIMED_OUT 2 NON_VIABLE 0
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
-> NO_COVERAGE 2
---------------------------------------------------------------------------------
-> org.pitest.mutationtest.engine.gregor.mutators.VoidMethodCallMutator
->> Generated 115 Killed 96 (83%)
-> KILLED 81 SURVIVED 12 TIMED_OUT 15 NON_VIABLE 0
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
-> NO_COVERAGE 7
---------------------------------------------------------------------------------
-> org.pitest.mutationtest.engine.gregor.mutators.ReturnValsMutator
->> Generated 503 Killed 465 (92%)
-> KILLED 432 SURVIVED 16 TIMED_OUT 33 NON_VIABLE 0
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
-> NO_COVERAGE 22
---------------------------------------------------------------------------------
-> org.pitest.mutationtest.engine.gregor.mutators.MathMutator
->> Generated 10 Killed 9 (90%)
-> KILLED 8 SURVIVED 0 TIMED_OUT 1 NON_VIABLE 0
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0
-> NO_COVERAGE 1
---------------------------------------------------------------------------------
-> org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator
->> Generated 294 Killed 270 (92%)
-> KILLED 254 SURVIVED 16 TIMED_OUT 15 NON_VIABLE 0
-> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 1
-> NO_COVERAGE 8
---------------------------------------------------------------------------------
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>PIT >> INFO : Found  464 tests</span></span>
+<span class="line"><span>PIT >> INFO : Calculated coverage in 22 seconds.</span></span>
+<span class="line"><span>PIT >> INFO : Created  132 mutation test units</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- Timings</span></span>
+<span class="line"><span>==================================================================</span></span>
+<span class="line"><span>> scan classpath : &#x3C; 1 second</span></span>
+<span class="line"><span>> coverage and dependency analysis : 22 seconds</span></span>
+<span class="line"><span>> build mutation tests : &#x3C; 1 second</span></span>
+<span class="line"><span>> run mutation analysis : 2 minutes and 48 seconds</span></span>
+<span class="line"><span>--------------------------------------------------------------------------------</span></span>
+<span class="line"><span>> Total : 3 minutes and 11 seconds</span></span>
+<span class="line"><span>--------------------------------------------------------------------------------</span></span>
+<span class="line"><span>==================================================================</span></span>
+<span class="line"><span>- Statistics</span></span>
+<span class="line"><span>==================================================================</span></span>
+<span class="line"><span>>> Generated 940 mutations Killed 849 (90%)</span></span>
+<span class="line"><span>>> Ran 2992 tests (3.18 tests per mutation)</span></span>
+<span class="line"><span>==================================================================</span></span>
+<span class="line"><span>- Mutators</span></span>
+<span class="line"><span>==================================================================</span></span>
+<span class="line"><span>> org.pitest.mutationtest.engine.gregor.mutators.ConditionalsBoundaryMutator</span></span>
+<span class="line"><span>>> Generated 18 Killed 9 (50%)</span></span>
+<span class="line"><span>> KILLED 7 SURVIVED 7 TIMED_OUT 2 NON_VIABLE 0</span></span>
+<span class="line"><span>> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0</span></span>
+<span class="line"><span>> NO_COVERAGE 2</span></span>
+<span class="line"><span>--------------------------------------------------------------------------------</span></span>
+<span class="line"><span>> org.pitest.mutationtest.engine.gregor.mutators.VoidMethodCallMutator</span></span>
+<span class="line"><span>>> Generated 115 Killed 96 (83%)</span></span>
+<span class="line"><span>> KILLED 81 SURVIVED 12 TIMED_OUT 15 NON_VIABLE 0</span></span>
+<span class="line"><span>> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0</span></span>
+<span class="line"><span>> NO_COVERAGE 7</span></span>
+<span class="line"><span>--------------------------------------------------------------------------------</span></span>
+<span class="line"><span>> org.pitest.mutationtest.engine.gregor.mutators.ReturnValsMutator</span></span>
+<span class="line"><span>>> Generated 503 Killed 465 (92%)</span></span>
+<span class="line"><span>> KILLED 432 SURVIVED 16 TIMED_OUT 33 NON_VIABLE 0</span></span>
+<span class="line"><span>> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0</span></span>
+<span class="line"><span>> NO_COVERAGE 22</span></span>
+<span class="line"><span>--------------------------------------------------------------------------------</span></span>
+<span class="line"><span>> org.pitest.mutationtest.engine.gregor.mutators.MathMutator</span></span>
+<span class="line"><span>>> Generated 10 Killed 9 (90%)</span></span>
+<span class="line"><span>> KILLED 8 SURVIVED 0 TIMED_OUT 1 NON_VIABLE 0</span></span>
+<span class="line"><span>> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 0</span></span>
+<span class="line"><span>> NO_COVERAGE 1</span></span>
+<span class="line"><span>--------------------------------------------------------------------------------</span></span>
+<span class="line"><span>> org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator</span></span>
+<span class="line"><span>>> Generated 294 Killed 270 (92%)</span></span>
+<span class="line"><span>> KILLED 254 SURVIVED 16 TIMED_OUT 15 NON_VIABLE 0</span></span>
+<span class="line"><span>> MEMORY_ERROR 0 NOT_STARTED 0 STARTED 0 RUN_ERROR 1</span></span>
+<span class="line"><span>> NO_COVERAGE 8</span></span>
+<span class="line"><span>--------------------------------------------------------------------------------</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Case study</h2>
 I used PITest on production project written on Java 8 extensively using Stream APIs and Lambda expressions. The initial run of 606 existing test cases gave 90% mutation coverage (846/940) and 95% line coverage (2291/2402).
 <p>Note that PITest calculates in statistic given above that existing tests are 464. This is because some of them are data driven tests and JUnit calculates the total number of 606 because every data row is counted as a test. Understand how to make JUnit data-driven tests in <a href="/data-driven-testing-junit-parameterized-tests/">Data driven testing with JUnit parameterized tests</a> post.</p>
 <p>After analysis and adding new tests total test cases number was increased to 654 which is almost 8% increase. PITest run shows 97% mutation coverage (911/939) and 97% line coverage (2332/2403). During the analysis, no bugs in code were found.</p>
 <h2>Conclusion</h2>
-Mutation testing is a good additional technique to make your unit tests better. It should not be the primary technique though as tests will be written just to kill the mutations instead of actually testing the functionality. In projects with well-written unit tests mutation testing does not bring much of a value, but still, it is a very good addition to your testing arsenal. PITest is a very good tool to do mutation testing in Java I would say to give it a try.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Mutation testing is a good additional technique to make your unit tests better. It should not be the primary technique though as tests will be written just to kill the mutations instead of actually testing the functionality. In projects with well-written unit tests mutation testing does not bring much of a value, but still, it is a very good addition to your testing arsenal. PITest is a very good tool to do mutation testing in Java I would say to give it a try.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/data-driven-testing-junit-parameterized-tests/" data-astro-cid-bvzihdzo>Data driven testing with JUnit parameterized tests</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/junit" data-astro-cid-bvzihdzo>JUnit</a><a href="/tags/pitest" data-astro-cid-bvzihdzo>PITest</a><a href="/tags/unit-testing" data-astro-cid-bvzihdzo>Unit testing</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

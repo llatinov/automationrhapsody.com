@@ -1,61 +1,60 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/git-clone-with-predefined-user-email-and-user-name/"><!-- Primary Meta Tags --><title>Git clone with predefined user email and user name</title><meta name="title" content="Git clone with predefined user email and user name"><meta name="description" content="Small bash script to clone a Git repository and set user.email and user.name."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/git-clone-with-predefined-user-email-and-user-name/"><meta property="og:title" content="Git clone with predefined user email and user name"><meta property="og:description" content="Small bash script to clone a Git repository and set user.email and user.name."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/git-clone-with-predefined-user-email-and-user-name/"><meta property="twitter:title" content="Git clone with predefined user email and user name"><meta property="twitter:description" content="Small bash script to clone a Git repository and set user.email and user.name."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-02-12T00:00:00.000Z"> Feb 12, 2020 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Git clone with predefined user email and user name</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>Usecase</h2>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/git-clone-with-predefined-user-email-and-user-name/"><!-- Primary Meta Tags --><title>Git clone with predefined user email and user name</title><meta name="title" content="Git clone with predefined user email and user name"><meta name="description" content="Small bash script to clone a Git repository and set user.email and user.name."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/git-clone-with-predefined-user-email-and-user-name/"><meta property="og:title" content="Git clone with predefined user email and user name"><meta property="og:description" content="Small bash script to clone a Git repository and set user.email and user.name."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/git-clone-with-predefined-user-email-and-user-name/"><meta property="twitter:title" content="Git clone with predefined user email and user name"><meta property="twitter:description" content="Small bash script to clone a Git repository and set user.email and user.name."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Git clone with predefined user email and user name</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-02-12T00:00:00.000Z"> Feb 12, 2020 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <h2>Usecase</h2>
 There are cases when committing with a different user to a different Git repository is needed. Git offers a very easy command to change user.email and user.name, as long as you remember to do so.
-<pre class="language-bash"><code>git config user.name "Firstname Lastname"
-git config user.email "Firstname.LastnameDoe@somemailhost.com"
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git config user.name "Firstname Lastname"</span></span>
+<span class="line"><span>git config user.email "Firstname.LastnameDoe@somemailhost.com"</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>I always forget to do it, so I made up a small script that I use to clone a repository and it does it for me.</p>
 <p>Git also offers a command to globally change user.name and user.email and this is valid for each and every repository that is cloned. If the use case is to work with one name and email only, then maybe this is the best option.</p>
-<pre class="language-bash"><code>git config --global user.name "Firstname Lastname"
-git config --global user.email "Firstname.LastnameDoe@somemailhost.com"
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git config --global user.name "Firstname Lastname"</span></span>
+<span class="line"><span>git config --global user.email "Firstname.LastnameDoe@somemailhost.com"</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Script</h2>
-<pre class="language-bash"><code>#!/bin/bash
-
-if [ -z "$1" ]
-then
-  echo "Please provide the Git repo as argument"
-  exit 1
-fi
-
-if [ -z "$2" ]
-then
-  echo "Please provide the user.name repo as argument"
-  exit 1
-fi
-
-if [ -z "$3" ]
-then
-  echo "Please provide the user.email repo as argument"
-  exit 1
-fi
-
-IFS='/' read -r -a urlParts &#x3C;&#x3C;&#x3C; "$1"
-urlPartsLast=${urlParts[${#urlParts[@]}-1]}
-
-IFS="." read -r -a repoParts &#x3C;&#x3C;&#x3C; "$urlPartsLast"
-repoPartsLast=${repoParts[${#repoParts[@]}-1]}
-if [ "$repoPartsLast" == "git" ]
-then
-  unset 'repoParts[${#repoParts[@]}-1]'
-fi
-repoName=$(printf ".%s" "${repoParts[@]}")
-repoName=${repoName:1}
-
-git clone "$1"
-
-cd $repoName
-git config user.name "$2"
-git config user.email "$3"
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>#!/bin/bash</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>if [ -z "$1" ]</span></span>
+<span class="line"><span>then</span></span>
+<span class="line"><span>  echo "Please provide the Git repo as argument"</span></span>
+<span class="line"><span>  exit 1</span></span>
+<span class="line"><span>fi</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>if [ -z "$2" ]</span></span>
+<span class="line"><span>then</span></span>
+<span class="line"><span>  echo "Please provide the user.name repo as argument"</span></span>
+<span class="line"><span>  exit 1</span></span>
+<span class="line"><span>fi</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>if [ -z "$3" ]</span></span>
+<span class="line"><span>then</span></span>
+<span class="line"><span>  echo "Please provide the user.email repo as argument"</span></span>
+<span class="line"><span>  exit 1</span></span>
+<span class="line"><span>fi</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>IFS='/' read -r -a urlParts &#x3C;&#x3C;&#x3C; "$1"</span></span>
+<span class="line"><span>urlPartsLast=${urlParts[${#urlParts[@]}-1]}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>IFS="." read -r -a repoParts &#x3C;&#x3C;&#x3C; "$urlPartsLast"</span></span>
+<span class="line"><span>repoPartsLast=${repoParts[${#repoParts[@]}-1]}</span></span>
+<span class="line"><span>if [ "$repoPartsLast" == "git" ]</span></span>
+<span class="line"><span>then</span></span>
+<span class="line"><span>  unset 'repoParts[${#repoParts[@]}-1]'</span></span>
+<span class="line"><span>fi</span></span>
+<span class="line"><span>repoName=$(printf ".%s" "${repoParts[@]}")</span></span>
+<span class="line"><span>repoName=${repoName:1}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>git clone "$1"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>cd $repoName</span></span>
+<span class="line"><span>git config user.name "$2"</span></span>
+<span class="line"><span>git config user.email "$3"</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>The script file should be made executable with <strong><em>chmod +x</em> git-clone.sh</strong> and then the script can be invoked with the following command:</p>
-<pre class="language-bash"><code>./git-clone.sh https://github.com/llatinov/aws.examples.csharp.git "Firstname Lastname" Firstname.LastnameDoe@somemailhost.com
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>./git-clone.sh https://github.com/llatinov/aws.examples.csharp.git "Firstname Lastname" Firstname.LastnameDoe@somemailhost.com</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Script insights</h2>
 The script checks for empty arguments and returns error in case of such. Note that <em><strong>user.name</strong></em> and <em><strong>user.email</strong></em> can be hardcoded into the script itself, this makes it easier to invoke. Then the script splits by <em><strong>slash (/)</strong></em> the <em><strong>Git URL</strong></em> into different parts. It takes the last part, which is supposed to be the repository name. The last part is additionally split by <em><strong>dot (.)</strong></em> and the <em><strong>git</strong></em> suffix is ignored. Script clones the repository and navigates to the folder where it sets the <em><strong>user.name</strong></em> and <em><strong>user.email</strong></em>.
 <h2>Conclusion</h2>
-This script is helping not to forget to clone a Git repository with correct user.name and user.email.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+This script is helping not to forget to clone a Git repository with correct user.name and user.email.  <hr data-astro-cid-bvzihdzo>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/git" data-astro-cid-bvzihdzo>Git</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

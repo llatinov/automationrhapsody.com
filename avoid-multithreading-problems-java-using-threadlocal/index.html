@@ -1,26 +1,27 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/avoid-multithreading-problems-java-using-threadlocal/"><!-- Primary Meta Tags --><title>Avoid multithreading problems in Java using ThreadLocal</title><meta name="title" content="Avoid multithreading problems in Java using ThreadLocal"><meta name="description" content="What are common approaches to deal with multithreading problems in Java. What is ThreadLocal and how to use it."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/avoid-multithreading-problems-java-using-threadlocal/"><meta property="og:title" content="Avoid multithreading problems in Java using ThreadLocal"><meta property="og:description" content="What are common approaches to deal with multithreading problems in Java. What is ThreadLocal and how to use it."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/avoid-multithreading-problems-java-using-threadlocal/"><meta property="twitter:title" content="Avoid multithreading problems in Java using ThreadLocal"><meta property="twitter:description" content="What are common approaches to deal with multithreading problems in Java. What is ThreadLocal and how to use it."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-06-07T00:00:00.000Z"> Jun 7, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Avoid multithreading problems in Java using ThreadLocal</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>Multithreading problems</h2>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/avoid-multithreading-problems-java-using-threadlocal/"><!-- Primary Meta Tags --><title>Avoid multithreading problems in Java using ThreadLocal</title><meta name="title" content="Avoid multithreading problems in Java using ThreadLocal"><meta name="description" content="What are common approaches to deal with multithreading problems in Java. What is ThreadLocal and how to use it."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/avoid-multithreading-problems-java-using-threadlocal/"><meta property="og:title" content="Avoid multithreading problems in Java using ThreadLocal"><meta property="og:description" content="What are common approaches to deal with multithreading problems in Java. What is ThreadLocal and how to use it."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/avoid-multithreading-problems-java-using-threadlocal/"><meta property="twitter:title" content="Avoid multithreading problems in Java using ThreadLocal"><meta property="twitter:description" content="What are common approaches to deal with multithreading problems in Java. What is ThreadLocal and how to use it."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Avoid multithreading problems in Java using ThreadLocal</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-06-07T00:00:00.000Z"> Jun 7, 2016 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <h2>Multithreading problems</h2>
 By definition, multithreading is the ability of CPU to execute multiple processes and threads. Almost every application nowadays is multithreaded. This allows programs to be faster and handler more users, programs have a more complex design. Multithreading causes race conditions (performing many operations at the same time on one resource) and deadlocks (competitive actions wait for each other to finish).
 <h2>Multithreading problem</h2>
 See code snippet below. This is a simple utility class that converts Date to String. When functional or unit tests are executed on it there are no issues, since in most cases those are single threaded. When a performance test is run program will burst into flames. Problem is that SimpleDateFormat is not thread-safe. Java 8 date objects are thread safe as they are immutable, but Java 7 below are not:
-<pre class="language-java"><code>import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-<p>public final class DateTimeUtils {</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private static final SimpleDateFormat DATE_FORMAT</span></span>
-<span class="line"><span>		= new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import java.text.SimpleDateFormat;</span></span>
+<span class="line"><span>import java.util.Date;</span></span>
+<span class="line"><span>import java.util.Locale;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>private DateTimeUtils() {</span></span>
-<span class="line"><span>	// Util class</span></span>
+<span class="line"><span>public final class DateTimeUtils {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private static final SimpleDateFormat DATE_FORMAT</span></span>
+<span class="line"><span>            = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private DateTimeUtils() {</span></span>
+<span class="line"><span>        // Util class</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static String toDateString(Date date) {</span></span>
+<span class="line"><span>        return DATE_FORMAT.format(date);</span></span>
+<span class="line"><span>    }</span></span>
 <span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>public static String toDateString(Date date) {</span></span>
-<span class="line"><span>	return DATE_FORMAT.format(date);</span></span>
-<span class="line"><span>}</span></span></code></pre>
-</code><p><code>}
-</code></p></pre><p></p>
+<span class="line"><span></span></span></code></pre>
 <h2>Avoid multithreading problems</h2>
 Debugging multithreading problems is really hard. During debug, there are no race conditions and program works correctly. The program can even work correctly with a small number of users. One clue for multithreading problems is NullPointerException in places in a code where it is impossible to have such. Prevention is better than debugging. Prevention suggests proper design. Below is a list of approaches how to prevent and avoid multithreading issues:
 <ul>
@@ -33,82 +34,87 @@ Debugging multithreading problems is really hard. During debug, there are no rac
 </ul>
 <h2>Immutable objects</h2>
 Immutable means something that cannot change. Values in such objects are initialized once and never changed, just read. Date objects in Java 8 are immutable which makes them safe to use. Object below is an example of immutable one:
-<pre class="language-java"><code>public class Immutable {
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private String name;</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class Immutable {</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>public Immutable(String name) {</span></span>
-<span class="line"><span>	this.name = name;</span></span>
+<span class="line"><span>    private String name;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public Immutable(String name) {</span></span>
+<span class="line"><span>        this.name = name;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public String getName() {</span></span>
+<span class="line"><span>        return name;</span></span>
+<span class="line"><span>    }</span></span>
 <span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>public String getName() {</span></span>
-<span class="line"><span>	return name;</span></span>
-<span class="line"><span>}</span></span></code></pre>
-</code><p><code>}
-</code></p></pre>
-Going back to the initial problem with DateTimeUtils one solution could be to always create new SimpleDateFormat object:<p></p>
-<pre class="language-java"><code>public static String toDateString(Date date) {
-	return new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(date);
-}
-</code></pre>
+<span class="line"><span></span></span></code></pre>
+<p>Going back to the initial problem with DateTimeUtils one solution could be to always create new SimpleDateFormat object:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static String toDateString(Date date) {</span></span>
+<span class="line"><span>    return new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(date);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Defensive copies</h2>
 Immutable objects are really simple and their fields should be primitive data types, which is not always possible. If some field is an object (List) then the getter will return a copy of the reference to this object, but the actual object can be still manipulated in heap. In such cases defensive copies are returned:
-<pre class="language-java"><code>import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-<p>public class Immutable {</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private String name;</span></span>
-<span class="line"><span>private List&#x26;lt;String&#x26;gt; hobbies;</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import java.util.ArrayList;</span></span>
+<span class="line"><span>import java.util.Collections;</span></span>
+<span class="line"><span>import java.util.List;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>public Immutable(String name, String... hobbies) {</span></span>
-<span class="line"><span>	this.name = name;</span></span>
-<span class="line"><span>	this.hobbies = new ArrayList&#x26;lt;&#x26;gt;();</span></span>
-<span class="line"><span>	Collections.addAll(this.hobbies, hobbies);</span></span>
+<span class="line"><span>public class Immutable {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private String name;</span></span>
+<span class="line"><span>    private List&#x3C;String> hobbies;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public Immutable(String name, String... hobbies) {</span></span>
+<span class="line"><span>        this.name = name;</span></span>
+<span class="line"><span>        this.hobbies = new ArrayList&#x3C;>();</span></span>
+<span class="line"><span>        Collections.addAll(this.hobbies, hobbies);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public String getName() {</span></span>
+<span class="line"><span>        return name;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public List&#x3C;String> getHobbies() {</span></span>
+<span class="line"><span>        return new ArrayList&#x3C;>(hobbies);</span></span>
+<span class="line"><span>    }</span></span>
 <span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>public String getName() {</span></span>
-<span class="line"><span>	return name;</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>public List&#x26;lt;String&#x26;gt; getHobbies() {</span></span>
-<span class="line"><span>	return new ArrayList&#x26;lt;&#x26;gt;(hobbies);</span></span>
-<span class="line"><span>}</span></span></code></pre>
-</code><p><code>}
-</code></p></pre>
-The example here works as ArrayList is from String. If it was from some Object only references would be copied from one list to other, again real object would be available in heap, so deep copy of the Object data is also needed. Copy should drill down to the primitive types.<p></p>
+<span class="line"><span></span></span></code></pre>
+<p>The example here works as ArrayList is from String. If it was from some Object only references would be copied from one list to other, again real object would be available in heap, so deep copy of the Object data is also needed. Copy should drill down to the primitive types.</p>
 <h2>Synchronized</h2>
 Synchronized methods cannot be accessed from two thread at the same time. One thread can access the synchronized object method, others are blocked and wait. Another solution to DateTimeUtils problem could be using synchronized:
-<pre class="language-java"><code>private static final SimpleDateFormat DATE_FORMAT
-            = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-</code><p><code>public static synchronized String toDateString(Date date) {
-return DATE_FORMAT.format(date);
-}
-</code></p></pre>
-Theoretically, this should work and when testing locally it does, but I’ve seen this solution not working in real life application, so I would not go for synchronized in given problem context.<p></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private static final SimpleDateFormat DATE_FORMAT</span></span>
+<span class="line"><span>            = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public static synchronized String toDateString(Date date) {</span></span>
+<span class="line"><span>    return DATE_FORMAT.format(date);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Theoretically, this should work and when testing locally it does, but I’ve seen this solution not working in real life application, so I would not go for synchronized in given problem context.</p>
 <h2>Volatile</h2>
 Volatile means that variable is stored in main memory. I would not go into details about this solution. It is pretty complex and has unexpected problems.
 <h2>Atomic operations</h2>
 The Java language specification guarantees that reading or writing a variable is an atomic operation (unless the variable is of type long or double because of some CPU architecture specifics). For example, i++ is not an atomic operation, it consists of two operations - read the value and add 1 to it. In order to be sure you use atomic operations on variables, Java provides a whole package with atomic objects java.util.concurrent.atomic. Objects have methods like getAndSet(), getAndIncrement() and getAndDecrement() which ensure thread safety.
 <h2>ThreadLocal</h2>
 This was the topic initially blog post was about, but with the research, it got little extended. This class provides thread-local variables or in other words variables that are actually different for each and every thread. It is little strange because declaration suggests this is one variable but Java makes copies behind the scenes. There is also InheritableThreadLocal which means the variable is different for other threads, but one and the same for the current thread and its sub-threads. This could also lead to multithreading problems if you mess the thread-local object from the sub-threads. The third solution to DateTimeUtils problem could be:
-<pre class="language-java"><code>private static final ThreadLocal&#x3C;SimpleDateFormat> DATE_FORMAT
-		= new ThreadLocal&#x3C;SimpleDateFormat>() {
-	@Override
-	protected SimpleDateFormat initialValue() {
-		return new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-	}
-};
-</code><p><code>public static String toDateString(Date date) {
-return DATE_FORMAT.get().format(date);
-}
-</code></p></pre>
-Or using new Java 8 lambda expressions code will look as below. More on Java 8 features can be found in <a href="/java-8-features-lambda-expressions-interface-changes-stream-api-datetime-api/">Java 8 features – Lambda expressions, Interface changes, Stream API, DateTime API</a> post.<p></p>
-<pre class="language-java"><code>private static final ThreadLocal&#x3C;SimpleDateFormat> DATE_FORMAT_SAFE = ThreadLocal
-	.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH));
-
-public static String toDateString(Date date) {
-	return DATE_FORMAT.get().format(date);
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private static final ThreadLocal&#x3C;SimpleDateFormat> DATE_FORMAT</span></span>
+<span class="line"><span>        = new ThreadLocal&#x3C;SimpleDateFormat>() {</span></span>
+<span class="line"><span>    @Override</span></span>
+<span class="line"><span>    protected SimpleDateFormat initialValue() {</span></span>
+<span class="line"><span>        return new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public static String toDateString(Date date) {</span></span>
+<span class="line"><span>    return DATE_FORMAT.get().format(date);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Or using new Java 8 lambda expressions code will look as below. More on Java 8 features can be found in <a href="/java-8-features-lambda-expressions-interface-changes-stream-api-datetime-api/">Java 8 features – Lambda expressions, Interface changes, Stream API, DateTime API</a> post.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private static final ThreadLocal&#x3C;SimpleDateFormat> DATE_FORMAT_SAFE = ThreadLocal</span></span>
+<span class="line"><span>    .withInitial(() -> new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public static String toDateString(Date date) {</span></span>
+<span class="line"><span>    return DATE_FORMAT.get().format(date);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Comparison of solutions to multithreading problem</h2>
 I have given three solutions to DateTimeUtils multithreading problem. Code shown above is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener noreferrer">java-samples/junit</a> repository. There is unit test <a href="https://github.com/llatinov/java-samples/blob/master/junit/src/test/java/com/automationrhapsody/junit/DateTimeUtilsTest.java" target="_blank" rel="noopener noreferrer">DateTimeUtilsTest</a><em><strong> </strong></em>which is run in multithreading mode with Maven Surefire Plugin and tests the solutions. 10 tests are run in 10 separate threads. Each test makes 1000 invocations of toDateString() method with unique date. Java 8 LocalDate is used in tests to confirm thread safety. Here are thoughts and time for different solutions:
 <ul>
@@ -118,6 +124,6 @@ I have given three solutions to DateTimeUtils multithreading problem. Code show
 </ul>
 Observations above are valid for given multithreading problem, not a general rule. Everything is up to the problem that needs to be solved.
 <h2>Conclusion</h2>
-Multithreading is a very advanced topic. In this post, I have just given some overview and examples that could be easily applied in automation code. I would encourage you to use ThreadLocal to prevent multithreading problems. In production code, things could be much more complex. Very good tutorial on multithreading can be found in <a href="http://tutorials.jenkov.com/java-concurrency/index.html" target="_blank" rel="noopener noreferrer">Java Concurrency / Multithreading Tutorial</a>.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Multithreading is a very advanced topic. In this post, I have just given some overview and examples that could be easily applied in automation code. I would encourage you to use ThreadLocal to prevent multithreading problems. In production code, things could be much more complex. Very good tutorial on multithreading can be found in <a href="http://tutorials.jenkov.com/java-concurrency/index.html" target="_blank" rel="noopener noreferrer">Java Concurrency / Multithreading Tutorial</a>.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/running-cucumber-tests-in-parallel/" data-astro-cid-bvzihdzo>Running Cucumber tests in parallel</a> </li><li data-astro-cid-bvzihdzo> <a href="/use-junit-rules-debug-failed-api-tests/" data-astro-cid-bvzihdzo>Use JUnit rules to debug failed API tests</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/non-functional" data-astro-cid-bvzihdzo>Non-functional</a><a href="/tags/performance" data-astro-cid-bvzihdzo>Performance</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

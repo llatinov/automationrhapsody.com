@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/build-a-rest-stub-server-with-dropwizard/"><!-- Primary Meta Tags --><title>Build a RESTful stub server with Dropwizard</title><meta name="title" content="Build a RESTful stub server with Dropwizard"><meta name="description" content="How to make a RESTful server that can be used for stub during testing."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/build-a-rest-stub-server-with-dropwizard/"><meta property="og:title" content="Build a RESTful stub server with Dropwizard"><meta property="og:description" content="How to make a RESTful server that can be used for stub during testing."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/build-a-rest-stub-server-with-dropwizard/"><meta property="twitter:title" content="Build a RESTful stub server with Dropwizard"><meta property="twitter:description" content="How to make a RESTful server that can be used for stub during testing."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-04-07T00:00:00.000Z"> Apr 7, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Build a RESTful stub server with Dropwizard</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>It might happen that you are testing a REST client against a server that is not under your control. It might happen that server is not in your network, the server is not very stable, has sensitive data, changing, and unstable data, etc. In such cases, it might be hard to do proper automation testing. Solution to such situation is a server stub that responds to REST request in a predictable manner. This is tutorial how to do it.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/build-a-rest-stub-server-with-dropwizard/"><!-- Primary Meta Tags --><title>Build a RESTful stub server with Dropwizard</title><meta name="title" content="Build a RESTful stub server with Dropwizard"><meta name="description" content="How to make a RESTful server that can be used for stub during testing."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/build-a-rest-stub-server-with-dropwizard/"><meta property="og:title" content="Build a RESTful stub server with Dropwizard"><meta property="og:description" content="How to make a RESTful server that can be used for stub during testing."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/build-a-rest-stub-server-with-dropwizard/"><meta property="twitter:title" content="Build a RESTful stub server with Dropwizard"><meta property="twitter:description" content="How to make a RESTful server that can be used for stub during testing."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Build a RESTful stub server with Dropwizard</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-04-07T00:00:00.000Z"> Apr 7, 2015 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>It might happen that you are testing a REST client against a server that is not under your control. It might happen that server is not in your network, the server is not very stable, has sensitive data, changing, and unstable data, etc. In such cases, it might be hard to do proper automation testing. Solution to such situation is a server stub that responds to REST request in a predictable manner. This is tutorial how to do it.</p>
 <h2>Dropwizard</h2>
 Dropwizard is Java framework for building a RESTful web server in very yshort time. It has incorporated proven libraries like <em><strong>Jetty</strong></em>, <em><strong>Jersey</strong></em>, <em><strong>Jackson</strong></em> and many more to reliably do the job in shortest possible time. They have very good <a title="Dropwizard getting started" href="https://www.dropwizard.io/en/stable/getting-started.html" target="_blank" rel="noopener noreferrer">getting started</a> tutorial how to make a project from scratch. I've used it to create a project on my own. Steps are described below.
 <h2>How to do it</h2>
@@ -21,150 +20,159 @@ Dropwizard is Java framework for building a RESTful web server in very yshort t
 </ol>
 <h2>Create Maven project</h2>
 Maven is central build repository for JARs. It makes it very easy to manage dependencies between libraries. Before <a title="Maven getting started" href="https://maven.apache.org/guides/getting-started/" target="_blank" rel="noopener noreferrer">getting started</a> with Maven it should be installed. Once you do this path to Maven <em><strong>bin</strong></em> folder should be added to your <em><strong>Path</strong></em> environment variable (Windows). Once you do this open command prompt and type <em><strong>mvn --version</strong></em> to test if everything is configured correctly. If OK then make the project with the command below. Important in command is <em><strong>groupId</strong></em> this is Java package and <em><strong>artifactId</strong></em> this is project name:
-<pre class="language-bash"><code>mvn -B archetype:generate \
-	-DarchetypeGroupId=org.apache.maven.archetypes \
-	-DgroupId=com.automationrhapsody.reststub \
-	-DartifactId=sample-dropwizard-rest-stub
-</code></pre>
-The project can be created directly from <em><strong>IntelliJ</strong></em>, but I would recommend to create it with Maven to get acknowledged to it.
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>mvn -B archetype:generate \</span></span>
+<span class="line"><span>    -DarchetypeGroupId=org.apache.maven.archetypes \</span></span>
+<span class="line"><span>    -DgroupId=com.automationrhapsody.reststub \</span></span>
+<span class="line"><span>    -DartifactId=sample-dropwizard-rest-stub</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>The project can be created directly from <em><strong>IntelliJ</strong></em>, but I would recommend to create it with Maven to get acknowledged to it.</p>
 <h2>Build with Gradle</h2>
 How to build the same project with <em><strong>Gradle</strong></em> instead of <em><strong>Maven</strong></em> can be found in <a href="/build-dropwizard-project-gradle/">Build a Dropwizard project with Gradle</a> post.
 <h2>Add Dropwizard dependency</h2>
 Run your favorite IDE and import already created Maven project. In this tutorial, I'll use IntelliJ. From project structure open <em><strong>pom.</strong></em>xml file. If the project was created with Maven there should be &#x3C;<em><strong>dependencies></strong></em> section with <em><strong>junit</strong></em> in it. You can remove <em><strong>junit</strong></em> and add the following <em><strong>XML</strong></em> instead.
-<pre class="language-xml"><code>&#x3C;dependency>
-	&#x3C;groupId>io.dropwizard&#x3C;/groupId>
-	&#x3C;artifactId>dropwizard-core&#x3C;/artifactId>
-	&#x3C;version>0.8.0&#x3C;/version>
-&#x3C;/dependency>
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;dependency></span></span>
+<span class="line"><span>    &#x3C;groupId>io.dropwizard&#x3C;/groupId></span></span>
+<span class="line"><span>    &#x3C;artifactId>dropwizard-core&#x3C;/artifactId></span></span>
+<span class="line"><span>    &#x3C;version>0.8.0&#x3C;/version></span></span>
+<span class="line"><span>&#x3C;/dependency></span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Build with Maven</h2>
 Since you have created project with Maven you have it configured and know how to use it. Navigate to projects folder and run <em><strong>mvn package</strong></em> command. When run first time it takes a while since all dependencies are being loaded to the local Maven repository.
 <p>Once build is done go to IntelliJ and refresh Maven JARs. <em><strong>Right click on project -> Maven (in the bottom) -> Reimport</strong></em>.</p>
 <h2>Add configuration file</h2>
 Configurations in Dropwizard are managed with <a title="YAML" href="https://yaml.org/" target="_blank" rel="noopener noreferrer">YAML</a>. In short key-value pairs are separated with a colon. Child elements are indented with two spaces from their parent. Repeating items are shown with a dash in front. The configuration file is with *.yml extension. Add <em><strong>config.yml</strong></em> file in the project. Below is sample use of configuration we are about to use in this tutorial. <em><strong>version</strong></em> is our custom property to illustrate working with configurations. <em><strong>server</strong></em> is standard <em><strong>Dropwizard</strong></em> property. With these configurations, we set the application to listen port to <em><strong>9000</strong></em> and administration port to <em><strong>9001</strong></em>. With <em><strong>-type</strong></em> is shown repetitive sequence. In the current situation, it is <em><strong>HTTP</strong></em>, but there may be several protocols provided. <em><strong>port</strong></em> is its child key/value pair.
-<pre class="language-text"><code>version: 0.0.1
-<h1 id="change-default-server-ports">Change default server ports</h1>
-<p>server:
-applicationConnectors:</p>
-</code><ul><code>
-<li>type: http
-port: 9000
-adminConnectors:</li>
-</code><li><code>type: http
-port: 9001
-</code></li></ul></pre>
-
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>version: 0.0.1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Change default server ports</span></span>
+<span class="line"><span>server:</span></span>
+<span class="line"><span>  applicationConnectors:</span></span>
+<span class="line"><span>  - type: http</span></span>
+<span class="line"><span>    port: 9000</span></span>
+<span class="line"><span>  adminConnectors:</span></span>
+<span class="line"><span>  - type: http</span></span>
+<span class="line"><span>    port: 9001</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Add configuration class</h2>
 Once we have configuration file we need a class that will handle it. As I said <em><strong>version</strong></em> is our custom configuration property. In order to handle it, our class should extend <em><strong>Configuration</strong></em>. Define field with getter and setter. Annotate getter and setter with <em><strong>@JsonProperty</strong></em> and you are ready to go. If more properties are needed more fields with getters and setters should be defined in the class.
-<pre class="language-java"><code>package com.automationrhapsody.reststub;
-<p>import com.fasterxml.jackson.annotation.JsonProperty;
-import io.dropwizard.Configuration;
-import org.hibernate.validator.constraints.NotEmpty;</p>
-<p>public class RestStubConfig extends Configuration {
-@NotEmpty
-private String version;</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@JsonProperty</span></span>
-<span class="line"><span>public String getVersion() {</span></span>
-<span class="line"><span>	return version;</span></span>
-<span class="line"><span>}</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>package com.automationrhapsody.reststub;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>@JsonProperty</span></span>
-<span class="line"><span>public void setVersion(String version) {</span></span>
-<span class="line"><span>	this.version = version;</span></span>
-<span class="line"><span>}</span></span></code></pre>
-</code><p><code>}
-</code></p></pre><p></p>
+<span class="line"><span>import com.fasterxml.jackson.annotation.JsonProperty;</span></span>
+<span class="line"><span>import io.dropwizard.Configuration;</span></span>
+<span class="line"><span>import org.hibernate.validator.constraints.NotEmpty;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class RestStubConfig extends Configuration {</span></span>
+<span class="line"><span>    @NotEmpty</span></span>
+<span class="line"><span>    private String version;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @JsonProperty</span></span>
+<span class="line"><span>    public String getVersion() {</span></span>
+<span class="line"><span>        return version;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @JsonProperty</span></span>
+<span class="line"><span>    public void setVersion(String version) {</span></span>
+<span class="line"><span>        this.version = version;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Create data classes</h2>
 The term in Dropwizard for those POJOs is <em><strong>Representation Class</strong></em> but in general they are objects to exchange data. In our example, we have <em><strong>Person</strong></em> class which has very basic attributes. It has only getters in order to be immutable. Getters are annotated with <em><strong>@JsonProperty</strong></em>  which allows <em><strong>Jackson</strong></em> to serialize and deserialize from JSON. Note that there is empty constructor which is needed for Jackson's deserialization.
-<pre class="language-java"><code>package com.automationrhapsody.reststub.data;
-<p>import com.fasterxml.jackson.annotation.JsonProperty;</p>
-<p>public class Person {
-private int id;
-private String firstName;
-private String lastName;
-private String email;</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public Person() {</span></span>
-<span class="line"><span>	// Needed by Jackson deserialization</span></span>
-<span class="line"><span>}</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>package com.automationrhapsody.reststub.data;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>public Person(int id, String firstName, String lastName, String email) {</span></span>
-<span class="line"><span>	this.id = id;</span></span>
-<span class="line"><span>	this.firstName = firstName;</span></span>
-<span class="line"><span>	this.lastName = lastName;</span></span>
-<span class="line"><span>	this.email = email;</span></span>
-<span class="line"><span>}</span></span>
+<span class="line"><span>import com.fasterxml.jackson.annotation.JsonProperty;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>@JsonProperty</span></span>
-<span class="line"><span>public int getId() {</span></span>
-<span class="line"><span>	return id;</span></span>
-<span class="line"><span>}</span></span>
+<span class="line"><span>public class Person {</span></span>
+<span class="line"><span>    private int id;</span></span>
+<span class="line"><span>    private String firstName;</span></span>
+<span class="line"><span>    private String lastName;</span></span>
+<span class="line"><span>    private String email;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>@JsonProperty</span></span>
-<span class="line"><span>public String getFirstName() {</span></span>
-<span class="line"><span>	return firstName;</span></span>
-<span class="line"><span>}</span></span>
+<span class="line"><span>    public Person() {</span></span>
+<span class="line"><span>        // Needed by Jackson deserialization</span></span>
+<span class="line"><span>    }</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>@JsonProperty</span></span>
-<span class="line"><span>public String getLastName() {</span></span>
-<span class="line"><span>	return lastName;</span></span>
-<span class="line"><span>}</span></span>
+<span class="line"><span>    public Person(int id, String firstName, String lastName, String email) {</span></span>
+<span class="line"><span>        this.id = id;</span></span>
+<span class="line"><span>        this.firstName = firstName;</span></span>
+<span class="line"><span>        this.lastName = lastName;</span></span>
+<span class="line"><span>        this.email = email;</span></span>
+<span class="line"><span>    }</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>@JsonProperty</span></span>
-<span class="line"><span>public String getEmail() {</span></span>
-<span class="line"><span>	return email;</span></span>
-<span class="line"><span>}</span></span></code></pre>
-</code><p><code>}
-</code></p></pre>
-If data to be exchanged gets too much data classes will become enormous. One solution to reduce their size is to use Lombok. See how it is done in <a title="Get rid of Getters and Setters" href="/get-rid-of-getters-and-setters/">Get rid of Getters and Setters</a> post.<p></p>
+<span class="line"><span>    @JsonProperty</span></span>
+<span class="line"><span>    public int getId() {</span></span>
+<span class="line"><span>        return id;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @JsonProperty</span></span>
+<span class="line"><span>    public String getFirstName() {</span></span>
+<span class="line"><span>        return firstName;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @JsonProperty</span></span>
+<span class="line"><span>    public String getLastName() {</span></span>
+<span class="line"><span>        return lastName;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @JsonProperty</span></span>
+<span class="line"><span>    public String getEmail() {</span></span>
+<span class="line"><span>        return email;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>If data to be exchanged gets too much data classes will become enormous. One solution to reduce their size is to use Lombok. See how it is done in <a title="Get rid of Getters and Setters" href="/get-rid-of-getters-and-setters/">Get rid of Getters and Setters</a> post.</p>
 <h2>Create service</h2>
 The term in Dropwizard is <em><strong>Resource Class</strong></em> but this actually is the RESTful service with its endpoints. <em><strong>@Path</strong></em> provides where the endpoint is. In the current example, I have <em><strong>/person</strong></em> for the whole class and different paths for different operations. The result is that paths are concatenated. <em><strong>@GET</strong></em> and <em><strong>@POST</strong></em> indicate the type of the request. <em><strong>@Timed</strong></em> is put for analytics purposes. <em><strong>@Produces</strong></em> and <em><strong>@Consumes</strong></em> provide the type of data that is being exchanged. <em><strong>@PathParam</strong></em> indicates that <em><strong>id</strong></em> is part of the URL.
-<pre class="language-java"><code>package com.automationrhapsody.reststub.resources;
-<p>import com.automationrhapsody.reststub.data.Person;
-import com.automationrhapsody.reststub.persistence.PersonDB;
-import com.codahale.metrics.annotation.Timed;</p>
-<p>import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import java.util.List;</p>
-<p>@Path(“/person”)
-public class PersonService {</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public PersonService() {</span></span>
-<span class="line"><span>}</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>package com.automationrhapsody.reststub.resources;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>@GET</span></span>
-<span class="line"><span>@Timed</span></span>
-<span class="line"><span>@Path("/get/{id}")</span></span>
-<span class="line"><span>@Produces(MediaType.APPLICATION_JSON)</span></span>
-<span class="line"><span>public Person getPerson(@PathParam("id") int id) {</span></span>
-<span class="line"><span>	return PersonDB.getById(id);</span></span>
-<span class="line"><span>}</span></span>
+<span class="line"><span>import com.automationrhapsody.reststub.data.Person;</span></span>
+<span class="line"><span>import com.automationrhapsody.reststub.persistence.PersonDB;</span></span>
+<span class="line"><span>import com.codahale.metrics.annotation.Timed;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>@GET</span></span>
-<span class="line"><span>@Timed</span></span>
-<span class="line"><span>@Path("/remove")</span></span>
-<span class="line"><span>@Produces(MediaType.TEXT_PLAIN)</span></span>
-<span class="line"><span>public String removePerson() {</span></span>
-<span class="line"><span>	PersonDB.remove();</span></span>
-<span class="line"><span>	return "Last person remove. Total count: " + PersonDB.getCount();</span></span>
-<span class="line"><span>}</span></span>
+<span class="line"><span>import javax.ws.rs.*;</span></span>
+<span class="line"><span>import javax.ws.rs.core.MediaType;</span></span>
+<span class="line"><span>import java.util.List;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>@GET</span></span>
-<span class="line"><span>@Timed</span></span>
-<span class="line"><span>@Path("/all")</span></span>
-<span class="line"><span>@Produces(MediaType.APPLICATION_JSON)</span></span>
-<span class="line"><span>public List&#x26;lt;Person&#x26;gt; getPersons() {</span></span>
-<span class="line"><span>	return PersonDB.getAll();</span></span>
-<span class="line"><span>}</span></span>
+<span class="line"><span>@Path("/person")</span></span>
+<span class="line"><span>public class PersonService {</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>@POST</span></span>
-<span class="line"><span>@Timed</span></span>
-<span class="line"><span>@Path("/save")</span></span>
-<span class="line"><span>@Produces(MediaType.TEXT_PLAIN)</span></span>
-<span class="line"><span>@Consumes({MediaType.APPLICATION_JSON})</span></span>
-<span class="line"><span>public String addPerson(Person person) {</span></span>
-<span class="line"><span>	return PersonDB.save(person);</span></span>
-<span class="line"><span>}</span></span></code></pre>
-</code><p><code>}
-</code></p></pre><p></p>
+<span class="line"><span>    public PersonService() {</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @GET</span></span>
+<span class="line"><span>    @Timed</span></span>
+<span class="line"><span>    @Path("/get/{id}")</span></span>
+<span class="line"><span>    @Produces(MediaType.APPLICATION_JSON)</span></span>
+<span class="line"><span>    public Person getPerson(@PathParam("id") int id) {</span></span>
+<span class="line"><span>        return PersonDB.getById(id);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @GET</span></span>
+<span class="line"><span>    @Timed</span></span>
+<span class="line"><span>    @Path("/remove")</span></span>
+<span class="line"><span>    @Produces(MediaType.TEXT_PLAIN)</span></span>
+<span class="line"><span>    public String removePerson() {</span></span>
+<span class="line"><span>        PersonDB.remove();</span></span>
+<span class="line"><span>        return "Last person remove. Total count: " + PersonDB.getCount();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @GET</span></span>
+<span class="line"><span>    @Timed</span></span>
+<span class="line"><span>    @Path("/all")</span></span>
+<span class="line"><span>    @Produces(MediaType.APPLICATION_JSON)</span></span>
+<span class="line"><span>    public List&#x3C;Person> getPersons() {</span></span>
+<span class="line"><span>        return PersonDB.getAll();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @POST</span></span>
+<span class="line"><span>    @Timed</span></span>
+<span class="line"><span>    @Path("/save")</span></span>
+<span class="line"><span>    @Produces(MediaType.TEXT_PLAIN)</span></span>
+<span class="line"><span>    @Consumes({MediaType.APPLICATION_JSON})</span></span>
+<span class="line"><span>    public String addPerson(Person person) {</span></span>
+<span class="line"><span>        return PersonDB.save(person);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Service operations</h2>
 Example above is about RESTful service dealing with person data. There are 4 operations exposed on following URLs:
 <ul>
@@ -175,157 +183,167 @@ Example above is about RESTful service dealing with person data. There are 4 ope
 </ul>
 <h2>Business logic</h2>
 It is little overrated to call it business logic but this is how we manage persons. If this was a production application you might have lots of business logic and some DB (SQL or no-SQL). Since this is just a test stub it is enough to have some data structure where to keep persons. In our case, HashMap is selected. There are static methods manipulating data.
-<pre class="language-java"><code>package com.automationrhapsody.reststub.persistence;
-<p>import com.automationrhapsody.reststub.data.Person;</p>
-<p>import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;</p>
-<p>public class PersonDB {
-private static Map&#x3C;Integer, Person> persons = new HashMap&#x3C;Integer, Person>();</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>static {</span></span>
-<span class="line"><span>	persons.put(1, new Person(1, "FN1", "LN1", "email1@email.com"));</span></span>
-<span class="line"><span>	persons.put(2, new Person(2, "FN2", "LN2", "email2@email.com"));</span></span>
-<span class="line"><span>	persons.put(3, new Person(3, "FN3", "LN3", "email3@email.com"));</span></span>
-<span class="line"><span>	persons.put(4, new Person(4, "FN4", "LN4", "email4@email.com"));</span></span>
-<span class="line"><span>}</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>package com.automationrhapsody.reststub.persistence;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>public static Person getById(int id) {</span></span>
-<span class="line"><span>	return persons.get(id);</span></span>
-<span class="line"><span>}</span></span>
+<span class="line"><span>import com.automationrhapsody.reststub.data.Person;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>public static List&#x26;lt;Person&#x26;gt; getAll() {</span></span>
-<span class="line"><span>	List&#x26;lt;Person&#x26;gt; result = new ArrayList&#x26;lt;Person&#x26;gt;();</span></span>
-<span class="line"><span>	for (Integer key : persons.keySet()) {</span></span>
-<span class="line"><span>		result.add(persons.get(key));</span></span>
-<span class="line"><span>	}</span></span>
-<span class="line"><span>	return result;</span></span>
-<span class="line"><span>}</span></span>
+<span class="line"><span>import java.util.ArrayList;</span></span>
+<span class="line"><span>import java.util.HashMap;</span></span>
+<span class="line"><span>import java.util.List;</span></span>
+<span class="line"><span>import java.util.Map;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>public static int getCount() {</span></span>
-<span class="line"><span>	return persons.size();</span></span>
-<span class="line"><span>}</span></span>
+<span class="line"><span>public class PersonDB {</span></span>
+<span class="line"><span>    private static Map&#x3C;Integer, Person> persons = new HashMap&#x3C;Integer, Person>();</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>public static void remove() {</span></span>
-<span class="line"><span>	if (!persons.keySet().isEmpty()) {</span></span>
-<span class="line"><span>		persons.remove(persons.keySet().toArray()[0]);</span></span>
-<span class="line"><span>	}</span></span>
-<span class="line"><span>}</span></span>
+<span class="line"><span>    static {</span></span>
+<span class="line"><span>        persons.put(1, new Person(1, "FN1", "LN1", "email1@email.com"));</span></span>
+<span class="line"><span>        persons.put(2, new Person(2, "FN2", "LN2", "email2@email.com"));</span></span>
+<span class="line"><span>        persons.put(3, new Person(3, "FN3", "LN3", "email3@email.com"));</span></span>
+<span class="line"><span>        persons.put(4, new Person(4, "FN4", "LN4", "email4@email.com"));</span></span>
+<span class="line"><span>    }</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>public static String save(Person person) {</span></span>
-<span class="line"><span>	String result = "";</span></span>
-<span class="line"><span>	if (persons.get(person.getId()) != null) {</span></span>
-<span class="line"><span>		result = "Updated Person with id=" + person.getId();</span></span>
-<span class="line"><span>	} else {</span></span>
-<span class="line"><span>		result = "Added Person with id=" + person.getId();</span></span>
-<span class="line"><span>	}</span></span>
-<span class="line"><span>	persons.put(person.getId(), person);</span></span>
-<span class="line"><span>	return result;</span></span>
-<span class="line"><span>}</span></span></code></pre>
-</code><p><code>}
-</code></p></pre><p></p>
+<span class="line"><span>    public static Person getById(int id) {</span></span>
+<span class="line"><span>        return persons.get(id);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static List&#x3C;Person> getAll() {</span></span>
+<span class="line"><span>        List&#x3C;Person> result = new ArrayList&#x3C;Person>();</span></span>
+<span class="line"><span>        for (Integer key : persons.keySet()) {</span></span>
+<span class="line"><span>            result.add(persons.get(key));</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        return result;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static int getCount() {</span></span>
+<span class="line"><span>        return persons.size();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static void remove() {</span></span>
+<span class="line"><span>        if (!persons.keySet().isEmpty()) {</span></span>
+<span class="line"><span>            persons.remove(persons.keySet().toArray()[0]);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static String save(Person person) {</span></span>
+<span class="line"><span>        String result = "";</span></span>
+<span class="line"><span>        if (persons.get(person.getId()) != null) {</span></span>
+<span class="line"><span>            result = "Updated Person with id=" + person.getId();</span></span>
+<span class="line"><span>        } else {</span></span>
+<span class="line"><span>            result = "Added Person with id=" + person.getId();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        persons.put(person.getId(), person);</span></span>
+<span class="line"><span>        return result;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Create health check</h2>
 The health check is a smoke test that can be called from admin panel to give you information about the status of the system. In production systems, you might do things like checking DB connection, checking file system or network, checking important functionality. In the example here just to illustrate the functionality my health check is the count of persons in memory. If it goes to <em><strong>0</strong></em> then something is wrong and the system is not healthy. Also to illustrate how properties are used <em><strong>version</strong></em> is passed from configuration file to health check via its constructor.
-<pre class="language-java"><code>package com.automationrhapsody.reststub;
-<p>import com.automationrhapsody.reststub.persistence.PersonDB;
-import com.codahale.metrics.health.HealthCheck;</p>
-<p>public class RestStubCheck extends HealthCheck {
-private final String version;</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public RestStubCheck(String version) {</span></span>
-<span class="line"><span>	this.version = version;</span></span>
-<span class="line"><span>}</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>package com.automationrhapsody.reststub;</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>@Override</span></span>
-<span class="line"><span>protected Result check() throws Exception {</span></span>
-<span class="line"><span>	if (PersonDB.getCount() == 0) {</span></span>
-<span class="line"><span>		return Result.unhealthy("No persons in DB! Version: " +</span></span>
-<span class="line"><span>				this.version);</span></span>
-<span class="line"><span>	}</span></span>
-<span class="line"><span>	return Result.healthy("OK with version: " + this.version +</span></span>
-<span class="line"><span>			". Persons count: " + PersonDB.getCount());</span></span>
-<span class="line"><span>}</span></span></code></pre>
-</code><p><code>}
-</code></p></pre><p></p>
+<span class="line"><span>import com.automationrhapsody.reststub.persistence.PersonDB;</span></span>
+<span class="line"><span>import com.codahale.metrics.health.HealthCheck;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class RestStubCheck extends HealthCheck {</span></span>
+<span class="line"><span>    private final String version;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public RestStubCheck(String version) {</span></span>
+<span class="line"><span>        this.version = version;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Override</span></span>
+<span class="line"><span>    protected Result check() throws Exception {</span></span>
+<span class="line"><span>        if (PersonDB.getCount() == 0) {</span></span>
+<span class="line"><span>            return Result.unhealthy("No persons in DB! Version: " +</span></span>
+<span class="line"><span>                    this.version);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        return Result.healthy("OK with version: " + this.version +</span></span>
+<span class="line"><span>                ". Persons count: " + PersonDB.getCount());</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Create application</h2>
 This is the final piece. Once we have all (data, service, health check) then the application is the binding piece that brings them together. This is execution entry point. In <em><strong>main</strong></em> method new application is created and its <em><strong>run()</strong></em> method is called. This is it. In order to actually work service and health check should be registered. This is done in the run method. You create an instance of both service and health check. Configuration is passed in health check's constructor.
-<pre class="language-java"><code>package com.automationrhapsody.reststub;
-<p>import com.automationrhapsody.reststub.resources.BookService;
-import com.automationrhapsody.reststub.resources.PersonService;
-import io.dropwizard.Application;
-import io.dropwizard.setup.Environment;</p>
-<p>public class RestStubApp extends Application&#x3C;RestStubConfig> {</p>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static void main(String[] args) throws Exception {</span></span>
-<span class="line"><span>	new RestStubApp().run(args);</span></span>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>package com.automationrhapsody.reststub;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import com.automationrhapsody.reststub.resources.BookService;</span></span>
+<span class="line"><span>import com.automationrhapsody.reststub.resources.PersonService;</span></span>
+<span class="line"><span>import io.dropwizard.Application;</span></span>
+<span class="line"><span>import io.dropwizard.setup.Environment;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class RestStubApp extends Application&#x3C;RestStubConfig> {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static void main(String[] args) throws Exception {</span></span>
+<span class="line"><span>        new RestStubApp().run(args);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Override</span></span>
+<span class="line"><span>    public void run(RestStubConfig config, Environment env) {</span></span>
+<span class="line"><span>        final PersonService personService = new PersonService();</span></span>
+<span class="line"><span>        env.jersey().register(personService);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        env.healthChecks().register("template", </span></span>
+<span class="line"><span>            new RestStubCheck(config.getVersion()));</span></span>
+<span class="line"><span>    }</span></span>
 <span class="line"><span>}</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>@Override</span></span>
-<span class="line"><span>public void run(RestStubConfig config, Environment env) {</span></span>
-<span class="line"><span>	final PersonService personService = new PersonService();</span></span>
-<span class="line"><span>	env.jersey().register(personService);</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>	env.healthChecks().register("template", </span></span>
-<span class="line"><span>		new RestStubCheck(config.getVersion()));</span></span>
-<span class="line"><span>}</span></span></code></pre>
-</code><p><code>}
-</code></p></pre><p></p>
+<span class="line"><span></span></span></code></pre>
 <h2>Build a single JAR</h2>
 This was it now all have to be packed into a JAR. The strategy is to build everything into one JAR and just run it. It could not be more simple. Open pom.xml file. Add <em><strong>&#x3C;build>&#x3C;plugins> ... &#x3C;/plugins>&#x3C;/build></strong></em> in the end. Add <em><strong>XML</strong></em> below into this snippet. Only <em><strong>&#x3C;mainClass></strong></em> is customizable and should be changed according to your project structure.
-<pre class="language-xml"><code>&#x3C;plugin>
-	&#x3C;groupId>org.apache.maven.plugins&#x3C;/groupId>
-	&#x3C;artifactId>maven-shade-plugin&#x3C;/artifactId>
-	&#x3C;version>1.6&#x3C;/version>
-	&#x3C;configuration>
-		&#x3C;createDependencyReducedPom>true&#x3C;/createDependencyReducedPom>
-		&#x3C;filters>
-			&#x3C;filter>
-				&#x3C;artifact>*:*&#x3C;/artifact>
-				&#x3C;excludes>
-					&#x3C;exclude>META-INF/*.SF&#x3C;/exclude>
-					&#x3C;exclude>META-INF/*.DSA&#x3C;/exclude>
-					&#x3C;exclude>META-INF/*.RSA&#x3C;/exclude>
-				&#x3C;/excludes>
-			&#x3C;/filter>
-		&#x3C;/filters>
-	&#x3C;/configuration>
-	&#x3C;executions>
-		&#x3C;execution>
-			&#x3C;phase>package&#x3C;/phase>
-			&#x3C;goals>
-				&#x3C;goal>shade&#x3C;/goal>
-			&#x3C;/goals>
-			&#x3C;configuration>
-				&#x3C;transformers>
-					&#x3C;transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-					&#x3C;transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-						&#x3C;mainClass>com.automationrhapsody.reststub.RestStubApp&#x3C;/mainClass>
-					&#x3C;/transformer>
-				&#x3C;/transformers>
-			&#x3C;/configuration>
-		&#x3C;/execution>
-	&#x3C;/executions>
-&#x3C;/plugin>
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;plugin></span></span>
+<span class="line"><span>    &#x3C;groupId>org.apache.maven.plugins&#x3C;/groupId></span></span>
+<span class="line"><span>    &#x3C;artifactId>maven-shade-plugin&#x3C;/artifactId></span></span>
+<span class="line"><span>    &#x3C;version>1.6&#x3C;/version></span></span>
+<span class="line"><span>    &#x3C;configuration></span></span>
+<span class="line"><span>        &#x3C;createDependencyReducedPom>true&#x3C;/createDependencyReducedPom></span></span>
+<span class="line"><span>        &#x3C;filters></span></span>
+<span class="line"><span>            &#x3C;filter></span></span>
+<span class="line"><span>                &#x3C;artifact>*:*&#x3C;/artifact></span></span>
+<span class="line"><span>                &#x3C;excludes></span></span>
+<span class="line"><span>                    &#x3C;exclude>META-INF/*.SF&#x3C;/exclude></span></span>
+<span class="line"><span>                    &#x3C;exclude>META-INF/*.DSA&#x3C;/exclude></span></span>
+<span class="line"><span>                    &#x3C;exclude>META-INF/*.RSA&#x3C;/exclude></span></span>
+<span class="line"><span>                &#x3C;/excludes></span></span>
+<span class="line"><span>            &#x3C;/filter></span></span>
+<span class="line"><span>        &#x3C;/filters></span></span>
+<span class="line"><span>    &#x3C;/configuration></span></span>
+<span class="line"><span>    &#x3C;executions></span></span>
+<span class="line"><span>        &#x3C;execution></span></span>
+<span class="line"><span>            &#x3C;phase>package&#x3C;/phase></span></span>
+<span class="line"><span>            &#x3C;goals></span></span>
+<span class="line"><span>                &#x3C;goal>shade&#x3C;/goal></span></span>
+<span class="line"><span>            &#x3C;/goals></span></span>
+<span class="line"><span>            &#x3C;configuration></span></span>
+<span class="line"><span>                &#x3C;transformers></span></span>
+<span class="line"><span>                    &#x3C;transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/></span></span>
+<span class="line"><span>                    &#x3C;transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"></span></span>
+<span class="line"><span>                        &#x3C;mainClass>com.automationrhapsody.reststub.RestStubApp&#x3C;/mainClass></span></span>
+<span class="line"><span>                    &#x3C;/transformer></span></span>
+<span class="line"><span>                &#x3C;/transformers></span></span>
+<span class="line"><span>            &#x3C;/configuration></span></span>
+<span class="line"><span>        &#x3C;/execution></span></span>
+<span class="line"><span>    &#x3C;/executions></span></span>
+<span class="line"><span>&#x3C;/plugin></span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Build and run</h2>
 Once this is done use <em><strong>mvn package</strong></em> to make the JAR. Navigate to target folder in your project and run the JAR. Two arguments are needed in order to run the JAR. First is <em><strong>server</strong></em> which instructs Dropwizard to run as a server. Second is the path to <em><strong>*.yml</strong></em> configuration file.
-<pre class="language-bash"><code>java -jar sample-dropwizard-rest-stub-1.0-SNAPSHOT.jar server ../config.yml
-</code></pre>
-If everything is fine you should see something like the code below which will mean the server is ready.
-<pre class="language-text"><code>GET     /person/all (...)
-GET     /person/get/{id} (...)
-GET     /person/remove (...)
-POST    /person/save (...)
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>java -jar sample-dropwizard-rest-stub-1.0-SNAPSHOT.jar server ../config.yml</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>If everything is fine you should see something like the code below which will mean the server is ready.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>GET     /person/all (...)</span></span>
+<span class="line"><span>GET     /person/get/{id} (...)</span></span>
+<span class="line"><span>GET     /person/remove (...)</span></span>
+<span class="line"><span>POST    /person/save (...)</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Test and enjoy</h2>
 Once all this hard work has been done it is time to enjoy our RESTful server. List of all persons can be found at this URL: <em><strong>http://localhost:9000/person/all</strong></em>. You can get a person by id: <em><strong>http://localhost:9000/person/get/1</strong></em>.
 <p>Health checks are found in admin panel: <em><strong><a href="http://localhost:9001">http://localhost:9001</a></strong></em>. Try removing all persons by invoking several times this URL: <em><strong><a href="http://localhost:9000/person/remove">http://localhost:9000/person/remove</a></strong></em></p>
 <p>And the hardest part is to save a person. I’m using Postman plugin but you can use any REST client you want. You have to put POST data against <em><strong><a href="http://localhost:9000/person/save">http://localhost:9000/person/save</a></strong></em> URL.</p>
-<pre class="language-json"><code>{
-	"id": 10,
-	"firstName": "FN10",
-	"lastName": "LN10",
-	"email": "email10@email.com"
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<span class="line"><span>    "id": 10,</span></span>
+<span class="line"><span>    "firstName": "FN10",</span></span>
+<span class="line"><span>    "lastName": "LN10",</span></span>
+<span class="line"><span>    "email": "email10@email.com"</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>And most important DO not forget to put <em><strong>Content-Type: application/json</strong></em> in the request header. If you do not put you will get <em><strong>Error 415 Unsupported Media Type</strong></em> error.</p>
 <p><a href="/images/2015/04/PostmanRequest.png"><img src="/images/2015/04/PostmanRequest.png" alt="PostmanRequest"></a></p>
 <p>The sample application can be found in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/sample-dropwizard-rest-stub" target="_blank" rel="noopener noreferrer">sample-dropwizard-rest-stub</a> repository. Postman requests can be downloaded from <a href="/examples/Postman/Dropwizard.postman_collection.json" target="_blank" rel="noopener noreferrer">Dropwizard Postman requests</a> link and directly imported into Postman.</p>
@@ -333,6 +351,6 @@ Once all this hard work has been done it is time to enjoy our RESTful server. Li
 <h2>Run with Docker</h2>
 In <a href="/run-dropwizard-application-docker-templated-configuration-using-environment-variables/">Run Dropwizard application in Docker with templated configuration using environment variables</a> post, I have described how to make Dropwizard application configuration be changed with environment variables which makes it very easy to build and run inside <em><strong>Docker</strong></em> container.
 <h2>Conclusion</h2>
-It could not be easier. If you really need to stub a RESTful server this is the proper way to do it.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+It could not be easier. If you really need to stub a RESTful server this is the proper way to do it.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/build-dropwizard-project-gradle/" data-astro-cid-bvzihdzo>Build a Dropwizard project with Gradle</a> </li><li data-astro-cid-bvzihdzo> <a href="/create-simple-rest-api-client-using-jersey/" data-astro-cid-bvzihdzo>Create simple REST API client using Jersey</a> </li><li data-astro-cid-bvzihdzo> <a href="/run-dropwizard-application-docker-templated-configuration-using-environment-variables/" data-astro-cid-bvzihdzo>Run Dropwizard application in Docker with templated configuration using environment variables</a> </li><li data-astro-cid-bvzihdzo> <a href="/implement-secure-api-authentication-http-dropwizard/" data-astro-cid-bvzihdzo>Implement secure API authentication over HTTP with Dropwizard</a> </li><li data-astro-cid-bvzihdzo> <a href="/install-java-application-linux-service/" data-astro-cid-bvzihdzo>Install Java application as a Linux service</a> </li><li data-astro-cid-bvzihdzo> <a href="/run-dropwizard-java-application-vagrant/" data-astro-cid-bvzihdzo>Run Dropwizard Java application on Vagrant</a> </li><li data-astro-cid-bvzihdzo> <a href="/build-a-rest-api-with-net-core-2-and-run-it-on-docker-linux-container/" data-astro-cid-bvzihdzo>Build a REST API with .NET Core 2 and run it on Docker Linux container</a> </li><li data-astro-cid-bvzihdzo> <a href="/build-rest-api-express-node-js-run-docker/" data-astro-cid-bvzihdzo>Build a REST API with Express on Node.js and run it on Docker</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/api-automation" data-astro-cid-bvzihdzo>API Automation</a><a href="/tags/dropwizard" data-astro-cid-bvzihdzo>Dropwizard</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/rest" data-astro-cid-bvzihdzo>REST</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

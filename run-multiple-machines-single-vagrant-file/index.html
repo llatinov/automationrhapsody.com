@@ -1,74 +1,73 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/run-multiple-machines-single-vagrant-file/"><!-- Primary Meta Tags --><title>Run multiple machines in a single Vagrant file</title><meta name="title" content="Run multiple machines in a single Vagrant file"><meta name="description" content="How to run multiple machines on Vagrant described in a single Vagrantfile."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/run-multiple-machines-single-vagrant-file/"><meta property="og:title" content="Run multiple machines in a single Vagrant file"><meta property="og:description" content="How to run multiple machines on Vagrant described in a single Vagrantfile."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/run-multiple-machines-single-vagrant-file/"><meta property="twitter:title" content="Run multiple machines in a single Vagrant file"><meta property="twitter:description" content="How to run multiple machines on Vagrant described in a single Vagrantfile."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-06-10T00:00:00.000Z"> Jun 10, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Run multiple machines in a single Vagrant file</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>The code below can be found in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/sample-dropwizard-rest-stub" target="_blank" rel="noopener noreferrer">sample-dropwizard-rest-stub</a> repository in <em><strong>Vagrantfile</strong></em> file. This post is part of Vagrant series. All of other Vagrant related posts, as well as more theoretical information what is Vagrant and why to use it, can be found in <a href="/what-is-vagrant-and-why-to-use-it/">What is Vagrant and why to use it</a> post.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/run-multiple-machines-single-vagrant-file/"><!-- Primary Meta Tags --><title>Run multiple machines in a single Vagrant file</title><meta name="title" content="Run multiple machines in a single Vagrant file"><meta name="description" content="How to run multiple machines on Vagrant described in a single Vagrantfile."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/run-multiple-machines-single-vagrant-file/"><meta property="og:title" content="Run multiple machines in a single Vagrant file"><meta property="og:description" content="How to run multiple machines on Vagrant described in a single Vagrantfile."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/run-multiple-machines-single-vagrant-file/"><meta property="twitter:title" content="Run multiple machines in a single Vagrant file"><meta property="twitter:description" content="How to run multiple machines on Vagrant described in a single Vagrantfile."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Run multiple machines in a single Vagrant file</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-06-10T00:00:00.000Z"> Jun 10, 2017 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>The code below can be found in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/sample-dropwizard-rest-stub" target="_blank" rel="noopener noreferrer">sample-dropwizard-rest-stub</a> repository in <em><strong>Vagrantfile</strong></em> file. This post is part of Vagrant series. All of other Vagrant related posts, as well as more theoretical information what is Vagrant and why to use it, can be found in <a href="/what-is-vagrant-and-why-to-use-it/">What is Vagrant and why to use it</a> post.</p>
 <h2>Vagrantfile</h2>
 As described in Vagrant introduction post all configurations are done in a single text file called Vagrantfile. Below is a Vagrant file which can be used to initialize two machines. One is same as described in <a href="/run-dropwizard-java-application-vagrant/">Run Dropwizard Java application on Vagrant</a> post, the other is the one described in <a href="/run-docker-container-vagrant/">Run Docker container on Vagrant</a> post.
-<pre class="language-text"><code>Vagrant.configure('2') do |config|
-
-  config.vm.hostname = 'dropwizard'
-  config.vm.box = 'opscode-centos-7.2'
-  config.vm.box_url = 'http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-7.2_chef-provisionerless.box'
-
-  config.vm.synced_folder './', '/vagrant'
-
-  config.vm.define 'jar' do |jar|
-    jar.vm.network :forwarded_port, guest: 9000, host: 9100
-    jar.vm.network :forwarded_port, guest: 9001, host: 9101
-
-    jar.vm.provider :virtualbox do |vb|
-      vb.name = 'dropwizard-rest-stub-jar'
-    end
-
-    jar.vm.provision :shell do |shell|
-      shell.inline = &#x3C;&#x3C;-SHELL
-        sudo service dropwizard stop
-        sudo yum -y install java
-        sudo mkdir -p /var/dropwizard-rest-stub
-        sudo mkdir -p /var/dropwizard-rest-stub/logs
-        sudo cp /vagrant/target/sample-dropwizard-rest-stub-1.0-SNAPSHOT.jar /var/dropwizard-rest-stub/dropwizard-rest-stub.jar
-        sudo cp /vagrant/config-vagrant.yml /var/dropwizard-rest-stub/config.yml
-        sudo cp /vagrant/linux_service_file /etc/init.d/dropwizard
-        # Replace CR+LF with LF because of Windows
-        sudo sed -i -e 's/\r//g' /etc/init.d/dropwizard
-        sudo chmod +x /etc/init.d/dropwizard
-        sudo service dropwizard start
-      SHELL
-    end
-  end
-
-  config.vm.define 'docker' do |docker|
-    docker.vm.network :forwarded_port, guest: 9000, host: 9000
-    docker.vm.network :forwarded_port, guest: 9001, host: 9001
-
-    docker.vm.provider :virtualbox do |vb|
-      vb.name = 'dropwizard-rest-stub-docker'
-      vb.customize ['modifyvm', :id, '--memory', '768', '--cpus', '2']
-    end
-  
-    docker.vm.provision :shell do |shell|
-      shell.inline = &#x3C;&#x3C;-SHELL
-        sudo yum -y install epel-release
-        sudo yum -y install python-pip
-        sudo pip install --upgrade pip
-        sudo pip install six==1.4
-        sudo pip install docker-py
-      SHELL
-    end
-  
-    docker.vm.provision :docker do |docker|
-      docker.build_image '/vagrant/.', args: '-t dropwizard-rest-stub'
-      docker.run 'dropwizard-rest-stub', args: '-it -p 9000:9000 -p 9001:9001 -e ENV_VARIABLE_VERSION=1.1.1'
-    end
-  end
-  
-end
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Vagrant.configure('2') do |config|</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  config.vm.hostname = 'dropwizard'</span></span>
+<span class="line"><span>  config.vm.box = 'opscode-centos-7.2'</span></span>
+<span class="line"><span>  config.vm.box_url = 'http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-7.2_chef-provisionerless.box'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  config.vm.synced_folder './', '/vagrant'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  config.vm.define 'jar' do |jar|</span></span>
+<span class="line"><span>    jar.vm.network :forwarded_port, guest: 9000, host: 9100</span></span>
+<span class="line"><span>    jar.vm.network :forwarded_port, guest: 9001, host: 9101</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    jar.vm.provider :virtualbox do |vb|</span></span>
+<span class="line"><span>      vb.name = 'dropwizard-rest-stub-jar'</span></span>
+<span class="line"><span>    end</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    jar.vm.provision :shell do |shell|</span></span>
+<span class="line"><span>      shell.inline = &#x3C;&#x3C;-SHELL</span></span>
+<span class="line"><span>        sudo service dropwizard stop</span></span>
+<span class="line"><span>        sudo yum -y install java</span></span>
+<span class="line"><span>        sudo mkdir -p /var/dropwizard-rest-stub</span></span>
+<span class="line"><span>        sudo mkdir -p /var/dropwizard-rest-stub/logs</span></span>
+<span class="line"><span>        sudo cp /vagrant/target/sample-dropwizard-rest-stub-1.0-SNAPSHOT.jar /var/dropwizard-rest-stub/dropwizard-rest-stub.jar</span></span>
+<span class="line"><span>        sudo cp /vagrant/config-vagrant.yml /var/dropwizard-rest-stub/config.yml</span></span>
+<span class="line"><span>        sudo cp /vagrant/linux_service_file /etc/init.d/dropwizard</span></span>
+<span class="line"><span>        # Replace CR+LF with LF because of Windows</span></span>
+<span class="line"><span>        sudo sed -i -e 's/\r//g' /etc/init.d/dropwizard</span></span>
+<span class="line"><span>        sudo chmod +x /etc/init.d/dropwizard</span></span>
+<span class="line"><span>        sudo service dropwizard start</span></span>
+<span class="line"><span>      SHELL</span></span>
+<span class="line"><span>    end</span></span>
+<span class="line"><span>  end</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  config.vm.define 'docker' do |docker|</span></span>
+<span class="line"><span>    docker.vm.network :forwarded_port, guest: 9000, host: 9000</span></span>
+<span class="line"><span>    docker.vm.network :forwarded_port, guest: 9001, host: 9001</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    docker.vm.provider :virtualbox do |vb|</span></span>
+<span class="line"><span>      vb.name = 'dropwizard-rest-stub-docker'</span></span>
+<span class="line"><span>      vb.customize ['modifyvm', :id, '--memory', '768', '--cpus', '2']</span></span>
+<span class="line"><span>    end</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>    docker.vm.provision :shell do |shell|</span></span>
+<span class="line"><span>      shell.inline = &#x3C;&#x3C;-SHELL</span></span>
+<span class="line"><span>        sudo yum -y install epel-release</span></span>
+<span class="line"><span>        sudo yum -y install python-pip</span></span>
+<span class="line"><span>        sudo pip install --upgrade pip</span></span>
+<span class="line"><span>        sudo pip install six==1.4</span></span>
+<span class="line"><span>        sudo pip install docker-py</span></span>
+<span class="line"><span>      SHELL</span></span>
+<span class="line"><span>    end</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>    docker.vm.provision :docker do |docker|</span></span>
+<span class="line"><span>      docker.build_image '/vagrant/.', args: '-t dropwizard-rest-stub'</span></span>
+<span class="line"><span>      docker.run 'dropwizard-rest-stub', args: '-it -p 9000:9000 -p 9001:9001 -e ENV_VARIABLE_VERSION=1.1.1'</span></span>
+<span class="line"><span>    end</span></span>
+<span class="line"><span>  end</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>end</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Vagrantfile explanation</h2>
 The file starts with a <em><strong>Vagrant.configure('2') do |config|</strong></em> which states that version <em><strong>2</strong></em> of Vagrant API will be used and defines constant with name <strong>config</strong> to be used below. Guest operating system hostname is set to <em><strong>config.vm.hostname</strong></em>. If you use <a href="https://github.com/cogitatio/vagrant-hostsupdater" target="_blank" rel="noopener noreferrer">vagrant-hostsupdater</a> plugin it will add it to your hosts file and you can access it from a browser in case you are developing web applications. With <em><strong>config.vm.box</strong></em> you define which would be the guest operating system. Vagrant maintains <em><strong>config.vm.box = "hashicorp/precise64"</strong></em> which is Ubuntu 12.04 (32 and 64-bit), they also recommend to use <a href="https://app.vagrantup.com/bento" target="_blank" rel="noopener noreferrer">Bento's boxes</a>, but I found issues with Vagrant's as well as Bento's boxes so I've decided to use one I know is working. I specify where it is located with <em><strong>config.vm.box_url</strong></em>. It is It is <a href="https://www.centos.org/" target="_blank" rel="noopener noreferrer">CentOS</a> 7.2. With <em><strong>config.vm.synced_folder</strong></em> command, you specify that Vagrantfile location folder is shared as <em><strong>/vagrant/</strong></em> in the guest operating system. This makes it easy to transfer files between guest and host operating systems. Now comes the part where two different machines are defined. First one is defined with <em><strong>config.vm.define 'jar' do |jar|</strong></em>, which declares variable <em><strong>jar</strong></em> to be used later in configurations. All other configurations are well described in <a href="/run-dropwizard-java-application-vagrant/">Run Dropwizard Java application on Vagrant</a> post. The specific part here is port mapping. In order to avoid port collision port 9000 from the guest is mapped to port 9100 to host with <em><strong>jar.vm.network :forwarded_port, guest: 9000, host: 9100</strong></em> line. This is because the second machine uses port 9000 from the host. The second machine is defined in <em><strong>config.vm.define 'docker' do |docker|</strong></em>, which declares variable docker to be used in further configurations. All other configurations are described in <a href="/run-docker-container-vagrant/">Run Docker container on Vagrant</a> post.
 <h2>Running Vagrant</h2>
 Command to start Vagrant machine is: <em><strong>vagrant up</strong></em>. Then in order to invoke provisioning section with actual deployment, you have to call: <em><strong>vagrant provision</strong></em>. All can be done in one step: <em><strong>vagrant up --provision</strong></em>. To shut down the machine use <em><strong>vagrant halt</strong></em>. To delete machine: <em><strong>vagrant destroy</strong></em>.
 <h2>Conclusion</h2>
-It is very easy to create Vagrantfile that builds and runs several machines with different applications. It possible to make those machine communicate with each other, hence simulation real environment. Once created file can be reused by all team members. It is executed over and over again making provisioning extremely easy.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+It is very easy to create Vagrantfile that builds and runs several machines with different applications. It possible to make those machine communicate with each other, hence simulation real environment. Once created file can be reused by all team members. It is executed over and over again making provisioning extremely easy.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/what-is-vagrant-and-why-to-use-it/" data-astro-cid-bvzihdzo>What is Vagrant and why to use it</a> </li><li data-astro-cid-bvzihdzo> <a href="/run-dropwizard-java-application-vagrant/" data-astro-cid-bvzihdzo>Run Dropwizard Java application on Vagrant</a> </li><li data-astro-cid-bvzihdzo> <a href="/run-docker-container-vagrant/" data-astro-cid-bvzihdzo>Run Docker container on Vagrant</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/docker" data-astro-cid-bvzihdzo>Docker</a><a href="/tags/dropwizard" data-astro-cid-bvzihdzo>Dropwizard</a><a href="/tags/linux" data-astro-cid-bvzihdzo>Linux</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a><a href="/tags/vagrant" data-astro-cid-bvzihdzo>Vagrant</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

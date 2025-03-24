@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/running-cucumber-tests-in-parallel/"><!-- Primary Meta Tags --><title>Running Cucumber tests in parallel</title><meta name="title" content="Running Cucumber tests in parallel"><meta name="description" content="Details with code samples how to run Cucumber JVM tests in parallel."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/running-cucumber-tests-in-parallel/"><meta property="og:title" content="Running Cucumber tests in parallel"><meta property="og:description" content="Details with code samples how to run Cucumber JVM tests in parallel."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/running-cucumber-tests-in-parallel/"><meta property="twitter:title" content="Running Cucumber tests in parallel"><meta property="twitter:description" content="Details with code samples how to run Cucumber JVM tests in parallel."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-01-08T00:00:00.000Z"> Jan 8, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Running Cucumber tests in parallel</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Cucumber code examples can be found in <a href="https://github.com/llatinov/selenium-samples-java/tree/master/cucumber-parallel" target="_blank" rel="noopener">selenium-samples-java/cucumber-parallel</a> GitHub repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/running-cucumber-tests-in-parallel/"><!-- Primary Meta Tags --><title>Running Cucumber tests in parallel</title><meta name="title" content="Running Cucumber tests in parallel"><meta name="description" content="Details with code samples how to run Cucumber JVM tests in parallel."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/running-cucumber-tests-in-parallel/"><meta property="og:title" content="Running Cucumber tests in parallel"><meta property="og:description" content="Details with code samples how to run Cucumber JVM tests in parallel."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/running-cucumber-tests-in-parallel/"><meta property="twitter:title" content="Running Cucumber tests in parallel"><meta property="twitter:description" content="Details with code samples how to run Cucumber JVM tests in parallel."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Running Cucumber tests in parallel</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-01-08T00:00:00.000Z"> Jan 8, 2016 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>Cucumber code examples can be found in <a href="https://github.com/llatinov/selenium-samples-java/tree/master/cucumber-parallel" target="_blank" rel="noopener">selenium-samples-java/cucumber-parallel</a> GitHub repository.</p>
 <p>More details what is and how to use Cucumber JVM can be found in <a href="/introduction-to-cucumber-and-bdd-with-examples/">Introduction to Cucumber and BDD with examples</a> post.</p>
 <h2>Why parallel execution?</h2>
 In general, an automation project starts with a smoke test scenario as a proof of concept. It seems good enough and team start to add tests for different features and modules. Eventually, a team can end up with hundreds of tests taking hours to execute. This becomes a problem as tests can be run only overnight. It is not easy to run tests for an emergency quick fix for example. This is why running tests in parallel is important and it is better to always start an automation project with this in mind.
@@ -15,28 +14,28 @@ Knowing that Surefire can run JUnit tests in parallel and feature files are run 
 Cucumber reporters are not thread-safe. This means if several parallel runners want to write in one and the same Cucumber report file for sure file will get scrambled. It is mandatory to avoid such cases. This is another requirement to have each runner reporting to separate file.
 <h2>Automatic runners generation</h2>
 Having a runner for each feature file in general case implies a lot of copy/pasting. The project will end up with hundreds of empty classes which purpose is just link a feature file. Also, copy/paste is always an error-prone process. The best solution is to generate runners automatically. This can be done with <a href="https://github.com/temyers/cucumber-jvm-parallel-plugin" target="_blank" rel="noopener">Cucumber JVM parallel plugin</a>. This plugin internally uses Apache Velocity to generate classes based on an internal template file. So it is an option to have the jar locally and modify velocity template inside. Not really recommended. The plugin is included in Maven POM file with following XML fragment:
-<pre class="language-xml"><code>&#x3C;plugin>
-	&#x3C;groupId>com.github.temyers&#x3C;/groupId>
-	&#x3C;artifactId>cucumber-jvm-parallel-plugin&#x3C;/artifactId>
-	&#x3C;version>1.0.1&#x3C;/version>
-	&#x3C;executions>
-		&#x3C;execution>
-			&#x3C;id>generateRunners&#x3C;/id>
-			&#x3C;phase>validate&#x3C;/phase>
-			&#x3C;goals>
-				&#x3C;goal>generateRunners&#x3C;/goal>
-			&#x3C;/goals>
-			&#x3C;configuration>
-				&#x3C;glue>com.automationrhapsody.cucumber.parallel.tests&#x3C;/glue>
-				&#x3C;featuresDirectory>src/test/resources/com&#x3C;/featuresDirectory>
-				&#x3C;cucumberOutputDir>target/cucumber-parallel&#x3C;/cucumberOutputDir>
-				&#x3C;format>json,html&#x3C;/format>
-				&#x3C;tags>"~@ignored"&#x3C;/tags>
-			&#x3C;/configuration>
-		&#x3C;/execution>
-	&#x3C;/executions>
-&#x3C;/plugin>
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;plugin></span></span>
+<span class="line"><span>    &#x3C;groupId>com.github.temyers&#x3C;/groupId></span></span>
+<span class="line"><span>    &#x3C;artifactId>cucumber-jvm-parallel-plugin&#x3C;/artifactId></span></span>
+<span class="line"><span>    &#x3C;version>1.0.1&#x3C;/version></span></span>
+<span class="line"><span>    &#x3C;executions></span></span>
+<span class="line"><span>        &#x3C;execution></span></span>
+<span class="line"><span>            &#x3C;id>generateRunners&#x3C;/id></span></span>
+<span class="line"><span>            &#x3C;phase>validate&#x3C;/phase></span></span>
+<span class="line"><span>            &#x3C;goals></span></span>
+<span class="line"><span>                &#x3C;goal>generateRunners&#x3C;/goal></span></span>
+<span class="line"><span>            &#x3C;/goals></span></span>
+<span class="line"><span>            &#x3C;configuration></span></span>
+<span class="line"><span>                &#x3C;glue>com.automationrhapsody.cucumber.parallel.tests&#x3C;/glue></span></span>
+<span class="line"><span>                &#x3C;featuresDirectory>src/test/resources/com&#x3C;/featuresDirectory></span></span>
+<span class="line"><span>                &#x3C;cucumberOutputDir>target/cucumber-parallel&#x3C;/cucumberOutputDir></span></span>
+<span class="line"><span>                &#x3C;format>json,html&#x3C;/format></span></span>
+<span class="line"><span>                &#x3C;tags>"~@ignored"&#x3C;/tags></span></span>
+<span class="line"><span>            &#x3C;/configuration></span></span>
+<span class="line"><span>        &#x3C;/execution></span></span>
+<span class="line"><span>    &#x3C;/executions></span></span>
+<span class="line"><span>&#x3C;/plugin></span></span>
+<span class="line"><span></span></span></code></pre>
 <p>General option for this plugin can be seen on its homepage. In current example following options are used:</p>
 <ul>
  	<li><strong>glue</strong> - this is a comma-separated list of packages where the classes with step definitions can be found. Cucumber looks for all child packages, so if you have step definitions in many different packages a higher level package can be defined, e.g. <em>com.automationrhapsody</em> or defined different packages with a comma.</li>
@@ -48,73 +47,73 @@ Having a runner for each feature file in general case implies a lot of copy/past
 This plugin is invoked at Maven lifecycle <strong>validate</strong> phase. This is the first build phase and it guarantees that Java class files are being generated so they can get compiled later.
 <h2>Automatic runner class</h2>
 After the plugin is configured and build is started it produces a class for each feature file with a link to the feature file.
-<pre class="language-java"><code>import org.junit.runner.RunWith;
-
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-
-@RunWith(Cucumber.class)
-@CucumberOptions(strict = true,
-	features = {"classpath:com/automationrhapsody/cucumber/parallel/tests/wikipedia/ignored.feature"},
-	format = {"json:target/cucumber-parallel/1.json", "html:target/cucumber-parallel/1.html", "pretty"},
-	monochrome = false,
-	tags = {"~@ignored"},
-	glue = { "com.automationrhapsody.cucumber.parallel.tests" })
-public class Parallel01IT {
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import org.junit.runner.RunWith;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import cucumber.api.CucumberOptions;</span></span>
+<span class="line"><span>import cucumber.api.junit.Cucumber;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@RunWith(Cucumber.class)</span></span>
+<span class="line"><span>@CucumberOptions(strict = true,</span></span>
+<span class="line"><span>    features = {"classpath:com/automationrhapsody/cucumber/parallel/tests/wikipedia/ignored.feature"},</span></span>
+<span class="line"><span>    format = {"json:target/cucumber-parallel/1.json", "html:target/cucumber-parallel/1.html", "pretty"},</span></span>
+<span class="line"><span>    monochrome = false,</span></span>
+<span class="line"><span>    tags = {"~@ignored"},</span></span>
+<span class="line"><span>    glue = { "com.automationrhapsody.cucumber.parallel.tests" })</span></span>
+<span class="line"><span>public class Parallel01IT {</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Configure Maven Surefire plugin</h2>
 Once plugin that generates Cucumber runners is setup it is time to configure Maven Surefire plugin to run those tests in parallel. This is done with following XML fragment:
-<pre class="language-xml"><code>&#x3C;plugin>
-	&#x3C;groupId>org.apache.maven.plugins&#x3C;/groupId>
-	&#x3C;artifactId>maven-surefire-plugin&#x3C;/artifactId>
-	&#x3C;version>2.19&#x3C;/version>
-	&#x3C;configuration>
-		&#x3C;forkCount>10&#x3C;/forkCount>
-		&#x3C;reuseForks>true&#x3C;/reuseForks>
-		&#x3C;includes>
-			&#x3C;include>**/Parallel*IT.class&#x3C;/include>
-		&#x3C;/includes>
-	&#x3C;/configuration>
-&#x3C;/plugin>
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;plugin></span></span>
+<span class="line"><span>    &#x3C;groupId>org.apache.maven.plugins&#x3C;/groupId></span></span>
+<span class="line"><span>    &#x3C;artifactId>maven-surefire-plugin&#x3C;/artifactId></span></span>
+<span class="line"><span>    &#x3C;version>2.19&#x3C;/version></span></span>
+<span class="line"><span>    &#x3C;configuration></span></span>
+<span class="line"><span>        &#x3C;forkCount>10&#x3C;/forkCount></span></span>
+<span class="line"><span>        &#x3C;reuseForks>true&#x3C;/reuseForks></span></span>
+<span class="line"><span>        &#x3C;includes></span></span>
+<span class="line"><span>            &#x3C;include>**/Parallel*IT.class&#x3C;/include></span></span>
+<span class="line"><span>        &#x3C;/includes></span></span>
+<span class="line"><span>    &#x3C;/configuration></span></span>
+<span class="line"><span>&#x3C;/plugin></span></span>
+<span class="line"><span></span></span></code></pre>
 <p><em><strong>forkCount</strong></em> can be set up as POM property and changed during runtime. Forking is a special feature that creates separate JVM process. In current example 10 JVM processes will be created. <em><strong>reuseForks</strong></em> actually doesn’t matter if <em><strong>true</strong></em> or <em><strong>false</strong></em>. They are always reused.</p>
 <p><em><strong>includes</strong></em> part is very important. By default, plugin runs only classes that either start or end with <em><strong>test</strong></em> word. Automatically generated classes are with not such name, so they have to be explicitly included in the run with <strong><em>&#x3C;include>**/Parallel*IT.class&#x3C;/include></em></strong>.</p>
 <h2>Fork vs Parallel</h2>
 Forking creates separate JVM process which is more thread safe as it isolates resources. Still, in some cases, this can cause troubles to the machine running the tests as it requires more resources. Surefire supports another type of parallelism where tests are run in one JVM process but different threads. More details are available at <a href="https://maven.apache.org/surefire/maven-surefire-plugin/examples/fork-options-and-parallel-execution.html" target="_blank" rel="noopener">Fork Options and Parallel Test Execution</a> page.
 <p>In order to use many threads instead of many JVMs then use <strong><em>&#x3C;threadCount>10&#x3C;/threadCount> &#x3C;parallel>classes&#x3C;/parallel></em></strong> instead of <em><strong>&#x3C;forkCount>10&#x3C;/forkCount> &#x3C;reuseForks>true&#x3C;/reuseForks></strong></em>. Very important is if you use parallel you <em><strong>MUST</strong></em> change <strong><em>&#x3C;cucumberOutputDir>target/cucumber-parallel&#x3C;/cucumberOutputDir></em></strong> to <strong><em>&#x3C;cucumberOutputDir>target&#x3C;/cucumberOutputDir></em></strong>. This a must because all Cucumber threads try to create <strong><em>cucumber-parallel</em></strong> directory and since Cucumber is not thread safe most of them fail.</p>
 <p>Table below shows how parallel and fork manage resources, where following Java code is added to @Before method and results,<em><strong></strong></em> are observed. Parallel has one process with many threads. The fork has several processes with one thread. As seen in table reuseForks does not have any effect.</p>
-<pre class="language-java"><code>@Before
-public void before() {
-	long threadId = Thread.currentThread().getId();
-	String processName = ManagementFactory.getRuntimeMXBean().getName();
-	System.out.println("Started in thread: " + threadId + ", in JVM: " + processName);
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Before</span></span>
+<span class="line"><span>public void before() {</span></span>
+<span class="line"><span>    long threadId = Thread.currentThread().getId();</span></span>
+<span class="line"><span>    String processName = ManagementFactory.getRuntimeMXBean().getName();</span></span>
+<span class="line"><span>    System.out.println("Started in thread: " + threadId + ", in JVM: " + processName);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Result is:</p>
-<pre class="language-text"><code>forkCount = 10, reuseForks = true
-Started in thread: 1, in JVM: 9884@WKS-SOF-L011
-Started in thread: 1, in JVM: 11160@WKS-SOF-L011
-Started in thread: 1, in JVM: 10892@WKS-SOF-L011
-Started in thread: 1, in JVM: 11160@WKS-SOF-L011
-Started in thread: 1, in JVM: 10892@WKS-SOF-L011
-
-forkCount = 10, reuseForks = false
-Started in thread: 1, in JVM: 8792@WKS-SOF-L011
-Started in thread: 1, in JVM: 7884@WKS-SOF-L011
-Started in thread: 1, in JVM: 9332@WKS-SOF-L011
-Started in thread: 1, in JVM: 8792@WKS-SOF-L011
-Started in thread: 1, in JVM: 9332@WKS-SOF-L011
-
-parallel = classes, threadCount = 10
-Started in thread: 15, in JVM: 7352@WKS-SOF-L011
-Started in thread: 14, in JVM: 7352@WKS-SOF-L011
-Started in thread: 15, in JVM: 7352@WKS-SOF-L011
-Started in thread: 14, in JVM: 7352@WKS-SOF-L011
-Started in thread: 13, in JVM: 7352@WKS-SOF-L011
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>forkCount = 10, reuseForks = true</span></span>
+<span class="line"><span>Started in thread: 1, in JVM: 9884@WKS-SOF-L011</span></span>
+<span class="line"><span>Started in thread: 1, in JVM: 11160@WKS-SOF-L011</span></span>
+<span class="line"><span>Started in thread: 1, in JVM: 10892@WKS-SOF-L011</span></span>
+<span class="line"><span>Started in thread: 1, in JVM: 11160@WKS-SOF-L011</span></span>
+<span class="line"><span>Started in thread: 1, in JVM: 10892@WKS-SOF-L011</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>forkCount = 10, reuseForks = false</span></span>
+<span class="line"><span>Started in thread: 1, in JVM: 8792@WKS-SOF-L011</span></span>
+<span class="line"><span>Started in thread: 1, in JVM: 7884@WKS-SOF-L011</span></span>
+<span class="line"><span>Started in thread: 1, in JVM: 9332@WKS-SOF-L011</span></span>
+<span class="line"><span>Started in thread: 1, in JVM: 8792@WKS-SOF-L011</span></span>
+<span class="line"><span>Started in thread: 1, in JVM: 9332@WKS-SOF-L011</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>parallel = classes, threadCount = 10</span></span>
+<span class="line"><span>Started in thread: 15, in JVM: 7352@WKS-SOF-L011</span></span>
+<span class="line"><span>Started in thread: 14, in JVM: 7352@WKS-SOF-L011</span></span>
+<span class="line"><span>Started in thread: 15, in JVM: 7352@WKS-SOF-L011</span></span>
+<span class="line"><span>Started in thread: 14, in JVM: 7352@WKS-SOF-L011</span></span>
+<span class="line"><span>Started in thread: 13, in JVM: 7352@WKS-SOF-L011</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Tests are run with <em><strong>mvn clean test</strong></em>.</p>
 <h2>Conclusion</h2>
-Running Cucumber JVM tests in parallel is essential for successful test automation. Better to start automation project with this thought in mind rather get disappointed at a later stage where tests get impossible to run in a feasible time span. Automatic Cucumber runner classes generation is a good approach as this keeps the project clean and tidy. Using Maven Surefire or Failsafe plugins is the proper way to run already automatically generated runner classes.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Running Cucumber JVM tests in parallel is essential for successful test automation. Better to start automation project with this thought in mind rather get disappointed at a later stage where tests get impossible to run in a feasible time span. Automatic Cucumber runner classes generation is a good approach as this keeps the project clean and tidy. Using Maven Surefire or Failsafe plugins is the proper way to run already automatically generated runner classes.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/introduction-to-cucumber-and-bdd-with-examples/" data-astro-cid-bvzihdzo>Introduction to Cucumber and BDD with examples</a> </li><li data-astro-cid-bvzihdzo> <a href="/avoid-multithreading-problems-java-using-threadlocal/" data-astro-cid-bvzihdzo>Avoid multithreading problems in Java using ThreadLocal</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/cucumber" data-astro-cid-bvzihdzo>Cucumber</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

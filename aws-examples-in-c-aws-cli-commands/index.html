@@ -1,254 +1,253 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-aws-cli-commands/"><!-- Primary Meta Tags --><title>AWS examples in C# - AWS CLI commands</title><meta name="title" content="AWS examples in C# - AWS CLI commands"><meta name="description" content="Important AWS CLI commands used in AWS examples in C#."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-aws-cli-commands/"><meta property="og:title" content="AWS examples in C# - AWS CLI commands"><meta property="og:description" content="Important AWS CLI commands used in AWS examples in C#."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-aws-cli-commands/"><meta property="twitter:title" content="AWS examples in C# - AWS CLI commands"><meta property="twitter:description" content="Important AWS CLI commands used in AWS examples in C#."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-03-28T00:00:00.000Z"> Mar 28, 2020 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - AWS CLI commands</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-aws-cli-commands/"><!-- Primary Meta Tags --><title>AWS examples in C# - AWS CLI commands</title><meta name="title" content="AWS examples in C# - AWS CLI commands"><meta name="description" content="Important AWS CLI commands used in AWS examples in C#."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-aws-cli-commands/"><meta property="og:title" content="AWS examples in C# - AWS CLI commands"><meta property="og:description" content="Important AWS CLI commands used in AWS examples in C#."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-aws-cli-commands/"><meta property="twitter:title" content="AWS examples in C# - AWS CLI commands"><meta property="twitter:description" content="Important AWS CLI commands used in AWS examples in C#."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - AWS CLI commands</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-03-28T00:00:00.000Z"> Mar 28, 2020 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository.</p>
 <h2>Introduction</h2>
 In <a href="/aws-examples-in-c-run-the-solution/">AWS examples in C# – run the solution</a> post I have described how to install/uninstall current examples. In the current post, I am going to show in detail individual commands used. The configuration parameters in the command below will be given with capital letters and starting with a dollar sign, e.g. <em><strong>$CONFIGURATION_PARAMETER</strong></em>. Each AWS command has its code representation in the SDK for the desired programming language.
 <h2>AWS Command Line Interface</h2>
 The AWS Command Line Interface (CLI) is a unified tool to manage AWS services. Control of multiple AWS services from the command line and automate them through scripts can be done with just one tool to download and configure. The full list of services that can be controlled is listed in the <a href="https://docs.aws.amazon.com/cli/latest/reference/" target="_blank" rel="noopener noreferrer">AWS Command Line Interface reference</a> page. Each service has a subpage with a list of all available commands. All commands return JSON as a response. In a subsequent post, I will describe how to manage the JSON in the command line. All operations in the current post are done after AWS credentials are set as environment variables:
-<pre class="language-bash"><code>export AWS_ACCESS_KEY_ID=KIA57FV4.....
-export AWS_SECRET_ACCESS_KEY=mSgsxOWVh...
-export AWS_DEFAULT_REGION=us-east-1
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>export AWS_ACCESS_KEY_ID=KIA57FV4.....</span></span>
+<span class="line"><span>export AWS_SECRET_ACCESS_KEY=mSgsxOWVh...</span></span>
+<span class="line"><span>export AWS_DEFAULT_REGION=us-east-1</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>SQS operations</h2>
 The full list can be found in <a href="https://docs.aws.amazon.com/cli/latest/reference/sqs/index.html" target="_blank" rel="noopener noreferrer">aws sqs CLI reference</a> page. More information about SQS can be found in <a href="/aws-examples-in-c-create-a-service-working-with-sqs/">AWS examples in C# – create a service working with SQS</a> post.
 <h3>Create</h3>
 Initially, all queues are listed with <em><strong>list-queues</strong></em>, in order to check if the queue already exists.
-<pre class="language-bash"><code>aws sqs list-queues</code></pre>
-The queue is created with <em><strong>create-queue</strong></em> command, the result of the command returns the queue URL.
-<pre class="language-bash"><code>aws sqs create-queue --queue-name $QUEUE_NAME</code></pre>
-After queues are created, the re-drive policy has to be set up. The ARN of the dead-letter queue can be obtained with <em><strong>get-queue-attributes</strong></em> command by providing the queue URL.
-<pre class="language-bash"><code>aws sqs get-queue-attributes \
-	--queue-url $DEAD_LETTER_QUEUE_URL \
-	--attribute-names QueueArn
-</code></pre>
-The re-drive policy is set with <em><strong>set-queue-attributes</strong></em> command.
-<pre class="language-bash"><code>aws sqs set-queue-attributes \
-	--queue-url $QUEUE_URL \
-	--attributes "{\"RedrivePolicy\":\"{\\\"maxReceiveCount\\\":\\\"3\\\",\\\"deadLetterTargetArn\\\":\\\"$DEAD_LETTER_QUEUE_ARN\\\"}\",\"ReceiveMessageWaitTimeSeconds\":\"$LONG_POLLING_TIMEOUT\"}"
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws sqs list-queues</span></span></code></pre>
+<p>The queue is created with <em><strong>create-queue</strong></em> command, the result of the command returns the queue URL.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws sqs create-queue --queue-name $QUEUE_NAME</span></span></code></pre>
+<p>After queues are created, the re-drive policy has to be set up. The ARN of the dead-letter queue can be obtained with <em><strong>get-queue-attributes</strong></em> command by providing the queue URL.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws sqs get-queue-attributes \</span></span>
+<span class="line"><span>    --queue-url $DEAD_LETTER_QUEUE_URL \</span></span>
+<span class="line"><span>    --attribute-names QueueArn</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>The re-drive policy is set with <em><strong>set-queue-attributes</strong></em> command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws sqs set-queue-attributes \</span></span>
+<span class="line"><span>    --queue-url $QUEUE_URL \</span></span>
+<span class="line"><span>    --attributes "{\"RedrivePolicy\":\"{\\\"maxReceiveCount\\\":\\\"3\\\",\\\"deadLetterTargetArn\\\":\\\"$DEAD_LETTER_QUEUE_ARN\\\"}\",\"ReceiveMessageWaitTimeSeconds\":\"$LONG_POLLING_TIMEOUT\"}"</span></span>
+<span class="line"><span></span></span></code></pre>
 <h3>Delete</h3>
 In order to delete the queue, its URL is needed. The URL is obtained with <em><strong>get-queue-url</strong></em> command.
-<pre class="language-bash"><code>aws sqs get-queue-url --queue-name $QUEUE_NAME</code></pre>
-Deletion happens with <em><strong>delete-queue</strong></em> command.
-<pre class="language-bash"><code>aws sqs delete-queue --queue-url $QUEUE_URL</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws sqs get-queue-url --queue-name $QUEUE_NAME</span></span></code></pre>
+<p>Deletion happens with <em><strong>delete-queue</strong></em> command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws sqs delete-queue --queue-url $QUEUE_URL</span></span></code></pre>
 <h2>DynamoDB operations</h2>
 The full list can be found in <a href="https://docs.aws.amazon.com/cli/latest/reference/dynamodb/index.html" target="_blank" rel="noopener noreferrer">aws dynamodb CLI reference</a> page. More information about DynamoDB can be found in <a href="/aws-examples-in-c-create-a-service-working-with-dynamodb/">AWS examples in C# – create a service working with DynamoDB</a> post.
 <h3>Create</h3>
 The table data is obtained with <em><strong>describe-table</strong></em> command.
-<pre class="language-bash"><code>aws dynamodb describe-table --table-name $TABLE_NAME</code></pre>
-If the table does not exist, it is created with <em><strong>create-table</strong></em> command. The table command has all the data needed. See more about table attributes in <a href="/aws-examples-in-c-create-a-service-working-with-dynamodb/" target="_blank" rel="noopener noreferrer">AWS examples in C# – create a service working with DynamoDB</a> post.
-<pre class="language-bash"><code>aws dynamodb create-table \
-	--table-name $TABLE_NAME \
-	--attribute-definitions 'AttributeName=FirstName,AttributeType=S' 'AttributeName=LastName,AttributeType=S' \
-	--key-schema 'AttributeName=FirstName,KeyType=HASH' 'AttributeName=LastName,KeyType=RANGE' \
-	--provisioned-throughput 'ReadCapacityUnits=5,WriteCapacityUnits=5' \
-	--stream-specification 'StreamEnabled=true,StreamViewType=NEW_AND_OLD_IMAGES'
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws dynamodb describe-table --table-name $TABLE_NAME</span></span></code></pre>
+<p>If the table does not exist, it is created with <em><strong>create-table</strong></em> command. The table command has all the data needed. See more about table attributes in <a href="/aws-examples-in-c-create-a-service-working-with-dynamodb/" target="_blank" rel="noopener noreferrer">AWS examples in C# – create a service working with DynamoDB</a> post.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws dynamodb create-table \</span></span>
+<span class="line"><span>    --table-name $TABLE_NAME \</span></span>
+<span class="line"><span>    --attribute-definitions 'AttributeName=FirstName,AttributeType=S' 'AttributeName=LastName,AttributeType=S' \</span></span>
+<span class="line"><span>    --key-schema 'AttributeName=FirstName,KeyType=HASH' 'AttributeName=LastName,KeyType=RANGE' \</span></span>
+<span class="line"><span>    --provisioned-throughput 'ReadCapacityUnits=5,WriteCapacityUnits=5' \</span></span>
+<span class="line"><span>    --stream-specification 'StreamEnabled=true,StreamViewType=NEW_AND_OLD_IMAGES'</span></span>
+<span class="line"><span></span></span></code></pre>
 <h3>Delete</h3>
 The table is deleted by name with <em><strong>delete-table</strong></em> command.
-<pre class="language-bash"><code>aws dynamodb delete-table --table-name $TABLE_NAME</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws dynamodb delete-table --table-name $TABLE_NAME</span></span></code></pre>
 <h2>IAM roles operations</h2>
 The full list can be found in <a href="https://docs.aws.amazon.com/cli/latest/reference/iam/index.html" target="_blank" rel="noopener noreferrer">aws iam CLI reference</a> page.
 <h3>Create</h3>
 Roles are listed with <em><strong>list-roles</strong></em> command to check if the role exists.
-<pre class="language-bash"><code>aws iam list-roles</code></pre>
-The role is created with <em><strong>create-role</strong></em> command.
-<pre class="language-bash"><code>aws iam create-role \
-	--role-name $ROLE_NAME \
-	--assume-role-policy-document file://assume-role-policy-document.json</code></pre>
-This is the only case in the current examples where an additional JSON document is needed alongside a command. It is not possible to pass this JSON inline as it is with <em><strong>aws sqs set-queue-attributes</strong></em> command. This JSON <em><strong>allows</strong></em> certain services to be accessed by this role.
-<pre class="language-json"><code>{
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Principal": {
-				"Service": [
-					"lambda.amazonaws.com",
-					"ec2.amazonaws.com",
-					"ecs.amazonaws.com",
-					"ecs-tasks.amazonaws.com",
-					"batch.amazonaws.com"
-				]
-			},
-			"Action": "sts:AssumeRole"
-		}
-	]
-}
-</code></pre>
-List policies to get the policy <em><strong>ARN</strong></em> with <em><strong>list-policies</strong></em> command. Basically, to make things easier, <em><strong>AdministratorAccess</strong></em> existing policy is used with its ARN.
-<pre class="language-bash"><code>aws iam list-policies</code></pre>
-Attach the policy to the role with <em><strong>attach-role-policy</strong></em> command.
-<pre class="language-bash"><code>aws iam attach-role-policy \
-	--role-name $ROLE_NAME \
-	--policy-arn $POLICY_ARN
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws iam list-roles</span></span></code></pre>
+<p>The role is created with <em><strong>create-role</strong></em> command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws iam create-role \</span></span>
+<span class="line"><span>    --role-name $ROLE_NAME \</span></span>
+<span class="line"><span>    --assume-role-policy-document file://assume-role-policy-document.json</span></span></code></pre>
+<p>This is the only case in the current examples where an additional JSON document is needed alongside a command. It is not possible to pass this JSON inline as it is with <em><strong>aws sqs set-queue-attributes</strong></em> command. This JSON <em><strong>allows</strong></em> certain services to be accessed by this role.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<span class="line"><span>    "Version": "2012-10-17",</span></span>
+<span class="line"><span>    "Statement": [</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            "Effect": "Allow",</span></span>
+<span class="line"><span>            "Principal": {</span></span>
+<span class="line"><span>                "Service": [</span></span>
+<span class="line"><span>                    "lambda.amazonaws.com",</span></span>
+<span class="line"><span>                    "ec2.amazonaws.com",</span></span>
+<span class="line"><span>                    "ecs.amazonaws.com",</span></span>
+<span class="line"><span>                    "ecs-tasks.amazonaws.com",</span></span>
+<span class="line"><span>                    "batch.amazonaws.com"</span></span>
+<span class="line"><span>                ]</span></span>
+<span class="line"><span>            },</span></span>
+<span class="line"><span>            "Action": "sts:AssumeRole"</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    ]</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>List policies to get the policy <em><strong>ARN</strong></em> with <em><strong>list-policies</strong></em> command. Basically, to make things easier, <em><strong>AdministratorAccess</strong></em> existing policy is used with its ARN.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws iam list-policies</span></span></code></pre>
+<p>Attach the policy to the role with <em><strong>attach-role-policy</strong></em> command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws iam attach-role-policy \</span></span>
+<span class="line"><span>    --role-name $ROLE_NAME \</span></span>
+<span class="line"><span>    --policy-arn $POLICY_ARN</span></span>
+<span class="line"><span></span></span></code></pre>
 <h3>Delete</h3>
 List policies with <em><strong>list-policies</strong></em> command to get the ARN, then detach the policy from the role.
-<pre class="language-bash"><code>aws iam detach-role-policy \
-	--role-name $ROLE_NAME \
-	--policy-arn $POLICY_ARN
-</code></pre>
-After the policy is detached, role is deleted with <em><strong>delete-role</strong></em> command.
-<pre class="language-bash"><code>aws iam delete-role --role-name $ROLE_NAME</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws iam detach-role-policy \</span></span>
+<span class="line"><span>    --role-name $ROLE_NAME \</span></span>
+<span class="line"><span>    --policy-arn $POLICY_ARN</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>After the policy is detached, role is deleted with <em><strong>delete-role</strong></em> command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws iam delete-role --role-name $ROLE_NAME</span></span></code></pre>
 <h2>AWS Lambda operations</h2>
 The full list can be found in <a href="https://docs.aws.amazon.com/cli/latest/reference/lambda/index.html" target="_blank" rel="noopener noreferrer">aws lambda CLI reference</a> page.
 <h3>Create</h3>
 List functions with <em><strong>list-functions</strong></em> command to check if the function exists.
-<pre class="language-bash"><code>aws lambda list-functions</code></pre>
-Creating a function is done with <em><strong>create-function</strong></em> command and takes many arguments. Most of the parameters are self-explanatory. Timeout is important, the lambda function execution is suspended after the timeout passes, in current examples, it is 30 seconds, I found that cold start could take up to 15 seconds some times. The lambda configurations are described in <a href="/aws-examples-in-c-create-basic-lambda-function/" target="_blank" rel="noopener noreferrer">AWS examples in C# – create basic Lambda function</a> post.
-<pre class="language-bash"><code>aws lambda create-function \
-	--function-name $FUNCTION_NAME \
-	--runtime dotnetcore2.1 \
-	--role $ROLE_ARN \
-	--handler $HANDLER_STRING_WITH_NAMESPACE_CLASS_METHOD \
-	--environment "Variables={AWS_SQS_QUEUE_NAME=$QUEUE_NAME, AWS_SQS_IS_FIFO=$IS_QUEUE_FIFO}" \
-	--timeout $FUNCTION_TIMEOUT \
-	--zip-file fileb://$PATH_TO_ZIP_FILE)
-</code></pre>
-Once the function is created, it can be linked to an <em><strong>event source</strong></em>, such as DynamoDB. This happens by DynamoDB stream ARN. Once a record is inserted, updated or deleted in DynamoDB, the lambda function is called with this event.
-<pre class="language-bash"><code>aws lambda create-event-source-mapping \
-	--function-name $FUNCTION_NAME \
-	--event-source-arn $DYNAMODB_STREAM_ARN \
-	--starting-position LATEST)
-</code></pre>
-In case of function already exists, but its code has to be updated, this is done with <em><strong>update-function-code</strong></em> command.
-<pre class="language-bash"><code>aws lambda update-function-code \
-	--function-name $FUNCTION_NAME \
-	--zip-file fileb://$PATH_TO_ZIP_FILE)
-</code></pre>
-Along with the code, function configuration can be updated as well with <em><strong>update-function-configuration</strong></em> command.
-<pre class="language-bash"><code>aws lambda update-function-configuration \
-	--function-name $FUNCTION_NAME  \
-	--role $ROLE_ARN\
-	--handler $HANDLER_STRING_WITH_NAMESPACE_CLASS_METHOD  \
-	--environment "Variables={AWS_SQS_QUEUE_NAME=$QUEUE_NAME, AWS_SQS_IS_FIFO=$IS_QUEUE_FIFO}" \
-	--timeout $FUNCTION_TIMEOUT
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws lambda list-functions</span></span></code></pre>
+<p>Creating a function is done with <em><strong>create-function</strong></em> command and takes many arguments. Most of the parameters are self-explanatory. Timeout is important, the lambda function execution is suspended after the timeout passes, in current examples, it is 30 seconds, I found that cold start could take up to 15 seconds some times. The lambda configurations are described in <a href="/aws-examples-in-c-create-basic-lambda-function/" target="_blank" rel="noopener noreferrer">AWS examples in C# – create basic Lambda function</a> post.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws lambda create-function \</span></span>
+<span class="line"><span>    --function-name $FUNCTION_NAME \</span></span>
+<span class="line"><span>    --runtime dotnetcore2.1 \</span></span>
+<span class="line"><span>    --role $ROLE_ARN \</span></span>
+<span class="line"><span>    --handler $HANDLER_STRING_WITH_NAMESPACE_CLASS_METHOD \</span></span>
+<span class="line"><span>    --environment "Variables={AWS_SQS_QUEUE_NAME=$QUEUE_NAME, AWS_SQS_IS_FIFO=$IS_QUEUE_FIFO}" \</span></span>
+<span class="line"><span>    --timeout $FUNCTION_TIMEOUT \</span></span>
+<span class="line"><span>    --zip-file fileb://$PATH_TO_ZIP_FILE)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Once the function is created, it can be linked to an <em><strong>event source</strong></em>, such as DynamoDB. This happens by DynamoDB stream ARN. Once a record is inserted, updated or deleted in DynamoDB, the lambda function is called with this event.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws lambda create-event-source-mapping \</span></span>
+<span class="line"><span>    --function-name $FUNCTION_NAME \</span></span>
+<span class="line"><span>    --event-source-arn $DYNAMODB_STREAM_ARN \</span></span>
+<span class="line"><span>    --starting-position LATEST)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>In case of function already exists, but its code has to be updated, this is done with <em><strong>update-function-code</strong></em> command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws lambda update-function-code \</span></span>
+<span class="line"><span>    --function-name $FUNCTION_NAME \</span></span>
+<span class="line"><span>    --zip-file fileb://$PATH_TO_ZIP_FILE)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Along with the code, function configuration can be updated as well with <em><strong>update-function-configuration</strong></em> command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws lambda update-function-configuration \</span></span>
+<span class="line"><span>    --function-name $FUNCTION_NAME  \</span></span>
+<span class="line"><span>    --role $ROLE_ARN\</span></span>
+<span class="line"><span>    --handler $HANDLER_STRING_WITH_NAMESPACE_CLASS_METHOD  \</span></span>
+<span class="line"><span>    --environment "Variables={AWS_SQS_QUEUE_NAME=$QUEUE_NAME, AWS_SQS_IS_FIFO=$IS_QUEUE_FIFO}" \</span></span>
+<span class="line"><span>    --timeout $FUNCTION_TIMEOUT</span></span>
+<span class="line"><span></span></span></code></pre>
 <h3>Delete</h3>
 In order to delete, then the event source UUID has to be obtained, this is done with <em><strong>list-event-source-mappings</strong></em> command.
-<pre class="language-bash"><code>aws lambda list-event-source-mappings --function-name $FUNCTION_NAME</code></pre>
-Then event source mapping is deleted with <em><strong>delete-event-source-mapping</strong></em> command.
-<pre class="language-bash"><code>aws lambda delete-event-source-mapping --uuid $EVNET_SOURCE_UUID</code></pre>
-And finally, the function itself is deleted with <em><strong>delete-function</strong></em> command.
-<pre class="language-bash"><code>aws lambda delete-function --function-name $FUNCTION_NAME</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws lambda list-event-source-mappings --function-name $FUNCTION_NAME</span></span></code></pre>
+<p>Then event source mapping is deleted with <em><strong>delete-event-source-mapping</strong></em> command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws lambda delete-event-source-mapping --uuid $EVNET_SOURCE_UUID</span></span></code></pre>
+<p>And finally, the function itself is deleted with <em><strong>delete-function</strong></em> command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws lambda delete-function --function-name $FUNCTION_NAME</span></span></code></pre>
 <h2>ECS (Elastic Container Service) operations</h2>
 The full list can be found in <a href="https://docs.aws.amazon.com/cli/latest/reference/ecs/index.html" target="_blank" rel="noopener noreferrer">aws ecs CLI reference</a> page.
 <h3>Create</h3>
 Before doing anything with ECR, <em><strong>docker login</strong></em> command should be created with get-login, so docker is authenticated with AWS ECR. With <em><strong>eval</strong></em> function, the <em><strong>docker login</strong></em> command is directly executed.
-<pre class="language-bash"><code>eval $(aws ecr get-login --no-include-email)</code></pre>
-Clusters are first listed, in order to evaluate if the application is already deployed.
-<pre class="language-bash"><code>aws ecs list-clusters</code></pre>
-Cluster is created with <em><strong>create-cluster</strong></em> command. A cluster consists of services.
-<pre class="language-bash"><code>aws ecs create-cluster --cluster-name $CLUSTER_NAME</code></pre>
-Existing task definitions are listed, to evaluate whether they are published or not. Task definitions are Docker configurations.
-<pre class="language-bash"><code>aws ecs describe-task-definition --task-definition $TASK_DEFINITION_NAME</code></pre>
-Task definition is created with <em><strong>register-task-definition</strong></em> command.
-<pre class="language-bash"><code>aws ecs register-task-definition \
-	--family $TASK_DEFINITION_NAME \
-	--execution-role-arn $ROLE_ARN\
-	--network-mode awsvpc \
-	--container-definitions $CONTAINER_DEFINITIONS \
-	--requires-compatibilities "FARGATE" \
-	--cpu "256" \
-	--memory "512"
-</code></pre>
-<em><strong>$CONTAINER_DEFINITIONS</strong></em> is a Docker configuration which defines the task definition:
-<pre class="language-bash"><code>name=$TASK_DEFINITION_NAME,\
-image=$IMAGE_TAG,\
-environment=[\
-	{name=AwsQueueIsFifo,value=$_IS_QUEUE_FIFO},\
-	{name=AwsRegion,value=$REGION},\
-	{name=AwsQueueName,value=$QUEUE_NAME},\
-	{name=AwsAccessKey,value=$AWS_ACCESS_KEY},\
-	{name=AwsSecretKey,value=$AWS_SECRET_KEY},\
-	{name=AwsQueueAutomaticallyCreate,value=$AWS_QUEUE_AUTO_CREATE},\
-	{name=AwsQueueLongPollTimeSeconds,value=$AWS_POLL_TIME_SECONDS}\
-],\
-logConfiguration={\
-	logDriver=awslogs,\
-	options={\
-		awslogs-group=ecs/$SERVICE_NAME,\
-		awslogs-region=$REGION,\
-		awslogs-stream-prefix=ecs\
-	}\
-}
-</code></pre>
-Before creating a service, existing ones are listed with <em><strong>describe-services</strong></em> command. Service has one or more running instances of a task definition. This is how service can scale.
-<pre class="language-bash"><code>aws ecs describe-services \
-	--cluster $CLUSTER_NAME\
-	--services $SERVICE_NAME
-</code></pre>
-Creating a service is done with <em><strong>create-service</strong></em> command. <em><strong>$TASK_REVISION</strong></em> is the result of the <em><strong>register-task-definition</strong></em> command. <em><strong>$SUBNET_ID</strong></em> is returned by <em><strong>aws ec2 describe-subnets</strong></em> command.
-<pre class="language-bash"><code>aws ecs create-service --cluster $CLUSTER_NAME \
-	--service-name $SERVICE_NAME \
-	--task-definition "$TASK_DEFINITION_NAME:$TASK_REVISION" \
-	--desired-count 1 \
-	--launch-type "FARGATE" \
-	--network-configuration "awsvpcConfiguration={subnets=[$SUBNET_ID],securityGroups=[$SECURITY_GROUP_ID],assignPublicIp=ENABLED}")
-</code></pre>
-Updating of the service is done with a very <em><strong>update-service</strong></em> similar command.
-<pre class="language-bash"><code>aws ecs update-service --cluster $CLUSTER_NAME \
-	--service $SERVICE_NAME \
-	--task-definition "$TASK_DEFINITION_NAME:$TASK_REVISION" \
-	--desired-count 1 \
-	--network-configuration "awsvpcConfiguration={subnets=[$SUBNET_ID],securityGroups=[$SECURITY_GROUP_ID],assignPublicIp=ENABLED}")
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>eval $(aws ecr get-login --no-include-email)</span></span></code></pre>
+<p>Clusters are first listed, in order to evaluate if the application is already deployed.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ecs list-clusters</span></span></code></pre>
+<p>Cluster is created with <em><strong>create-cluster</strong></em> command. A cluster consists of services.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ecs create-cluster --cluster-name $CLUSTER_NAME</span></span></code></pre>
+<p>Existing task definitions are listed, to evaluate whether they are published or not. Task definitions are Docker configurations.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ecs describe-task-definition --task-definition $TASK_DEFINITION_NAME</span></span></code></pre>
+<p>Task definition is created with <em><strong>register-task-definition</strong></em> command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ecs register-task-definition \</span></span>
+<span class="line"><span>    --family $TASK_DEFINITION_NAME \</span></span>
+<span class="line"><span>    --execution-role-arn $ROLE_ARN\</span></span>
+<span class="line"><span>    --network-mode awsvpc \</span></span>
+<span class="line"><span>    --container-definitions $CONTAINER_DEFINITIONS \</span></span>
+<span class="line"><span>    --requires-compatibilities "FARGATE" \</span></span>
+<span class="line"><span>    --cpu "256" \</span></span>
+<span class="line"><span>    --memory "512"</span></span>
+<span class="line"><span></span></span></code></pre>
+<p><em><strong>$CONTAINER_DEFINITIONS</strong></em> is a Docker configuration which defines the task definition:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>name=$TASK_DEFINITION_NAME,\</span></span>
+<span class="line"><span>image=$IMAGE_TAG,\</span></span>
+<span class="line"><span>environment=[\</span></span>
+<span class="line"><span>    {name=AwsQueueIsFifo,value=$_IS_QUEUE_FIFO},\</span></span>
+<span class="line"><span>    {name=AwsRegion,value=$REGION},\</span></span>
+<span class="line"><span>    {name=AwsQueueName,value=$QUEUE_NAME},\</span></span>
+<span class="line"><span>    {name=AwsAccessKey,value=$AWS_ACCESS_KEY},\</span></span>
+<span class="line"><span>    {name=AwsSecretKey,value=$AWS_SECRET_KEY},\</span></span>
+<span class="line"><span>    {name=AwsQueueAutomaticallyCreate,value=$AWS_QUEUE_AUTO_CREATE},\</span></span>
+<span class="line"><span>    {name=AwsQueueLongPollTimeSeconds,value=$AWS_POLL_TIME_SECONDS}\</span></span>
+<span class="line"><span>],\</span></span>
+<span class="line"><span>logConfiguration={\</span></span>
+<span class="line"><span>    logDriver=awslogs,\</span></span>
+<span class="line"><span>    options={\</span></span>
+<span class="line"><span>        awslogs-group=ecs/$SERVICE_NAME,\</span></span>
+<span class="line"><span>        awslogs-region=$REGION,\</span></span>
+<span class="line"><span>        awslogs-stream-prefix=ecs\</span></span>
+<span class="line"><span>    }\</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Before creating a service, existing ones are listed with <em><strong>describe-services</strong></em> command. Service has one or more running instances of a task definition. This is how service can scale.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ecs describe-services \</span></span>
+<span class="line"><span>    --cluster $CLUSTER_NAME\</span></span>
+<span class="line"><span>    --services $SERVICE_NAME</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Creating a service is done with <em><strong>create-service</strong></em> command. <em><strong>$TASK_REVISION</strong></em> is the result of the <em><strong>register-task-definition</strong></em> command. <em><strong>$SUBNET_ID</strong></em> is returned by <em><strong>aws ec2 describe-subnets</strong></em> command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ecs create-service --cluster $CLUSTER_NAME \</span></span>
+<span class="line"><span>    --service-name $SERVICE_NAME \</span></span>
+<span class="line"><span>    --task-definition "$TASK_DEFINITION_NAME:$TASK_REVISION" \</span></span>
+<span class="line"><span>    --desired-count 1 \</span></span>
+<span class="line"><span>    --launch-type "FARGATE" \</span></span>
+<span class="line"><span>    --network-configuration "awsvpcConfiguration={subnets=[$SUBNET_ID],securityGroups=[$SECURITY_GROUP_ID],assignPublicIp=ENABLED}")</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Updating of the service is done with a very <em><strong>update-service</strong></em> similar command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ecs update-service --cluster $CLUSTER_NAME \</span></span>
+<span class="line"><span>    --service $SERVICE_NAME \</span></span>
+<span class="line"><span>    --task-definition "$TASK_DEFINITION_NAME:$TASK_REVISION" \</span></span>
+<span class="line"><span>    --desired-count 1 \</span></span>
+<span class="line"><span>    --network-configuration "awsvpcConfiguration={subnets=[$SUBNET_ID],securityGroups=[$SECURITY_GROUP_ID],assignPublicIp=ENABLED}")</span></span>
+<span class="line"><span></span></span></code></pre>
 <h3>Delete</h3>
 In order to delete task definitions, they should be first listed with <em><strong>list-task-definitions</strong></em> command, so the task definition version is available.
-<pre class="language-bash"><code>aws ecs list-task-definitions</code></pre>
-Removing of the task definition is done with <em><strong>deregister-task-definition</strong></em> command. Note that the command does what it says, deregister, it does not delete. The task definition is kept in history in status <em><strong>INACTIVE</strong></em>.
-<pre class="language-bash"><code>aws ecs deregister-task-definition --task-definition "$TASK_DEFINITION_VERSION"</code></pre>
-Deleting the service is done with the <em><strong>delete-service</strong></em> command, the <em><strong>--force</strong></em> parameter also stops the running tasks.
-<pre class="language-bash"><code>aws ecs delete-service \
-	--cluster $CLUSTER_NAME \
-	--service $SERVICE_NAME \
-	--force
-</code></pre>
-In the end, the whole cluster is deleted with <em><strong>delete-cluster</strong></em> command.
-<pre class="language-bash"><code>aws ecs delete-cluster --cluster $CLUSTER_NAME</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ecs list-task-definitions</span></span></code></pre>
+<p>Removing of the task definition is done with <em><strong>deregister-task-definition</strong></em> command. Note that the command does what it says, deregister, it does not delete. The task definition is kept in history in status <em><strong>INACTIVE</strong></em>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ecs deregister-task-definition --task-definition "$TASK_DEFINITION_VERSION"</span></span></code></pre>
+<p>Deleting the service is done with the <em><strong>delete-service</strong></em> command, the <em><strong>—force</strong></em> parameter also stops the running tasks.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ecs delete-service \</span></span>
+<span class="line"><span>    --cluster $CLUSTER_NAME \</span></span>
+<span class="line"><span>    --service $SERVICE_NAME \</span></span>
+<span class="line"><span>    --force</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>In the end, the whole cluster is deleted with <em><strong>delete-cluster</strong></em> command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ecs delete-cluster --cluster $CLUSTER_NAME</span></span></code></pre>
 <h2>ECR (Elastic Container Registry) operations</h2>
 The full list can be found in <a href="https://docs.aws.amazon.com/cli/latest/reference/ecr/index.html" target="_blank" rel="noopener noreferrer">aws ecr CLI reference</a> page.
 <h3>Delete</h3>
 The repository is created by Docker when the image is pushed to it. Repository and images inside are deleted with <em><strong>delete-repository</strong></em> command.
-<pre class="language-bash"><code>aws ecr delete-repository \
-	--repository-name $REPOSITORY_NAME \
-	--force
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ecr delete-repository \</span></span>
+<span class="line"><span>    --repository-name $REPOSITORY_NAME \</span></span>
+<span class="line"><span>    --force</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>EC2 (Elastic Compute Cloud) operations</h2>
 The full list can be found in <a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/index.html" target="_blank" rel="noopener noreferrer">aws ec2 CLI reference</a> page.
 <h3>Create</h3>
 EC2 is responsible for security groups, which expose the service to the world by applying firewall rules. Before creating the group, it is first searched for presence with <em><strong>describe-security-groups</strong></em> command.
-<pre class="language-bash"><code>aws ec2 describe-security-groups</code></pre>
-The security group is created with <em><strong>create-security-group</strong></em> command.
-<pre class="language-bash"><code>aws ec2 create-security-group \
-	--description $SECIRITY_GROUP_DESCRIPTION\
-	--group-name $SECIRITY_GROUP_NAME
-</code></pre>
-Inbound rules are defined with <em><strong>authorize-security-group-ingress</strong></em> command, where ip_permission is a bash function generation the JSON for better reuse.
-<pre class="language-bash"><code>aws ec2 authorize-security-group-ingress \
-	--group-id $SECURITY_GROUP_ID \
-	--ip-permissions "[$(ip_permission $SERVICE_PORT)]"
-</code></pre>
-Function generation firewall rule JSON, <em><strong>$1</strong></em> is an argument given to the function.
-<pre class="language-bash"><code>function ip_permission() {
-	echo "{\"IpProtocol\": \"tcp\", \"FromPort\": $1, \"ToPort\": $1, \"IpRanges\": [{\"CidrIp\": \"0.0.0.0/0\", \"Description\": \"Port $1\"}]}"
-}
-</code></pre>
-Subnets are listed with <em><strong>describe-subnets</strong></em> command. Each subnet has 3 availability zones.
-<pre class="language-bash"><code>aws ec2 describe-subnets</code></pre>
-Finally, in order to report the IP of the deployed service, <em><strong>describe-network-interfaces</strong></em> command is used.
-<pre class="language-bash"><code>aws ec2 describe-network-interfaces --filters "Name=network-interface-id,Values=$networkInterfaceId"</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ec2 describe-security-groups</span></span></code></pre>
+<p>The security group is created with <em><strong>create-security-group</strong></em> command.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ec2 create-security-group \</span></span>
+<span class="line"><span>    --description $SECIRITY_GROUP_DESCRIPTION\</span></span>
+<span class="line"><span>    --group-name $SECIRITY_GROUP_NAME</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Inbound rules are defined with <em><strong>authorize-security-group-ingress</strong></em> command, where ip_permission is a bash function generation the JSON for better reuse.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ec2 authorize-security-group-ingress \</span></span>
+<span class="line"><span>    --group-id $SECURITY_GROUP_ID \</span></span>
+<span class="line"><span>    --ip-permissions "[$(ip_permission $SERVICE_PORT)]"</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Function generation firewall rule JSON, <em><strong>$1</strong></em> is an argument given to the function.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>function ip_permission() {</span></span>
+<span class="line"><span>    echo "{\"IpProtocol\": \"tcp\", \"FromPort\": $1, \"ToPort\": $1, \"IpRanges\": [{\"CidrIp\": \"0.0.0.0/0\", \"Description\": \"Port $1\"}]}"</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Subnets are listed with <em><strong>describe-subnets</strong></em> command. Each subnet has 3 availability zones.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ec2 describe-subnets</span></span></code></pre>
+<p>Finally, in order to report the IP of the deployed service, <em><strong>describe-network-interfaces</strong></em> command is used.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ec2 describe-network-interfaces --filters "Name=network-interface-id,Values=$networkInterfaceId"</span></span></code></pre>
 <h3>Delete</h3>
 A security group is deleted by name with <em>delete-security-group</em> command.
-<pre class="language-bash"><code>aws ec2 delete-security-group --group-name $SECURITY_GROUP</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws ec2 delete-security-group --group-name $SECURITY_GROUP</span></span></code></pre>
 <h2>CloudWatch operations</h2>
 The full list can be found in <a href="https://docs.aws.amazon.com/cli/latest/reference/logs/index.html" target="_blank" rel="noopener noreferrer">aws logs CLI reference</a> page.
 <h3>Delete</h3>
 CloudWatch logs are created by default from the services. Deleting the logs is done with <em><strong>delete-log-group</strong></em> command. Note that I am using Git Bash on Windows and <em><strong>MSYS_NO_PATHCONV=1</strong></em> is mandatory because the log group name starts with <em><strong>/</strong></em>.
-<pre class="language-bash"><code>MSYS_NO_PATHCONV=1 aws logs delete-log-group --log-group-name ecs/$SERVICE_NAME</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>MSYS_NO_PATHCONV=1 aws logs delete-log-group --log-group-name ecs/$SERVICE_NAME</span></span></code></pre>
 <h2>Conclusion</h2>
-AWS command-line interface provides tooling to handle all needed operations of the AWS services. It is the preferred way to manage services over the Web user interface.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+AWS command-line interface provides tooling to handle all needed operations of the AWS services. It is the preferred way to manage services over the Web user interface.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/aws-examples-in-c-run-the-solution/" data-astro-cid-bvzihdzo>AWS examples in C# - run the solution</a> </li><li data-astro-cid-bvzihdzo> <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/" data-astro-cid-bvzihdzo>AWS examples in C# - working with SQS, DynamoDB, Lambda, ECS</a> </li><li data-astro-cid-bvzihdzo> <a href="/aws-examples-in-c-create-a-service-working-with-dynamodb/" data-astro-cid-bvzihdzo>AWS examples in C# - create a service working with DynamoDB</a> </li><li data-astro-cid-bvzihdzo> <a href="/aws-examples-in-c-create-a-service-working-with-sqs/" data-astro-cid-bvzihdzo>AWS examples in C# - create a service working with SQS</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/aws" data-astro-cid-bvzihdzo>AWS</a><a href="/tags/aws-dynamodb" data-astro-cid-bvzihdzo>AWS DynamoDB</a><a href="/tags/aws-ecs" data-astro-cid-bvzihdzo>AWS ECS</a><a href="/tags/aws-lambda" data-astro-cid-bvzihdzo>AWS Lambda</a><a href="/tags/aws-sqs" data-astro-cid-bvzihdzo>AWS SQS</a><a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

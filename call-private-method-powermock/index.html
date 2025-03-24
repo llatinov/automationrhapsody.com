@@ -1,47 +1,46 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/call-private-method-powermock/"><!-- Primary Meta Tags --><title>Call private method with PowerMock</title><meta name="title" content="Call private method with PowerMock"><meta name="description" content="How to invoke a private method with PowerMock."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/call-private-method-powermock/"><meta property="og:title" content="Call private method with PowerMock"><meta property="og:description" content="How to invoke a private method with PowerMock."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/call-private-method-powermock/"><meta property="twitter:title" content="Call private method with PowerMock"><meta property="twitter:description" content="How to invoke a private method with PowerMock."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-05-28T00:00:00.000Z"> May 28, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Call private method with PowerMock</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/powermock-examples-better-not-use/">PowerMock series examples</a>. The code shown in examples below is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener noreferrer">java-samples/junit</a> repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/call-private-method-powermock/"><!-- Primary Meta Tags --><title>Call private method with PowerMock</title><meta name="title" content="Call private method with PowerMock"><meta name="description" content="How to invoke a private method with PowerMock."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/call-private-method-powermock/"><meta property="og:title" content="Call private method with PowerMock"><meta property="og:description" content="How to invoke a private method with PowerMock."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/call-private-method-powermock/"><meta property="twitter:title" content="Call private method with PowerMock"><meta property="twitter:description" content="How to invoke a private method with PowerMock."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Call private method with PowerMock</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-05-28T00:00:00.000Z"> May 28, 2017 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/powermock-examples-better-not-use/">PowerMock series examples</a>. The code shown in examples below is available in GitHub <a href="https://github.com/llatinov/java-samples" target="_blank" rel="noopener noreferrer">java-samples/junit</a> repository.</p>
 <h2>Unit test private method</h2>
 Mainly public methods are being tested, so it is a very rare case where you want to unit test a private method. PowerMock provides utilities that can invoke private methods via a reflection and get output which can be tested.
 <h2>Code to be tested</h2>
 Below is a sample code that shows a class with a private method in it. It does nothing else but increases the <em><strong>X</strong></em> and <em><strong>Y</strong></em> coordinates of given as argument <em><strong>Point</strong></em>.
-<pre class="language-java"><code>public class PowerMockDemo {
-
-	private Point privateMethod(Point point) {
-		return new Point(point.getX() + 1, point.getY() + 1);
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class PowerMockDemo {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private Point privateMethod(Point point) {</span></span>
+<span class="line"><span>        return new Point(point.getX() + 1, point.getY() + 1);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Unit test</h2>
 Assume that this private method has to be unit tested for some reason. In order to do so, you have to use PowerMock's <em><strong>Whitebox.invokeMethod()</strong></em>. You give an instance of the object, method name as a <em><strong>String</strong></em> and arguments to call the method with. In the example below argument is <em><strong>new Point(11, 11)</strong></em>.
-<pre class="language-java"><code>import org.junit.Before;
-import org.junit.Test;
-import org.powermock.reflect.Whitebox;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-public class PowerMockDemoTest {
-
-	private PowerMockDemo powerMockDemo;
-
-	@Before
-	public void setUp() {
-		powerMockDemo = new PowerMockDemo();
-	}
-
-	@Test
-	public void testCallPrivateMethod() throws Exception {
-		Point actual = Whitebox.invokeMethod(powerMockDemo, 
-			"privateMethod", new Point(11, 11));
-
-		assertThat(actual.getX(), is(12));
-		assertThat(actual.getY(), is(12));
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import org.junit.Before;</span></span>
+<span class="line"><span>import org.junit.Test;</span></span>
+<span class="line"><span>import org.powermock.reflect.Whitebox;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import static org.hamcrest.CoreMatchers.is;</span></span>
+<span class="line"><span>import static org.hamcrest.MatcherAssert.assertThat;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class PowerMockDemoTest {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private PowerMockDemo powerMockDemo;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Before</span></span>
+<span class="line"><span>    public void setUp() {</span></span>
+<span class="line"><span>        powerMockDemo = new PowerMockDemo();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Test</span></span>
+<span class="line"><span>    public void testCallPrivateMethod() throws Exception {</span></span>
+<span class="line"><span>        Point actual = Whitebox.invokeMethod(powerMockDemo, </span></span>
+<span class="line"><span>            "privateMethod", new Point(11, 11));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        assertThat(actual.getX(), is(12));</span></span>
+<span class="line"><span>        assertThat(actual.getY(), is(12));</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Conclusion</h2>
-PowerMock provides utilities which uses reflection to do certain things, as shown in the example above to invoke a private method.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+PowerMock provides utilities which uses reflection to do certain things, as shown in the example above to invoke a private method.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/powermock-examples-better-not-use/" data-astro-cid-bvzihdzo>PowerMock examples and why better not to use them</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/junit" data-astro-cid-bvzihdzo>JUnit</a><a href="/tags/powermock" data-astro-cid-bvzihdzo>PowerMock</a><a href="/tags/unit-testing" data-astro-cid-bvzihdzo>Unit testing</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

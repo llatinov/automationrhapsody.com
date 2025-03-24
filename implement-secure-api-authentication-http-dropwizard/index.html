@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/implement-secure-api-authentication-http-dropwizard/"><!-- Primary Meta Tags --><title>Implement secure API authentication over HTTP with Dropwizard</title><meta name="title" content="Implement secure API authentication over HTTP with Dropwizard"><meta name="description" content="Reference implementation on suggested in <a href=&#34;/implement-secure-rest-api-authentication-http/&#34;>How to implement secure REST API authentication over HTTP</a> post authentication mechanism."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/implement-secure-api-authentication-http-dropwizard/"><meta property="og:title" content="Implement secure API authentication over HTTP with Dropwizard"><meta property="og:description" content="Reference implementation on suggested in <a href=&#34;/implement-secure-rest-api-authentication-http/&#34;>How to implement secure REST API authentication over HTTP</a> post authentication mechanism."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/implement-secure-api-authentication-http-dropwizard/"><meta property="twitter:title" content="Implement secure API authentication over HTTP with Dropwizard"><meta property="twitter:description" content="Reference implementation on suggested in <a href=&#34;/implement-secure-rest-api-authentication-http/&#34;>How to implement secure REST API authentication over HTTP</a> post authentication mechanism."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-07-08T00:00:00.000Z"> Jul 8, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Implement secure API authentication over HTTP with Dropwizard</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>API authentication mechanism</h2>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/implement-secure-api-authentication-http-dropwizard/"><!-- Primary Meta Tags --><title>Implement secure API authentication over HTTP with Dropwizard</title><meta name="title" content="Implement secure API authentication over HTTP with Dropwizard"><meta name="description" content="Reference implementation on suggested in &#34;How to implement secure REST API authentication over HTTP&#34; post authentication mechanism."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/implement-secure-api-authentication-http-dropwizard/"><meta property="og:title" content="Implement secure API authentication over HTTP with Dropwizard"><meta property="og:description" content="Reference implementation on suggested in &#34;How to implement secure REST API authentication over HTTP&#34; post authentication mechanism."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/implement-secure-api-authentication-http-dropwizard/"><meta property="twitter:title" content="Implement secure API authentication over HTTP with Dropwizard"><meta property="twitter:description" content="Reference implementation on suggested in &#34;How to implement secure REST API authentication over HTTP&#34; post authentication mechanism."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Implement secure API authentication over HTTP with Dropwizard</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-07-08T00:00:00.000Z"> Jul 8, 2016 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <h2>API authentication mechanism</h2>
 Suggested authentication mechanism consists of following steps:
 <ul>
  	<li>The secret key that is known only by API consumer and API provider is needed along with API key.</li>
@@ -22,145 +21,145 @@ Dropwizard stub introduced in <a href="/build-a-rest-stub-server-with-dropwizard
 </ul>
 <h2>Create custom annotation</h2>
 Starting with the easiest step. Creating custom annotation is pretty easy. It could be applied to a class (<em><strong>ElementType.TYPE</strong></em>) or to a method (<em><strong>ElementType.METHOD</strong></em>). It should live as long as program runs (<em><strong>RetentionPolicy.RUNTIME</strong></em>). In order to make it possible annotated request filter to be applied to a specific resource, only <em><strong>@NameBinding</strong></em> annotation is a must in Jersey. If not specified request filter will apply to all resources. Needed annotation is:
-<pre class="language-java"><code>import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import javax.ws.rs.NameBinding;
-
-@Target({ElementType.TYPE, ElementType.METHOD})
-@Retention(value = RetentionPolicy.RUNTIME)
-@NameBinding
-public @interface Authenticator {
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import java.lang.annotation.ElementType;</span></span>
+<span class="line"><span>import java.lang.annotation.Retention;</span></span>
+<span class="line"><span>import java.lang.annotation.RetentionPolicy;</span></span>
+<span class="line"><span>import java.lang.annotation.Target;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import javax.ws.rs.NameBinding;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@Target({ElementType.TYPE, ElementType.METHOD})</span></span>
+<span class="line"><span>@Retention(value = RetentionPolicy.RUNTIME)</span></span>
+<span class="line"><span>@NameBinding</span></span>
+<span class="line"><span>public @interface Authenticator {</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>ContainerRequestFilter implementation</h2>
 Container request filter is applied to incoming requests. If used with <em><strong>@NameBinding</strong></em> annotation it is applied only where needed, if not it is applied globally. Mandatory is to override <em><strong>filter()</strong></em> method:
-<pre class="language-java"><code>import com.automationrhapsody.reststub.persistence.AuthDB;
-
-import java.io.IOException;
-import java.util.List;
-
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.ContainerRequestFilter;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-
-@Authenticator
-public class AuthenticateFilter implements ContainerRequestFilter {
-
-	private static final String PARAM_API_KEY = "apiKey";
-	private static final String PARAM_TOKEN = "token";
-	private static final long SECONDS_IN_MILLISECOND = 1000L;
-	private static final int TTL_SECONDS = 60;
-
-	@Override
-	public void filter(ContainerRequestContext context) throws IOException {
-		final String apiKey = extractParam(context, PARAM_API_KEY);
-		if (StringUtils.isEmpty(apiKey)) {
-			context.abortWith(responseMissingParameter(PARAM_API_KEY));
-		}
-
-		final String token = extractParam(context, PARAM_TOKEN);
-		if (StringUtils.isEmpty(token)) {
-			context.abortWith(responseMissingParameter(PARAM_TOKEN));
-		}
-
-		if (!authenticate(apiKey, token)) {
-			context.abortWith(responseUnauthorized());
-		}
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import com.automationrhapsody.reststub.persistence.AuthDB;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import java.io.IOException;</span></span>
+<span class="line"><span>import java.util.List;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import javax.ws.rs.container.ContainerRequestContext;</span></span>
+<span class="line"><span>import javax.ws.rs.container.ContainerRequestFilter;</span></span>
+<span class="line"><span>import javax.ws.rs.core.MediaType;</span></span>
+<span class="line"><span>import javax.ws.rs.core.Response;</span></span>
+<span class="line"><span>import javax.ws.rs.core.UriInfo;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import org.apache.commons.codec.digest.DigestUtils;</span></span>
+<span class="line"><span>import org.apache.commons.collections.CollectionUtils;</span></span>
+<span class="line"><span>import org.apache.commons.lang3.StringUtils;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@Authenticator</span></span>
+<span class="line"><span>public class AuthenticateFilter implements ContainerRequestFilter {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private static final String PARAM_API_KEY = "apiKey";</span></span>
+<span class="line"><span>    private static final String PARAM_TOKEN = "token";</span></span>
+<span class="line"><span>    private static final long SECONDS_IN_MILLISECOND = 1000L;</span></span>
+<span class="line"><span>    private static final int TTL_SECONDS = 60;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Override</span></span>
+<span class="line"><span>    public void filter(ContainerRequestContext context) throws IOException {</span></span>
+<span class="line"><span>        final String apiKey = extractParam(context, PARAM_API_KEY);</span></span>
+<span class="line"><span>        if (StringUtils.isEmpty(apiKey)) {</span></span>
+<span class="line"><span>            context.abortWith(responseMissingParameter(PARAM_API_KEY));</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        final String token = extractParam(context, PARAM_TOKEN);</span></span>
+<span class="line"><span>        if (StringUtils.isEmpty(token)) {</span></span>
+<span class="line"><span>            context.abortWith(responseMissingParameter(PARAM_TOKEN));</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        if (!authenticate(apiKey, token)) {</span></span>
+<span class="line"><span>            context.abortWith(responseUnauthorized());</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>As seen above two GET parameters are mandatory in the request: <em><strong>“apiKey”</strong></em> and <em><strong>“token”</strong></em>. Those are first extracted and verified. If some of them are not existing <em><strong>BAD_REQUEST</strong></em> (HTTP Status code 400) <em><strong>Response</strong></em> is returned with an error message. Methods that extract params and build error response are:</p>
-<pre class="language-java"><code>private String extractParam(ContainerRequestContext context, String param) {
-	final UriInfo uriInfo = context.getUriInfo();
-	final List user = uriInfo.getQueryParameters().get(param);
-	return CollectionUtils.isEmpty(user) ? null : String.valueOf(user.get(0));
-}
-
-private Response responseMissingParameter(String name) {
-	return Response.status(Response.Status.BAD_REQUEST)
-		.type(MediaType.TEXT_PLAIN_TYPE)
-		.entity("Parameter '" + name + "' is required.")
-		.build();
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private String extractParam(ContainerRequestContext context, String param) {</span></span>
+<span class="line"><span>    final UriInfo uriInfo = context.getUriInfo();</span></span>
+<span class="line"><span>    final List user = uriInfo.getQueryParameters().get(param);</span></span>
+<span class="line"><span>    return CollectionUtils.isEmpty(user) ? null : String.valueOf(user.get(0));</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>private Response responseMissingParameter(String name) {</span></span>
+<span class="line"><span>    return Response.status(Response.Status.BAD_REQUEST)</span></span>
+<span class="line"><span>        .type(MediaType.TEXT_PLAIN_TYPE)</span></span>
+<span class="line"><span>        .entity("Parameter '" + name + "' is required.")</span></span>
+<span class="line"><span>        .build();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>If both are present then code tried to authenticate the call by rebuilding all the hashes for 60 seconds in the past because the request cannot arrive instantly it takes some time. If the network is slower this time can be increased. It also rebuilds all hashes for 60 seconds in the future, this is token’s time to live. The server has access to the Secret key for any given API key. In the example above they are stored in fake DB provider and obtained by <em><strong>AuthDB.getSecretKey(apiKey)</strong></em>:</p>
-<pre class="language-java"><code>private boolean authenticate(String apiKey, String token) {
-	final String secretKey = AuthDB.getSecretKey(apiKey);
-
-	// No need to calculate digest in case of wrong apiKey
-	if (StringUtils.isEmpty(secretKey)) {
-		return false;
-	}
-
-	final long nowSec = System.currentTimeMillis() / SECONDS_IN_MILLISECOND;
-	long startTime = nowSec - TTL_SECONDS;
-	long endTime = nowSec + TTL_SECONDS;
-	for (; startTime &#x3C; endTime; startTime++) {
-		final String toHash = apiKey + secretKey + startTime;
-		final String sha1 = DigestUtils.sha256Hex(toHash);
-		if (sha1.equals(token)) {
-			return true;
-		}
-	}
-
-	return false;
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private boolean authenticate(String apiKey, String token) {</span></span>
+<span class="line"><span>    final String secretKey = AuthDB.getSecretKey(apiKey);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // No need to calculate digest in case of wrong apiKey</span></span>
+<span class="line"><span>    if (StringUtils.isEmpty(secretKey)) {</span></span>
+<span class="line"><span>        return false;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    final long nowSec = System.currentTimeMillis() / SECONDS_IN_MILLISECOND;</span></span>
+<span class="line"><span>    long startTime = nowSec - TTL_SECONDS;</span></span>
+<span class="line"><span>    long endTime = nowSec + TTL_SECONDS;</span></span>
+<span class="line"><span>    for (; startTime &#x3C; endTime; startTime++) {</span></span>
+<span class="line"><span>        final String toHash = apiKey + secretKey + startTime;</span></span>
+<span class="line"><span>        final String sha1 = DigestUtils.sha256Hex(toHash);</span></span>
+<span class="line"><span>        if (sha1.equals(token)) {</span></span>
+<span class="line"><span>            return true;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    return false;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>As seen above server uses SHA-256 cryptographic algorithm. It is the best solution in terms of speed and security. In <a href="/md5-sha-1-sha-256-sha-512-speed-performance/">MD5, SHA-1, SHA-256 and SHA-512 speed performance</a> post a comparison between MD5, SHA-1, SHA-256, and SHA-512 is made. If authentication cannot be verified then <em><strong>UNAUTHORIZED</strong></em> (HTTP Status code 401) <em><strong>Response</strong></em> response is returned:</p>
-<pre class="language-java"><code>private Response responseUnauthorized() {
-	return Response.status(Response.Status.UNAUTHORIZED)
-		.type(MediaType.TEXT_PLAIN_TYPE)
-		.entity("Unauthorized")
-		.build();
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private Response responseUnauthorized() {</span></span>
+<span class="line"><span>    return Response.status(Response.Status.UNAUTHORIZED)</span></span>
+<span class="line"><span>        .type(MediaType.TEXT_PLAIN_TYPE)</span></span>
+<span class="line"><span>        .entity("Unauthorized")</span></span>
+<span class="line"><span>        .build();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>This is the hardest part. Now, this filter has to be registered with Jersey and applied to needed resources (services). See more on <em><strong>ContainerRequestFilter</strong></em> interface and <em><strong>@NameBinding</strong></em> annotation in <a href="https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/filters-and-interceptors.html" target="_blank" rel="noopener noreferrer">Jersey filters and interceptors</a> page.</p>
 <h2>Apply authentication filter on a resource</h2>
 Indicating that given resource should be checked for authentication is done with custom <em><strong>@Authenticator</strong></em> annotation created previously. If needed just for specific API call it can be applied also on a method level:
-<pre class="language-java"><code>import com.automationrhapsody.reststub.data.Book;
-import com.automationrhapsody.reststub.filters.Authenticator;
-import com.automationrhapsody.reststub.persistence.BookDB;
-import com.codahale.metrics.annotation.Timed;
-
-import java.util.List;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
-@Authenticator
-@Path("/secure/books")
-public class BooksSecureService {
-
-	@GET
-	@Timed
-	@Produces(MediaType.APPLICATION_JSON)
-	public List&#x3C;Book> getBooks() {
-		return BookDB.getAll();
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import com.automationrhapsody.reststub.data.Book;</span></span>
+<span class="line"><span>import com.automationrhapsody.reststub.filters.Authenticator;</span></span>
+<span class="line"><span>import com.automationrhapsody.reststub.persistence.BookDB;</span></span>
+<span class="line"><span>import com.codahale.metrics.annotation.Timed;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import java.util.List;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import javax.ws.rs.GET;</span></span>
+<span class="line"><span>import javax.ws.rs.Path;</span></span>
+<span class="line"><span>import javax.ws.rs.Produces;</span></span>
+<span class="line"><span>import javax.ws.rs.core.MediaType;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>@Authenticator</span></span>
+<span class="line"><span>@Path("/secure/books")</span></span>
+<span class="line"><span>public class BooksSecureService {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @GET</span></span>
+<span class="line"><span>    @Timed</span></span>
+<span class="line"><span>    @Produces(MediaType.APPLICATION_JSON)</span></span>
+<span class="line"><span>    public List&#x3C;Book> getBooks() {</span></span>
+<span class="line"><span>        return BookDB.getAll();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Register in Dropwizard Jersey</h2>
 The last step is to register the request filter and resource with Dropwizard's Jersey:
-<pre class="language-java"><code>@Override
-public void run(RestStubConfig config, Environment env) {
-
-	env.jersey().register(BooksSecureService.class);
-	env.jersey().register(AuthenticateFilter.class);
-
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Override</span></span>
+<span class="line"><span>public void run(RestStubConfig config, Environment env) {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    env.jersey().register(BooksSecureService.class);</span></span>
+<span class="line"><span>    env.jersey().register(AuthenticateFilter.class);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Conclusion</h2>
-Very easy to implement in Dropwizard and a relatively secure way to provide API authentication over HTTP protocol. For a mission-critical application, definitely more strict consideration and review of this authentication mechanism are needed.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Very easy to implement in Dropwizard and a relatively secure way to provide API authentication over HTTP protocol. For a mission-critical application, definitely more strict consideration and review of this authentication mechanism are needed.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/implement-secure-rest-api-authentication-http/" data-astro-cid-bvzihdzo>How to implement secure REST API authentication over HTTP</a> </li><li data-astro-cid-bvzihdzo> <a href="/build-a-rest-stub-server-with-dropwizard/" data-astro-cid-bvzihdzo>Build a RESTful stub server with Dropwizard</a> </li><li data-astro-cid-bvzihdzo> <a href="/md5-sha-1-sha-256-sha-512-speed-performance/" data-astro-cid-bvzihdzo>MD5, SHA-1, SHA-256 and SHA-512 speed performance</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/api-automation" data-astro-cid-bvzihdzo>API Automation</a><a href="/tags/dropwizard" data-astro-cid-bvzihdzo>Dropwizard</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/rest" data-astro-cid-bvzihdzo>REST</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

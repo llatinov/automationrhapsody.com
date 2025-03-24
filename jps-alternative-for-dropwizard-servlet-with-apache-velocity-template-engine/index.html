@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/jps-alternative-for-dropwizard-servlet-with-apache-velocity-template-engine/"><!-- Primary Meta Tags --><title>JPS alternative for Dropwizard - Servlet with Apache Velocity template engine</title><meta name="title" content="JPS alternative for Dropwizard - Servlet with Apache Velocity template engine"><meta name="description" content="How to create a web application with Dropwizard with Servlet and Apache Velocity template engine since JSP is not supported."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/jps-alternative-for-dropwizard-servlet-with-apache-velocity-template-engine/"><meta property="og:title" content="JPS alternative for Dropwizard - Servlet with Apache Velocity template engine"><meta property="og:description" content="How to create a web application with Dropwizard with Servlet and Apache Velocity template engine since JSP is not supported."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/jps-alternative-for-dropwizard-servlet-with-apache-velocity-template-engine/"><meta property="twitter:title" content="JPS alternative for Dropwizard - Servlet with Apache Velocity template engine"><meta property="twitter:description" content="How to create a web application with Dropwizard with Servlet and Apache Velocity template engine since JSP is not supported."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-08-05T00:00:00.000Z"> Aug 5, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>JPS alternative for Dropwizard - Servlet with Apache Velocity template engine</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2>JSP</h2>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/jps-alternative-for-dropwizard-servlet-with-apache-velocity-template-engine/"><!-- Primary Meta Tags --><title>JPS alternative for Dropwizard - Servlet with Apache Velocity template engine</title><meta name="title" content="JPS alternative for Dropwizard - Servlet with Apache Velocity template engine"><meta name="description" content="How to create a web application with Dropwizard with Servlet and Apache Velocity template engine since JSP is not supported."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/jps-alternative-for-dropwizard-servlet-with-apache-velocity-template-engine/"><meta property="og:title" content="JPS alternative for Dropwizard - Servlet with Apache Velocity template engine"><meta property="og:description" content="How to create a web application with Dropwizard with Servlet and Apache Velocity template engine since JSP is not supported."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/jps-alternative-for-dropwizard-servlet-with-apache-velocity-template-engine/"><meta property="twitter:title" content="JPS alternative for Dropwizard - Servlet with Apache Velocity template engine"><meta property="twitter:description" content="How to create a web application with Dropwizard with Servlet and Apache Velocity template engine since JSP is not supported."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>JPS alternative for Dropwizard - Servlet with Apache Velocity template engine</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-08-05T00:00:00.000Z"> Aug 5, 2015 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <h2>JSP</h2>
 <a href="https://en.wikipedia.org/wiki/JavaServer_Pages" target="_blank" rel="noopener noreferrer">JSP</a> (Java Server Pages) is used to create web applications. It easy to separate presentation from business logic. JSP defines a page template with static content and tags inside which are evaluated in business logic and replaced in a template.
 <h2>Dropwizard</h2>
 Dropwizard is Java framework for building a RESTful web server in very short time. It has incorporated proven libraries like Jetty, Jersey, Jackson and many more to reliably do the job in shortest possible time. They have very good <a title="Dropwizard getting started" href="https://www.dropwizard.io/en/stable/getting-started.html" target="_blank" rel="noopener noreferrer">getting started</a> tutorial how to make a project from scratch. Dropwizard doesn't have support for JPS. This is because its purpose is to be REST server, not a web application server.
@@ -13,45 +12,45 @@ Dropwizard provides so-called Views which actually uses FreeMarker or Mustache t
 <a href="http://velocity.apache.org/" target="_blank" rel="noopener noreferrer">Apache Velocity</a> is a template engine. HTML code is defined as a template with dynamic values substituted with special tags, similar to JSP.
 <h2>Define Velocity template</h2>
 The template contains HTML code and tags starting with $ sign, in the example below this is $productId. The template is put in project's "resource" folder.
-<pre class="language-text"><code>This is 'Product $productId name' details page.
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>This is 'Product $productId name' details page.</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Initialise Velocity engine</h2>
 This is done in Servlet's init() method. It is important to give as a property where Velocity should look for its resources. It is in the class loader.
-<pre class="language-java"><code>private Template details;
-
-public void init() throws ServletException {
-	Properties props = new Properties();
-	props.setProperty("resource.loader", "class");
-	props.setProperty("class.resource.loader.class",
-		"org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
-	VelocityEngine engine = new VelocityEngine(props);
-	engine.init();
-	details = engine.getTemplate("velocity.details.html");
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>private Template details;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public void init() throws ServletException {</span></span>
+<span class="line"><span>    Properties props = new Properties();</span></span>
+<span class="line"><span>    props.setProperty("resource.loader", "class");</span></span>
+<span class="line"><span>    props.setProperty("class.resource.loader.class",</span></span>
+<span class="line"><span>        "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");</span></span>
+<span class="line"><span>    VelocityEngine engine = new VelocityEngine(props);</span></span>
+<span class="line"><span>    engine.init();</span></span>
+<span class="line"><span>    details = engine.getTemplate("velocity.details.html");</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Render template</h2>
 In order to render the template $variable needs to be substituted with valued values in a VelocityContext map. Note that if given value is null then $variable is being outputted directly, so this case should be handled correctly.
-<pre class="language-java"><code>public void doGet(HttpServletRequest request,
-		HttpServletResponse response) throws ServletException, IOException {
-	String productId = request.getParameter("id");
-	if (StringUtils.isEmpty(productId)) {
-		productId = "";
-	}
-	VelocityContext context = new VelocityContext();
-	context.put("productId", productId);
-	StringWriter writer = new StringWriter();
-	details.merge(context, writer);
-	String result = writer.toString();
-
-	// Output
-	response.setContentType("text/html");
-	PrintWriter out = response.getWriter();
-	out.println(result);
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public void doGet(HttpServletRequest request,</span></span>
+<span class="line"><span>        HttpServletResponse response) throws ServletException, IOException {</span></span>
+<span class="line"><span>    String productId = request.getParameter("id");</span></span>
+<span class="line"><span>    if (StringUtils.isEmpty(productId)) {</span></span>
+<span class="line"><span>        productId = "";</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    VelocityContext context = new VelocityContext();</span></span>
+<span class="line"><span>    context.put("productId", productId);</span></span>
+<span class="line"><span>    StringWriter writer = new StringWriter();</span></span>
+<span class="line"><span>    details.merge(context, writer);</span></span>
+<span class="line"><span>    String result = writer.toString();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Output</span></span>
+<span class="line"><span>    response.setContentType("text/html");</span></span>
+<span class="line"><span>    PrintWriter out = response.getWriter();</span></span>
+<span class="line"><span>    out.println(result);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Full code</h2>
 The full example can be found in GitHub <a href="https://github.com/llatinov/sample-dropwizard-rest-stub" target="_blank" rel="noopener noreferrer">sample-dropwizard-rest-stub</a> repository <a href="https://github.com/llatinov/sample-dropwizard-rest-stub/blob/master/src/main/java/com/automationrhapsody/reststub/resources/ProductsServlet.java" target="_blank" rel="noopener noreferrer">ProductsServlet</a> class.
 <h2>Conclusion</h2>
-This is a pretty easy way to create web application of Dropwizard with keeping the presentation code separate from business logic.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+This is a pretty easy way to create web application of Dropwizard with keeping the presentation code separate from business logic.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/build-a-rest-stub-server-with-dropwizard/" data-astro-cid-bvzihdzo>Build a RESTful stub server with Dropwizard</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/api-automation" data-astro-cid-bvzihdzo>API Automation</a><a href="/tags/dropwizard" data-astro-cid-bvzihdzo>Dropwizard</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

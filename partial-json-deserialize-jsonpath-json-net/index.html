@@ -1,131 +1,130 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/partial-json-deserialize-jsonpath-json-net/"><!-- Primary Meta Tags --><title>Partial JSON deserialize by JsonPath with Json.NET</title><meta name="title" content="Partial JSON deserialize by JsonPath with Json.NET"><meta name="description" content="Code examples how to deserialize only part of a big JSON file by JsonPath when using Newtonsoft Json.NET."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/partial-json-deserialize-jsonpath-json-net/"><meta property="og:title" content="Partial JSON deserialize by JsonPath with Json.NET"><meta property="og:description" content="Code examples how to deserialize only part of a big JSON file by JsonPath when using Newtonsoft Json.NET."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/partial-json-deserialize-jsonpath-json-net/"><meta property="twitter:title" content="Partial JSON deserialize by JsonPath with Json.NET"><meta property="twitter:description" content="Code examples how to deserialize only part of a big JSON file by JsonPath when using Newtonsoft Json.NET."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-09-20T00:00:00.000Z"> Sep 20, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Partial JSON deserialize by JsonPath with Json.NET</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>The code shown in the examples below is available in GitHub <a href="https://github.com/llatinov/DotNetSamples/tree/master/JsonPathConverter" target="_blank" rel="noopener noreferrer">DotNetSamples/JsonPathConverter</a> repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/partial-json-deserialize-jsonpath-json-net/"><!-- Primary Meta Tags --><title>Partial JSON deserialize by JsonPath with Json.NET</title><meta name="title" content="Partial JSON deserialize by JsonPath with Json.NET"><meta name="description" content="Code examples how to deserialize only part of a big JSON file by JsonPath when using Newtonsoft Json.NET."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/partial-json-deserialize-jsonpath-json-net/"><meta property="og:title" content="Partial JSON deserialize by JsonPath with Json.NET"><meta property="og:description" content="Code examples how to deserialize only part of a big JSON file by JsonPath when using Newtonsoft Json.NET."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/partial-json-deserialize-jsonpath-json-net/"><meta property="twitter:title" content="Partial JSON deserialize by JsonPath with Json.NET"><meta property="twitter:description" content="Code examples how to deserialize only part of a big JSON file by JsonPath when using Newtonsoft Json.NET."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Partial JSON deserialize by JsonPath with Json.NET</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-09-20T00:00:00.000Z"> Sep 20, 2017 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>The code shown in the examples below is available in GitHub <a href="https://github.com/llatinov/DotNetSamples/tree/master/JsonPathConverter" target="_blank" rel="noopener noreferrer">DotNetSamples/JsonPathConverter</a> repository.</p>
 <h2>Use case description</h2>
 Imagine you have a big JSON which you want to deserialize into a C# object.
-<pre class="language-json"><code>{
-  "node1": {
-    "node1node1": "node1node1value",
-    "node1node2": [ "value1", "value2" ],
-    "node1node3": {
-      "node1node3node1": "node1node3node1value"
-    }
-  },
-  "node2": true,
-  "node3": {
-    "node3node1": "node3SubNode1Value",
-    "node3node2": {
-      "node3node2node1": {
-        "node3node2node1node1": [ 1, 2, 3 ]
-      },
-      "node3node2node2": "node3node2node1value"
-    }
-  },
-  "node4": "{\"node4node1\": \"n4n1value\", \"node4node2\": \"n4n1value\"}"
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{</span></span>
+<span class="line"><span>  "node1": {</span></span>
+<span class="line"><span>    "node1node1": "node1node1value",</span></span>
+<span class="line"><span>    "node1node2": [ "value1", "value2" ],</span></span>
+<span class="line"><span>    "node1node3": {</span></span>
+<span class="line"><span>      "node1node3node1": "node1node3node1value"</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  },</span></span>
+<span class="line"><span>  "node2": true,</span></span>
+<span class="line"><span>  "node3": {</span></span>
+<span class="line"><span>    "node3node1": "node3SubNode1Value",</span></span>
+<span class="line"><span>    "node3node2": {</span></span>
+<span class="line"><span>      "node3node2node1": {</span></span>
+<span class="line"><span>        "node3node2node1node1": [ 1, 2, 3 ]</span></span>
+<span class="line"><span>      },</span></span>
+<span class="line"><span>      "node3node2node2": "node3node2node1value"</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  },</span></span>
+<span class="line"><span>  "node4": "{\"node4node1\": \"n4n1value\", \"node4node2\": \"n4n1value\"}"</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>The file above is actually pretty small and used for demo purposes. In practice, you can stumble upon terrifyingly big JSON files. <em><strong>NewtonSoft.Json</strong></em> or <em><strong>Json.NET</strong></em> is defacto the JSON standard for .NET, so it is being used to parse the JSON file. In order to deserialize this JSON to a C# object, you need a model class that represents the JSON nodes. Although immense effort you can create such, why bother if you are going to use just a fraction of all JSON data. This is where JsonPath comes into play. Json.NET allows you to query JSON by JsonPath, so one option is to manually query the JSON, find data you need and assign it to your C# object. This is not an elegant solution. Since query by JsonPath is possible this can be used in a <em><strong>JsonConverter</strong></em> that will automatically do the job. What is needed is a custom JsonPathConverter and a model class that will be deserialized to, both are described below.</p>
 <h2>JSON model class</h2>
 It is easier to describe the JSON model first. Below is a code for JSON model class that will collect only data we need.
-<pre class="language-csharp"><code>using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace JsonPathConverter
-{
-	[JsonConverter(typeof(JsonPathConverter))]
-	public class JsonModel
-	{
-		[JsonProperty("node1.node1node2")]
-		public IList&#x3C;string> Node1Array { get; set; }
-
-		[JsonProperty("node2")]
-		public bool Node2 { get; set; }
-
-		[JsonProperty("node3.node3node2.node3node2node1.node3node2node1node1")]
-		public IList&#x3C;int> Node3Array { get; set; }
-
-		[JsonConverter(typeof(JsonPathConverter))]
-		[JsonProperty("node4")]
-		public NestedJsonModel Node4 { get; set; }
-	}
-
-	public class NestedJsonModel
-	{
-		[JsonProperty("node4node2")]
-		public string NestedNode2 { get; set; }
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>using System.Collections.Generic;</span></span>
+<span class="line"><span>using Newtonsoft.Json;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>namespace JsonPathConverter</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    [JsonConverter(typeof(JsonPathConverter))]</span></span>
+<span class="line"><span>    public class JsonModel</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        [JsonProperty("node1.node1node2")]</span></span>
+<span class="line"><span>        public IList&#x3C;string> Node1Array { get; set; }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [JsonProperty("node2")]</span></span>
+<span class="line"><span>        public bool Node2 { get; set; }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [JsonProperty("node3.node3node2.node3node2node1.node3node2node1node1")]</span></span>
+<span class="line"><span>        public IList&#x3C;int> Node3Array { get; set; }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        [JsonConverter(typeof(JsonPathConverter))]</span></span>
+<span class="line"><span>        [JsonProperty("node4")]</span></span>
+<span class="line"><span>        public NestedJsonModel Node4 { get; set; }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public class NestedJsonModel</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        [JsonProperty("node4node2")]</span></span>
+<span class="line"><span>        public string NestedNode2 { get; set; }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>JSON model class is annotated with <em><strong>[JsonConverter(typeof(JsonPathConverter))]</strong></em> which tells Json.NET to use <em><strong>JsonPathConverter</strong></em> class to do the conversion. <em><strong>JsonPathConverter</strong></em> is implemented in such a way that <em><strong>JsonProperty</strong></em> is a mandatory for each property in order to be parsed: <em><strong>[JsonProperty(“node1.node1node2”)]</strong></em>.</p>
 <h2>JSON as a string</h2>
 You may have noticed already the weird case where <em><strong>node4</strong></em> in JSON file has actually a string value which is escaped JSON string. This is something unusual and may not be pretty good programming practice, but I've encountered it in a production code, so examples given here cover this weirdo as well. There is a special <em><strong>NestedJsonModel</strong></em> class which this JSON string is being deserialized to.
 <h2>JsonPathConverter</h2>
 Code below implements <em><strong>JsonConverter</strong></em> abstract class and implements needed methods.
-<pre class="language-csharp"><code>public class JsonPathConverter : JsonConverter
-{
-	public override bool CanWrite => false;
-
-	public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-	{
-		var jObject = JObject.Load(reader);
-		var targetObj = Activator.CreateInstance(objectType);
-
-		foreach (var prop in objectType.GetProperties().Where(p => p.CanRead &#x26;&#x26; p.CanWrite))
-		{
-			var jsonPropertyAttr = prop.GetCustomAttributes(true).OfType&#x3C;JsonPropertyAttribute>().FirstOrDefault();
-			if (jsonPropertyAttr == null)
-			{
-				throw new JsonReaderException($"{nameof(JsonPropertyAttribute)} is mandatory when using {nameof(JsonPathConverter)}");
-			}
-
-			var jsonPath = jsonPropertyAttr.PropertyName;
-			var token = jObject.SelectToken(jsonPath);
-
-			if (token != null &#x26;&#x26; token.Type != JTokenType.Null)
-			{
-				var jsonConverterAttr = prop.GetCustomAttributes(true).OfType&#x3C;JsonConverterAttribute>().FirstOrDefault();
-				object value;
-				if (jsonConverterAttr == null)
-				{
-					serializer.Converters.Clear();
-					value = token.ToObject(prop.PropertyType, serializer);
-				}
-				else
-				{
-					value = JsonConvert.DeserializeObject(token.ToString(), prop.PropertyType,
-						(JsonConverter)Activator.CreateInstance(jsonConverterAttr.ConverterType));
-				}
-				prop.SetValue(targetObj, value, null);
-			}
-		}
-
-		return targetObj;
-	}
-
-	public override bool CanConvert(Type objectType)
-	{
-		return true;
-	}
-
-	public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-	{
-		throw new NotImplementedException();
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class JsonPathConverter : JsonConverter</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public override bool CanWrite => false;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        var jObject = JObject.Load(reader);</span></span>
+<span class="line"><span>        var targetObj = Activator.CreateInstance(objectType);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        foreach (var prop in objectType.GetProperties().Where(p => p.CanRead &#x26;&#x26; p.CanWrite))</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            var jsonPropertyAttr = prop.GetCustomAttributes(true).OfType&#x3C;JsonPropertyAttribute>().FirstOrDefault();</span></span>
+<span class="line"><span>            if (jsonPropertyAttr == null)</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                throw new JsonReaderException($"{nameof(JsonPropertyAttribute)} is mandatory when using {nameof(JsonPathConverter)}");</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            var jsonPath = jsonPropertyAttr.PropertyName;</span></span>
+<span class="line"><span>            var token = jObject.SelectToken(jsonPath);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            if (token != null &#x26;&#x26; token.Type != JTokenType.Null)</span></span>
+<span class="line"><span>            {</span></span>
+<span class="line"><span>                var jsonConverterAttr = prop.GetCustomAttributes(true).OfType&#x3C;JsonConverterAttribute>().FirstOrDefault();</span></span>
+<span class="line"><span>                object value;</span></span>
+<span class="line"><span>                if (jsonConverterAttr == null)</span></span>
+<span class="line"><span>                {</span></span>
+<span class="line"><span>                    serializer.Converters.Clear();</span></span>
+<span class="line"><span>                    value = token.ToObject(prop.PropertyType, serializer);</span></span>
+<span class="line"><span>                }</span></span>
+<span class="line"><span>                else</span></span>
+<span class="line"><span>                {</span></span>
+<span class="line"><span>                    value = JsonConvert.DeserializeObject(token.ToString(), prop.PropertyType,</span></span>
+<span class="line"><span>                        (JsonConverter)Activator.CreateInstance(jsonConverterAttr.ConverterType));</span></span>
+<span class="line"><span>                }</span></span>
+<span class="line"><span>                prop.SetValue(targetObj, value, null);</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        return targetObj;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public override bool CanConvert(Type objectType)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        return true;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        throw new NotImplementedException();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Deserialization work is done in <em><strong>public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)</strong></em> method. JSON is loaded to a <em><strong>NewtonSoft JObject</strong></em> and instance of result object is created. All properties of this result object are iterated in a <em><strong>foreach</strong></em> loop. It is important to note that properties should have both <em><strong>get</strong></em> and <em><strong>set</strong></em> in order to be considered in deserialization: <em><strong>objectType.GetProperties().Where(p => p.CanRead &#x26;&#x26; p.CanWrite)</strong></em>. If you have properties with just <em><strong>get</strong></em> or just <em><strong>set</strong></em> they will be ignored. <em><strong>JsonPropertyAttribute</strong></em> for each property is taken. If there is no such then an exception is thrown. This part can be changed. JsonPath can be considered to be the property name: <em><strong>var jsonPath = jsonPropertyAttr == null ? prop.Name : jsonPropertyAttr.PropertyName</strong></em>. This is tricky though as <em><strong>C#</strong></em> is case sensitive and it might not work as property could start with capital letter, but JSON itself to be with lower case. Once there is JsonPath defined <em><strong>JObject</strong></em> is queried with <em><strong>jObject.SelectToken(jsonPath)</strong></em>. This should return a valid token. In case of a valid token result, object property is checked for <em><strong>JsonConverterAttribute</strong></em>. If such exists then JSON is deserialized with this newly found <em><strong>JsonConverter</strong></em> instance. If there is no converter attached to this property then all existing converters are cleared and the token is converted into an object. Clearing part is important as in case of recursive call it will throw an exception.</p>
 <h2>Usage</h2>
 Once job above is done usage is pretty easy:
-<pre class="language-csharp"><code>var fileContent = File.ReadAllText("jsonFile.json");
-var result = JsonConvert.DeserializeObject&#x3C;JsonModel>(fileContent);
-
-result.Node1Array.Should().BeEquivalentTo(new List&#x3C;string> {"value1", "value2"});
-result.Node2.Should().Be(true);
-result.Node3Array.Should().BeEquivalentTo(new List&#x3C;int> { 1, 2, 3 });
-result.Node4.NestedNode2.Should().Be("n4n1value");
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>var fileContent = File.ReadAllText("jsonFile.json");</span></span>
+<span class="line"><span>var result = JsonConvert.DeserializeObject&#x3C;JsonModel>(fileContent);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>result.Node1Array.Should().BeEquivalentTo(new List&#x3C;string> {"value1", "value2"});</span></span>
+<span class="line"><span>result.Node2.Should().Be(true);</span></span>
+<span class="line"><span>result.Node3Array.Should().BeEquivalentTo(new List&#x3C;int> { 1, 2, 3 });</span></span>
+<span class="line"><span>result.Node4.NestedNode2.Should().Be("n4n1value");</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Conclusion</h2>
-In this post, I have shown how to partially deserialize JSON by JsonPath picking only data that you need.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+In this post, I have shown how to partially deserialize JSON by JsonPath picking only data that you need.  <hr data-astro-cid-bvzihdzo>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/api-automation" data-astro-cid-bvzihdzo>API Automation</a><a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a><a href="/tags/newtonsoft-json" data-astro-cid-bvzihdzo>Newtonsoft.Json</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

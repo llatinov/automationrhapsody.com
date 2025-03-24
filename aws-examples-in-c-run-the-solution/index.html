@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-run-the-solution/"><!-- Primary Meta Tags --><title>AWS examples in C# - run the solution</title><meta name="title" content="AWS examples in C# - run the solution"><meta name="description" content="Explanation of how to install and use the solution in AWS examples in C# blog post series."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-run-the-solution/"><meta property="og:title" content="AWS examples in C# - run the solution"><meta property="og:description" content="Explanation of how to install and use the solution in AWS examples in C# blog post series."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-run-the-solution/"><meta property="twitter:title" content="AWS examples in C# - run the solution"><meta property="twitter:description" content="Explanation of how to install and use the solution in AWS examples in C# blog post series."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-02-18T00:00:00.000Z"> Feb 18, 2020 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - run the solution</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository. In the current post, I give information on how to install and run the project.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/aws-examples-in-c-run-the-solution/"><!-- Primary Meta Tags --><title>AWS examples in C# - run the solution</title><meta name="title" content="AWS examples in C# - run the solution"><meta name="description" content="Explanation of how to install and use the solution in AWS examples in C# blog post series."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/aws-examples-in-c-run-the-solution/"><meta property="og:title" content="AWS examples in C# - run the solution"><meta property="og:description" content="Explanation of how to install and use the solution in AWS examples in C# blog post series."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/aws-examples-in-c-run-the-solution/"><meta property="twitter:title" content="AWS examples in C# - run the solution"><meta property="twitter:description" content="Explanation of how to install and use the solution in AWS examples in C# blog post series."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>AWS examples in C# - run the solution</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2020-02-18T00:00:00.000Z"> Feb 18, 2020 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>This post is part of <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series. The code used for this series of blog posts is located in <a href="https://github.com/llatinov/aws.examples.csharp" target="_blank" rel="noopener noreferrer">aws.examples.csharp</a> GitHub repository. In the current post, I give information on how to install and run the project.</p>
 <h2>Disclaimer</h2>
 The solution has commands to deploy to the cloud as well as to clean resources. Note not all resources are cleaned, read more in the <em><strong>Cleanup</strong></em> section. In order to be run in AWS valid account is needed. I am not going to describe how to create an account. If an account is present, then there is also knowledge and awareness of how to use it.
 <p><em><strong>Important: current examples generate costs on AWS account. Use cautiously at your own risk!</strong></em></p>
@@ -25,11 +24,11 @@ AWS CLI has to be configured in order to run properly. It happens with <em><stro
 <p>Import Postman collection, in order to be able to try the examples. Postman collection is in <em><strong>aws.examples.csharp.postman_collection.json</strong></em> file in the code. This is an optional step, below there are cURL examples also.</p>
 <h2>Run the project in AWS</h2>
 Running on AWS requires the setting of environment variables:
-<pre class="language-bash"><code>export AwsAccessKey=KIA57FV4.....
-export AwsSecretKey=mSgsxOWVh...
-export AwsRegion=us-east-1
-</code></pre>
-Then the solution is deployed to AWS with <em><strong>./solution-deploy.sh</strong></em> script. Note that the output of the command gives the API Gateway URL and API key, as well as the SqsWriter and SqsReader endpoints. See image below:
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>export AwsAccessKey=KIA57FV4.....</span></span>
+<span class="line"><span>export AwsSecretKey=mSgsxOWVh...</span></span>
+<span class="line"><span>export AwsRegion=us-east-1</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Then the solution is deployed to AWS with <em><strong>./solution-deploy.sh</strong></em> script. Note that the output of the command gives the API Gateway URL and API key, as well as the SqsWriter and SqsReader endpoints. See image below:</p>
 <img src="/images/2020/02/aws.csharp.exmaples-deploy.aws_.png">
 <h2>Run the project partly in AWS</h2>
 The most expensive part of the current setup is the running of the docker containers in EC2 (<span>Elastic Compute Cloud)</span>. I have prepared a script called <em><strong>./solution-deploy-hybrid.sh</strong></em>, which runs the containers locally and all other things are in AWS. Still, environment variables from the previous section are mandatory to be set. I believe this is the optimal variant if you want to test and run the code in a "production-like" environment.
@@ -40,75 +39,75 @@ There is a Postman collection which allows easy firing of the requests. Another 
 <h3>SqsWriter</h3>
 <a href="https://github.com/llatinov/aws.examples.csharp/tree/master/SqsWriter" target="_blank" rel="noopener noreferrer">SqsWriter</a> is a .NET Core 3.0 application, that is dockerized and run in AWS ECS (Elastic Container Service). It exposes an API that can be used to publish Actor or Movie objects. There is also a health check request. After AWS deployment proper endpoint is needed. The endpoint can be found as an output of deployment scripts. See the image above.
 <p><strong>PublishActor</strong></p>
-<pre class="language-bash"><code>curl --location --request POST 'http://localhost:5100/api/publish/actor' \
---header 'Content-Type: application/json' \
---data-raw '{
-	"FirstName": "Bruce",
-	"LastName": "Willis"
-}'
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>curl --location --request POST 'http://localhost:5100/api/publish/actor' \</span></span>
+<span class="line"><span>--header 'Content-Type: application/json' \</span></span>
+<span class="line"><span>--data-raw '{</span></span>
+<span class="line"><span>    "FirstName": "Bruce",</span></span>
+<span class="line"><span>    "LastName": "Willis"</span></span>
+<span class="line"><span>}'</span></span>
+<span class="line"><span></span></span></code></pre>
 <p><strong>PublishMovie</strong></p>
-<pre class="language-bash"><code>curl --location --request POST 'http://localhost:5100/api/publish/movie' \
---header 'Content-Type: application/json' \
---data-raw '{
-	"Title": "Die Hard",
-	"Genre": "Action Movie"
-}'
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>curl --location --request POST 'http://localhost:5100/api/publish/movie' \</span></span>
+<span class="line"><span>--header 'Content-Type: application/json' \</span></span>
+<span class="line"><span>--data-raw '{</span></span>
+<span class="line"><span>    "Title": "Die Hard",</span></span>
+<span class="line"><span>    "Genre": "Action Movie"</span></span>
+<span class="line"><span>}'</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>When Actor or Movie is published, it goes to the SQS queue, SqsReader picks it up from there and processes it. What is visible in the logs is that both LogEntryMessageProcessor and ActorMessageProcessor are invoked. See the screenshot:</p>
 <p><a href="/images/2020/02/aws.csharp.exmaples-publish.actor_.png"><img src="/images/2020/02/aws.csharp.exmaples-publish.actor_.png"></a></p>
 <p><strong>SqsWriterHealthCheck</strong></p>
-<pre class="language-bash"><code>curl --location --request GET 'http://localhost:5100/health'
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>curl --location --request GET 'http://localhost:5100/health'</span></span>
+<span class="line"><span></span></span></code></pre>
 <h3>SqsReader</h3>
 <a href="https://github.com/llatinov/aws.examples.csharp/tree/master/SqsReader" target="_blank" rel="noopener noreferrer">SqsReader</a> is a .NET Core 3.0 application, that is dockerized and run in AWS ECS. It has a consumer that listens to the SQS queue and processes the messages by writing them into appropriate AQS DynamoDB tables. It also exposes API to stop or start processing, as long as reprocess the dead-letter queue or simply get the queue status. After AWS deployment proper endpoint is needed. The endpoint can be found as an output of deployment scripts. See the image above.
 <p><strong>ConsumerStart</strong></p>
-<pre class="language-bash"><code>curl --location --request POST 'http://localhost:5200/api/consumer/start' \
---header 'Content-Type: application/json' \
---data-raw ''
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>curl --location --request POST 'http://localhost:5200/api/consumer/start' \</span></span>
+<span class="line"><span>--header 'Content-Type: application/json' \</span></span>
+<span class="line"><span>--data-raw ''</span></span>
+<span class="line"><span></span></span></code></pre>
 <p><strong>ConsumerStop</strong></p>
-<pre class="language-bash"><code>curl --location --request POST 'http://localhost:5200/api/consumer/stop' \
---header 'Content-Type: application/json' \
---data-raw ''
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>curl --location --request POST 'http://localhost:5200/api/consumer/stop' \</span></span>
+<span class="line"><span>--header 'Content-Type: application/json' \</span></span>
+<span class="line"><span>--data-raw ''</span></span>
+<span class="line"><span></span></span></code></pre>
 <p><strong>ConsumerStatus</strong></p>
-<pre class="language-bash"><code>curl --location --request GET 'http://localhost:5200/api/consumer/status'
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>curl --location --request GET 'http://localhost:5200/api/consumer/status'</span></span>
+<span class="line"><span></span></span></code></pre>
 <p><strong>ConsumerReprocess</strong>
 If this one is invoked with no messages in the dead-letter queue then it takes 20 seconds to finish, because it actually waits for long polling timeout.</p>
-<pre class="language-bash"><code>curl --location --request POST 'http://localhost:5200/api/consumer/reprocess' \
---header 'Content-Type: application/json' \
---data-raw ''
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>curl --location --request POST 'http://localhost:5200/api/consumer/reprocess' \</span></span>
+<span class="line"><span>--header 'Content-Type: application/json' \</span></span>
+<span class="line"><span>--data-raw ''</span></span>
+<span class="line"><span></span></span></code></pre>
 <p><strong>SqsReaderHealthCheck</strong></p>
-<pre class="language-bash"><code>curl --location --request GET 'http://localhost:5200/health'
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>curl --location --request GET 'http://localhost:5200/health'</span></span>
+<span class="line"><span></span></span></code></pre>
 <h3>ActorsServerlessLambda</h3>
 This lambda is managed by the Serverless framework. It is exposed as REST API via AWS API Gateway. It also has a custom authorizer as well as API Key attached. Those are described in a further post.
 <p><strong>ServerlessActors</strong></p>
 <p>In the case of AWS, the <em><strong>API Key</strong></em> and <em><strong>URL</strong></em> are needed, those can be obtained from deployment command logs. See the screenshot above. Put correct values to <em><strong>CHANGE_ME</strong></em> and <em><strong>REGION</strong></em> placeholders. Request is:</p>
-<pre class="language-bash"><code>curl --location --request POST 'https://CHANGE_ME.execute-api.REGION.amazonaws.com/dev/actors/search' \
---header 'Content-Type: application/json' \
---header 'x-api-key: CHANGE_ME' \
---header 'Authorization: Bearer validToken' \
---data-raw '{
-    "FirstName": "Bruce",
-    "LastName": "Willis"
-}'
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>curl --location --request POST 'https://CHANGE_ME.execute-api.REGION.amazonaws.com/dev/actors/search' \</span></span>
+<span class="line"><span>--header 'Content-Type: application/json' \</span></span>
+<span class="line"><span>--header 'x-api-key: CHANGE_ME' \</span></span>
+<span class="line"><span>--header 'Authorization: Bearer validToken' \</span></span>
+<span class="line"><span>--data-raw '{</span></span>
+<span class="line"><span>    "FirstName": "Bruce",</span></span>
+<span class="line"><span>    "LastName": "Willis"</span></span>
+<span class="line"><span>}'</span></span>
+<span class="line"><span></span></span></code></pre>
 <h3>MoviesServerlessLambda</h3>
 <strong>ServerlessMovies</strong>
 <p>Put correct values to <em><strong>CHANGE_ME</strong></em> and <em><strong>REGION</strong></em> placeholders. Request is:</p>
-<pre class="language-bash"><code>curl --location --request GET 'https://CHANGE_ME.execute-api.REGION.amazonaws.com/dev/movies/title/Die Hard'
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>curl --location --request GET 'https://CHANGE_ME.execute-api.REGION.amazonaws.com/dev/movies/title/Die Hard'</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Cleanup</h2>
 <em><strong>Nota bene: This is a very important step, as leaving the solution running in AWS will accumulate costs.</strong></em>
 <p>In order to stop and clean up all AWS resources run <em><strong>./solution-delete.sh</strong></em> script.</p>
 <p><em><strong>Nota bene:</strong></em> There a resource that is not automatically deleted by the scripts. This is a <em><strong>Route53</strong></em> resource created by <em><strong>AWS Cloud Map</strong></em>. It has to be deleted with the following commands. Note that the <em><strong>id</strong></em> in the delete command comes from the result of <em><strong>list-namespaces</strong></em> command.</p>
-<pre class="language-bash"><code>aws servicediscovery list-namespaces
-aws servicediscovery delete-namespace --id ns-kneie4niu6pwwela
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws servicediscovery list-namespaces</span></span>
+<span class="line"><span>aws servicediscovery delete-namespace --id ns-kneie4niu6pwwela</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Verify cleanup</h2>
 In order to be sure there are no leftovers from the examples, following AWS services has to be checked:
 <ul>
@@ -129,6 +128,6 @@ In order to be sure there are no leftovers from the examples, following AWS serv
 </ul>
 On top of it, Billing should be regularly monitored to ensure no costs are applied.
 <h2>Conclusion</h2>
-This post describes how to run and they the solution described in <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+This post describes how to run and they the solution described in <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/">AWS examples in C# – working with SQS, DynamoDB, Lambda, ECS</a> series  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/aws-examples-in-c-working-with-sqs-dynamodb-lambda-ecs/" data-astro-cid-bvzihdzo>AWS examples in C# - working with SQS, DynamoDB, Lambda, ECS</a> </li><li data-astro-cid-bvzihdzo> <a href="/aws-examples-in-c-aws-cli-commands/" data-astro-cid-bvzihdzo>AWS examples in C# - AWS CLI commands</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/dotnet-core" data-astro-cid-bvzihdzo>.NET Core</a><a href="/tags/aws" data-astro-cid-bvzihdzo>AWS</a><a href="/tags/aws-lambda" data-astro-cid-bvzihdzo>AWS Lambda</a><a href="/tags/aws-sqs" data-astro-cid-bvzihdzo>AWS SQS</a><a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a><a href="/tags/docker" data-astro-cid-bvzihdzo>Docker</a><a href="/tags/git" data-astro-cid-bvzihdzo>Git</a><a href="/tags/postman" data-astro-cid-bvzihdzo>Postman</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

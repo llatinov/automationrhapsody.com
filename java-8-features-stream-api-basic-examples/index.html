@@ -1,361 +1,417 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/java-8-features-stream-api-basic-examples/"><!-- Primary Meta Tags --><title>Java 8 features - Stream API basic examples</title><meta name="title" content="Java 8 features - Stream API basic examples"><meta name="description" content="This post explains Java 8 Stream API with very basic code examples."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/java-8-features-stream-api-basic-examples/"><meta property="og:title" content="Java 8 features - Stream API basic examples"><meta property="og:description" content="This post explains Java 8 Stream API with very basic code examples."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/java-8-features-stream-api-basic-examples/"><meta property="twitter:title" content="Java 8 features - Stream API basic examples"><meta property="twitter:description" content="This post explains Java 8 Stream API with very basic code examples."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-06-22T00:00:00.000Z"> Jun 22, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Java 8 features - Stream API basic examples</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>In <a href="/java-8-features-lambda-expressions-interface-changes-stream-api-datetime-api/">Java 8 features – Lambda expressions, Interface changes, Stream API, DateTime API</a> post I have briefly described most interesting Java 8 features. In the current post, I will give special attention to Stream API. This post is with very basic code examples to explain the theory described in <a href="/java-8-features-stream-api-explained/">Java 8 features – Stream API explained</a> post. Code examples here can be found in GitHub <a href="https://github.com/llatinov/java-samples/tree/master/java8" target="_blank" rel="noopener">java-samples/java8</a> repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/java-8-features-stream-api-basic-examples/"><!-- Primary Meta Tags --><title>Java 8 features - Stream API basic examples</title><meta name="title" content="Java 8 features - Stream API basic examples"><meta name="description" content="This post explains Java 8 Stream API with very basic code examples."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/java-8-features-stream-api-basic-examples/"><meta property="og:title" content="Java 8 features - Stream API basic examples"><meta property="og:description" content="This post explains Java 8 Stream API with very basic code examples."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/java-8-features-stream-api-basic-examples/"><meta property="twitter:title" content="Java 8 features - Stream API basic examples"><meta property="twitter:description" content="This post explains Java 8 Stream API with very basic code examples."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Java 8 features - Stream API basic examples</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-06-22T00:00:00.000Z"> Jun 22, 2017 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>In <a href="/java-8-features-lambda-expressions-interface-changes-stream-api-datetime-api/">Java 8 features – Lambda expressions, Interface changes, Stream API, DateTime API</a> post I have briefly described most interesting Java 8 features. In the current post, I will give special attention to Stream API. This post is with very basic code examples to explain the theory described in <a href="/java-8-features-stream-api-explained/">Java 8 features – Stream API explained</a> post. Code examples here can be found in GitHub <a href="https://github.com/llatinov/java-samples/tree/master/java8" target="_blank" rel="noopener">java-samples/java8</a> repository.</p>
 <h2>Example for filter, map, distinct, sorted, peek and collect</h2>
 I will cover all those operations in one example. Code below takes a list of strings and converts it to stream by <em><strong>stream()</strong></em> method. For debug purposes <em><strong>peek()</strong></em> is used in the beginning and at the end of stream operations. It only prints to the console elements from the stream. Filtering of the elements is done by <em><strong>filter()</strong></em> method. <em><strong>Lambda expression</strong></em> is used as a predicate. This lambda expression is a method call to verify current element is a number: <em><strong>element-> NumberUtils.isNumber(element)</strong></em>. Since it is a single method call it is substituted with <em><strong>method reference</strong></em>: <em><strong>NumberUtils::isNumber</strong></em>. All elements that are evaluated to <em><strong>false</strong></em> are removed from further processing. It is good practice to use filtering at the beginning of stream pipeline so stream elements are reduced. Next operation is converting <em><strong>String</strong></em> values in the stream to <em><strong>Long</strong></em> values. This is done with <em><strong>map()</strong></em> method again with method reference. Duplicated elements are removed by calling <em><strong>distinct()</strong></em>. Stream elements are sorted by element's natural order, in the current example, they are <em><strong>Long</strong></em> values. In the end, the stream is materialized into a <em><strong>List</strong></em> by using <em><strong>collect(Collectors.toList())</strong></em> method. If this code has to be written without streams it would have looked as shown in "no stream code" tab. Note that using stream code is much more readable. Actually, in the beginning, it is not that easy to think in a stream-oriented way, but once you get used to it, you will never want to see the non-streams code.
-[tabby title="code"]
-<pre class="language-java"><code>public static List&#x3C;Long> toLongList(List&#x3C;String> stringList) {
-	return stringList.stream()
-		.peek(element -> System.out.println("Before: " + element))
-		.filter(NumberUtils::isNumber)
-		.map(Long::valueOf)
-		.distinct()
-		.sorted()
-		.peek(element -> System.out.println("After: " + element))
-		.collect(Collectors.toList());
-}
-</code></pre>
-<p>[tabby title=“unit test”]</p>
-<pre class="language-java"><code>@Test
-public void test_toLongList() {
-	List&#x3C;String> stringList = Arrays
-		.asList(null, "", "aaa", "345", "123", "234", "123");
-
-	List&#x3C;Long> result = BasicStreamExamples.toLongList(stringList);
-
-	assertEquals(3, result.size());
-	assertEquals(123L, (long) result.get(0));
-	assertEquals(234L, (long) result.get(1));
-	assertEquals(345L, (long) result.get(2));
-}
-</code></pre>
-<p>[tabby title=“console output”]</p>
-<pre class="language-text"><code>Before: null
-Before: 
-Before: aaa
-Before: 345
-Before: 123
-Before: 234
-Before: 123
-After: 123
-After: 234
-After: 345
-</code></pre>
-<p>[tabby title=“no stream code”]</p>
-<pre class="language-java"><code>public static List&#x3C;Long> toLongListWithoutStream(List&#x3C;String> stringList) {
-	List&#x3C;Long> result = new ArrayList&#x3C;>();
-	for (String value : stringList) {
-		System.out.println("Before: " + value);
-		if (NumberUtils.isNumber(value)) {
-			Long longValue = Long.valueOf(value);
-			if (!result.contains(longValue)) {
-				result.add(longValue);
-				System.out.println("After: " + value);
-			}
-		}
-	}
-	Collections.sort(result);
-	return result;
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="2749-code" class="tablinks active" onclick="openTab(this, &#x27;content-2749-code&#x27;, &#x27;2749&#x27;)">code</button>
+<button id="2749-unit test" class="tablinks" onclick="openTab(this, &#x27;content-2749-unit test&#x27;, &#x27;2749&#x27;)">unit test</button>
+<button id="2749-console output" class="tablinks" onclick="openTab(this, &#x27;content-2749-console output&#x27;, &#x27;2749&#x27;)">console output</button>
+<button id="2749-no stream code" class="tablinks" onclick="openTab(this, &#x27;content-2749-no stream code&#x27;, &#x27;2749&#x27;)">no stream code</button></div>
+<div id="content-2749-code" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static List&#x3C;Long> toLongList(List&#x3C;String> stringList) {</span></span>
+<span class="line"><span>    return stringList.stream()</span></span>
+<span class="line"><span>        .peek(element -> System.out.println("Before: " + element))</span></span>
+<span class="line"><span>        .filter(NumberUtils::isNumber)</span></span>
+<span class="line"><span>        .map(Long::valueOf)</span></span>
+<span class="line"><span>        .distinct()</span></span>
+<span class="line"><span>        .sorted()</span></span>
+<span class="line"><span>        .peek(element -> System.out.println("After: " + element))</span></span>
+<span class="line"><span>        .collect(Collectors.toList());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-2749-unit test" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_toLongList() {</span></span>
+<span class="line"><span>    List&#x3C;String> stringList = Arrays</span></span>
+<span class="line"><span>        .asList(null, "", "aaa", "345", "123", "234", "123");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    List&#x3C;Long> result = BasicStreamExamples.toLongList(stringList);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals(3, result.size());</span></span>
+<span class="line"><span>    assertEquals(123L, (long) result.get(0));</span></span>
+<span class="line"><span>    assertEquals(234L, (long) result.get(1));</span></span>
+<span class="line"><span>    assertEquals(345L, (long) result.get(2));</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-2749-console output" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Before: null</span></span>
+<span class="line"><span>Before: </span></span>
+<span class="line"><span>Before: aaa</span></span>
+<span class="line"><span>Before: 345</span></span>
+<span class="line"><span>Before: 123</span></span>
+<span class="line"><span>Before: 234</span></span>
+<span class="line"><span>Before: 123</span></span>
+<span class="line"><span>After: 123</span></span>
+<span class="line"><span>After: 234</span></span>
+<span class="line"><span>After: 345</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-2749-no stream code" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static List&#x3C;Long> toLongListWithoutStream(List&#x3C;String> stringList) {</span></span>
+<span class="line"><span>    List&#x3C;Long> result = new ArrayList&#x3C;>();</span></span>
+<span class="line"><span>    for (String value : stringList) {</span></span>
+<span class="line"><span>        System.out.println("Before: " + value);</span></span>
+<span class="line"><span>        if (NumberUtils.isNumber(value)) {</span></span>
+<span class="line"><span>            Long longValue = Long.valueOf(value);</span></span>
+<span class="line"><span>            if (!result.contains(longValue)) {</span></span>
+<span class="line"><span>                result.add(longValue);</span></span>
+<span class="line"><span>                System.out.println("After: " + value);</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    Collections.sort(result);</span></span>
+<span class="line"><span>    return result;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Example for toArray</h2>
 This example is similar to the example above, instead of collecting as a list here stream elements are returned in the array.
-<p>[tabby title=“toArray code”]</p>
-<pre class="language-java"><code>public static Long[] toLongArray(String[] stringArray) {
-	return Arrays.stream(stringArray)
-		.filter(NumberUtils::isNumber)
-		.map(Long::valueOf)
-		.toArray(Long[]::new);
-}
-</code></pre>
-<p>[tabby title=“unit test”]</p>
-<pre class="language-java"><code>@Test
-public void test_toLongArray() {
-	String[] stringArray = new String[] {null, "", "aaa", "123", "234"};
-
-	Long[] result = BasicStreamExamples.toLongArray(stringArray);
-
-	assertEquals(2, result.length);
-	assertEquals(123L, (long) result[0]);
-	assertEquals(234L, (long) result[1]);
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="4683-toArray code" class="tablinks active" onclick="openTab(this, &#x27;content-4683-toArray code&#x27;, &#x27;4683&#x27;)">toArray code</button>
+<button id="4683-unit test" class="tablinks" onclick="openTab(this, &#x27;content-4683-unit test&#x27;, &#x27;4683&#x27;)">unit test</button></div>
+<div id="content-4683-toArray code" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static Long[] toLongArray(String[] stringArray) {</span></span>
+<span class="line"><span>    return Arrays.stream(stringArray)</span></span>
+<span class="line"><span>        .filter(NumberUtils::isNumber)</span></span>
+<span class="line"><span>        .map(Long::valueOf)</span></span>
+<span class="line"><span>        .toArray(Long[]::new);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-4683-unit test" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_toLongArray() {</span></span>
+<span class="line"><span>    String[] stringArray = new String[] {null, "", "aaa", "123", "234"};</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Long[] result = BasicStreamExamples.toLongArray(stringArray);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals(2, result.length);</span></span>
+<span class="line"><span>    assertEquals(123L, (long) result[0]);</span></span>
+<span class="line"><span>    assertEquals(234L, (long) result[1]);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Example for flatMap</h2>
 This function is pretty complex and hard to understand. In the current example, there is a map with <em><strong>String</strong></em> for key and <em><strong>List</strong></em> for value. The example below merges all list values in one result list. Note that <em><strong>Map</strong></em> interface does not have <em><strong>stream()</strong></em> method. Instead, first <em><strong>entrySet()</strong></em> is invoked which returns <em><strong>Set</strong></em> and then invoke its <em><strong>stream()</strong></em> method. Once stream is created <em><strong>flatMap()</strong></em> is called and result of <em><strong>Function</strong></em> argument should be stream: <em><strong>map -> map.getValue().stream()</strong></em>. This resultant stream is a merge of all list values streams, which is then collected to a <em><strong>List</strong></em>.
-<p>[tabby title=“flatMap code”]</p>
-<pre class="language-java"><code>public static List&#x3C;String> flapMap(Map&#x3C;String, List&#x3C;String>> mapToProcess) {
-	return mapToProcess.entrySet()
-		.stream()
-		.flatMap(map -> map.getValue().stream())
-		.collect(Collectors.toList());
-}
-</code></pre>
-<p>[tabby title=“unit test”]</p>
-<pre class="language-java"><code>@Test
-public void test_flapMap() {
-	Map&#x3C;String, List&#x3C;String>> map = new HashMap&#x3C;>();
-	map.put("1", Arrays.asList("a", "b"));
-	map.put("2", Arrays.asList("C", "D"));
-
-	List&#x3C;String> expectedResult = Arrays.asList("a", "b", "C", "D");
-
-	List&#x3C;String> result = BasicStreamExamples.flapMap(map);
-
-	assertEquals(expectedResult, result);
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="6262-flatMap code" class="tablinks active" onclick="openTab(this, &#x27;content-6262-flatMap code&#x27;, &#x27;6262&#x27;)">flatMap code</button>
+<button id="6262-unit test" class="tablinks" onclick="openTab(this, &#x27;content-6262-unit test&#x27;, &#x27;6262&#x27;)">unit test</button></div>
+<div id="content-6262-flatMap code" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static List&#x3C;String> flapMap(Map&#x3C;String, List&#x3C;String>> mapToProcess) {</span></span>
+<span class="line"><span>    return mapToProcess.entrySet()</span></span>
+<span class="line"><span>        .stream()</span></span>
+<span class="line"><span>        .flatMap(map -> map.getValue().stream())</span></span>
+<span class="line"><span>        .collect(Collectors.toList());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-6262-unit test" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_flapMap() {</span></span>
+<span class="line"><span>    Map&#x3C;String, List&#x3C;String>> map = new HashMap&#x3C;>();</span></span>
+<span class="line"><span>    map.put("1", Arrays.asList("a", "b"));</span></span>
+<span class="line"><span>    map.put("2", Arrays.asList("C", "D"));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    List&#x3C;String> expectedResult = Arrays.asList("a", "b", "C", "D");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    List&#x3C;String> result = BasicStreamExamples.flapMap(map);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals(expectedResult, result);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Examples of limit and skip</h2>
-[tabby title="limit code"]
-<pre class="language-java"><code>public static List&#x3C;String> limitValues(List&#x3C;String> stringList, long limit) {
-	return stringList.stream()
-		.limit(limit)
-		.collect(Collectors.toList());
-}
-</code></pre>
-<p>[tabby title=“limit unit test”]</p>
-<pre class="language-java"><code>@Test
-public void test_limitValues() {
-	List&#x3C;String> stringList = Arrays.asList("a", "b", "c", "d");
-
-	List&#x3C;String> result = BasicStreamExamples.limitValues(stringList, 2);
-
-	assertEquals(2, result.size());
-	assertEquals("a", result.get(0));
-	assertEquals("b", result.get(1));
-}
-</code></pre>
-<p>[tabby title=“skip code”]</p>
-<pre class="language-java"><code>public static List&#x3C;String> skipValues(List&#x3C;String> stringList, long skip) {
-	return stringList.stream()
-		.skip(skip)
-		.collect(Collectors.toList());
-}
-</code></pre>
-<p>[tabby title=“skip unit test”]</p>
-<pre class="language-java"><code>@Test
-public void test_skipValues() {
-	List&#x3C;String> stringList = Arrays.asList("a", "b", "c", "d");
-
-	List&#x3C;String> result = BasicStreamExamples.skipValues(stringList, 2);
-
-	assertEquals(2, result.size());
-	assertEquals("c", result.get(0));
-	assertEquals("d", result.get(1));
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="7175-limit code" class="tablinks active" onclick="openTab(this, &#x27;content-7175-limit code&#x27;, &#x27;7175&#x27;)">limit code</button>
+<button id="7175-limit unit test" class="tablinks" onclick="openTab(this, &#x27;content-7175-limit unit test&#x27;, &#x27;7175&#x27;)">limit unit test</button>
+<button id="7175-skip code" class="tablinks" onclick="openTab(this, &#x27;content-7175-skip code&#x27;, &#x27;7175&#x27;)">skip code</button>
+<button id="7175-skip unit test" class="tablinks" onclick="openTab(this, &#x27;content-7175-skip unit test&#x27;, &#x27;7175&#x27;)">skip unit test</button></div>
+<div id="content-7175-limit code" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static List&#x3C;String> limitValues(List&#x3C;String> stringList, long limit) {</span></span>
+<span class="line"><span>    return stringList.stream()</span></span>
+<span class="line"><span>        .limit(limit)</span></span>
+<span class="line"><span>        .collect(Collectors.toList());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-7175-limit unit test" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_limitValues() {</span></span>
+<span class="line"><span>    List&#x3C;String> stringList = Arrays.asList("a", "b", "c", "d");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    List&#x3C;String> result = BasicStreamExamples.limitValues(stringList, 2);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals(2, result.size());</span></span>
+<span class="line"><span>    assertEquals("a", result.get(0));</span></span>
+<span class="line"><span>    assertEquals("b", result.get(1));</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-7175-skip code" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static List&#x3C;String> skipValues(List&#x3C;String> stringList, long skip) {</span></span>
+<span class="line"><span>    return stringList.stream()</span></span>
+<span class="line"><span>        .skip(skip)</span></span>
+<span class="line"><span>        .collect(Collectors.toList());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-7175-skip unit test" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_skipValues() {</span></span>
+<span class="line"><span>    List&#x3C;String> stringList = Arrays.asList("a", "b", "c", "d");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    List&#x3C;String> result = BasicStreamExamples.skipValues(stringList, 2);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals(2, result.size());</span></span>
+<span class="line"><span>    assertEquals("c", result.get(0));</span></span>
+<span class="line"><span>    assertEquals("d", result.get(1));</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Example for forEach</h2>
-[tabby title="forEach code"]
-<pre class="language-java"><code>public static void printEachElement(List&#x3C;String> stringList) {
-	stringList.stream()
-		.forEach(element -> System.out.println("Element: " + element));
-}
-</code></pre>
-<p>[tabby title=“unit test”]</p>
-<pre class="language-java"><code>@Test
-public void test_printEachElement() {
-	List&#x3C;String> stringList = Arrays.asList("a", "b", "c", "d");
-
-	BasicStreamExamples.printEachElement(stringList);
-}
-</code></pre>
-<p>[tabby title=“console output”]</p>
-<pre class="language-text"><code>Element: a
-Element: b
-Element: c
-Element: d
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="8612-forEach code" class="tablinks active" onclick="openTab(this, &#x27;content-8612-forEach code&#x27;, &#x27;8612&#x27;)">forEach code</button>
+<button id="8612-unit test" class="tablinks" onclick="openTab(this, &#x27;content-8612-unit test&#x27;, &#x27;8612&#x27;)">unit test</button>
+<button id="8612-console output" class="tablinks" onclick="openTab(this, &#x27;content-8612-console output&#x27;, &#x27;8612&#x27;)">console output</button></div>
+<div id="content-8612-forEach code" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static void printEachElement(List&#x3C;String> stringList) {</span></span>
+<span class="line"><span>    stringList.stream()</span></span>
+<span class="line"><span>        .forEach(element -> System.out.println("Element: " + element));</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-8612-unit test" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_printEachElement() {</span></span>
+<span class="line"><span>    List&#x3C;String> stringList = Arrays.asList("a", "b", "c", "d");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    BasicStreamExamples.printEachElement(stringList);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-8612-console output" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Element: a</span></span>
+<span class="line"><span>Element: b</span></span>
+<span class="line"><span>Element: c</span></span>
+<span class="line"><span>Element: d</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Examples of min and max</h2>
-[tabby title="min code"]
-<pre class="language-java"><code>public static Optional&#x3C;Integer> getMin(List&#x3C;Integer> stringList) {
-	return stringList.stream()
-		.min(Long::compare);
-}
-</code></pre>
-<p>[tabby title=“min unit test”]</p>
-<pre class="language-java"><code>@Test
-public void test_getMin() {
-	List&#x3C;Integer> integerList = Arrays.asList(234, 123, 345);
-
-	Optional&#x3C;Integer> result = BasicStreamExamples.getMin(integerList);
-
-	assertEquals(123, (int) result.get());
-}
-</code></pre>
-<p>[tabby title=“max code”]</p>
-<pre class="language-java"><code>public static Optional&#x3C;Integer> getMax(List&#x3C;Integer> integers) {
-	return integers.stream()
-		.max(Long::compare);
-}
-</code></pre>
-<p>[tabby title=“max unit test”]</p>
-<pre class="language-java"><code>@Test
-public void test_getMax() {
-	List&#x3C;Integer> integerList = Arrays.asList(234, 123, 345);
-
-	Optional&#x3C;Integer> result = BasicStreamExamples.getMax(integerList);
-
-	assertEquals(345, (int) result.get());
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="9341-min code" class="tablinks active" onclick="openTab(this, &#x27;content-9341-min code&#x27;, &#x27;9341&#x27;)">min code</button>
+<button id="9341-min unit test" class="tablinks" onclick="openTab(this, &#x27;content-9341-min unit test&#x27;, &#x27;9341&#x27;)">min unit test</button>
+<button id="9341-max code" class="tablinks" onclick="openTab(this, &#x27;content-9341-max code&#x27;, &#x27;9341&#x27;)">max code</button>
+<button id="9341-max unit test" class="tablinks" onclick="openTab(this, &#x27;content-9341-max unit test&#x27;, &#x27;9341&#x27;)">max unit test</button></div>
+<div id="content-9341-min code" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static Optional&#x3C;Integer> getMin(List&#x3C;Integer> stringList) {</span></span>
+<span class="line"><span>    return stringList.stream()</span></span>
+<span class="line"><span>        .min(Long::compare);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-9341-min unit test" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_getMin() {</span></span>
+<span class="line"><span>    List&#x3C;Integer> integerList = Arrays.asList(234, 123, 345);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Optional&#x3C;Integer> result = BasicStreamExamples.getMin(integerList);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals(123, (int) result.get());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-9341-max code" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static Optional&#x3C;Integer> getMax(List&#x3C;Integer> integers) {</span></span>
+<span class="line"><span>    return integers.stream()</span></span>
+<span class="line"><span>        .max(Long::compare);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-9341-max unit test" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_getMax() {</span></span>
+<span class="line"><span>    List&#x3C;Integer> integerList = Arrays.asList(234, 123, 345);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Optional&#x3C;Integer> result = BasicStreamExamples.getMax(integerList);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals(345, (int) result.get());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Example for reduce</h2>
 This also is a bit complex method. The method that is given below sums all elements in the provided stream.
-<p>[tabby title=“reduce code”]</p>
-<pre class="language-java"><code>public static Optional&#x3C;Integer> sumByReduce(List&#x3C;Integer> integers) {
-	return integers.stream()
-		.reduce((x, y) -> x + y);
-}
-</code></pre>
-<p>[tabby title=“unit test”]</p>
-<pre class="language-java"><code>@Test
-public void test_sumByReduce() {
-	List&#x3C;Integer> integerList = Arrays.asList(100, 200, 300);
-
-	Optional&#x3C;Integer> result = BasicStreamExamples.sumByReduce(integerList);
-
-	assertEquals(600, (int) result.get());
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="10538-reduce code" class="tablinks active" onclick="openTab(this, &#x27;content-10538-reduce code&#x27;, &#x27;10538&#x27;)">reduce code</button>
+<button id="10538-unit test" class="tablinks" onclick="openTab(this, &#x27;content-10538-unit test&#x27;, &#x27;10538&#x27;)">unit test</button></div>
+<div id="content-10538-reduce code" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static Optional&#x3C;Integer> sumByReduce(List&#x3C;Integer> integers) {</span></span>
+<span class="line"><span>    return integers.stream()</span></span>
+<span class="line"><span>        .reduce((x, y) -> x + y);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-10538-unit test" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_sumByReduce() {</span></span>
+<span class="line"><span>    List&#x3C;Integer> integerList = Arrays.asList(100, 200, 300);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Optional&#x3C;Integer> result = BasicStreamExamples.sumByReduce(integerList);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals(600, (int) result.get());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Example for count</h2>
-[tabby title="count code"]
-<pre class="language-java"><code>public static long count(List&#x3C;Integer> integers) {
-	return integers.stream()
-		.count();
-}
-</code></pre>
-<p>[tabby title=“unit test”]</p>
-<pre class="language-java"><code>@Test
-public void test_count() {
-	List&#x3C;Integer> integerList = Arrays.asList(234, 123, 345);
-
-	long result = BasicStreamExamples.count(integerList);
-
-	assertEquals(3, result);
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="11122-count code" class="tablinks active" onclick="openTab(this, &#x27;content-11122-count code&#x27;, &#x27;11122&#x27;)">count code</button>
+<button id="11122-unit test" class="tablinks" onclick="openTab(this, &#x27;content-11122-unit test&#x27;, &#x27;11122&#x27;)">unit test</button></div>
+<div id="content-11122-count code" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static long count(List&#x3C;Integer> integers) {</span></span>
+<span class="line"><span>    return integers.stream()</span></span>
+<span class="line"><span>        .count();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-11122-unit test" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_count() {</span></span>
+<span class="line"><span>    List&#x3C;Integer> integerList = Arrays.asList(234, 123, 345);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    long result = BasicStreamExamples.count(integerList);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals(3, result);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Example for anyMatch, allMatch, and noneMatch</h2>
-[tabby title="anyMatch code"]
-<pre class="language-java"><code>public static boolean isOddElementPresent(List&#x3C;Integer> integers) {
-	return integers.stream()
-		.anyMatch(element -> element % 2 != 0);
-}
-</code></pre>
-<p>[tabby title=“allMatch code”]</p>
-<pre class="language-java"><code>public static boolean areAllElementsOdd(List&#x3C;Integer> integers) {
-	return integers.stream()
-		.allMatch(element -> element % 2 != 0);
-}
-</code></pre>
-<p>[tabby title=“noneMatch code”]</p>
-<pre class="language-java"><code>public static boolean areAllElementsEven(List&#x3C;Integer> integers) {
-	return integers.stream()
-		.noneMatch(element -> element % 2 != 0);
-}
-</code></pre>
-<p>[tabbyending]</p>
-<p>[tabby title=“unit test 1”]</p>
-<pre class="language-java"><code>@Test
-public void test_anyMatch_allMatch_noneMatch_allEven() {
-	List&#x3C;Integer> integerList = Arrays.asList(234, 124, 346, 124);
-
-	assertFalse(BasicStreamExamples.isOddElementPresent(integerList));
-	assertFalse(BasicStreamExamples.areAllElementsOdd(integerList));
-	assertTrue(BasicStreamExamples.areAllElementsEven(integerList));
-}
-</code></pre>
-<p>[tabby title=“unit test 2”]</p>
-<pre class="language-java"><code>@Test
-public void test_anyMatch_allMatch_noneMatch_evenAndOdd() {
-	List&#x3C;Integer> integerList = Arrays.asList(234, 123, 345, 123);
-
-	assertTrue(BasicStreamExamples.isOddElementPresent(integerList));
-	assertFalse(BasicStreamExamples.areAllElementsOdd(integerList));
-	assertFalse(BasicStreamExamples.areAllElementsEven(integerList));
-}
-</code></pre>
-<p>[tabby title=“unit test 3”]</p>
-<pre class="language-java"><code>@Test
-public void test_anyMatch_allMatch_noneMatch_allOdd() {
-	List&#x3C;Integer> integerList = Arrays.asList(233, 123, 345, 123);
-
-	assertTrue(BasicStreamExamples.isOddElementPresent(integerList));
-	assertTrue(BasicStreamExamples.areAllElementsOdd(integerList));
-	assertFalse(BasicStreamExamples.areAllElementsEven(integerList));
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="11644-anyMatch code" class="tablinks active" onclick="openTab(this, &#x27;content-11644-anyMatch code&#x27;, &#x27;11644&#x27;)">anyMatch code</button>
+<button id="11644-allMatch code" class="tablinks" onclick="openTab(this, &#x27;content-11644-allMatch code&#x27;, &#x27;11644&#x27;)">allMatch code</button>
+<button id="11644-noneMatch code" class="tablinks" onclick="openTab(this, &#x27;content-11644-noneMatch code&#x27;, &#x27;11644&#x27;)">noneMatch code</button></div>
+<div id="content-11644-anyMatch code" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static boolean isOddElementPresent(List&#x3C;Integer> integers) {</span></span>
+<span class="line"><span>    return integers.stream()</span></span>
+<span class="line"><span>        .anyMatch(element -> element % 2 != 0);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-11644-allMatch code" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static boolean areAllElementsOdd(List&#x3C;Integer> integers) {</span></span>
+<span class="line"><span>    return integers.stream()</span></span>
+<span class="line"><span>        .allMatch(element -> element % 2 != 0);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-11644-noneMatch code" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static boolean areAllElementsEven(List&#x3C;Integer> integers) {</span></span>
+<span class="line"><span>    return integers.stream()</span></span>
+<span class="line"><span>        .noneMatch(element -> element % 2 != 0);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div class="tab"><button id="12362-unit test 1" class="tablinks active" onclick="openTab(this, &#x27;content-12362-unit test 1&#x27;, &#x27;12362&#x27;)">unit test 1</button>
+<button id="12362-unit test 2" class="tablinks" onclick="openTab(this, &#x27;content-12362-unit test 2&#x27;, &#x27;12362&#x27;)">unit test 2</button>
+<button id="12362-unit test 3" class="tablinks" onclick="openTab(this, &#x27;content-12362-unit test 3&#x27;, &#x27;12362&#x27;)">unit test 3</button></div>
+<div id="content-12362-unit test 1" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_anyMatch_allMatch_noneMatch_allEven() {</span></span>
+<span class="line"><span>    List&#x3C;Integer> integerList = Arrays.asList(234, 124, 346, 124);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertFalse(BasicStreamExamples.isOddElementPresent(integerList));</span></span>
+<span class="line"><span>    assertFalse(BasicStreamExamples.areAllElementsOdd(integerList));</span></span>
+<span class="line"><span>    assertTrue(BasicStreamExamples.areAllElementsEven(integerList));</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-12362-unit test 2" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_anyMatch_allMatch_noneMatch_evenAndOdd() {</span></span>
+<span class="line"><span>    List&#x3C;Integer> integerList = Arrays.asList(234, 123, 345, 123);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertTrue(BasicStreamExamples.isOddElementPresent(integerList));</span></span>
+<span class="line"><span>    assertFalse(BasicStreamExamples.areAllElementsOdd(integerList));</span></span>
+<span class="line"><span>    assertFalse(BasicStreamExamples.areAllElementsEven(integerList));</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-12362-unit test 3" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_anyMatch_allMatch_noneMatch_allOdd() {</span></span>
+<span class="line"><span>    List&#x3C;Integer> integerList = Arrays.asList(233, 123, 345, 123);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertTrue(BasicStreamExamples.isOddElementPresent(integerList));</span></span>
+<span class="line"><span>    assertTrue(BasicStreamExamples.areAllElementsOdd(integerList));</span></span>
+<span class="line"><span>    assertFalse(BasicStreamExamples.areAllElementsEven(integerList));</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Examples for findFirst</h2>
 In case of <em><strong>List</strong></em> stream has an order and it will return always 234 as result.
-<p>[tabby title=“findFirst code for List”]</p>
-<pre class="language-java"><code>public static Optional&#x3C;Integer> getFirstElementList(List&#x3C;Integer> integers) {
-	return integers.stream()
-		.findFirst();
-}
-</code></pre>
-<p>[tabby title=“findFirst unit test for List”]</p>
-<pre class="language-java"><code>@Test
-public void test_getFirstElementList() {
-	List&#x3C;Integer> integerList = Arrays.asList(234, 123, 345, 123);
-
-	Optional&#x3C;Integer> result = BasicStreamExamples
-		.getFirstElementList(integerList);
-
-	assertEquals(Integer.valueOf(234), result.get());
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="13792-findFirst code for List" class="tablinks active" onclick="openTab(this, &#x27;content-13792-findFirst code for List&#x27;, &#x27;13792&#x27;)">findFirst code for List</button>
+<button id="13792-findFirst unit test for List" class="tablinks" onclick="openTab(this, &#x27;content-13792-findFirst unit test for List&#x27;, &#x27;13792&#x27;)">findFirst unit test for List</button></div>
+<div id="content-13792-findFirst code for List" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static Optional&#x3C;Integer> getFirstElementList(List&#x3C;Integer> integers) {</span></span>
+<span class="line"><span>    return integers.stream()</span></span>
+<span class="line"><span>        .findFirst();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-13792-findFirst unit test for List" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_getFirstElementList() {</span></span>
+<span class="line"><span>    List&#x3C;Integer> integerList = Arrays.asList(234, 123, 345, 123);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Optional&#x3C;Integer> result = BasicStreamExamples</span></span>
+<span class="line"><span>        .getFirstElementList(integerList);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals(Integer.valueOf(234), result.get());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <p>Since Set has no natural order then there is no guarantee which element is to be returned by <em><strong>findFirst()</strong></em>. On my machine, with my JVM it is 345, but on another machine, with other JVM it might be a different value, so this test most likely will fail for someone else.</p>
-<p>[tabby title=“findFirst code for Set”]</p>
-<pre class="language-java"><code>public static Optional&#x3C;Integer> getFirstElementSet(Set&#x3C;Integer> integers) {
-	return integers.stream()
-		.findFirst();
-}
-</code></pre>
-<p>[tabby title=“findFirst unit test for Set”]</p>
-<pre class="language-java"><code>@Test
-public void test_getFirstElementSet() {
-	Set&#x3C;Integer> integerSet = new HashSet&#x3C;>();
-	integerSet.add(234);
-	integerSet.add(123);
-	integerSet.add(345);
-	integerSet.add(123);
-
-	Optional&#x3C;Integer> result = BasicStreamExamples
-		.getFirstElementSet(integerSet);
-
-	assertEquals(Integer.valueOf(345), result.get());
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="14706-findFirst code for Set" class="tablinks active" onclick="openTab(this, &#x27;content-14706-findFirst code for Set&#x27;, &#x27;14706&#x27;)">findFirst code for Set</button>
+<button id="14706-findFirst unit test for Set" class="tablinks" onclick="openTab(this, &#x27;content-14706-findFirst unit test for Set&#x27;, &#x27;14706&#x27;)">findFirst unit test for Set</button></div>
+<div id="content-14706-findFirst code for Set" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static Optional&#x3C;Integer> getFirstElementSet(Set&#x3C;Integer> integers) {</span></span>
+<span class="line"><span>    return integers.stream()</span></span>
+<span class="line"><span>        .findFirst();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-14706-findFirst unit test for Set" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_getFirstElementSet() {</span></span>
+<span class="line"><span>    Set&#x3C;Integer> integerSet = new HashSet&#x3C;>();</span></span>
+<span class="line"><span>    integerSet.add(234);</span></span>
+<span class="line"><span>    integerSet.add(123);</span></span>
+<span class="line"><span>    integerSet.add(345);</span></span>
+<span class="line"><span>    integerSet.add(123);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Optional&#x3C;Integer> result = BasicStreamExamples</span></span>
+<span class="line"><span>        .getFirstElementSet(integerSet);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals(Integer.valueOf(345), result.get());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Examples for findAny</h2>
 There is no guarantee which element is to be returned by <em><strong>findAny()</strong></em>. On my machine, with my JVM it is 234, but on another machine, with other JVM it might be a different value, so this test most likely will fail for someone else.
-<p>[tabby title=“findAny code”]</p>
-<pre class="language-java"><code>public static Optional&#x3C;Integer> getAnyElement(List&#x3C;Integer> integers) {
-	return integers.stream()
-		.findAny();
-}
-</code></pre>
-<p>[tabby title=“findAny unit test”]</p>
-<pre class="language-java"><code>@Test
-public void test_getGetAnyElement() {
-	List&#x3C;Integer> integerList = Arrays.asList(234, 123, 345, 123);
-
-	Optional&#x3C;Integer> result = BasicStreamExamples
-		.getAnyElement(integerList);
-
-	assertEquals(Integer.valueOf(234), result.get());
-}
-</code></pre>
-<p>[tabbyending]</p>
+<div class="tab"><button id="15682-findAny code" class="tablinks active" onclick="openTab(this, &#x27;content-15682-findAny code&#x27;, &#x27;15682&#x27;)">findAny code</button>
+<button id="15682-findAny unit test" class="tablinks" onclick="openTab(this, &#x27;content-15682-findAny unit test&#x27;, &#x27;15682&#x27;)">findAny unit test</button></div>
+<div id="content-15682-findAny code" class="tabcontent" style="display: block">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public static Optional&#x3C;Integer> getAnyElement(List&#x3C;Integer> integers) {</span></span>
+<span class="line"><span>    return integers.stream()</span></span>
+<span class="line"><span>        .findAny();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
+<div id="content-15682-findAny unit test" class="tabcontent">
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@Test</span></span>
+<span class="line"><span>public void test_getGetAnyElement() {</span></span>
+<span class="line"><span>    List&#x3C;Integer> integerList = Arrays.asList(234, 123, 345, 123);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Optional&#x3C;Integer> result = BasicStreamExamples</span></span>
+<span class="line"><span>        .getAnyElement(integerList);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assertEquals(Integer.valueOf(234), result.get());</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+</div>
 <h2>Conclusion</h2>
-These basic code examples give an idea how Java 8 Stream API operations work. More advanced examples are shown in <a href="/java-8-features-stream-api-advanced-examples/">Java 8 features – Stream API advanced examples</a> post.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+These basic code examples give an idea how Java 8 Stream API operations work. More advanced examples are shown in <a href="/java-8-features-stream-api-advanced-examples/">Java 8 features – Stream API advanced examples</a> post.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/java-8-features-lambda-expressions-interface-changes-stream-api-datetime-api/" data-astro-cid-bvzihdzo>Java 8 features - Lambda expressions, Interface changes, Stream API, DateTime API</a> </li><li data-astro-cid-bvzihdzo> <a href="/java-8-features-stream-api-explained/" data-astro-cid-bvzihdzo>Java 8 features - Stream API explained</a> </li><li data-astro-cid-bvzihdzo> <a href="/java-8-features-stream-api-advanced-examples/" data-astro-cid-bvzihdzo>Java 8 features - Stream API advanced examples</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/java8" data-astro-cid-bvzihdzo>Java 8</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

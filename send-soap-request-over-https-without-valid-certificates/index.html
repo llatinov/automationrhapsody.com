@@ -1,151 +1,150 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/send-soap-request-over-https-without-valid-certificates/"><!-- Primary Meta Tags --><title>Send SOAP request over HTTPS without valid certificates</title><meta name="title" content="Send SOAP request over HTTPS without valid certificates"><meta name="description" content="How to send SOAP request over HTTPS in Java without generating and installing certificates. NB: This MUST not be used for production code!"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/send-soap-request-over-https-without-valid-certificates/"><meta property="og:title" content="Send SOAP request over HTTPS without valid certificates"><meta property="og:description" content="How to send SOAP request over HTTPS in Java without generating and installing certificates. NB: This MUST not be used for production code!"><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/send-soap-request-over-https-without-valid-certificates/"><meta property="twitter:title" content="Send SOAP request over HTTPS without valid certificates"><meta property="twitter:description" content="How to send SOAP request over HTTPS in Java without generating and installing certificates. NB: This MUST not be used for production code!"><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-08-03T00:00:00.000Z"> Aug 3, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Send SOAP request over HTTPS without valid certificates</h1> <hr data-astro-cid-bvzihdzo> </div>  <p><a href="https://en.wikipedia.org/wiki/SOAP" target="_blank" rel="noopener noreferrer">SOAP</a> (Simple Object Access Protocol) is a protocol used in web services. It allows exchanging of XML data over HTTP or HTTPS.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/send-soap-request-over-https-without-valid-certificates/"><!-- Primary Meta Tags --><title>Send SOAP request over HTTPS without valid certificates</title><meta name="title" content="Send SOAP request over HTTPS without valid certificates"><meta name="description" content="How to send SOAP request over HTTPS in Java without generating and installing certificates. NB: This MUST not be used for production code!"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/send-soap-request-over-https-without-valid-certificates/"><meta property="og:title" content="Send SOAP request over HTTPS without valid certificates"><meta property="og:description" content="How to send SOAP request over HTTPS in Java without generating and installing certificates. NB: This MUST not be used for production code!"><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/send-soap-request-over-https-without-valid-certificates/"><meta property="twitter:title" content="Send SOAP request over HTTPS without valid certificates"><meta property="twitter:description" content="How to send SOAP request over HTTPS in Java without generating and installing certificates. NB: This MUST not be used for production code!"><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Send SOAP request over HTTPS without valid certificates</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-08-03T00:00:00.000Z"> Aug 3, 2015 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p><a href="https://en.wikipedia.org/wiki/SOAP" target="_blank" rel="noopener noreferrer">SOAP</a> (Simple Object Access Protocol) is a protocol used in web services. It allows exchanging of XML data over HTTP or HTTPS.</p>
 <h2>Send SOAP over HTTP</h2>
 Sending SOAP message over HTTP is Java is as simple as:
-<pre class="language-java"><code>public SOAPMessage sendSoapRequest(String endpointUrl, SOAPMessage request) {
-	try {
-		// Send HTTP SOAP request and get response
-		SOAPConnection soapConnection
-				= SOAPConnectionFactory.newInstance().createConnection();
-		SOAPMessage response = soapConnection.call(request, endpointUrl);
-		// Close connection
-		soapConnection.close();
-		return response;
-	} catch (SOAPException ex) {
-		// Do Something
-	}
-	return null;
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public SOAPMessage sendSoapRequest(String endpointUrl, SOAPMessage request) {</span></span>
+<span class="line"><span>    try {</span></span>
+<span class="line"><span>        // Send HTTP SOAP request and get response</span></span>
+<span class="line"><span>        SOAPConnection soapConnection</span></span>
+<span class="line"><span>                = SOAPConnectionFactory.newInstance().createConnection();</span></span>
+<span class="line"><span>        SOAPMessage response = soapConnection.call(request, endpointUrl);</span></span>
+<span class="line"><span>        // Close connection</span></span>
+<span class="line"><span>        soapConnection.close();</span></span>
+<span class="line"><span>        return response;</span></span>
+<span class="line"><span>    } catch (SOAPException ex) {</span></span>
+<span class="line"><span>        // Do Something</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    return null;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>HTTPS</h2>
 HTTPS is an HTTP over a security layer (SSL/TLS). This is the essence of secure internet communication. For valid HTTPS connection server needs a valid certificate signed by a certification authority. Establishing an HTTPS connection between client and server is by a procedure called <a href="https://www.websecurity.digicert.com/security-topics/how-does-ssl-handshake-work" target="_blank" rel="noopener noreferrer">SSL handshake</a> in which client validates server certificate and both set session key which they use to encrypt messages. This level of security makes the code above to fail if executed against HTTPS host:
 <p><strong>javax.net.ssl.SSLHandshakeException: java.security.cert.CertificateException: No subject alternative DNS name matching localhost found.</strong></p>
 <p>This error appears because the server is running on localhost and there is no valid certificate for localhost. The proper way for handling this is to generate a valid or test SSL certificate with IP or hostname of the machine running the server and install it on it.</p>
 <h2>Trust all hosts</h2>
 Generating and installing SSL certificates for test servers is a good idea but is not worth the effort. So in order to overcome this, an HTTPS connection should be opened and it should be instructed to trust any hostname. First is to add dummy implementation of HostnameVerifier interface trusting all hosts:
-<pre class="language-java"><code>/**
- * Dummy class implementing HostnameVerifier to trust all host names
- */
-private static class TrustAllHosts implements HostnameVerifier {
-	public boolean verify(String hostname, SSLSession session) {
-		return true;
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>/**</span></span>
+<span class="line"><span> * Dummy class implementing HostnameVerifier to trust all host names</span></span>
+<span class="line"><span> */</span></span>
+<span class="line"><span>private static class TrustAllHosts implements HostnameVerifier {</span></span>
+<span class="line"><span>    public boolean verify(String hostname, SSLSession session) {</span></span>
+<span class="line"><span>        return true;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Open HTTPS connection</h2>
 Opening HTTPS connection is done with Java's HttpsURLConnection. Instruction to trust all hosts is done with setHostnameVerifier(new TrustAllHosts()) method. The re-factored code is:
-<pre class="language-java"><code>public SOAPMessage sendSoapRequest(String endpointUrl, SOAPMessage request) {
-	try {
-		final boolean isHttps = endpointUrl.toLowerCase().startsWith("https");
-		HttpsURLConnection httpsConnection = null;
-		// Open HTTPS connection
-		if (isHttps) {
-			// Open HTTPS connection
-			URL url = new URL(endpointUrl);
-			httpsConnection = (HttpsURLConnection) url.openConnection();
-			// Trust all hosts
-			httpsConnection.setHostnameVerifier(new TrustAllHosts());
-			// Connect
-			httpsConnection.connect();
-		}
-		// Send HTTP SOAP request and get response
-		SOAPConnection soapConnection
-				= SOAPConnectionFactory.newInstance().createConnection();
-		SOAPMessage response = soapConnection.call(request, endpointUrl);
-		// Close connection
-		soapConnection.close();
-		// Close HTTPS connection
-		if (isHttps) {
-			httpsConnection.disconnect();
-		}
-		return response;
-	} catch (SOAPException | IOException ex) {
-		// Do Something
-	}
-	return null;
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public SOAPMessage sendSoapRequest(String endpointUrl, SOAPMessage request) {</span></span>
+<span class="line"><span>    try {</span></span>
+<span class="line"><span>        final boolean isHttps = endpointUrl.toLowerCase().startsWith("https");</span></span>
+<span class="line"><span>        HttpsURLConnection httpsConnection = null;</span></span>
+<span class="line"><span>        // Open HTTPS connection</span></span>
+<span class="line"><span>        if (isHttps) {</span></span>
+<span class="line"><span>            // Open HTTPS connection</span></span>
+<span class="line"><span>            URL url = new URL(endpointUrl);</span></span>
+<span class="line"><span>            httpsConnection = (HttpsURLConnection) url.openConnection();</span></span>
+<span class="line"><span>            // Trust all hosts</span></span>
+<span class="line"><span>            httpsConnection.setHostnameVerifier(new TrustAllHosts());</span></span>
+<span class="line"><span>            // Connect</span></span>
+<span class="line"><span>            httpsConnection.connect();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        // Send HTTP SOAP request and get response</span></span>
+<span class="line"><span>        SOAPConnection soapConnection</span></span>
+<span class="line"><span>                = SOAPConnectionFactory.newInstance().createConnection();</span></span>
+<span class="line"><span>        SOAPMessage response = soapConnection.call(request, endpointUrl);</span></span>
+<span class="line"><span>        // Close connection</span></span>
+<span class="line"><span>        soapConnection.close();</span></span>
+<span class="line"><span>        // Close HTTPS connection</span></span>
+<span class="line"><span>        if (isHttps) {</span></span>
+<span class="line"><span>            httpsConnection.disconnect();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        return response;</span></span>
+<span class="line"><span>    } catch (SOAPException | IOException ex) {</span></span>
+<span class="line"><span>        // Do Something</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    return null;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Not valid certificate exception</h2>
 Running code above throws an exception which generally means that server is either missing an SSL certificate or its SSL certificate is not valid, i.e. not signed by a certification authority. Error is:
 <p><strong>javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</strong></p>
 <p>The proper way to handle this is to add server’s certificate to client’s JVM TrustStore certificates. But since test servers may change and server on which client is running may also change generating of certificates is an overhead. Since we are writing test code it is OK to lower the level of security of SSL.</p>
 <h2>Trust all certificates</h2>
 Trusting all certificates is a very bad practice and MUST never be used in production code. This is undermining the whole concept and purpose of SSL certificates. For test code is not that bad to do this sin. A class implementing X509TrustManager interface is needed:
-<pre class="language-java"><code>/**
- * Dummy class implementing X509TrustManager to trust all certificates
- */
-private static class TrustAllCertificates implements X509TrustManager {
-	public void checkClientTrusted(X509Certificate[] certs, String authType) {
-	}
-
-	public void checkServerTrusted(X509Certificate[] certs, String authType) {
-	}
-
-	public X509Certificate[] getAcceptedIssuers() {
-		return null;
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>/**</span></span>
+<span class="line"><span> * Dummy class implementing X509TrustManager to trust all certificates</span></span>
+<span class="line"><span> */</span></span>
+<span class="line"><span>private static class TrustAllCertificates implements X509TrustManager {</span></span>
+<span class="line"><span>    public void checkClientTrusted(X509Certificate[] certs, String authType) {</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void checkServerTrusted(X509Certificate[] certs, String authType) {</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public X509Certificate[] getAcceptedIssuers() {</span></span>
+<span class="line"><span>        return null;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Create SSL context trusting all certificates</h2>
 Instructing HttpsURLConnection to trust all certificates is done with following code:
-<pre class="language-java"><code>// Create SSL context and trust all certificates
-SSLContext sslContext = SSLContext.getInstance("SSL");
-TrustManager[] trustAll = new TrustManager[] {new TrustAllCertificates()};
-sslContext.init(null, trustAll, new java.security.SecureRandom());
-// Set trust all certificates context to HttpsURLConnection
-HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// Create SSL context and trust all certificates</span></span>
+<span class="line"><span>SSLContext sslContext = SSLContext.getInstance("SSL");</span></span>
+<span class="line"><span>TrustManager[] trustAll = new TrustManager[] {new TrustAllCertificates()};</span></span>
+<span class="line"><span>sslContext.init(null, trustAll, new java.security.SecureRandom());</span></span>
+<span class="line"><span>// Set trust all certificates context to HttpsURLConnection</span></span>
+<span class="line"><span>HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Send SOAP over HTTPS without having valid certificates</h2>
 The final code is:
-<pre class="language-java"><code>/**
- * Sends SOAP request and saves it in a queue.
- *
- * @param request SOAP Message request object
- * @return SOAP Message response object
- */
-public SOAPMessage sendSoapRequest(String endpointUrl, SOAPMessage request) {
-	try {
-		final boolean isHttps = endpointUrl.toLowerCase().startsWith("https");
-		HttpsURLConnection httpsConnection = null;
-		// Open HTTPS connection
-		if (isHttps) {
-			// Create SSL context and trust all certificates
-			SSLContext sslContext = SSLContext.getInstance("SSL");
-			TrustManager[] trustAll
-					= new TrustManager[] {new TrustAllCertificates()};
-			sslContext.init(null, trustAll, new java.security.SecureRandom());
-			// Set trust all certificates context to HttpsURLConnection
-			HttpsURLConnection
-					.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
-			// Open HTTPS connection
-			URL url = new URL(endpointUrl);
-			httpsConnection = (HttpsURLConnection) url.openConnection();
-			// Trust all hosts
-			httpsConnection.setHostnameVerifier(new TrustAllHosts());
-			// Connect
-			httpsConnection.connect();
-		}
-		// Send HTTP SOAP request and get response
-		SOAPConnection soapConnection
-				= SOAPConnectionFactory.newInstance().createConnection();
-		SOAPMessage response = soapConnection.call(request, endpointUrl);
-		// Close connection
-		soapConnection.close();
-		// Close HTTPS connection
-		if (isHttps) {
-			httpsConnection.disconnect();
-		}
-		return response;
-	} catch (SOAPException | IOException
-			| NoSuchAlgorithmException | KeyManagementException ex) {
-		// Do Something
-	}
-	return null;
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>/**</span></span>
+<span class="line"><span> * Sends SOAP request and saves it in a queue.</span></span>
+<span class="line"><span> *</span></span>
+<span class="line"><span> * @param request SOAP Message request object</span></span>
+<span class="line"><span> * @return SOAP Message response object</span></span>
+<span class="line"><span> */</span></span>
+<span class="line"><span>public SOAPMessage sendSoapRequest(String endpointUrl, SOAPMessage request) {</span></span>
+<span class="line"><span>    try {</span></span>
+<span class="line"><span>        final boolean isHttps = endpointUrl.toLowerCase().startsWith("https");</span></span>
+<span class="line"><span>        HttpsURLConnection httpsConnection = null;</span></span>
+<span class="line"><span>        // Open HTTPS connection</span></span>
+<span class="line"><span>        if (isHttps) {</span></span>
+<span class="line"><span>            // Create SSL context and trust all certificates</span></span>
+<span class="line"><span>            SSLContext sslContext = SSLContext.getInstance("SSL");</span></span>
+<span class="line"><span>            TrustManager[] trustAll</span></span>
+<span class="line"><span>                    = new TrustManager[] {new TrustAllCertificates()};</span></span>
+<span class="line"><span>            sslContext.init(null, trustAll, new java.security.SecureRandom());</span></span>
+<span class="line"><span>            // Set trust all certificates context to HttpsURLConnection</span></span>
+<span class="line"><span>            HttpsURLConnection</span></span>
+<span class="line"><span>                    .setDefaultSSLSocketFactory(sslContext.getSocketFactory());</span></span>
+<span class="line"><span>            // Open HTTPS connection</span></span>
+<span class="line"><span>            URL url = new URL(endpointUrl);</span></span>
+<span class="line"><span>            httpsConnection = (HttpsURLConnection) url.openConnection();</span></span>
+<span class="line"><span>            // Trust all hosts</span></span>
+<span class="line"><span>            httpsConnection.setHostnameVerifier(new TrustAllHosts());</span></span>
+<span class="line"><span>            // Connect</span></span>
+<span class="line"><span>            httpsConnection.connect();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        // Send HTTP SOAP request and get response</span></span>
+<span class="line"><span>        SOAPConnection soapConnection</span></span>
+<span class="line"><span>                = SOAPConnectionFactory.newInstance().createConnection();</span></span>
+<span class="line"><span>        SOAPMessage response = soapConnection.call(request, endpointUrl);</span></span>
+<span class="line"><span>        // Close connection</span></span>
+<span class="line"><span>        soapConnection.close();</span></span>
+<span class="line"><span>        // Close HTTPS connection</span></span>
+<span class="line"><span>        if (isHttps) {</span></span>
+<span class="line"><span>            httpsConnection.disconnect();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        return response;</span></span>
+<span class="line"><span>    } catch (SOAPException | IOException</span></span>
+<span class="line"><span>            | NoSuchAlgorithmException | KeyManagementException ex) {</span></span>
+<span class="line"><span>        // Do Something</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    return null;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Conclusion</h2>
-Although this code is very handy and eases a lot testing of SOAP over HTTPS it MUST never be used for production purpose!  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+Although this code is very handy and eases a lot testing of SOAP over HTTPS it MUST never be used for production purpose!  <hr data-astro-cid-bvzihdzo>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/api-automation" data-astro-cid-bvzihdzo>API Automation</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/soap" data-astro-cid-bvzihdzo>SOAP</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

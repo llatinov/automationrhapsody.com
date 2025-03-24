@@ -1,7 +1,6 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/manage-automatically-select-needed-webdriver-java-8-selenium-project/"><!-- Primary Meta Tags --><title>Manage and automatically select needed WebDriver in Java 8 Selenium project</title><meta name="title" content="Manage and automatically select needed WebDriver in Java 8 Selenium project"><meta name="description" content="Example code how to efficiently manage and automatically select needed local WebDriver using Java 8 method reference used as lambda expression."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/manage-automatically-select-needed-webdriver-java-8-selenium-project/"><meta property="og:title" content="Manage and automatically select needed WebDriver in Java 8 Selenium project"><meta property="og:description" content="Example code how to efficiently manage and automatically select needed local WebDriver using Java 8 method reference used as lambda expression."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/manage-automatically-select-needed-webdriver-java-8-selenium-project/"><meta property="twitter:title" content="Manage and automatically select needed WebDriver in Java 8 Selenium project"><meta property="twitter:description" content="Example code how to efficiently manage and automatically select needed local WebDriver using Java 8 method reference used as lambda expression."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-04-30T00:00:00.000Z"> Apr 30, 2017 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Manage and automatically select needed WebDriver in Java 8 Selenium project</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>Code examples in the current post can be found in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/selenium-samples-java/tree/master/design-patterns" target="_blank" rel="noopener noreferrer">selenium-samples-java/design-patterns</a> repository.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/manage-automatically-select-needed-webdriver-java-8-selenium-project/"><!-- Primary Meta Tags --><title>Manage and automatically select needed WebDriver in Java 8 Selenium project</title><meta name="title" content="Manage and automatically select needed WebDriver in Java 8 Selenium project"><meta name="description" content="Example code how to efficiently manage and automatically select needed local WebDriver using Java 8 method reference used as lambda expression."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/manage-automatically-select-needed-webdriver-java-8-selenium-project/"><meta property="og:title" content="Manage and automatically select needed WebDriver in Java 8 Selenium project"><meta property="og:description" content="Example code how to efficiently manage and automatically select needed local WebDriver using Java 8 method reference used as lambda expression."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/manage-automatically-select-needed-webdriver-java-8-selenium-project/"><meta property="twitter:title" content="Manage and automatically select needed WebDriver in Java 8 Selenium project"><meta property="twitter:description" content="Example code how to efficiently manage and automatically select needed local WebDriver using Java 8 method reference used as lambda expression."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Manage and automatically select needed WebDriver in Java 8 Selenium project</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2017-04-30T00:00:00.000Z"> Apr 30, 2017 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>Code examples in the current post can be found in GitHub <a title="sample-dropwizard-rest-stub" href="https://github.com/llatinov/selenium-samples-java/tree/master/design-patterns" target="_blank" rel="noopener noreferrer">selenium-samples-java/design-patterns</a> repository.</p>
 <h2>Java 8 features</h2>
 In this example lambda expression and method reference, Java 8 features are used. More in Java 8 features can be found in <a href="/java-8-features-lambda-expressions-interface-changes-stream-api-datetime-api/">Java 8 features – Lambda expressions, Interface changes, Stream API, DateTime API</a> post.
 <h3>Functional interface</h3>
@@ -14,89 +13,89 @@ Sometimes when using lambda expression all you do is call a method by name. Meth
 The proposed solution of managing WebDriver has enumeration called <em><strong>Browser</strong></em> and class called <em><strong>WebDriverFactory</strong></em>. Another important thing is web drivers should be placed in a folder with name <em><strong>webdrivers</strong></em> and named with a special pattern.
 <h3>Browser enum</h3>
 The code is shown below:
-<pre class="language-java"><code>package com.automationrhapsody.designpatterns;
-
-import java.util.Arrays;
-import java.util.function.Supplier;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-
-public enum Browser {
-	FIREFOX("gecko", FirefoxDriver::new),
-	CHROME("chrome", ChromeDriver::new),
-	IE("ie", InternetExplorerDriver::new);
-
-	private String name;
-	private Supplier&#x3C;WebDriver> driverSupplier;
-
-	Browser(String name, Supplier&#x3C;WebDriver> driverSupplier) {
-		this.name = name;
-		this.driverSupplier = driverSupplier;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public WebDriver getDriver() {
-		return driverSupplier.get();
-	}
-
-	public static Browser fromString(String value) {
-		for (Browser browser : values()) {
-			if (value != null &#x26;&#x26; value.toLowerCase().equals(browser.getName())) {
-				return browser;
-			}
-		}
-		System.out.println("Invalid driver name passed as 'browser' property. "
-			+ "One of: " + Arrays.toString(values()) + " is expected.");
-		return FIREFOX;
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>package com.automationrhapsody.designpatterns;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import java.util.Arrays;</span></span>
+<span class="line"><span>import java.util.function.Supplier;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import org.openqa.selenium.WebDriver;</span></span>
+<span class="line"><span>import org.openqa.selenium.chrome.ChromeDriver;</span></span>
+<span class="line"><span>import org.openqa.selenium.firefox.FirefoxDriver;</span></span>
+<span class="line"><span>import org.openqa.selenium.ie.InternetExplorerDriver;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public enum Browser {</span></span>
+<span class="line"><span>    FIREFOX("gecko", FirefoxDriver::new),</span></span>
+<span class="line"><span>    CHROME("chrome", ChromeDriver::new),</span></span>
+<span class="line"><span>    IE("ie", InternetExplorerDriver::new);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private String name;</span></span>
+<span class="line"><span>    private Supplier&#x3C;WebDriver> driverSupplier;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Browser(String name, Supplier&#x3C;WebDriver> driverSupplier) {</span></span>
+<span class="line"><span>        this.name = name;</span></span>
+<span class="line"><span>        this.driverSupplier = driverSupplier;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public String getName() {</span></span>
+<span class="line"><span>        return name;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public WebDriver getDriver() {</span></span>
+<span class="line"><span>        return driverSupplier.get();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static Browser fromString(String value) {</span></span>
+<span class="line"><span>        for (Browser browser : values()) {</span></span>
+<span class="line"><span>            if (value != null &#x26;&#x26; value.toLowerCase().equals(browser.getName())) {</span></span>
+<span class="line"><span>                return browser;</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        System.out.println("Invalid driver name passed as 'browser' property. "</span></span>
+<span class="line"><span>            + "One of: " + Arrays.toString(values()) + " is expected.");</span></span>
+<span class="line"><span>        return FIREFOX;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Enumeration’s constructor has <em><strong>Supplier</strong></em> functional interface as a parameter. When the constructor is called method reference <em><strong>FirefoxDriver::new</strong></em> is called as a lambda expression which purpose is to instantiate new Firefox driver. If only lambda expression is used is would be: <em><strong>() -> new FirefoxDriver()</strong></em>. Notice that method reference is much shorter and easy to read. <em><strong>getDriver()</strong></em> method invokes Supplier’s <em><strong>get()</strong></em> method which is implemented by the lambda expression, so lambda expression is executed hence instantiating new web driver. With this approach Firefox web driver object is created only when <em><strong>getDriver()</strong></em> method is called.</p>
 <h3>WebDriverFactory</h3>
 Code is:
-<pre class="language-java"><code>package com.automationrhapsody.designpatterns;
-
-import java.io.File;
-
-import org.openqa.selenium.WebDriver;
-
-class WebDriverFactory {
-
-	private static final String WEB_DRIVER_FOLDER = "webdrivers";
-
-		public static WebDriver createWebDriver() {
-		Browser browser = Browser.fromString(System.getProperty("browser"));
-		String arch = System.getProperty("os.arch").contains("64") ? "64" : "32";
-		String os = System.getProperty("os.name").toLowerCase().contains("win") 
-				? "win.exe" : "linux";
-		String driverFileName = browser.getName() + "driver-" + arch + "-" + os;
-		String driverFilePath = driversFolder(new File("").getAbsolutePath());
-		System.setProperty("webdriver." + browser.getName() + ".driver", 
-				driverFilePath + driverFileName);
-		return browser.getDriver();
-	}
-
-	private static String driversFolder(String path) {
-		File file = new File(path);
-		for (String item : file.list()) {
-			if (WEB_DRIVER_FOLDER.equals(item)) {
-				return file.getAbsolutePath() + "/" + WEB_DRIVER_FOLDER + "/";
-			}
-		}
-		return driversFolder(file.getParent());
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>package com.automationrhapsody.designpatterns;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import java.io.File;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import org.openqa.selenium.WebDriver;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>class WebDriverFactory {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private static final String WEB_DRIVER_FOLDER = "webdrivers";</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        public static WebDriver createWebDriver() {</span></span>
+<span class="line"><span>        Browser browser = Browser.fromString(System.getProperty("browser"));</span></span>
+<span class="line"><span>        String arch = System.getProperty("os.arch").contains("64") ? "64" : "32";</span></span>
+<span class="line"><span>        String os = System.getProperty("os.name").toLowerCase().contains("win") </span></span>
+<span class="line"><span>                ? "win.exe" : "linux";</span></span>
+<span class="line"><span>        String driverFileName = browser.getName() + "driver-" + arch + "-" + os;</span></span>
+<span class="line"><span>        String driverFilePath = driversFolder(new File("").getAbsolutePath());</span></span>
+<span class="line"><span>        System.setProperty("webdriver." + browser.getName() + ".driver", </span></span>
+<span class="line"><span>                driverFilePath + driverFileName);</span></span>
+<span class="line"><span>        return browser.getDriver();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private static String driversFolder(String path) {</span></span>
+<span class="line"><span>        File file = new File(path);</span></span>
+<span class="line"><span>        for (String item : file.list()) {</span></span>
+<span class="line"><span>            if (WEB_DRIVER_FOLDER.equals(item)) {</span></span>
+<span class="line"><span>                return file.getAbsolutePath() + "/" + WEB_DRIVER_FOLDER + "/";</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        return driversFolder(file.getParent());</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>This code recursively searches for a folder named <em><strong>webdrivers</strong></em> in the project. This is done because when you have a multi-module project running from IDE and from Maven has different root folder and finding web drivers is not possible from both simultaneously. Once the folder is found then proper web driver is selected based on OS and architecture. The code reads <em><strong>browser</strong></em> system property which can be passed from outside hence making the selection of web driver easy to configure. The important part is to have web drivers with special naming convention.</p>
 <h3>Web drivers naming convention</h3>
 In order code above to work the web drivers should be placed in <em><strong>webdrivers</strong></em> folder in the project and their names should match the pattern: {DIVER_NAME}-{ARCHITECTURE}-{OS}, e.g. <em><strong>geckodriver-64-win.exe</strong></em> for Windows 64 bit and <em><strong>geckodriver-64-linux</strong></em> for Linux 64 bit.
 <h2>Conclusion</h2>
-The proposed solution is a very elegant way to manage your web drivers and select proper one just by passing <em><strong>-Dbrowser={BROWSER}</strong></em> Java system property.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+The proposed solution is a very elegant way to manage your web drivers and select proper one just by passing <em><strong>-Dbrowser={BROWSER}</strong></em> Java system property.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/java-8-features-lambda-expressions-interface-changes-stream-api-datetime-api/" data-astro-cid-bvzihdzo>Java 8 features - Lambda expressions, Interface changes, Stream API, DateTime API</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/design-patterns" data-astro-cid-bvzihdzo>Design Patterns</a><a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/java8" data-astro-cid-bvzihdzo>Java 8</a><a href="/tags/selenium-webdriver" data-astro-cid-bvzihdzo>Selenium WebDriver</a><a href="/tags/tutorials" data-astro-cid-bvzihdzo>Tutorials</a><a href="/tags/web-automation" data-astro-cid-bvzihdzo>Web Automation</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

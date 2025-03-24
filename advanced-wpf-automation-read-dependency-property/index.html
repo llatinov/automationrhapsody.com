@@ -1,59 +1,58 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/advanced-wpf-automation-read-dependency-property/"><!-- Primary Meta Tags --><title>Advanced WPF automation - read dependency property</title><meta name="title" content="Advanced WPF automation - read dependency property"><meta name="description" content="What is dependency property in .NET and how to read it from Telerik Testing Framework."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/advanced-wpf-automation-read-dependency-property/"><meta property="og:title" content="Advanced WPF automation - read dependency property"><meta property="og:description" content="What is dependency property in .NET and how to read it from Telerik Testing Framework."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/advanced-wpf-automation-read-dependency-property/"><meta property="twitter:title" content="Advanced WPF automation - read dependency property"><meta property="twitter:description" content="What is dependency property in .NET and how to read it from Telerik Testing Framework."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-03-09T00:00:00.000Z"> Mar 9, 2015 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>Advanced WPF automation - read dependency property</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>In this post, I’ll show an advanced way of getting more details from an object and sophisticate your automation.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/advanced-wpf-automation-read-dependency-property/"><!-- Primary Meta Tags --><title>Advanced WPF automation - read dependency property</title><meta name="title" content="Advanced WPF automation - read dependency property"><meta name="description" content="What is dependency property in .NET and how to read it from Telerik Testing Framework."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/advanced-wpf-automation-read-dependency-property/"><meta property="og:title" content="Advanced WPF automation - read dependency property"><meta property="og:description" content="What is dependency property in .NET and how to read it from Telerik Testing Framework."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/advanced-wpf-automation-read-dependency-property/"><meta property="twitter:title" content="Advanced WPF automation - read dependency property"><meta property="twitter:description" content="What is dependency property in .NET and how to read it from Telerik Testing Framework."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>Advanced WPF automation - read dependency property</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2015-03-09T00:00:00.000Z"> Mar 9, 2015 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>In this post, I’ll show an advanced way of getting more details from an object and sophisticate your automation.</p>
 <h2>Reference</h2>
 This post is part of <a title="Advanced WPF desktop automation" href="/advanced-wpf-desktop-automation/">Advanced WPF desktop automation</a> with Telerik Testing Framework and TestStack White series. The sample application can be found in GitHub <a title="SampleAppPlus" href="https://github.com/llatinov/SampleAppPlus" target="_blank" rel="noopener">SampleAppPlus</a> repository.
 <h2>Dependency property</h2>
 <a title="Dependency properties" href="https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/dependency-properties-overview" target="_blank" rel="noopener">Dependency properties</a> are an easy way to extend available in .NET framework functionality. In SampleAppPlus there is CustomControl defined. Purpose of this control is to store text and visualize this text as image. The text is stored in dependency property.
-<pre class="language-csharp"><code>public partial class CustomControl : UserControl
-{
-	public static readonly DependencyProperty MessageProperty =
-			DependencyProperty.Register("Message",
-									typeof(string), typeof(CustomControl),
-									new PropertyMetadata(OnChange));
-
-	...
-
-	public string Message
-	{
-		get { return (string)GetValue(MessageProperty); }
-		set { SetValue(MessageProperty, value); }
-	}
-
-	...
-
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public partial class CustomControl : UserControl</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    public static readonly DependencyProperty MessageProperty =</span></span>
+<span class="line"><span>            DependencyProperty.Register("Message",</span></span>
+<span class="line"><span>                                    typeof(string), typeof(CustomControl),</span></span>
+<span class="line"><span>                                    new PropertyMetadata(OnChange));</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    ...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public string Message</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        get { return (string)GetValue(MessageProperty); }</span></span>
+<span class="line"><span>        set { SetValue(MessageProperty, value); }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    ...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Read dependency property</h2>
 In order to be able to properly automate something, you have to know the internal structure of the application. Generally, you will try to locate and read the element and it will not work in the ways you are used working with elements. At this point, you have to inspect the source code of application under test and see how it is done internally. Most important if dependency property is used you should know its name. Once you know the name reading is easy.
-<pre class="language-csharp"><code>public class MainWindow : XamlElementContainer
-{
-	...
-
-	private UserControl CustomControl_Image
-	{
-		get
-		{
-			return Get&#x3C;UserControl>(mainPath + "CustomControl[0]");
-		}
-	}
-
-	public Verification VerifyCustomImageText(string expected)
-	{
-		string actual =
-			CustomControl_Image.GetAttachedProperty&#x3C;string>("", "Message");
-		return BaseTest.VerifyText(expected, actual);
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class MainWindow : XamlElementContainer</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>    ...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private UserControl CustomControl_Image</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        get</span></span>
+<span class="line"><span>        {</span></span>
+<span class="line"><span>            return Get&#x3C;UserControl>(mainPath + "CustomControl[0]");</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public Verification VerifyCustomImageText(string expected)</span></span>
+<span class="line"><span>    {</span></span>
+<span class="line"><span>        string actual =</span></span>
+<span class="line"><span>            CustomControl_Image.GetAttachedProperty&#x3C;string>("", "Message");</span></span>
+<span class="line"><span>        return BaseTest.VerifyText(expected, actual);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>GetAttachedProperty</h2>
 GetAttachedProperty is a powerful method. Along with reading dependency properties, you can read much more. In some cases, WPF elements are nested in each other or in tooltip windows. In other cases, some object is bound to WPF element. In such situations you can try to access the elements and method will return you FrameworkElement object. From this object, you can again get GetAttachedProperty to access some class specific property. In all cases, you will need access to the application under test code to see how it is working internally.
-<pre class="language-csharp"><code>FrameworkElement tooltip = wpfElement.
-	GetAttachedProperty&#x3C;FrameworkElement>("", "ToolTip");
-string value = tooltip.GetAttachedProperty&#x3C;string>("", "SomeSpecificProperty");
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>FrameworkElement tooltip = wpfElement.</span></span>
+<span class="line"><span>    GetAttachedProperty&#x3C;FrameworkElement>("", "ToolTip");</span></span>
+<span class="line"><span>string value = tooltip.GetAttachedProperty&#x3C;string>("", "SomeSpecificProperty");</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2>Conclusion</h2>
-GetAttachedProperty is a powerful method. Once you get stuck with normal processing of elements you can always try it. I would say definitely give it a try.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+GetAttachedProperty is a powerful method. Once you get stuck with normal processing of elements you can always try it. I would say definitely give it a try.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/advanced-wpf-desktop-automation/" data-astro-cid-bvzihdzo>Advanced WPF desktop automation</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/c-sharp" data-astro-cid-bvzihdzo>C#</a><a href="/tags/desktop-automation" data-astro-cid-bvzihdzo>Desktop Automation</a><a href="/tags/telerik-testing-framework" data-astro-cid-bvzihdzo>Telerik Testing Framework</a><a href="/tags/wpf" data-astro-cid-bvzihdzo>WPF</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>

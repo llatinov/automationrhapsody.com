@@ -1,65 +1,64 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><!-- Font preloads --><!-- <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin /> --><!-- <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin /> --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/md5-sha-1-sha-256-sha-512-speed-performance/"><!-- Primary Meta Tags --><title>MD5, SHA-1, SHA-256 and SHA-512 speed performance</title><meta name="title" content="MD5, SHA-1, SHA-256 and SHA-512 speed performance"><meta name="description" content="Speed performance comparison of MD5, SHA-1, SHA-256 and SHA-512 cryptographic hash functions in Java."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/md5-sha-1-sha-256-sha-512-speed-performance/"><meta property="og:title" content="MD5, SHA-1, SHA-256 and SHA-512 speed performance"><meta property="og:description" content="Speed performance comparison of MD5, SHA-1, SHA-256 and SHA-512 cryptographic hash functions in Java."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/md5-sha-1-sha-256-sha-512-speed-performance/"><meta property="twitter:title" content="MD5, SHA-1, SHA-256 and SHA-512 speed performance"><meta property="twitter:description" content="Speed performance comparison of MD5, SHA-1, SHA-256 and SHA-512 cryptographic hash functions in Java."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder-1.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
-article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-07-11T00:00:00.000Z"> Jul 11, 2016 </time> <div class="last-updated-on" data-astro-cid-bvzihdzo>
-Last updated on <time datetime="2022-01-18T00:00:00.000Z"> Jan 18, 2022 </time> </div> </div> <h1 class="post-title" data-astro-cid-bvzihdzo>MD5, SHA-1, SHA-256 and SHA-512 speed performance</h1> <hr data-astro-cid-bvzihdzo> </div>  <p>For <a href="/implement-secure-api-authentication-http-dropwizard/">Implement secure API authentication over HTTP with Dropwizard</a> post, a one-way hash function was needed. Several factors are important when choosing hash algorithm: security, speed, and purpose of use.</p>
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Automation Rhapsody" href="https://automationrhapsody.com/rss.xml"><meta name="generator" content="Astro v5.5.3"><script src="/scripts.js"></script><!-- Font preloads --><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Playball"><link rel="stylesheet" property="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400italic,700"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://automationrhapsody.com/md5-sha-1-sha-256-sha-512-speed-performance/"><!-- Primary Meta Tags --><title>MD5, SHA-1, SHA-256 and SHA-512 speed performance</title><meta name="title" content="MD5, SHA-1, SHA-256 and SHA-512 speed performance"><meta name="description" content="Speed performance comparison of MD5, SHA-1, SHA-256 and SHA-512 cryptographic hash functions in Java."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://automationrhapsody.com/md5-sha-1-sha-256-sha-512-speed-performance/"><meta property="og:title" content="MD5, SHA-1, SHA-256 and SHA-512 speed performance"><meta property="og:description" content="Speed performance comparison of MD5, SHA-1, SHA-256 and SHA-512 cryptographic hash functions in Java."><meta property="og:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://automationrhapsody.com/md5-sha-1-sha-256-sha-512-speed-performance/"><meta property="twitter:title" content="MD5, SHA-1, SHA-256 and SHA-512 speed performance"><meta property="twitter:description" content="Speed performance comparison of MD5, SHA-1, SHA-256 and SHA-512 cryptographic hash functions in Java."><meta property="twitter:image" content="https://automationrhapsody.com/blog-placeholder.jpg"><style>:root{--color-gray-bg: #f5f5f5;--color-gray-text: #5e5e5e}body{font-family:Roboto,sans-serif;background:var(--color-gray-bg);word-wrap:break-word;overflow-wrap:break-word;color:var(--color-gray-text);font-size:18px}main{width:960px;max-width:calc(100% - 2em);margin:auto}h2{color:#3879d9;font-size:20px;margin:25px 0 6px}p{margin:6px 0}img{max-width:100%}pre{margin:0;padding:12px}@media (max-width: 720px){body{font-size:16px}ul{padding-inline-start:16px}}.tab{overflow:hidden;border:1px solid #ccc;background-color:#f1f1f1}.tab button{background-color:inherit;float:left;border:none;outline:none;cursor:pointer;padding:14px 16px;transition:.3s}.tab button:hover{background-color:#ddd}.tab button.active{background-color:#ccc}.tabcontent{display:none;border-top:none}footer[data-astro-cid-sz7xmlte]{margin:24px 0;text-align:center}header[data-astro-cid-3ef6ksr2]{text-align:center;font-size:56px}header[data-astro-cid-3ef6ksr2] div[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{font-family:Playball,Arial;color:#000;text-decoration:none;text-shadow:0 .033em 0 #fff;border-bottom:none}
+article[data-astro-cid-bvzihdzo]{padding:24px;box-shadow:0 2px 3px #acabab;background:#fff;position:relative}.post-title[data-astro-cid-bvzihdzo]{font-family:Bitter,serif;font-weight:700!important;margin:0;padding:5px 0;font-size:32px;line-height:40px;color:#444}.tags[data-astro-cid-bvzihdzo]{display:flex;flex-wrap:wrap}.tags[data-astro-cid-bvzihdzo]>a[data-astro-cid-bvzihdzo]{margin-left:8px}@media (max-width: 720px){article[data-astro-cid-bvzihdzo]{padding:12px}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <div data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>Automation Rhapsody</a> </div> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <h1 class="post-title" data-astro-cid-bvzihdzo>MD5, SHA-1, SHA-256 and SHA-512 speed performance</h1> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2016-07-11T00:00:00.000Z"> Jul 11, 2016 </time> </div> <hr data-astro-cid-bvzihdzo> </div>  <p>For <a href="/implement-secure-api-authentication-http-dropwizard/">Implement secure API authentication over HTTP with Dropwizard</a> post, a one-way hash function was needed. Several factors are important when choosing hash algorithm: security, speed, and purpose of use.</p>
 <h2>Security</h2>
 MD5 and SHA-1 are compromised. Those shall not be used unless their speed is several times slower than SHA-256 or SHA-512. Other that remain are SHA-256 and SHA-512. They are from SHA-2 family and are much more secure. SHA-256 is computed with 32-bit words, SHA-512 with 64-bit words.
 <h2>Hash implementations</h2>
 For generating cryptographic hashes in Java there is <a href="https://commons.apache.org/proper/commons-codec/">Apache Commons Codec</a> library which is very convenient.
 <h2>Speed performance</h2>
 In order to test the speed sample code is used:
-<pre class="language-java"><code>import java.util.UUID;
-
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang.time.StopWatch;
-
-public class Test {
-
-	private static final int TIMES = 1_000_000;
-	private static final String UUID_STRING = UUID.randomUUID().toString();
-
-	public static void main(String[] args) {
-		System.out.println(generateStringToHash());
-		System.out.println("MD5: " + md5());
-		System.out.println("SHA-1: " + sha1());
-		System.out.println("SHA-256: " + sha256());
-		System.out.println("SHA-512: " + sha512());
-	}
-
-	public static long md5() {
-		StopWatch watch = new StopWatch();
-		watch.start();
-		for (int i = 0; i &#x3C; TIMES; i++) {
-			DigestUtils.md5Hex(generateStringToHash());
-		}
-		watch.stop();
-		System.out.println(DigestUtils.md5Hex(generateStringToHash()));
-		return watch.getTime();
-	}
-
-	public static long sha1() {
-		...
-		System.out.println(DigestUtils.sha1Hex(generateStringToHash()));
-		return watch.getTime();
-	}
-
-	public static long sha256() {
-		...
-		System.out.println(DigestUtils.sha256Hex(generateStringToHash()));
-		return watch.getTime();
-	}
-
-	public static long sha512() {
-		...
-		System.out.println(DigestUtils.sha512Hex(generateStringToHash()));
-		return watch.getTime();
-	}
-
-	public static String generateStringToHash() {
-		return UUID.randomUUID().toString() + System.currentTimeMillis();
-	}
-}
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>import java.util.UUID;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>import org.apache.commons.codec.digest.DigestUtils;</span></span>
+<span class="line"><span>import org.apache.commons.lang.time.StopWatch;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class Test {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private static final int TIMES = 1_000_000;</span></span>
+<span class="line"><span>    private static final String UUID_STRING = UUID.randomUUID().toString();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static void main(String[] args) {</span></span>
+<span class="line"><span>        System.out.println(generateStringToHash());</span></span>
+<span class="line"><span>        System.out.println("MD5: " + md5());</span></span>
+<span class="line"><span>        System.out.println("SHA-1: " + sha1());</span></span>
+<span class="line"><span>        System.out.println("SHA-256: " + sha256());</span></span>
+<span class="line"><span>        System.out.println("SHA-512: " + sha512());</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static long md5() {</span></span>
+<span class="line"><span>        StopWatch watch = new StopWatch();</span></span>
+<span class="line"><span>        watch.start();</span></span>
+<span class="line"><span>        for (int i = 0; i &#x3C; TIMES; i++) {</span></span>
+<span class="line"><span>            DigestUtils.md5Hex(generateStringToHash());</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        watch.stop();</span></span>
+<span class="line"><span>        System.out.println(DigestUtils.md5Hex(generateStringToHash()));</span></span>
+<span class="line"><span>        return watch.getTime();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static long sha1() {</span></span>
+<span class="line"><span>        ...</span></span>
+<span class="line"><span>        System.out.println(DigestUtils.sha1Hex(generateStringToHash()));</span></span>
+<span class="line"><span>        return watch.getTime();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static long sha256() {</span></span>
+<span class="line"><span>        ...</span></span>
+<span class="line"><span>        System.out.println(DigestUtils.sha256Hex(generateStringToHash()));</span></span>
+<span class="line"><span>        return watch.getTime();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static long sha512() {</span></span>
+<span class="line"><span>        ...</span></span>
+<span class="line"><span>        System.out.println(DigestUtils.sha512Hex(generateStringToHash()));</span></span>
+<span class="line"><span>        return watch.getTime();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public static String generateStringToHash() {</span></span>
+<span class="line"><span>        return UUID.randomUUID().toString() + System.currentTimeMillis();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Several measurements were done. Two groups - one with smaller length string to hash and one with longer. Each group had following variations of <em><strong>generateStringToHash()</strong></em> method:</p>
 <ul>
  	<li>cached UUID - no extra time should be consumed</li>
@@ -471,6 +470,6 @@ In specific case this research was made for hashed string will be passed as API 
 <h2>Select hash function</h2>
 Based on all data so far SHA-256 is selected. It is from secure SHA-2 family. It is much faster than SHA-512 with shorter stings and it produces 64 chars hash.
 <h2>Conclusion</h2>
-The current post gives a comparison of MD5, SHA-1, SHA-256 and SHA-512 cryptographic hash functions. Important is that comparison is very dependant on specific implementation (Apache Commons Codec), the specific purpose of use (generate a secure token to be sent with API call). It is good MD5 and SHA-1 to be avoided as they are compromised and not secure. If their speed for given context is several times faster than secure SHA-2 ones and security is not that much important they can be chosen though. When choosing cryptographic hash function everything is up to a context of usage and benchmark tests for this context is needed.  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+The current post gives a comparison of MD5, SHA-1, SHA-256 and SHA-512 cryptographic hash functions. Important is that comparison is very dependant on specific implementation (Apache Commons Codec), the specific purpose of use (generate a secure token to be sent with API call). It is good MD5 and SHA-1 to be avoided as they are compromised and not secure. If their speed for given context is several times faster than secure SHA-2 ones and security is not that much important they can be chosen though. When choosing cryptographic hash function everything is up to a context of usage and benchmark tests for this context is needed.  <hr data-astro-cid-bvzihdzo>  <h2 data-astro-cid-bvzihdzo>Related Posts</h2> <ul data-astro-cid-bvzihdzo> <li data-astro-cid-bvzihdzo> <a href="/implement-secure-rest-api-authentication-http/" data-astro-cid-bvzihdzo>How to implement secure REST API authentication over HTTP</a> </li><li data-astro-cid-bvzihdzo> <a href="/implement-secure-api-authentication-http-dropwizard/" data-astro-cid-bvzihdzo>Implement secure API authentication over HTTP with Dropwizard</a> </li> </ul>  <div class="tags" data-astro-cid-bvzihdzo> <div data-astro-cid-bvzihdzo>Tags:</div> <a href="/tags/java" data-astro-cid-bvzihdzo>Java</a><a href="/tags/performance" data-astro-cid-bvzihdzo>Performance</a> </div> </div> </article> </main> <footer data-astro-cid-sz7xmlte>
 &copy; 2025 - Automation Rhapsody. All rights reserved.
 </footer>  </body></html>
